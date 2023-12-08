@@ -328,6 +328,7 @@ button.descargaCv:hover .overlay{
 }
 .listaHabilidades{
     display: flex;
+    flex-wrap: wrap;
 }
 .habilidad{
     display: flex;
@@ -394,6 +395,7 @@ button.descargaCv:hover .overlay{
     width: 100%;
     display: grid;
     grid-auto-flow: column;
+    overflow: hidden;
 }
 .proyectos::-webkit-scrollbar{
     display: none;
@@ -415,7 +417,7 @@ button.descargaCv:hover .overlay{
     transition: .3s;
     box-shadow: 4px 10px 46px -15px rgba(0, 0, 0, 1);
     width: 360px;
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 .carruselProyectos button{
     background-color: transparent;

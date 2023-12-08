@@ -1,4 +1,4 @@
-/*/-INICIO-función para controlar el scroll horizontal del carrusel de portfolio de inicio
+//-INICIO-función para controlar el scroll horizontal del carrusel de portfolio de inicio
 const proyectos = document.querySelectorAll(
   "#diseñoGrafico, #fullStack, #infografias"
 );
@@ -29,7 +29,7 @@ proyectos.forEach((proyecto) => {
   );
 });
 //-FIN-función para controlar el scroll horizontal del carrusel de portfolio de inicio
-/*////////////////////
+/////////////////////
 //-INICIO-función para copiar en el portapapeles
 function copyTel() {
   const textToCopy = "+34671987372"; // El texto que quieres copiar
