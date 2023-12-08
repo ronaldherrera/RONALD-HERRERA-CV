@@ -28,8 +28,8 @@ proyectos.forEach((proyecto) => {
     { passive: false }
   );
 });
-/*/-FIN-función para controlar el scroll horizontal del carrusel de portfolio de inicio
-/////////////////////
+//-FIN-función para controlar el scroll horizontal del carrusel de portfolio de inicio
+/*////////////////////
 //-INICIO-función para copiar en el portapapeles
 function copyTel() {
   const textToCopy = "+34671987372"; // El texto que quieres copiar
