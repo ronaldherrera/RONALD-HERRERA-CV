@@ -115,7 +115,7 @@ toggleMenus(); // Para manejar la visibilidad inicial de los menús
 window.addEventListener("resize", toggleMenus); // Para manejar los cambios en el tamaño de la ventana
 //-FIN-añadir atributo hidden segun el tamaño de la ventana para cambiar menu movil o escritorio.
 ///////////////////////////
-////////////////////////////////
+//-INICIO-controlar menu deslizable para movil
 document.addEventListener("DOMContentLoaded", function () {
   const botonHamburguesa = document.querySelector(".botonHamburguesa");
   const ulMovil = document.querySelector("#navHeader-movil ul");
@@ -154,3 +154,48 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+//-FIN-controlar menu deslizable para movil
+////////////////////
+//////////////
+const texts = [
+  "Diseñador gráfico",
+  "Web developer",
+  "Ux/Ui designer",
+  "3D Maker",
+  "Front End",
+  "Full Stack",
+];
+let count = 0;
+let index = 0;
+let currentText = "";
+let letter = "";
+
+function type() {
+  if (index < texts[count].length) {
+    currentText = texts[count];
+    letter = currentText.slice(0, ++index);
+
+    document.getElementById("text-container").textContent = letter;
+    setTimeout(type, 100);
+  } else {
+    setTimeout(erase, 1000);
+  }
+}
+
+function erase() {
+  if (index > 0) {
+    currentText = texts[count];
+    letter = currentText.slice(0, --index);
+
+    document.getElementById("text-container").textContent = letter;
+    setTimeout(erase, 50);
+  } else {
+    count++;
+    if (count >= texts.length) count = 0;
+    setTimeout(type, 500);
+  }
+}
+
+window.onload = function () {
+  setTimeout(type, 500);
+};

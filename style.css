@@ -204,6 +204,53 @@ nav#navHeader-movil .descargaCv {
 .inicio .contenidoBanner .redes a:hover{
     background-color: #893511;
 }
+/* Estilos para el cursor parpadeante */
+@keyframes cursorBlink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.typing-container {
+    font-family: 'fira Sans';
+    font-weight: 500;
+    font-size: 24px;
+    margin-left: 10px;
+    align-items: center;
+    width: 100%;
+    
+    position: relative;
+    display: flex;
+    height: 50px;
+}
+
+/* Estilos para la animación de escritura */
+.typing-animation {
+    animation: typing 4s steps(40, end);
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #000;
+    width: 90%;
+    display: inline-block;
+}
+
+/* Cursor parpadeante */
+.cursor {
+    display: inline-block;
+    width: 6px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #893511;
+    animation: cursorBlink 0.8s infinite;
+}
 
 /*--SECCION SOBRE MI--*/
 .sobreMi{
@@ -259,9 +306,7 @@ nav#navHeader-movil .descargaCv {
     justify-content: center;
     transition: .3s;
 }
-.sobreMi .contenedorIntereses .intereses:hover {
-    background-color: #893511;
-}
+
 .sobreMi .contenedorIntereses .intereses i{
     font-size: 25px;
     margin-bottom: 10px;
@@ -323,9 +368,7 @@ button.descargaCv:hover .overlay{
     border-radius: 10px;
     transition: .3s;
 }
-#listaHabilidades:hover{
-    box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);
-}
+
 .listaHabilidades{
     display: flex;
     flex-wrap: wrap;
@@ -362,10 +405,11 @@ button.descargaCv:hover .overlay{
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 20px;
 }
 .listaPortafolio{
     width: 100%;
-    max-width: 1200px;
+    max-width: 1100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -387,7 +431,7 @@ button.descargaCv:hover .overlay{
 }
 .portfolio h2{
     color: #893511;
-    margin: 20px;
+    margin: 20px 0;
     margin-bottom: 0;
     
 }        
@@ -396,6 +440,7 @@ button.descargaCv:hover .overlay{
     display: grid;
     grid-auto-flow: column;
     overflow: hidden;
+    
 }
 .proyectos::-webkit-scrollbar{
     display: none;
@@ -405,6 +450,7 @@ button.descargaCv:hover .overlay{
     flex-direction: column;
     width: fit-content;
     padding: 20px 20px 20px 20px;
+    
 }
 .proyecto img{
     transition: transform 0.3s ease-in-out;
@@ -418,6 +464,7 @@ button.descargaCv:hover .overlay{
     box-shadow: 4px 10px 46px -15px rgba(0, 0, 0, 1);
     width: 360px;
     transform: scale(1.05);
+    
 }
 .carruselProyectos button{
     background-color: transparent;
@@ -425,7 +472,7 @@ button.descargaCv:hover .overlay{
     border-radius: 5px;
     width: fit-content;
     display: block;
-    margin: 10px 20px 0px 20px;
+    margin: 10px 0px 0px 20px;
     padding: 5px 22px;
     font-size: 14px;
     color: #893511;
@@ -454,6 +501,11 @@ button.descargaCv:hover .overlay{
     text-align: center;
     margin-bottom: 40px;
 }
+.contacto a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+}
 .contacto h2{
     margin-bottom: 10px;
 }
@@ -481,4 +533,59 @@ box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.75);;
 background-color: #893511;
 }
 
+/*--FOOTER--*/
+footer{
+    background-color: #4c4949;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+footer p{
+    max-width: 150px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2b2b2b;
+}
+footer span{
+  max-width: 200px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+footer div{
+    margin-bottom: 20px;
+}
+form {
+    min-width: 250px;
+    max-width: 600px;
+   
+    
+}
+
+input,
+textarea,
+button {
+    display: block;
+    width: 100%;
+    border-radius: 5px 5px 0 0; 
+    padding: 8px;
+    font-size: 16px;
+    
+
+}
+
+button {
+    
+    background-color: #893511;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 0 5px 5px;
+}
+
+button:hover {
+    background-color: #1E1E1E;
+}
 
