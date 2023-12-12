@@ -54,11 +54,15 @@
                     <img src="/recursos/Fotos_de_mi/Selfie_Ronald_Herrera.jpeg" alt="Selfie de Ronald Herrera">
                 </div>
                 <h1>RONALD HERRERA</h1>
-                <H2>Diseñador multidisciplinar</H2>
+                <div class="typing-container">
+                  <div id="text-container"></div>
+                  <span class="cursor"></span>
+                </div>
+
                 <div class="redes">
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-brands fa-github"></i></a>
-                    <a href="#"><i class="fa-brands fa-behance"></i></a>
+                    <a href="https://www.linkedin.com/in/ronald-sc-herrera/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/ronaldherrera" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.behance.net/ronald-herrera" target="_blank"><i class="fa-brands fa-behance"></i></a>
                 </div>
             </div>
         </section>
@@ -260,10 +264,10 @@
                 <h3>Portfolio</h3>
                 <!--Carrusel de diseño gráfico-->
                 <div class="carruselProyectos">
-                    <div class="controlesCarrusel">
+                    <!--<div class="controlesCarrusel">
                         <h2>Diseño Gráfico</h2>
                         <button>Ver todos</button>
-                    </div>
+                    </div>-->
                     <div class="proyectos" id="diseñoGrafico" >
                         <div class="proyecto">
                             <img class="miniatura_proyecto"
@@ -299,28 +303,38 @@
                     <span>Telefono: <strong>+34 671 98 73 72</strong> <i class="fa-solid fa-copy"
                             style="cursor: pointer;" onclick="copyTel ()"></i></span>
                     <div class="botonesContacto">
-                        <div class="botonWhatsapp"
+                        <a class="botonWhatsapp"
                             href="https://api.whatsapp.com/  send? phone=+34671987372&text=Hola%20Ronald,      %20acabo%20de%20ver%20tu%20web%20y%20me%20gustar%C3%ADa">
                             <i class="fa-brands fa-whatsapp"></i>
                             <span>Escribir</span>
-                        </div>
-                        <div class="botonLlamar" href="tel:+34671987372">
+                    </a>
+                        <a class="botonLlamar" href="tel:+34671987372">
                             <i class="fa-solid fa-phone"></i>
                             <span>Llamar</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="tarjetaContacto">
                     <span>E-mail: <strong>ronaldcalzadilla31@gmail.com</strong> <i class="fa-solid fa-copy"
                             style="cursor: pointer;" onclick="copyMail()"></i></span>
-                    <div class="botonMail" href="mailto:ronaldcalzadilla31@gmail.com">
+                    <a class="botonMail" href="mailto:ronaldcalzadilla31@gmail.com">
                         <i class="fa-solid fa-envelope"></i>
                         <span>Mandar un correo</span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
     </main>
+    <footer>
+        <div>
+            <span>¡GRACIAS POR VER!</span>
+        <p>Esta es la primera version de mi CV online</p>
+        </div>
+        <form id="contactForm" method="post">
+            <textarea id="message" name="message" placeholder="¡Ayúdame a mejorar!"required></textarea>
+            <button type="submit">Enviar feedback</button>
+        </form>
+    </footer>
 
     <script src="/script.js"></script>
 </body>
