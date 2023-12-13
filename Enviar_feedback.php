@@ -11,11 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Enviar el correo electrónico
     if (mail($to, $subject, $body, $headers)) {
-        $response = array("status" => "success", "message" => "¡Gracias! Tu mensaje ha sido enviado.");
+        $response = array("status" => "success", "message" => "¡Gracias!🧡Feedback enviado.");
         http_response_code(200);
         echo json_encode($response);
     } else {
-        $response = array("status" => "error", "message" => "Hubo un problema al enviar el mensaje.");
+        $response = array("status" => "error", "message" => "💔 Hubo un problema al enviar el feedback.");
         http_response_code(500);
         echo json_encode($response);
     }

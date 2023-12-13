@@ -86,7 +86,7 @@ function getSectionMostVisible() {
     }
   });
 
-  console.log("Sección más visible:", mostVisibleSectionId);
+  //console.log("Sección más visible:", mostVisibleSectionId);
   return mostVisibleSectionId;
 }
 
@@ -224,7 +224,7 @@ document
         } else {
           responseMessage.style.color = "red";
         }
-
+        document.getElementById("message").value = "";
         responseMessage.style.display = "block";
         setTimeout(function () {
           responseMessage.style.opacity = 0;
@@ -232,7 +232,7 @@ document
             responseMessage.style.display = "none";
             responseMessage.style.opacity = 1;
           }, 500);
-        }, 3000); // 3000 milisegundos = 3 segundos
+        }, 5000);
       })
       .catch(function (error) {
         console.log("Error:", error);
