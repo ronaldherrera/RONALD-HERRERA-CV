@@ -563,7 +563,9 @@ form {
    
     
 }
-
+#contactForm {
+    position: relative;
+}
 input,
 textarea,
 button {
@@ -591,17 +593,18 @@ button:hover {
 
 
 
-#response-message {
+#response-message, #probando {
     position: absolute;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
+    background: #ecded8;
+    font-weight: 600;
+    text-align: center;
+    color: black;
     padding: 10px;
+    width: 100%;
     border-radius: 5px;
     display: none;
     transition: opacity 0.5s ease-in-out;
     z-index: 1;
 }
 
-#contactForm {
-    position: relative;
-}
+
