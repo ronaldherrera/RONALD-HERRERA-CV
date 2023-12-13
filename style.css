@@ -311,7 +311,7 @@ nav#navHeader-movil .descargaCv {
     font-size: 25px;
     margin-bottom: 10px;
 }
-button.descargaCv{
+#button.descargaCv{
     cursor: url(recursos/cursores/cursor_descarga_cv.svg), auto;
     background-color: transparent;
     border: 2px solid #893511;
@@ -325,8 +325,9 @@ button.descargaCv{
     position: relative;
     z-index: 10;
     white-space: nowrap;
+    text-decoration: none;
 }
-button.descargaCv .overlay{
+#button.descargaCv .overlay{
     position: absolute;
     top: 0;
     left: 0;
@@ -336,7 +337,7 @@ button.descargaCv .overlay{
     z-index: -1;
     transition: .3s;
 }
-button.descargaCv:hover .overlay{
+#button.descargaCv:hover .overlay{
     height: 100%;
 }
 
@@ -446,6 +447,7 @@ button.descargaCv:hover .overlay{
     display: none;
 }
 .proyecto{
+    height: 300px;
     display: flex;
     flex-direction: column;
     width: fit-content;
@@ -453,8 +455,9 @@ button.descargaCv:hover .overlay{
     
 }
 .proyecto img{
-    transition: transform 0.3s ease-in-out;
+    transition:  0.3s ease-in-out;
     width: 350px;
+    height: 200px;
     border-radius: 10px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -463,7 +466,8 @@ button.descargaCv:hover .overlay{
     transition: .3s;
     box-shadow: 4px 10px 46px -15px rgba(0, 0, 0, 1);
     width: 360px;
-    transform: scale(1.05);
+    height: 210px;
+    transform: scale(1.0);
     
 }
 .carruselProyectos button{
