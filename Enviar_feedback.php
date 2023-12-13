@@ -1,7 +1,5 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
     $message = $_POST["message"];
     
     $to = "ronaldcalzadilla31@gmail.com"; 
@@ -9,18 +7,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $body = "$message";
 
     // Configurar cabeceras para el correo electrónico
-    $headers = "Feedback recibido";
+    $headers = "From: hola@ronaldherrera.es";
 
     // Enviar el correo electrónico
     if (mail($to, $subject, $body, $headers)) {
+        $response = array("status" => "success", "message" => "¡Gracias! Tu mensaje ha sido enviado.");
         http_response_code(200);
-        echo "¡Gracias! Tu mensaje ha sido enviado.";
+        echo json_encode($response);
     } else {
+        $response = array("status" => "error", "message" => "Hubo un problema al enviar el mensaje.");
         http_response_code(500);
-        echo "Hubo un problema al enviar el mensaje.";
+        echo json_encode($response);
     }
 } else {
     http_response_code(403);
     echo "Hubo un problema al enviar el formulario.";
 }
 ?>
+

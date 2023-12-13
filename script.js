@@ -206,26 +206,35 @@ document
   .getElementById("contactForm")
   .addEventListener("submit", function (event) {
     event.preventDefault();
+    var form = this;
+    var formData = new FormData(form);
 
-    // Obtener los datos del formulario
-    const formData = new FormData(this);
-
-    // Enviar los datos mediante Ajax
-    fetch("send-email.php", {
-      method: "POST",
+    fetch(form.action, {
+      method: form.method,
       body: formData,
     })
-      .then((response) => response.text())
-      .then((data) => {
-        // Mostrar el mensaje de confirmación
-        document.getElementById("confirmationMessage").style.display = "block";
-
-        // Limpiar los campos del formulario (opcional)
-
-        document.getElementById("message").value = "!Gracias por tu feedbak!";
+      .then(function (response) {
+        return response.json();
       })
-      .catch((error) => {
-        console.error("Error al enviar el formulario:", error);
-        // Manejar errores si es necesario
+      .then(function (data) {
+        var responseMessage = document.getElementById("response-message");
+        responseMessage.textContent = data.message;
+        if (data.status === "success") {
+          responseMessage.style.color = "green";
+        } else {
+          responseMessage.style.color = "red";
+        }
+
+        responseMessage.style.display = "block";
+        setTimeout(function () {
+          responseMessage.style.opacity = 0;
+          setTimeout(function () {
+            responseMessage.style.display = "none";
+            responseMessage.style.opacity = 1;
+          }, 500);
+        }, 3000); // 3000 milisegundos = 3 segundos
+      })
+      .catch(function (error) {
+        console.log("Error:", error);
       });
   });
