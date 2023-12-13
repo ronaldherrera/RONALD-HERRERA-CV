@@ -199,3 +199,33 @@ function erase() {
 window.onload = function () {
   setTimeout(type, 500);
 };
+///////////////////////////////////////
+///////////////
+/////////////
+document
+  .getElementById("contactForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    // Obtener los datos del formulario
+    const formData = new FormData(this);
+
+    // Enviar los datos mediante Ajax
+    fetch("send-email.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        // Mostrar el mensaje de confirmación
+        document.getElementById("confirmationMessage").style.display = "block";
+
+        // Limpiar los campos del formulario (opcional)
+
+        document.getElementById("message").value = "!Gracias por tu feedbak!";
+      })
+      .catch((error) => {
+        console.error("Error al enviar el formulario:", error);
+        // Manejar errores si es necesario
+      });
+  });
