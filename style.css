@@ -131,24 +131,24 @@ nav#navHeader-movil .descargaCv {
 }
 .botonHamburguesa{
     display: flex;
-    background-color: #893511;
+    background-color: #1E1E1E;
     align-items: center;
     justify-content: center;
     width: 44px;
-    color:#fff;
+    color: #893511;
     padding: 10px;
     margin-right: 20px;
-
+    border: #893511;
     border-radius: 5px;
     cursor: pointer;
     transition: .2s;
-    /*display: none;*/
+    border-style: solid;
 }
 .botonHamburguesa:hover{
-    background-color: #1E1E1E;
-    color: #893511;
-    border: #893511;
-    border-style: solid;
+    
+    
+    
+    
 
 }
 
