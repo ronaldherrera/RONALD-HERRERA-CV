@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //-FIN-controlar menu deslizable para movil
 ////////////////////
-//////////////
+//-INICIO-animación escritura y borrado con cursor
 const texts = [
   "Diseñador gráfico",
   "Web developer",
@@ -199,9 +199,9 @@ function erase() {
 window.onload = function () {
   setTimeout(type, 500);
 };
-///////////////////////////////////////
+//-FIN-animación escritura y borrado con cursor
 ///////////////
-/////////////
+//-INICIO-aviso de mensaje de envío  o no de feedback
 document
   .getElementById("contactForm")
   .addEventListener("submit", function (event) {
@@ -238,3 +238,4 @@ document
         console.log("Error:", error);
       });
   });
+//-FIN-aviso de mensaje de envío  o no de feedback

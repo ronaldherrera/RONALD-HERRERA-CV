@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!--GRACIAS POR VEL CÓDIGO FUENTE DE MI PAGINA WEB, QUIERO QUE SEPAS QUE ABSOLUTAMENTE TODO LO QUE VAS A VER (CÓDIGO, ELEMENTOS GRÁFICOS, IMÁGENES...) ESTA CREADO O EJECUTADO POR MI-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="icon"
+      href="/recursos/iconos/cv-ronald.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RONALD HERRERA |CV</title>
+  </head>
+
+  <body>
+    <!--MENU ENCABEZADO-->
+    <header>
+      <div class="contenedorHeader" id="contenedorHeader">
+        <a href="#" onclick="window.history.back(); return false;"
+          ><i class="fa-solid fa-chevron-left"></i> Volver</a
+        >
+        <span>
+          <h1>SUBVERSUM</h1>
+          <h2>manual de marca</h2>
+        </span>
+        <button onclick="mostrarPopUpInfo()">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+
+        <div class="popUp" id="popUpInfo" onclick="cerrarPopUpInfo()">
+          <div class="popup-contenido">
+            <h1>Manual de marca de SUBVERSUM</h1>
+            <p>
+              Para la creación de esta marca de sweater me inspire en la
+              rebeldía y ansia de libertad de la juventud.
+            </p>
+            <p>
+              El nombre en latin declara su intención a subvertirlo todo y por
+              eso la idea es coger obras artísticas antiguas y darles un cambio
+              corrompiendo las lineas y dándoles color.
+            </p>
+            <p>
+              Para la tipografía del logotipo me inspire en la antigua roma y
+              los gladiadores, también le di la vuelta a la segunda ese para
+              exponer su esencia de ser único y salirse de la norma.
+            </p>
+            <div class="ofimatica" id="listaHerramientas">
+              <h2>Desarrollado con:</h2>
+              <div class="columna">
+                <div class="herramienta">
+                  <img src="/recursos/iconos/illustrator.svg" alt="" />
+                  <span>Adobe Illustrator</span>
+                </div>
+                <div class="herramienta">
+                  <img src="/recursos/iconos/photoshop.svg" alt="" />
+                  <span>Adobe Photoshop</span>
+                </div>
+                <div class="herramienta">
+                  <img src="/recursos/iconos/adobe_acrobat.svg" alt="" />
+                  <span>Adobe Acrobat</span>
+                </div>
+              </div>
+            </div>
+            <a
+              id="button"
+              class="descargaCv"
+              href="./descargas/manual de marca de subversum.pdf"
+              download="Manual_Marca_SUBVERSUM"
+              ><strong>Descargar manual</strong><span class="overlay"></span>
+            </a>
+            <p>Gracias por ver</p>
+            <button onclick="cerrarPopUpInfo()" class="cerrarPopUp">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <img src="./imagenes/gif cabecera.gif" alt="" />
+      <img src="./imagenes/sabana subversum.png" alt="" />
+      <img src="./imagenes/gif mockups.gif" alt="" />
+      <img src="./imagenes/agradecimientos y contacto.png" alt="" />
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
