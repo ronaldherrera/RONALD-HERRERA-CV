@@ -455,21 +455,66 @@ nav#navHeader-movil .descargaCv {
     
 }
 .proyecto img{
-    transition:  0.3s ease-in-out;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;     
+}
+.proyecto .miniatura_proyecto {
+    position: relative;
+    display: inline-block;
     width: 350px;
     height: 200px;
-    border-radius: 10px;
+    transition: 0.3s ease-in-out;
     margin-bottom: 10px;
-    cursor: pointer;
 }
-.proyecto img:hover{
-    transition: .3s;
-    box-shadow: 4px 10px 46px -15px rgba(0, 0, 0, 1);
+.proyecto .miniatura_proyecto:hover {
+    position: relative;
+    display: inline-block;
     width: 360px;
     height: 210px;
     transform: scale(1.0);
+    transition: .3s;
+    box-shadow: 4px 10px 46px -15px rgba(0, 0, 0, 1);
+}
+.proyecto .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: radial-gradient(circle at 50% 90%, #ffffff00, #893511);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+}
+
+.proyecto .overlay:hover {
+    opacity: 1;
     
 }
+
+.proyecto .enlace-boton {
+    padding: 10px 20px;
+    background-color: #1E1E1E;
+    font-weight: 500;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+}
+
+.proyecto .enlace-boton:hover {
+    background-color: #1E1E1E;
+    color:#893511;
+    
+}
+
 .carruselProyectos button{
     background-color: transparent;
     border: 1px solid #893511;
