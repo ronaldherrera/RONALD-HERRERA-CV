@@ -123,7 +123,7 @@ nav#navHeader-movil ul li{
     margin-bottom: 20px;
 }
 nav#navHeader-movil .descargaCv {
-    margin-bottom: 0px;
+    margin-bottom: 50px;
 
 }
 .botonHamburguesa i{
@@ -143,13 +143,6 @@ nav#navHeader-movil .descargaCv {
     cursor: pointer;
     transition: .2s;
     border-style: solid;
-}
-.botonHamburguesa:hover{
-    
-    
-    
-    
-
 }
 
 /*--SECCIÓN DE INCIO--*/
@@ -451,13 +444,14 @@ nav#navHeader-movil .descargaCv {
     display: flex;
     flex-direction: column;
     width: fit-content;
-    padding: 20px 20px 20px 20px;
+    margin-right: 20px;
     
 }
 .proyecto img{
     width: 100%;
     height: 100%;
-    border-radius: 10px;     
+    border-radius: 10px;  
+      
 }
 .proyecto .miniatura_proyecto {
     position: relative;
@@ -484,7 +478,7 @@ nav#navHeader-movil .descargaCv {
     height: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
-    background: radial-gradient(circle at 50% 90%, #ffffff00, #893511);
+    background: radial-gradient(circle at 50% 90%, #4d4d4d7f, #893511);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     display: flex;
