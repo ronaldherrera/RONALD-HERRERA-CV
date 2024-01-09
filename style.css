@@ -399,7 +399,7 @@ nav#navHeader-movil .descargaCv {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
+    padding: 70px 20px 30px;
 }
 .listaPortafolio{
     width: 100%;
@@ -407,11 +407,12 @@ nav#navHeader-movil .descargaCv {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 25px;
+    
 }
 .portfolio h3{
-    font-size: 28px;
-    margin-bottom: 10px;
-    margin-top: 15px;
+    font-size: 48px;
+    margin-bottom: 20px;
     text-align: center;
 }
 .carruselProyectos{
@@ -440,7 +441,7 @@ nav#navHeader-movil .descargaCv {
     display: none;
 }
 .proyecto{
-    height: 300px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     width: fit-content;
