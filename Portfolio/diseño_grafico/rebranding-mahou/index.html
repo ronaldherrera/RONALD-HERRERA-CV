@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!--GRACIAS POR VEL CÓDIGO FUENTE DE MI PAGINA WEB, QUIERO QUE SEPAS QUE ABSOLUTAMENTE TODO LO QUE VAS A VER (CÓDIGO, ELEMENTOS GRÁFICOS, IMÁGENES...) ESTA CREADO O EJECUTADO POR MI-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="icon"
+      href="/recursos/iconos/cv-ronald.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RONALD HERRERA |CV</title>
+  </head>
+
+  <body>
+    <!--MENU ENCABEZADO-->
+    <header>
+      <div class="contenedorHeader" id="contenedorHeader">
+        <a href="https://ronaldherrera.es/"
+          ><i class="fa-solid fa-chevron-left"></i> Inicio</a
+        >
+        <span>
+          <h1>MAHOU</h1>
+          <h2>rebranding</h2>
+        </span>
+        <button onclick="mostrarPopUpInfo()">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+
+        <div class="popUp" id="popUpInfo" onclick="cerrarPopUpInfo()">
+          <div class="popup-contenido">
+            <h1>Rebranding de MAHOU</h1>
+            <p>
+              Este proyecto que ha sido tanto desafiante como gratificante: el
+              rebranding de Mahou. Mi enfoque se centró en fusionar la rica
+              historia de esta marca icónica con una renovada identidad visual.
+              Utilizando mi experiencia y habilidades en herramientas como
+              Blender, Photoshop e Illustrator, me sumergí en un proceso
+              apasionante para dar forma a una nueva narrativa visual para
+              Mahou.
+            </p>
+
+            <div class="ofimatica" id="listaHerramientas">
+              <h2>Desarrollado con:</h2>
+              <div class="columna">
+                <div class="herramienta">
+                  <img src="/recursos/iconos/illustrator.svg" alt="" />
+                  <span>Adobe Illustrator</span>
+                </div>
+                <div class="herramienta">
+                  <img src="/recursos/iconos/photoshop.svg" alt="" />
+                  <span>Adobe Photoshop</span>
+                </div>
+                <div class="herramienta">
+                  <img src="/recursos/iconos/blender.svg" alt="" />
+                  <span>Blender</span>
+                </div>
+              </div>
+            </div>
+            <a
+              id="button"
+              class="descargaCv"
+              href="./descargas/manual de marca de subversum.pdf"
+              download="Rebranding de MAHOU por Ronald Herrera"
+              ><strong>Descargar PDF</strong><span class="overlay"></span>
+            </a>
+            <p>Gracias por ver</p>
+            <button onclick="cerrarPopUpInfo()" class="cerrarPopUp">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <img
+        class="escritorio"
+        src="./recursos/rebranding-mahou-sabana.svg"
+        alt=""
+      />
+      <img
+        class="movil"
+        src="./recursos/rebranding-mahou-sabana-movil.svg"
+        alt=""
+      />
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
