@@ -1,11 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 28.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 14 16" style="enable-background:new 0 0 14 16;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFFFFF;}
-</style>
-<path class="st0" d="M13,1H1C0.4,1,0,1.5,0,2v12c0,0.6,0.4,1,1,1h12c0.6,0,1-0.5,1-1V2C14,1.5,13.6,1,13,1z M4.2,13H2.2V6.3h2.1
-	L4.2,13L4.2,13z M3.2,5.4C2.5,5.4,2,4.9,2,4.2S2.5,3,3.2,3c0.7,0,1.2,0.5,1.2,1.2C4.4,4.9,3.9,5.4,3.2,5.4z M12,13H9.9V9.8
-	C9.9,9,9.9,8,8.9,8C7.8,8,7.6,8.8,7.6,9.7V13H5.5V6.3h2v0.9h0c0.3-0.5,1-1.1,2-1.1c2.1,0,2.5,1.4,2.5,3.2V13z"/>
-</svg>
+<?xml version="1.0" encoding="UTF-8"?><svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><defs><style>.cls-1{fill:#fff;stroke-width:0px;}</style></defs><path class="cls-1" d="M19.07.5H1.93c-.86,0-1.43.71-1.43,1.43v17.14c0,.86.57,1.43,1.43,1.43h17.14c.86,0,1.43-.71,1.43-1.43V1.93c0-.71-.57-1.43-1.43-1.43ZM6.5,17.64h-2.86v-9.57h3l-.14,9.57h0ZM5.07,6.79c-1,0-1.71-.71-1.71-1.71s.71-1.71,1.71-1.71,1.71.71,1.71,1.71-.71,1.71-1.71,1.71ZM17.64,17.64h-3v-4.57c0-1.14,0-2.57-1.43-2.57-1.57,0-1.86,1.14-1.86,2.43v4.71h-3v-9.57h2.86v1.29h0c.43-.71,1.43-1.57,2.86-1.57,3,0,3.57,2,3.57,4.57v5.29Z"/></svg>
