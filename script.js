@@ -239,12 +239,3 @@ document
       });
   });
 //-FIN-aviso de mensaje de envío  o no de feedback
-
-// Agregar interactividad para voltear la caja al hacer clic
-document.querySelector(".flip-box").addEventListener("click", function () {
-  const flipBoxInner = this.querySelector(".flip-box-inner");
-  flipBoxInner.style.transform =
-    flipBoxInner.style.transform === "rotateY(180deg)"
-      ? "rotateY(0deg)"
-      : "rotateY(180deg)";
-});
