@@ -1943,51 +1943,7 @@
             then: function (t, n, r) {
               var u = 0;
               function l(i, o, a, s) {
-                return function () {
-                  var n = this,
-                    r = arguments,
-                    e = function () {
-                      var e, t;
-                      if (!(i < u)) {
-                        if ((e = a.apply(n, r)) === o.promise())
-                          throw new TypeError("Thenable self-resolution");
-                        (t =
-                          e &&
-                          ("object" == typeof e || "function" == typeof e) &&
-                          e.then),
-                          m(t)
-                            ? s
-                              ? t.call(e, l(u, o, R, s), l(u, o, M, s))
-                              : (u++,
-                                t.call(
-                                  e,
-                                  l(u, o, R, s),
-                                  l(u, o, M, s),
-                                  l(u, o, R, o.notifyWith)
-                                ))
-                            : (a !== R && ((n = void 0), (r = [e])),
-                              (s || o.resolveWith)(n, r));
-                      }
-                    },
-                    t = s
-                      ? e
-                      : function () {
-                          try {
-                            e();
-                          } catch (e) {
-                            S.Deferred.exceptionHook &&
-                              S.Deferred.exceptionHook(e, t.stackTrace),
-                              u <= i + 1 &&
-                                (a !== M && ((n = void 0), (r = [e])),
-                                o.rejectWith(n, r));
-                          }
-                        };
-                  i
-                    ? t()
-                    : (S.Deferred.getStackHook &&
-                        (t.stackTrace = S.Deferred.getStackHook()),
-                      C.setTimeout(t));
-                };
+                return function () {};
               }
               return S.Deferred(function (e) {
                 o[0][3].add(l(0, e, m(r) ? r : R, e.notifyWith)),
@@ -2053,11 +2009,7 @@
     });
   var W = /^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;
   (S.Deferred.exceptionHook = function (e, t) {
-    C.console &&
-      C.console.warn &&
-      e &&
-      W.test(e.name) &&
-      C.console.warn("jQuery.Deferred exception: " + e.message, e.stack, t);
+    return;
   }),
     (S.readyException = function (e) {
       C.setTimeout(function () {
@@ -6733,7 +6685,7 @@
       H_ = Si() && k_.tram;
     ws.exports = (function () {
       var e = {};
-      e.VERSION = "1.6.0-Misitio";
+      e.VERSION = "1.6.0-miSitio";
       var t = {},
         r = Array.prototype,
         n = Object.prototype,
@@ -7006,7 +6958,7 @@ __p+='`),
     var ae = {},
       Nt = {},
       Lt = [],
-      xi = window.Misitio || [],
+      xi = window.miSitio || [],
       ft = window.jQuery,
       Ge = ft(window),
       W_ = ft(document),
@@ -7157,7 +7109,7 @@ __p+='`),
     };
     ft(ae.ready);
     Fs();
-    Ms.exports = window.Misitio = ae;
+    Ms.exports = window.miSitio = ae;
   });
   var Vs = c((RB, Gs) => {
     "use strict";
@@ -11814,7 +11766,7 @@ __p+='`),
     var rF = (e) => ({ value: e.value });
     me.getPluginDestination = rF;
     var nF = (e) => {
-      let t = window.Misitio.require("lottie").createInstance(e);
+      let t = window.miSitio.require("lottie").createInstance(e);
       return t.stop(), t.setSubframe(!0), t;
     };
     me.createPluginInstance = nF;
@@ -11825,7 +11777,7 @@ __p+='`),
     };
     me.renderPlugin = iF;
     var oF = (e) => {
-      window.Misitio.require("lottie").createInstance(e).stop();
+      window.miSitio.require("lottie").createInstance(e).stop();
     };
     me.clearPlugin = oF;
   });
@@ -11841,7 +11793,7 @@ __p+='`),
       _e.clearPlugin =
         void 0;
     var aF = (e) => document.querySelector(`[data-w-id="${e}"]`),
-      sF = () => window.Misitio.require("spline"),
+      sF = () => window.miSitio.require("spline"),
       uF = (e, t) => e.filter((r) => !t.includes(r)),
       cF = (e, t) => e.value[t];
     _e.getPluginConfig = cF;
@@ -16626,7 +16578,7 @@ __p+='`),
   q_();
 })();
 
-Misitio.require("ix2").init({
+miSitio.require("ix2").init({
   events: {
     e: {
       id: "e",
