@@ -1,28 +1,16 @@
-<link rel="stylesheet" href="./style.css">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $correo_destino = "ronaldherrera3d@gmail.com";
-    $asunto = "Feedback de sitio web";
-    $mensaje = $_POST['imput-home'];
+    $feedback = $_POST['imput-home'];
+    $to = "ronaldherrera3d@gmail.com";
+    $subject = "Feedback del sitio web";
+    $message = "Feedback recibido:\n\n" . $feedback;
+    $headers = "From: hola@ronaldherrera.es\r\n";
+    $headers .= "Reply-To: hola@ronaldherrera.es\r\n";
     
-    // Encabezados
-    $headers = "From: hola@ronaldherrera.es" . "\r\n" .
-               "Reply-To: hola@ronaldherrera.es" . "\r\n" .
-               "X-Mailer: PHP/" . phpversion();
-    
-    // Enviamos el correo
-    if (mail($correo_destino, $asunto, $mensaje, $headers)) {
-        echo '<div class="success-message w-form-done">
-                <div class="text-block-10">
-                  ¡Gracias! Tu comentario me ayudará a mejorar, lo tendré en cuenta para mi próxima versión del sitio.
-                </div>
-              </div>';
+    if (mail($to, $subject, $message, $headers)) {
+        echo json_encode(array('success' => true));
     } else {
-        echo '<div class="error-message w-form-fail">
-                <div class="text-block-9">
-                  ¡Oops! Algo ha ido mal, vuelve a intentarlo más tarde.
-                </div>
-              </div>';
+        echo json_encode(array('success' => false));
     }
 }
 ?>

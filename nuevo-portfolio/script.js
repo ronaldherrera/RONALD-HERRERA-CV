@@ -19932,3 +19932,29 @@ Misitio.require("ix2").init({
 */
 
 /*Enviar feedback*/
+
+$(document).ready(function () {
+  $(".form").submit(function (event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "enviar_feedback.php",
+      data: formData,
+      dataType: "json",
+      success: function (response) {
+        if (response.success) {
+          $(".success-message").show();
+          $(".error-message").hide();
+        } else {
+          $(".error-message").show();
+          $(".success-message").hide();
+        }
+      },
+      error: function () {
+        $(".error-message").show();
+        $(".success-message").hide();
+      },
+    });
+  });
+});
