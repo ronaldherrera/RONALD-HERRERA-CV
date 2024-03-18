@@ -922,11 +922,13 @@
           <div class="feedback">
             <div class="form-block w-form">
               <div class="textura-imput"></div>
+              <!-- Formulario con método POST que enviará los datos a send_feedback.php -->
               <form
                 id="wf-form-feedback"
                 name="wf-form-feedback"
                 data-name="feedback"
                 method="post"
+                action="send_feedback.php"
                 class="form"
                 data-wf-page-id="65dcdab941881aad3a400aae"
                 data-wf-element-id="b8c1d820-4f4b-0e45-1ae6-dc282cda486c"
@@ -934,6 +936,7 @@
                 <label for="imput-home" class="field-label"
                   >¡Ayúdame a mejorar!</label
                 >
+                <!-- Textarea para ingresar el feedback -->
                 <textarea
                   id="imput-home"
                   name="imput-home"
@@ -944,21 +947,23 @@
                   autofocus="true"
                   class="textarea w-input"
                 ></textarea>
+                <!-- Botón de envío -->
                 <input
                   type="submit"
                   data-wait="Espera un momento..."
                   class="submit-button w-button"
                   value="Enviar feedback"
-                  id="submit-button"
                 />
               </form>
-              <div class="success-message w-form-done">
+              <!-- Mensaje de éxito, oculto por defecto -->
+              <div class="success-message w-form-done" style="display: none">
                 <div class="text-block-10">
                   ¡Gracias! Tu comentario me ayudará a mejorar, lo tendré en
                   cuenta para mi próxima versión del sitio.
                 </div>
               </div>
-              <div class="error-message w-form-fail">
+              <!-- Mensaje de error, oculto por defecto -->
+              <div class="error-message w-form-fail" style="display: none">
                 <div class="text-block-9">
                   ¡Oops! Algo ha ido mal, vuelve a intentarlo más tarde.
                 </div>
@@ -1023,7 +1028,6 @@
         </div>
       </section>
     </main>
-
     <script
       src="./script.js"
       type="text/javascript"
