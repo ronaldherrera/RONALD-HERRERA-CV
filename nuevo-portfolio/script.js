@@ -19933,37 +19933,18 @@ Misitio.require("ix2").init({
 
 /*Enviar feedback*/
 
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
   var formSubmitted = false; // Variable para rastrear si el formulario ya ha sido enviado
+  var form = document.getElementById("wf-form-feedback");
+  var submitButton = document.getElementById("submit-button");
 
-  // Manejar el evento de clic en el botón
-  $("#submit-button").click(function () {
-    // Verificar si el formulario ya ha sido enviado
+  form.addEventListener("submit", function (event) {
     if (formSubmitted) {
-      return; // Salir de la función si ya se ha enviado el formulario
+      event.preventDefault(); // Evitar el envío del formulario si ya se ha enviado
+    } else {
+      // Deshabilitar el botón de envío después del primer envío
+      submitButton.setAttribute("disabled", "disabled");
+      formSubmitted = true;
     }
-
-    // Enviar el formulario
-    var formData = $(".form").serialize();
-    $.ajax({
-      type: "POST",
-      url: "enviar_feedback.php",
-      data: formData,
-      dataType: "json",
-      success: function (response) {
-        if (response.success) {
-          $(".success-message").show();
-          $(".error-message").hide();
-          formSubmitted = true; // Establecer la variable a true después de enviar el formulario con éxito
-        } else {
-          $(".error-message").show();
-          $(".success-message").hide();
-        }
-      },
-      error: function () {
-        $(".error-message").show();
-        $(".success-message").hide();
-      },
-    });
   });
 });
