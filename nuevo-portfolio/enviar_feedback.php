@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./style.css">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo_destino = "ronaldherrera3d@gmail.com";
