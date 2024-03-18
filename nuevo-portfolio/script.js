@@ -19937,7 +19937,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("submit-button");
 
   form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Previene el envío normal del formulario
+    event.preventDefault(); // Previene el envío normal del formulario.
+
+    // Deshabilita el botón de enviar para evitar envíos múltiples solo durante el proceso de envío.
+    submitButton.disabled = true;
 
     const formData = new FormData(form);
 
@@ -19960,7 +19963,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".error-message").style.display = "block";
       })
       .finally(() => {
-        // Habilita nuevamente el botón de enviar después de que se complete la solicitud (éxito o fracaso)
+        // Re-habilita el botón de enviar después de recibir la respuesta o en caso de un error.
         submitButton.disabled = false;
       });
   });
