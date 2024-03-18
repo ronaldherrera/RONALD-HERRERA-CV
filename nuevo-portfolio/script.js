@@ -19942,7 +19942,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var xhr = new XMLHttpRequest(); // Crear una nueva solicitud AJAX
 
-    xhr.open("POST", "ruta/a/tu/archivo/php.php", true); // Especificar la URL del archivo PHP que procesará el formulario
+    xhr.open("POST", "./enviar_feedback.php", true); // Especificar la URL del archivo PHP que procesará el formulario
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onload = function () {
