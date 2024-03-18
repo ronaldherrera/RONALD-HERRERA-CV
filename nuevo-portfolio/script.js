@@ -19936,6 +19936,9 @@ Misitio.require("ix2").init({
 $(document).ready(function () {
   $(".form").submit(function (event) {
     event.preventDefault();
+    // Deshabilitar el botón de envío para evitar envíos duplicados
+    $(".submit-button").prop("disabled", true);
+
     var formData = $(this).serialize();
     $.ajax({
       type: "POST",
@@ -19954,6 +19957,10 @@ $(document).ready(function () {
       error: function () {
         $(".error-message").show();
         $(".success-message").hide();
+      },
+      complete: function () {
+        // Habilitar el botón de envío después de que se complete la solicitud AJAX
+        $(".submit-button").prop("disabled", false);
       },
     });
   });
