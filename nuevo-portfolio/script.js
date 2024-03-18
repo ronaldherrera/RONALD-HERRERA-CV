@@ -19939,7 +19939,7 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault(); // Prevenir el envío del formulario predeterminado
 
       // Obtener el valor del textarea
-      var feedbackText = document.getElementById("input-home").value;
+      var feedbackText = document.getElementById("imput-home").value;
 
       // Crear objeto FormData
       var formData = new FormData();
