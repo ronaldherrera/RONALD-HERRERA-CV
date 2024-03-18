@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $feedback = $_POST['feedback'];
 
     // Dirección de correo electrónico a la que se enviará el feedback
-    $to = "ronaldcalzadilla31@gmail.com";
+    $to = "ronaldherrera3d@gmail.com";
 
     // Asunto del correo electrónico
     $subject = "Feedback de la página web";
