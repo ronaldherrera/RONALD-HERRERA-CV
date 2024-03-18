@@ -19967,19 +19967,3 @@ $(document).ready(function () {
     });
   });
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-  var formSubmitted = false; // Variable para rastrear si el formulario ya ha sido enviado
-  var form = document.getElementById("wf-form-feedback");
-  var submitButton = document.getElementById("submit-button");
-
-  form.addEventListener("submit", function (event) {
-    if (formSubmitted) {
-      event.preventDefault(); // Evitar el envío del formulario si ya se ha enviado
-    } else {
-      // Deshabilitar el botón de envío después del primer envío
-      submitButton.setAttribute("disabled", "disabled");
-      formSubmitted = true;
-    }
-  });
-});
