@@ -19936,15 +19936,15 @@ Misitio.require("ix2").init({
 $(document).ready(function () {
   var formSubmitted = false; // Variable para rastrear si el formulario ya ha sido enviado
 
-  $(".form").submit(function (event) {
-    event.preventDefault();
-
+  // Manejar el evento de clic en el botón
+  $("#submit-button").click(function () {
     // Verificar si el formulario ya ha sido enviado
     if (formSubmitted) {
       return; // Salir de la función si ya se ha enviado el formulario
     }
 
-    var formData = $(this).serialize();
+    // Enviar el formulario
+    var formData = $(".form").serialize();
     $.ajax({
       type: "POST",
       url: "enviar_feedback.php",
