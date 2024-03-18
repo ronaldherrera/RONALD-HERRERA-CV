@@ -19943,27 +19943,3 @@ function mostrarMensaje(resultado) {
     document.querySelector(".error-message").style.display = "block";
   }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("wf-form-feedback");
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const formData = new FormData(form);
-
-    fetch(form.action, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Llama a la función mostrarMensaje con el resultado devuelto por el PHP
-        mostrarMensaje(data.success);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        document.querySelector(".error-message").style.display = "block";
-        document.querySelector(".success-message").style.display = "none";
-      });
-  });
-});
