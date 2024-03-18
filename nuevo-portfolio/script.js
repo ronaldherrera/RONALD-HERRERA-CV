@@ -19939,7 +19939,7 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault(); // Prevenir el envío del formulario predeterminado
 
       // Obtener el valor del textarea
-      var feedbackText = document.getElementById("input-home").value;
+      var feedbackText = document.getElementById("imput-home").value;
 
       // Crear objeto FormData
       var formData = new FormData();
@@ -19953,7 +19953,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Éxito
           document.querySelector(".success-message").style.display = "block";
           document.querySelector(".error-message").style.display = "none";
-          document.getElementById("input-home").value = ""; // Limpiar el textarea
+          document.getElementById("imput-home").value = ""; // Limpiar el textarea
         } else {
           // Error
           document.querySelector(".success-message").style.display = "none";
