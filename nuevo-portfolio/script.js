@@ -19932,3 +19932,40 @@ Misitio.require("ix2").init({
 */
 
 /*Enviar feedback*/
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.getElementById("wf-form-feedback");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Evitar que el formulario se envíe de forma convencional
+
+    var formData = new FormData(form); // Obtener los datos del formulario
+
+    var xhr = new XMLHttpRequest(); // Crear una nueva solicitud AJAX
+
+    xhr.open("POST", "ruta/a/tu/archivo/php.php", true); // Especificar la URL del archivo PHP que procesará el formulario
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Éxito
+        console.log("Feedback enviado exitosamente");
+        // Aquí puedes mostrar un mensaje de éxito al usuario o realizar alguna otra acción
+        document.querySelector(".success-message").style.display = "block";
+      } else {
+        // Error
+        console.error("Hubo un error al enviar el feedback");
+        // Aquí puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+        document.querySelector(".error-message").style.display = "block";
+      }
+    };
+
+    xhr.onerror = function () {
+      // Manejar errores de red
+      console.error("Error de red al enviar el feedback");
+      // Aquí puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+      document.querySelector(".error-message").style.display = "block";
+    };
+
+    xhr.send(new URLSearchParams(formData)); // Enviar los datos del formulario
+  });
+});
