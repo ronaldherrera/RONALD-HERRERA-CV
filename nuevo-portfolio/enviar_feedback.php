@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mensaje del correo, obtenido del textarea del formulario
     $message = $_POST['imput-home'];
     // Encabezados del correo
-    $headers = "From: webmaster@example.com";
+    $headers = "From: hola@ronalherrera.es";
 
     // Intentar enviar el correo
     if (mail($to, $subject, $message, $headers)) {
