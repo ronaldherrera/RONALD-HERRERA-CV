@@ -19938,11 +19938,14 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Evitar que el formulario se envíe de forma convencional
 
-    var formData = new FormData(form); // Obtener los datos del formulario
+    var feedback = document.getElementById("imput-home").value; // Obtener el valor del textarea
 
     var xhr = new XMLHttpRequest(); // Crear una nueva solicitud AJAX
 
-    xhr.open("POST", "./enviar_feedback.php", true); // Especificar la URL del archivo PHP que procesará el formulario
+    var formData = new FormData(); // Crear un objeto FormData
+    formData.append("feedback", feedback); // Agregar el feedback al objeto FormData
+
+    xhr.open("POST", "ruta/a/tu/archivo/php.php", true); // Especificar la URL del archivo PHP que procesará el formulario
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onload = function () {
@@ -19966,6 +19969,6 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".error-message").style.display = "block";
     };
 
-    xhr.send(new URLSearchParams(formData)); // Enviar los datos del formulario
+    xhr.send(formData); // Enviar los datos del formulario
   });
 });
