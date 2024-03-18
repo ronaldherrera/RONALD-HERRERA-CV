@@ -19932,35 +19932,3 @@ Misitio.require("ix2").init({
 */
 
 /*Enviar feedback*/
-document.addEventListener("DOMContentLoaded", function () {
-  document
-    .getElementById("wf-form-feedback")
-    .addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevenir el envío del formulario predeterminado
-
-      // Obtener el valor del textarea
-      var feedbackText = document.getElementById("imput-home").value;
-
-      // Crear objeto FormData
-      var formData = new FormData();
-      formData.append("message", feedbackText);
-
-      // Enviar la solicitud AJAX
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "enviar_feedback.php", true);
-      xhr.onload = function () {
-        if (xhr.status === 200) {
-          // Éxito
-          document.querySelector(".success-message").style.display = "block";
-          document.querySelector(".error-message").style.display = "none";
-          document.getElementById("input-home").value = ""; // Limpiar el textarea
-        } else {
-          // Error
-          document.querySelector(".success-message").style.display = "none";
-          document.querySelector(".error-message").style.display = "block";
-        }
-      };
-      xhr.send(formData);
-      return false;
-    });
-});
