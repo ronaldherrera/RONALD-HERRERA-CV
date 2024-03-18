@@ -19932,3 +19932,38 @@ Misitio.require("ix2").init({
 */
 
 /*Enviar feedback*/
+function mostrarMensaje(resultado) {
+  // Si el resultado es verdadero (success), mostrar mensaje de éxito y ocultar mensaje de error
+  if (resultado === true) {
+    document.querySelector(".success-message").style.display = "block";
+    document.querySelector(".error-message").style.display = "none";
+  } else {
+    // Si el resultado es falso, mostrar mensaje de error y ocultar mensaje de éxito
+    document.querySelector(".success-message").style.display = "none";
+    document.querySelector(".error-message").style.display = "block";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("wf-form-feedback");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Llama a la función mostrarMensaje con el resultado devuelto por el PHP
+        mostrarMensaje(data.success);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        document.querySelector(".error-message").style.display = "block";
+        document.querySelector(".success-message").style.display = "none";
+      });
+  });
+});
