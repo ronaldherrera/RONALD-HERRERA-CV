@@ -19934,10 +19934,15 @@ Misitio.require("ix2").init({
 /*Enviar feedback*/
 
 $(document).ready(function () {
+  var formSubmitted = false; // Variable para rastrear si el formulario ya ha sido enviado
+
   $(".form").submit(function (event) {
     event.preventDefault();
-    // Deshabilitar el botón de envío para evitar envíos duplicados
-    $(".submit-button").prop("disabled", true);
+
+    // Verificar si el formulario ya ha sido enviado
+    if (formSubmitted) {
+      return; // Salir de la función si ya se ha enviado el formulario
+    }
 
     var formData = $(this).serialize();
     $.ajax({
@@ -19949,6 +19954,7 @@ $(document).ready(function () {
         if (response.success) {
           $(".success-message").show();
           $(".error-message").hide();
+          formSubmitted = true; // Establecer la variable a true después de enviar el formulario con éxito
         } else {
           $(".error-message").show();
           $(".success-message").hide();
@@ -19957,10 +19963,6 @@ $(document).ready(function () {
       error: function () {
         $(".error-message").show();
         $(".success-message").hide();
-      },
-      complete: function () {
-        // Habilitar el botón de envío después de que se complete la solicitud AJAX
-        $(".submit-button").prop("disabled", false);
       },
     });
   });
