@@ -19945,7 +19945,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var formData = new FormData(); // Crear un objeto FormData
     formData.append("feedback", feedback); // Agregar el feedback al objeto FormData
 
-    xhr.open("POST", "ruta/a/tu/archivo/php.php", true); // Especificar la URL del archivo PHP que procesará el formulario
+    xhr.open("POST", "./enviar_feedback.php", true); // Especificar la URL del archivo PHP que procesará el formulario
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onload = function () {
