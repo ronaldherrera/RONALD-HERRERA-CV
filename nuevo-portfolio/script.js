@@ -19939,9 +19939,6 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Previene el envío normal del formulario.
 
-    // Deshabilita el botón de enviar para evitar envíos múltiples solo durante el proceso de envío.
-    submitButton.disabled = true;
-
     const formData = new FormData(form);
 
     fetch(form.action, {
