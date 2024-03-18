@@ -19961,7 +19961,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       };
       xhr.send(formData);
-
-      return false; // Evitar envío adicional del formulario
     });
 });
