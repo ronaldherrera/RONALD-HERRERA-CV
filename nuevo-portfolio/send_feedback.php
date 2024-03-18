@@ -20,6 +20,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // Si se accede directamente al archivo PHP, redirigir al inicio
-    header("Location: /");
 }
 ?>
