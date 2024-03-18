@@ -5,8 +5,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mensaje = $_POST['imput-home'];
     
     // Encabezados
-    $headers = "From: feedback@tusitio.com" . "\r\n" .
-               "Reply-To: feedback@tusitio.com" . "\r\n" .
+    $headers = "From: hola@ronaldherrera.es" . "\r\n" .
+               "Reply-To: hola@ronaldherrera.es" . "\r\n" .
                "X-Mailer: PHP/" . phpversion();
     
     // Enviamos el correo
