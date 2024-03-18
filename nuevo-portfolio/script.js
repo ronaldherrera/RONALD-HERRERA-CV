@@ -19933,35 +19933,51 @@ Misitio.require("ix2").init({
 
 /*Enviar feedback*/
 document.addEventListener("DOMContentLoaded", function () {
+  // Espera a que el DOM esté completamente cargado
   const form = document.getElementById("wf-form-feedback");
-  const submitButton = document.getElementById("submit-button");
+  // Obtén el formulario por su ID
 
   form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Previene el envío normal del formulario.
+    // Escucha el evento de envío del formulario
+    event.preventDefault(); // Previene el comportamiento por defecto del formulario
 
     const formData = new FormData(form);
+    // Crea un objeto FormData para recoger los datos del formulario
+    console.log("Datos del formulario:", formData); // Muestra los datos del formulario en la consola
 
     fetch(form.action, {
+      // Realiza una solicitud fetch al servidor
       method: "POST",
-      body: formData,
+      // Utiliza el método POST para enviar los datos
+      body: formData, // Incluye los datos del formulario en el cuerpo de la solicitud
     })
-      .then((response) => response.json())
+      .then((response) => {
+        // Maneja la respuesta del servidor
+        console.log("Respuesta del servidor:", response); // Muestra la respuesta del servidor en la consola
+        return response.json(); // Convierte la respuesta a formato JSON
+      })
       .then((data) => {
+        // Maneja los datos recibidos del servidor
+        console.log("Datos recibidos del servidor:", data); // Muestra los datos recibidos del servidor en la consola
+
         if (data.success) {
+          // Si el envío fue exitoso según la respuesta del servidor
           document.querySelector(".success-message").style.display = "block";
-          console.log("¡Feedback enviado con éxito!");
+          // Muestra el mensaje de éxito en el formulario
+          console.log("¡Feedback enviado con éxito!"); // Muestra un mensaje de éxito en la consola
         } else {
+          // Si hubo un error según la respuesta del servidor
           document.querySelector(".error-message").style.display = "block";
-          console.error("¡Error al enviar el feedback!");
+          // Muestra el mensaje de error en el formulario
+          console.error("¡Error al enviar el feedback!"); // Muestra un mensaje de error en la consola
         }
       })
       .catch((error) => {
+        // Maneja cualquier error que pueda ocurrir durante la solicitud
         console.error("Error:", error);
+        // Muestra un mensaje de error en la consola
         document.querySelector(".error-message").style.display = "block";
-      })
-      .finally(() => {
-        // Re-habilita el botón de enviar después de recibir la respuesta o en caso de un error.
-        submitButton.disabled = false;
+        // Muestra el mensaje de error en el formulario
       });
   });
 });
