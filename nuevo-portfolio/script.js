@@ -19933,51 +19933,25 @@ Misitio.require("ix2").init({
 
 /*Enviar feedback*/
 document.addEventListener("DOMContentLoaded", function () {
-  // Espera a que el DOM esté completamente cargado
   const form = document.getElementById("wf-form-feedback");
-  // Obtén el formulario por su ID
 
   form.addEventListener("submit", function (event) {
-    // Escucha el evento de envío del formulario
-    event.preventDefault(); // Previene el comportamiento por defecto del formulario
+    event.preventDefault(); // Previene el comportamiento por defecto del formulario.
 
-    const formData = new FormData(form);
-    // Crea un objeto FormData para recoger los datos del formulario
-    console.log("Datos del formulario:", formData); // Muestra los datos del formulario en la consola
+    // Aquí puedes poner tu lógica para determinar si el formulario es válido.
+    // Para este ejemplo, simplemente vamos a asignar un valor booleano directamente.
+    // Cambia esto a false para probar el mensaje de error.
 
-    fetch(form.action, {
-      // Realiza una solicitud fetch al servidor
-      method: "POST",
-      // Utiliza el método POST para enviar los datos
-      body: formData, // Incluye los datos del formulario en el cuerpo de la solicitud
-    })
-      .then((response) => {
-        // Maneja la respuesta del servidor
-        console.log("Respuesta del servidor:", response); // Muestra la respuesta del servidor en la consola
-        return response.json(); // Convierte la respuesta a formato JSON
-      })
-      .then((data) => {
-        // Maneja los datos recibidos del servidor
-        console.log("Datos recibidos del servidor:", data); // Muestra los datos recibidos del servidor en la consola
-
-        if (data.success) {
-          // Si el envío fue exitoso según la respuesta del servidor
-          document.querySelector(".success-message").style.display = "block";
-          // Muestra el mensaje de éxito en el formulario
-          console.log("¡Feedback enviado con éxito!"); // Muestra un mensaje de éxito en la consola
-        } else {
-          // Si hubo un error según la respuesta del servidor
-          document.querySelector(".error-message").style.display = "block";
-          // Muestra el mensaje de error en el formulario
-          console.error("¡Error al enviar el feedback!"); // Muestra un mensaje de error en la consola
-        }
-      })
-      .catch((error) => {
-        // Maneja cualquier error que pueda ocurrir durante la solicitud
-        console.error("Error:", error);
-        // Muestra un mensaje de error en la consola
-        document.querySelector(".error-message").style.display = "block";
-        // Muestra el mensaje de error en el formulario
-      });
+    if (isFormValid) {
+      // Muestra el mensaje de éxito si la condición es verdadera.
+      document.querySelector(".success-message").style.display = "block";
+      document.querySelector(".error-message").style.display = "none"; // Oculta el mensaje de error en caso de que estuviera visible.
+      console.log("¡Feedback enviado con éxito!");
+    } else {
+      // Muestra el mensaje de error si la condición es falsa.
+      document.querySelector(".error-message").style.display = "block";
+      document.querySelector(".success-message").style.display = "none"; // Oculta el mensaje de éxito en caso de que estuviera visible.
+      console.error("¡Error al enviar el feedback!");
+    }
   });
 });
