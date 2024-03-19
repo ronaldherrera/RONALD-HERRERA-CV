@@ -19940,7 +19940,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Aquí puedes poner tu lógica para determinar si el formulario es válido.
     // Para este ejemplo, simplemente vamos a asignar un valor booleano directamente.
-    // Cambia esto a false para probar el mensaje de error.
+    const isFormValid = true; // Cambia esto a false para probar el mensaje de error.
 
     if (isFormValid) {
       // Muestra el mensaje de éxito si la condición es verdadera.
