@@ -4007,15 +4007,6 @@ a {
     padding-right: 0;
   }
 
-  .barra-burguer-superior-copy {
-    width: 35px;
-    height: 4px;
-    background-color: var(--azul);
-    border-radius: 20px;
-    padding-bottom: 0;
-    padding-right: 0;
-  }
-
   .barra-burguer-central {
     width: 35px;
     height: 4px;
