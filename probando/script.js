@@ -78,3 +78,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const graficoFondo = document.querySelector(".grafico-fondo-proyecto");
+
+  document.addEventListener("mousemove", function (e) {
+    const mouseX = e.clientX;
+    const windowWidth = window.innerWidth;
+    const percentX = (mouseX / windowWidth) * 100;
+    const offset = (percentX - 50) * 10; // Ajusta la velocidad del movimiento cambiando el valor multiplicativo
+
+    graficoFondo.style.transform = `translateX(${offset}px)`;
+  });
+});
