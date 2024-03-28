@@ -104,3 +104,50 @@ window.addEventListener("scroll", function () {
 });
 
 ////////////////
+//las lineas de footer siguen al raton
+document.addEventListener("mousemove", function (event) {
+  var mouseX = event.clientX;
+  var mouseY = event.clientY;
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+  var translateX = (mouseX / windowWidth - 0.5) * 200;
+  var translateY = (mouseY / windowHeight - 0.5) * 200;
+
+  document.querySelector(".linea-naranja-contacto").style.transform =
+    "translateX(" + translateX + "px)";
+  document.querySelector(".linea-azul-contacto").style.transform =
+    "translateX(" + -translateX + "px)";
+  document.querySelector(".linea-amarilla-contacto").style.transform =
+    "translatex(" + translateY + "px)";
+});
+
+//las lineas del footer se mueven con el scroll aleatoriamente en dispositivos moviles y tablets
+// Función para generar un número aleatorio entre un rango
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+// Función para aplicar transformaciones aleatorias a las líneas en el eje X
+function applyRandomTransform() {
+  var translateX1 = getRandomNumber(-10, 10);
+  var translateX2 = getRandomNumber(-10, 10);
+
+  document.querySelector(".linea-naranja-contacto").style.transform =
+    "translateX(" + translateX1 + "px)";
+  document.querySelector(".linea-azul-contacto").style.transform =
+    "translateX(" + translateX2 + "px)";
+}
+
+// Verificar si el dispositivo es un dispositivo móvil o una tablet
+function isMobileOrTablet() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+}
+
+// Escuchar el evento de scroll y aplicar transformaciones aleatorias en dispositivos móviles y tablets
+if (isMobileOrTablet()) {
+  window.addEventListener("scroll", function () {
+    applyRandomTransform();
+  });
+}
