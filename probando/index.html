@@ -760,6 +760,9 @@
         
         // Obtener el valor del textarea
         var mensaje = document.getElementById('imput-home').value;
+// Imprimir el valor del textarea en la consola para depurar
+        console.log('Mensaje:', mensaje);
+
         // Realiza una solicitud AJAX al servidor
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'Envio-feedback.php', true);
