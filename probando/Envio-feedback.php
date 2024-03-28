@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $to = "ronaldherrera3d@gmail.com";
     $subject = "Feedback de tu sitio web: " . $_POST['data-name'];
@@ -11,8 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(array("success" => false));
     }
 } else {
-    header("Location: /"); // Redirigir al inicio si se accede directamente al archivo PHP
-    exit;
+    echo json_encode(array("error" => "Method not allowed"));
 }
 ?>
 
