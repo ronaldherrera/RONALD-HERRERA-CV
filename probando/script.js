@@ -106,11 +106,16 @@ window.addEventListener("scroll", function () {
 ////////////////
 // Esperar a que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM completamente cargado");
+
   // Seleccionar el formulario por su ID
   var form = document.getElementById("wf-form-feedback");
+  console.log("Formulario seleccionado:", form);
 
   // Agregar un evento de envío al formulario
   form.addEventListener("submit", function (event) {
+    console.log("Envío de formulario detectado");
+
     // Evitar que el formulario se envíe normalmente
     event.preventDefault();
 
@@ -121,19 +126,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Preparar los datos a enviar
     var formData = new FormData(form);
+    console.log("Datos del formulario:", formData);
 
     // Manejar la respuesta del servidor
     xhr.onload = function () {
+      console.log("Respuesta del servidor recibida");
       if (xhr.status === 200) {
+        console.log("Estado de la respuesta: 200 OK");
+
         // Verificar si el servidor respondió con éxito
         var response = JSON.parse(xhr.responseText);
+        console.log("Respuesta del servidor:", response);
+
         if (response.success) {
           // Mostrar el mensaje de éxito
+          console.log("Envío exitoso. Mostrando mensaje de éxito.");
           document.querySelector(".success-message").style.display = "block";
           document.querySelector(".error-message").style.display = "none";
           form.reset(); // Limpiar el formulario después del envío exitoso
         } else {
           // Mostrar el mensaje de error
+          console.log("Error en el envío. Mostrando mensaje de error.");
           document.querySelector(".success-message").style.display = "none";
           document.querySelector(".error-message").style.display = "block";
         }
@@ -141,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Enviar los datos del formulario al servidor
+    console.log("Enviando datos del formulario al servidor...");
     xhr.send(new URLSearchParams(formData));
   });
 });
