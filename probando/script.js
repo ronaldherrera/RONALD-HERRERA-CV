@@ -126,10 +126,12 @@ document.addEventListener("DOMContentLoaded", function () {
           // Si la respuesta del servidor es exitosa, mostrar mensaje de éxito
           successMessage.style.display = "block";
           errorMessage.style.display = "none";
+          console.log("enviado");
         } else {
           // Si hay un error en la respuesta del servidor, mostrar mensaje de error
           successMessage.style.display = "none";
           errorMessage.style.display = "block";
+          console.log("no enviado");
         }
       })
       .catch(function (error) {
