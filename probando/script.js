@@ -51,28 +51,36 @@ enlaces.forEach(function (enlace) {
 
 /////////
 
-$(document).ready(function () {
-  $("#home-feedback").submit(function (event) {
-    event.preventDefault(); // Evitar que el formulario se envíe de forma predeterminada
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("home-feedback");
+  const successMessage = document.querySelector(".success-message");
+  const errorMessage = document.querySelector(".error-message");
 
-    $.ajax({
-      type: "POST",
-      url: $(this).attr("action"),
-      data: $(this).serialize(),
-      success: function (response) {
-        var responseData = JSON.parse(response);
-        if (responseData.success) {
-          $(".success-message").show(); // Mostrar el mensaje de éxito
-          $(".error-message").hide(); // Ocultar el mensaje de error
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Evitar el envío predeterminado del formulario
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          successMessage.style.display = "block";
+          errorMessage.style.display = "none";
+          form.reset(); // Limpiar el formulario si se envió con éxito
         } else {
-          $(".success-message").hide(); // Ocultar el mensaje de éxito
-          $(".error-message").show(); // Mostrar el mensaje de error
+          throw new Error("Network response was not ok.");
         }
-      },
-      error: function () {
-        $(".success-message").hide(); // Ocultar el mensaje de éxito
-        $(".error-message").show(); // Mostrar el mensaje de error en caso de error en la solicitud AJAX
-      },
-    });
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+        errorMessage.style.display = "block";
+        successMessage.style.display = "none";
+      });
   });
 });
