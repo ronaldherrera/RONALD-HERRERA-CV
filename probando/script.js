@@ -104,3 +104,29 @@ window.addEventListener("scroll", function () {
 });
 
 ////////////////
+
+$(document).ready(function () {
+  $("#home-feedback").submit(function (event) {
+    event.preventDefault(); // Evita que se envíe el formulario tradicionalmente
+
+    var formData = $(this).serialize(); // Obtén los datos del formulario
+
+    // Enviar datos del formulario usando AJAX
+    $.ajax({
+      type: "POST",
+      url: "Envio-feedback.php",
+      data: formData,
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "success") {
+          $(".success-message").css("display", "block");
+        } else {
+          $(".error-message").css("display", "block");
+        }
+      },
+      error: function () {
+        $(".error-message").css("display", "block");
+      },
+    });
+  });
+});
