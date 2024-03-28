@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $to = "hola@ronalherrera.es";
+    $to = "ronaldherrera3d@gmail.com";
     $subject = "Feedback de tu sitio web: " . $_POST['data-name'];
     $message = $_POST['imput-home'];
     $headers = "From: hola@ronalherrera.es";
