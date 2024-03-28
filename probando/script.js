@@ -50,31 +50,29 @@ enlaces.forEach(function (enlace) {
 });
 
 /////////
-<script>
-$(document).ready(function() {
-  $('#home-feedback').submit(function(event) {
+
+$(document).ready(function () {
+  $("#home-feedback").submit(function (event) {
     event.preventDefault(); // Evitar que el formulario se envíe de forma predeterminada
-    
+
     $.ajax({
-      type: 'POST',
-      url: $(this).attr('action'),
+      type: "POST",
+      url: $(this).attr("action"),
       data: $(this).serialize(),
-      success: function(response) {
+      success: function (response) {
         var responseData = JSON.parse(response);
         if (responseData.success) {
-          $('.success-message').show(); // Mostrar el mensaje de éxito
-          $('.error-message').hide(); // Ocultar el mensaje de error
+          $(".success-message").show(); // Mostrar el mensaje de éxito
+          $(".error-message").hide(); // Ocultar el mensaje de error
         } else {
-          $('.success-message').hide(); // Ocultar el mensaje de éxito
-          $('.error-message').show(); // Mostrar el mensaje de error
+          $(".success-message").hide(); // Ocultar el mensaje de éxito
+          $(".error-message").show(); // Mostrar el mensaje de error
         }
       },
-      error: function() {
-        $('.success-message').hide(); // Ocultar el mensaje de éxito
-        $('.error-message').show(); // Mostrar el mensaje de error en caso de error en la solicitud AJAX
-      }
+      error: function () {
+        $(".success-message").hide(); // Ocultar el mensaje de éxito
+        $(".error-message").show(); // Mostrar el mensaje de error en caso de error en la solicitud AJAX
+      },
     });
   });
 });
-</script>
-
