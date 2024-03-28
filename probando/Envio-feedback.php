@@ -1,26 +1,27 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $message = $_POST["message"];
-    
-    $to = "ronaldcalzadilla31@gmail.com"; 
-    $subject = "FEEDBACK cV web";
-    $body = "$message";
+// Recoger los datos del formulario
+$mensaje = $_POST['imput-home']; // El nombre del textarea del formulario
 
-    // Configurar cabeceras para el correo electrónico
-    $headers = "From: hola@ronaldherrera.es";
+// Establecer la dirección de correo electrónico de destino
+$destinatario = 'ronaldherrera3d@gmail.com';
 
-    // Enviar el correo electrónico
-    if (mail($to, $subject, $body, $headers)) {
-        $response = array("status" => "success", "message" => "¡Gracias!🧡Feedback enviado.");
-        http_response_code(200);
-        echo json_encode($response);
-    } else {
-        $response = array("status" => "error", "message" => "💔 Hubo un problema al enviar el feedback.");
-        http_response_code(500);
-        echo json_encode($response);
-    }
+// Establecer el asunto del correo electrónico
+$asunto = 'Feedback desde el formulario de tu sitio web';
+
+// Establecer la dirección de correo electrónico del remitente (debe ser una dirección válida en tu servidor)
+$remitente = 'hola@ronaldherrera.es';
+
+// Cabeceras del correo electrónico
+$headers = "From: $remitente\r\n";
+$headers .= "Reply-To: $remitente\r\n";
+$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+// Enviar el correo electrónico
+if(mail($destinatario, $asunto, $mensaje, $headers)) {
+    // Envío exitoso
+    echo json_encode(array('status' => 'success'));
 } else {
-    http_response_code(403);
-    echo "Hubo un problema al enviar el formulario.";
+    // Error en el envío
+    echo json_encode(array('status' => 'error'));
 }
 ?>
