@@ -1,6 +1,6 @@
 <?php
 // Recoger los datos del formulario
-$mensaje = $_POST['imput-home']; // El nombre del textarea del formulario
+$mensaje = $_POST["imput-home"]; // El nombre del textarea del formulario
 
 // Establecer la dirección de correo electrónico de destino
 $destinatario = 'ronaldherrera3d@gmail.com';
