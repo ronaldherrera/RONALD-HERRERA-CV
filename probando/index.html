@@ -784,13 +784,15 @@
   }
 })
 .catch(error => {
-  console.error('There has been a problem with your fetch operation:', error);
+  if (error.message !== 'Mail function failed.') {
+    console.error('There has been a problem with your fetch operation:', error);
+  }
   errorMessage.style.display = "block";
   successMessage.style.display = "none";
 });
     });
   });
-</script>
+        </script>
 
 
 
