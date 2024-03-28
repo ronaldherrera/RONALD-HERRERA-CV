@@ -752,34 +752,31 @@
             Todos los derechos reservados<br />2024-2025<br />
           </div>
       </section>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#home-feedback').submit(function(event) {
-      event.preventDefault(); // Evita que se envíe el formulario tradicionalmente
-      
-      var formData = $(this).serialize(); // Obtén los datos del formulario
-      
-      // Enviar datos del formulario usando AJAX
-      $.ajax({
-        type: 'POST',
-        url: 'Envio-feedback.php',
-        data: formData,
-        dataType: 'json',
-        success: function(response) {
-          if (response.status === 'success') {
-            $('.success-message').css('display', 'block');
-          } else {
-            $('.error-message').css('display', 'block');
-          }
-        },
-        error: function() {
-          $('.error-message').css('display', 'block');
+       <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.getElementById('home-feedback');
+      var successMessage = document.querySelector('.success-message');
+      var errorMessage = document.querySelector('.error-message');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Evitar el envío del formulario por defecto
+
+        // Aquí podrías hacer una petición AJAX para enviar el formulario
+
+        // Simulación de envío exitoso
+        var enviadoExitosamente = true;
+
+        if (enviadoExitosamente) {
+          successMessage.style.display = 'block';
+          errorMessage.style.display = 'none';
+        } else {
+          successMessage.style.display = 'none';
+          errorMessage.style.display = 'block';
         }
       });
     });
-  });
-</script>
+  </script>
+
 
     <script src="./script.js"></script>
   </body>
