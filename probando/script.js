@@ -104,3 +104,43 @@ window.addEventListener("scroll", function () {
 });
 
 ////////////////
+// Esperar a que el DOM esté completamente cargado
+document.addEventListener("DOMContentLoaded", function () {
+  // Seleccionar el formulario por su ID
+  var form = document.getElementById("wf-form-feedback");
+
+  // Agregar un evento de envío al formulario
+  form.addEventListener("submit", function (event) {
+    // Evitar que el formulario se envíe normalmente
+    event.preventDefault();
+
+    // Realizar la petición POST al servidor
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", form.action, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    // Preparar los datos a enviar
+    var formData = new FormData(form);
+
+    // Manejar la respuesta del servidor
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Verificar si el servidor respondió con éxito
+        var response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          // Mostrar el mensaje de éxito
+          document.querySelector(".success-message").style.display = "block";
+          document.querySelector(".error-message").style.display = "none";
+          form.reset(); // Limpiar el formulario después del envío exitoso
+        } else {
+          // Mostrar el mensaje de error
+          document.querySelector(".success-message").style.display = "none";
+          document.querySelector(".error-message").style.display = "block";
+        }
+      }
+    };
+
+    // Enviar los datos del formulario al servidor
+    xhr.send(new URLSearchParams(formData));
+  });
+});
