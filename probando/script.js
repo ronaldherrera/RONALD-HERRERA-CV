@@ -105,39 +105,38 @@ window.addEventListener("scroll", function () {
 
 ////////////////
 
-document
-  .getElementById("home-feedback")
-  .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevenir el envío del formulario para manejarlo con JavaScript
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.getElementById("home-feedback");
+  var successMessage = document.querySelector(".success-message");
+  var errorMessage = document.querySelector(".error-message");
 
-    // Recoger los datos del formulario
-    var formData = new FormData(this);
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Evitar el envío del formulario por defecto
 
-    // Añadir el remitente y el asunto al formData
-    formData.append("remitente", "hola@ronaldherrera.es");
-    formData.append("destinatario", "ronaldherrera3d@gmail.com");
-    formData.append("asunto", "Feedback desde el formulario de tu sitio web");
+    // Obtener los datos del formulario
+    var formData = new FormData(form);
 
-    // Realizar la solicitud POST
-    fetch("Envio-feedback.php", {
-      method: "POST",
+    // Realizar la petición AJAX
+    fetch(form.action, {
+      method: form.method,
       body: formData,
     })
-      .then((response) => {
+      .then(function (response) {
         if (response.ok) {
-          // Si la respuesta es exitosa, mostrar mensaje de éxito
-          document.querySelector(".success-message").style.display = "block";
-          document.querySelector(".error-message").style.display = "none";
+          // Si la respuesta del servidor es exitosa, mostrar mensaje de éxito
+          successMessage.style.display = "block";
+          errorMessage.style.display = "none";
         } else {
-          // Si hay un error en la respuesta, mostrar mensaje de error
-          document.querySelector(".success-message").style.display = "none";
-          document.querySelector(".error-message").style.display = "block";
+          // Si hay un error en la respuesta del servidor, mostrar mensaje de error
+          successMessage.style.display = "none";
+          errorMessage.style.display = "block";
         }
       })
-      .catch((error) => {
-        // Si hay un error en la solicitud, mostrar mensaje de error
-        document.querySelector(".success-message").style.display = "none";
-        document.querySelector(".error-message").style.display = "block";
-        console.error("Error al enviar el formulario:", error);
+      .catch(function (error) {
+        // Si hay un error en la petición, mostrar mensaje de error
+        console.error("Error:", error);
+        successMessage.style.display = "none";
+        errorMessage.style.display = "block";
       });
   });
+});
