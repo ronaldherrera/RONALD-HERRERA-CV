@@ -1,19 +1,28 @@
 <?php
-header('Content-Type: application/json');
+// Recoger los datos del formulario
+$mensaje = $_POST['imput-home']; // El nombre del textarea del formulario
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $to = "ronaldherrera3d@gmail.com";
-    $subject = "Feedback de tu sitio web: " . $_POST['data-name'];
-    $message = $_POST['imput-home'];
-    $headers = "From: hola@ronaldherrera.es";
+// Establecer la dirección de correo electrónico de destino
+$destinatario = 'ronaldherrera3d@gmail.com';
 
-    if (mail($to, $subject, $message, $headers)) {
-        echo json_encode(array("success" => true));
-    } else {
-        echo json_encode(array("success" => false));
-    }
+// Establecer el asunto del correo electrónico
+$asunto = 'Feedback desde el formulario de tu sitio web';
+
+// Establecer la dirección de correo electrónico del remitente (debe ser una dirección válida en tu servidor)
+$remitente = 'hola@ronaldherrera.es';
+
+// Cabeceras del correo electrónico
+$headers = "From: $remitente\r\n";
+$headers .= "Reply-To: $remitente\r\n";
+$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+// Enviar el correo electrónico
+if(mail($destinatario, $asunto, $mensaje, $headers)) {
+    // Envío exitoso
+    echo json_encode(array('status' => 'success'));
 } else {
-    echo json_encode(array("error" => "Method not allowed"));
+    // Error en el envío
+    echo json_encode(array('status' => 'error'));
 }
 ?>
 

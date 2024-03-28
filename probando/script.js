@@ -105,43 +105,22 @@ window.addEventListener("scroll", function () {
 
 ////////////////
 
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("home-feedback");
-  const successMessage = document.querySelector(".success-message");
-  const errorMessage = document.querySelector(".error-message");
+// Función para cambiar el mensaje de éxito o error según el resultado del envío del formulario
+document
+  .getElementById("home-feedback")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevenir el envío del formulario para manejarlo con JavaScript
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Evitar el envío predeterminado del formulario
+    // Aquí puedes realizar la lógica de envío del formulario, por ejemplo, usando fetch o XMLHttpRequest
 
-    const formData = new FormData(form);
+    // Simulando el envío exitoso del formulario
+    var envioExitoso = true; // Cambia a false para simular un envío fallido
 
-    fetch(form.action, {
-      method: form.method,
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json(); // Convertir la respuesta a JSON
-        } else {
-          throw new Error("Network response was not ok.");
-        }
-      })
-      .then((data) => {
-        if (data.success) {
-          successMessage.style.display = "block";
-          errorMessage.style.display = "none";
-          form.reset(); // Limpiar el formulario si se envió con éxito
-        } else {
-          throw new Error("Mail function failed.");
-        }
-      })
-      .catch((error) => {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-        errorMessage.style.display = "block";
-        successMessage.style.display = "none";
-      });
+    if (envioExitoso) {
+      document.querySelector(".success-message").style.display = "block";
+      document.querySelector(".error-message").style.display = "none";
+    } else {
+      document.querySelector(".success-message").style.display = "none";
+      document.querySelector(".error-message").style.display = "block";
+    }
   });
-});
