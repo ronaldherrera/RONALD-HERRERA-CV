@@ -769,6 +769,7 @@
                 // Si la respuesta del servidor es exitosa, muestra el mensaje de éxito y oculta el mensaje de error
                 document.getElementById('success-message').style.display = 'block';
                 document.getElementById('error-message').style.display = 'none';
+                console.log('Datos enviados:', new FormData(event.target));
             } else {
                 // Si la respuesta del servidor es un error, muestra el mensaje de error y oculta el mensaje de éxito
                 document.getElementById('error-message').style.display = 'block';
