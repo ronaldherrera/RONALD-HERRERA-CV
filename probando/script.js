@@ -105,22 +105,39 @@ window.addEventListener("scroll", function () {
 
 ////////////////
 
-// Función para cambiar el mensaje de éxito o error según el resultado del envío del formulario
 document
   .getElementById("home-feedback")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevenir el envío del formulario para manejarlo con JavaScript
 
-    // Aquí puedes realizar la lógica de envío del formulario, por ejemplo, usando fetch o XMLHttpRequest
+    // Recoger los datos del formulario
+    var formData = new FormData(this);
 
-    // Simulando el envío exitoso del formulario
-    var envioExitoso = true; // Cambia a false para simular un envío fallido
+    // Añadir el remitente y el asunto al formData
+    formData.append("remitente", "hola@ronaldherrera.es");
+    formData.append("destinatario", "ronaldherrera3d@gmail.com");
+    formData.append("asunto", "Feedback desde el formulario de tu sitio web");
 
-    if (envioExitoso) {
-      document.querySelector(".success-message").style.display = "block";
-      document.querySelector(".error-message").style.display = "none";
-    } else {
-      document.querySelector(".success-message").style.display = "none";
-      document.querySelector(".error-message").style.display = "block";
-    }
+    // Realizar la solicitud POST
+    fetch("Envio-feedback.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Si la respuesta es exitosa, mostrar mensaje de éxito
+          document.querySelector(".success-message").style.display = "block";
+          document.querySelector(".error-message").style.display = "none";
+        } else {
+          // Si hay un error en la respuesta, mostrar mensaje de error
+          document.querySelector(".success-message").style.display = "none";
+          document.querySelector(".error-message").style.display = "block";
+        }
+      })
+      .catch((error) => {
+        // Si hay un error en la solicitud, mostrar mensaje de error
+        document.querySelector(".success-message").style.display = "none";
+        document.querySelector(".error-message").style.display = "block";
+        console.error("Error al enviar el formulario:", error);
+      });
   });
