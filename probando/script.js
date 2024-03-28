@@ -106,27 +106,34 @@ window.addEventListener("scroll", function () {
 ////////////////
 
 $(document).ready(function () {
+  console.log("jQuery cargado correctamente.");
+
   $("#home-feedback").submit(function (event) {
     event.preventDefault(); // Evita que se envíe el formulario tradicionalmente
 
     var formData = $(this).serialize(); // Obtén los datos del formulario
+    console.log("Datos del formulario:", formData);
 
     // Enviar datos del formulario usando AJAX
     $.ajax({
       type: "POST",
-      url: "Envio-feedback.php",
+      url: "/enviar-feedback.php", // Cambiada la URL de la acción del formulario
       data: formData,
       dataType: "json",
       success: function (response) {
+        console.log("Respuesta del servidor:", response);
         if (response.status === "success") {
+          console.log("Envío exitoso.");
           $(".success-message").css("display", "block");
           $(".error-message").css("display", "none");
         } else {
+          console.log("Error en el envío.");
           $(".success-message").css("display", "none");
           $(".error-message").css("display", "block");
         }
       },
-      error: function () {
+      error: function (xhr, status, error) {
+        console.error("Error en la solicitud AJAX:", error);
         $(".success-message").css("display", "none");
         $(".error-message").css("display", "block");
       },
