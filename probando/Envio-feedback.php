@@ -6,11 +6,11 @@ $mensaje = $_POST['imput-home']; // El nombre del textarea del formulario
 $destinatario = 'ronaldherrera3d@gmail.com';
 
 // Establecer el asunto del correo electrónico
-$asunto = 'Feedback desde el formulario de tu sitio web';
+$asunto = 'MI WEB';
 
 // Establecer el contenido del correo electrónico
 $contenido_correo = '<html><body>';
-$contenido_correo .= '<h2>Feedback recibido desde el formulario de tu sitio web:</h2>';
+$contenido_correo .= '<h2>Feedback recibido:</h2>';
 $contenido_correo .= '<p>' . $mensaje . '</p>';
 $contenido_correo .= '</body></html>';
 
