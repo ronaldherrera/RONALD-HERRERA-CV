@@ -20,13 +20,8 @@ $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 if(mail($destinatario, $asunto, $mensaje, $headers)) {
     // Envío exitoso
     echo json_encode(array('status' => 'success'));
-    http_response_code(200);
-    echo json_encode($response);
 } else {
     // Error en el envío
     echo json_encode(array('status' => 'error'));
-    http_response_code(500);
-    echo json_encode($response);
 }
 ?>
-
