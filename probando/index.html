@@ -758,6 +758,8 @@
         // Detiene el envío predeterminado del formulario
         event.preventDefault();
         
+        // Obtener el valor del textarea
+        var mensaje = document.getElementById('imput-home').value;
         // Realiza una solicitud AJAX al servidor
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'Envio-feedback.php', true);
