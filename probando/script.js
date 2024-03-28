@@ -129,8 +129,8 @@ function getRandomNumber(min, max) {
 
 // Función para aplicar transformaciones aleatorias a las líneas en el eje X
 function applyRandomTransform() {
-  var translateX1 = getRandomNumber(-10, 10);
-  var translateX2 = getRandomNumber(-10, 10);
+  var translateX1 = getRandomNumber(-100, 100);
+  var translateX2 = getRandomNumber(-100, 100);
 
   document.querySelector(".linea-naranja-contacto").style.transform =
     "translateX(" + translateX1 + "px)";
