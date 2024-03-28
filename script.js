@@ -1,241 +1,139 @@
-//-INICIO-función para controlar el scroll horizontal del carrusel de portfolio de inicio
-const proyectos = document.querySelectorAll(
-  "#diseñoGrafico, #fullStack, #infografias"
-);
+document.getElementById("botonBurguer").addEventListener("click", function () {
+  var marcoMenu = document.getElementById("marcoMenu");
+  var enlacesMovil = document.getElementById("enlacesMovil");
+  var fondoEnlancesMovil = document.getElementById("fondoEnlancesMovil");
 
-let isScrolling = false;
+  setTimeout(() => {
+    this.classList.toggle("active");
+  }, 50); // Añadimos un retraso pequeño antes de cambiar la clase
 
-proyectos.forEach((proyecto) => {
-  proyecto.addEventListener("mouseenter", function () {
-    isScrolling = true;
-    proyecto.style.overflowY = "hidden";
-    proyecto.style.overflowX = "scroll";
-  });
-
-  proyecto.addEventListener("mouseleave", function () {
-    isScrolling = false;
-    proyecto.style.overflow = "hidden";
-  });
-
-  proyecto.addEventListener(
-    "wheel",
-    function (event) {
-      if (isScrolling) {
-        event.preventDefault();
-        proyecto.scrollLeft += event.deltaY;
-      }
-    },
-    { passive: false }
-  );
+  if (this.classList.contains("active")) {
+    // Abre el menú móvil escalando
+    setTimeout(function () {
+      enlacesMovil.style.transform = "scale(0)";
+      fondoEnlancesMovil.style.transform = "scale(0)";
+      setTimeout(function () {
+        marcoMenu.style.transform = "scale(0)";
+      }, 300);
+    }, 100); // Retraso para que el marco del menú se abra primero
+  } else {
+    // Cierra el menú móvil escalando
+    marcoMenu.style.transform = "scale(1)";
+    setTimeout(function () {
+      enlacesMovil.style.transform = "scale(1)";
+      fondoEnlancesMovil.style.transform = "scale(1)";
+    }, 300); // Retraso para que los enlaces del menú se cierren primero
+  }
 });
-//-FIN-función para controlar el scroll horizontal del carrusel de portfolio de inicio
-/////////////////////
-//-INICIO-función para copiar en el portapapeles
-function copyTel() {
-  const textToCopy = "+34671987372"; // El texto que quieres copiar
-  navigator.clipboard.writeText(textToCopy).then(
-    function () {
-      alert("Teléfono copiado al portapapeles: " + textToCopy);
-    },
-    function (err) {
-      console.error("Error al copiar: ", err);
-    }
-  );
-}
-function copyMail() {
-  const textToCopy = "ronaldcalzadilla31@gmail.com"; // El texto que quieres copiar
-  navigator.clipboard.writeText(textToCopy).then(
-    function () {
-      alert("E-mail copiado al portapapeles: " + textToCopy);
-    },
-    function (err) {
-      console.error("Error al copiar: ", err);
-    }
-  );
-}
-//-FIN-función para copiar en el portapapeles
-//////////////////////////
-//-INICIO-activar enlaces en menu de la seccion seleccionada
-function getSectionMostVisible() {
-  const windowHeight = window.innerHeight;
-  const sections = document.querySelectorAll("main section");
-  const headerLinks = document.querySelectorAll("header  a");
 
-  let maxVisibleHeight = 0;
-  let mostVisibleSectionId = null;
-
-  sections.forEach((section) => {
-    const sectionTop = section.getBoundingClientRect().top;
-    const sectionBottom = section.getBoundingClientRect().bottom;
-    const visibleHeight =
-      Math.min(windowHeight, sectionBottom) - Math.max(0, sectionTop);
-
-    if (
-      visibleHeight > maxVisibleHeight &&
-      visibleHeight >= section.clientHeight / 2
-    ) {
-      maxVisibleHeight = visibleHeight;
-      mostVisibleSectionId = section.getAttribute("id");
-    }
-  });
-
-  headerLinks.forEach((link) => {
-    link.classList.remove("activo");
-    if (link.getAttribute("href").slice(1) === mostVisibleSectionId) {
-      link.classList.add("activo");
-    }
-  });
-
-  //console.log("Sección más visible:", mostVisibleSectionId);
-  return mostVisibleSectionId;
-}
-
-document.addEventListener("scroll", getSectionMostVisible);
-//-FIN-activar enlaces en menu de la seccion seleccionada
-///////////////////////
-//-INICIO-añadir atributo hidden segun el tamaño de la ventana para cambiar menu movil o escritorio.
-// Obtener los elementos de los menús
-const navEscritorio = document.getElementById("navHeader-escritorio");
-const navMovil = document.getElementById("navHeader-movil");
-
-// Función para mostrar u ocultar menús según el tamaño de la pantalla
-function toggleMenus() {
-  if (window.innerWidth <= 767) {
-    navEscritorio.setAttribute("hidden", true); // Oculta el menú de escritorio
-    navMovil.removeAttribute("hidden"); // Muestra el menú móvil
-  } else {
-    navEscritorio.removeAttribute("hidden"); // Muestra el menú de escritorio
-    navMovil.setAttribute("hidden", true); // Oculta el menú móvil
-  }
-}
-
-// Llamar a la función inicialmente y cada vez que se redimensione la ventana
-toggleMenus(); // Para manejar la visibilidad inicial de los menús
-
-window.addEventListener("resize", toggleMenus); // Para manejar los cambios en el tamaño de la ventana
-//-FIN-añadir atributo hidden segun el tamaño de la ventana para cambiar menu movil o escritorio.
-///////////////////////////
-//-INICIO-controlar menu deslizable para movil
-document.addEventListener("DOMContentLoaded", function () {
-  const botonHamburguesa = document.querySelector(".botonHamburguesa");
-  const ulMovil = document.querySelector("#navHeader-movil ul");
-  const xMarkIcon = document.querySelector(".fa-xmark");
-  const barsIcon = document.querySelector(".fa-bars");
-  const header = document.querySelector("header");
-
-  // Función para mostrar/ocultar la lista al hacer clic en el botón de hamburguesa
-  botonHamburguesa.addEventListener("click", function () {
-    ulMovil.classList.toggle("mostrar");
-    xMarkIcon.style.display = ulMovil.classList.contains("mostrar")
-      ? "inline"
-      : "none";
-    barsIcon.style.display = ulMovil.classList.contains("mostrar")
-      ? "none"
-      : "inline";
-  });
-
-  // Función para ocultar la lista al hacer clic en elementos dentro del header
-  header.addEventListener("click", function (event) {
-    const target = event.target;
-    if (target.tagName === "A" || target.tagName === "BUTTON") {
-      ulMovil.classList.remove("mostrar");
-      xMarkIcon.style.display = "none";
-      barsIcon.style.display = "inline";
-    }
-  });
-
-  // Función para ocultar la lista al hacer clic fuera del header
-  document.addEventListener("click", function (event) {
-    const isClickedInsideHeader = header.contains(event.target);
-    if (!isClickedInsideHeader) {
-      ulMovil.classList.remove("mostrar");
-      xMarkIcon.style.display = "none";
-      barsIcon.style.display = "inline";
-    }
-  });
-});
-//-FIN-controlar menu deslizable para movil
-////////////////////
-//-INICIO-animación escritura y borrado con cursor
-const texts = [
-  "Diseñador gráfico",
-  "Web developer",
-  "Ux/Ui designer",
-  "3D Maker",
-  "Front End",
-  "Full Stack",
-];
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
-
-function type() {
-  if (index < texts[count].length) {
-    currentText = texts[count];
-    letter = currentText.slice(0, ++index);
-
-    document.getElementById("text-container").textContent = letter;
-    setTimeout(type, 100);
-  } else {
-    setTimeout(erase, 1000);
-  }
-}
-
-function erase() {
-  if (index > 0) {
-    currentText = texts[count];
-    letter = currentText.slice(0, --index);
-
-    document.getElementById("text-container").textContent = letter;
-    setTimeout(erase, 50);
-  } else {
-    count++;
-    if (count >= texts.length) count = 0;
-    setTimeout(type, 500);
-  }
-}
-
-window.onload = function () {
-  setTimeout(type, 500);
-};
-//-FIN-animación escritura y borrado con cursor
-///////////////
-//-INICIO-aviso de mensaje de envío  o no de feedback
+// Agregar evento de clic para el fondo de enlaces móvil
 document
-  .getElementById("contactForm")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    var form = this;
-    var formData = new FormData(form);
-
-    fetch(form.action, {
-      method: form.method,
-      body: formData,
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        var responseMessage = document.getElementById("response-message");
-        responseMessage.textContent = data.message;
-        if (data.status === "success") {
-          responseMessage.style.color = "green";
-        } else {
-          responseMessage.style.color = "red";
-        }
-        document.getElementById("message").value = "";
-        responseMessage.style.display = "block";
-        setTimeout(function () {
-          responseMessage.style.opacity = 0;
-          setTimeout(function () {
-            responseMessage.style.display = "none";
-            responseMessage.style.opacity = 1;
-          }, 500);
-        }, 5000);
-      })
-      .catch(function (error) {
-        console.log("Error:", error);
-      });
+  .getElementById("fondoEnlancesMovil")
+  .addEventListener("click", function () {
+    // Revertir el estado del botón burger y del menú
+    document.getElementById("botonBurguer").classList.remove("active");
+    document.getElementById("marcoMenu").style.transform = "scale(0)";
+    document.getElementById("enlacesMovil").style.transform = "scale(0)";
+    this.style.transform = "scale(0)";
   });
-//-FIN-aviso de mensaje de envío  o no de feedback
+
+// Agregar evento de clic para cada enlace del menú móvil
+var enlaces = document.querySelectorAll("#enlacesMovil a");
+enlaces.forEach(function (enlace) {
+  enlace.addEventListener("click", function () {
+    // Revertir el estado del botón burger y del menú
+    document.getElementById("botonBurguer").classList.remove("active");
+    document.getElementById("marcoMenu").style.transform = "scale(0)";
+    document.getElementById("enlacesMovil").style.transform = "scale(0)";
+    document.getElementById("fondoEnlancesMovil").style.transform = "scale(0)";
+  });
+});
+
+/////////
+document.addEventListener("DOMContentLoaded", function () {
+  const isMobile = window.matchMedia("(max-width: 890px)").matches;
+  const lines = document.querySelectorAll(".animated-line");
+
+  if (!isMobile) {
+    document.addEventListener("mousemove", function (e) {
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+
+      lines.forEach((line) => {
+        const moveAmount = line.getAttribute("data-move-amount");
+        const moveX = (mouseX - 0.5) * moveAmount;
+        const moveY = (mouseY - 0.5) * moveAmount;
+        line.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+    });
+  } else {
+    document.addEventListener("scroll", function () {
+      const scrollY = window.scrollY;
+
+      lines.forEach((line) => {
+        const scrollAmount = line.getAttribute("data-scroll-amount");
+        const translateY = scrollY * scrollAmount;
+        line.style.transform = `translateY(${translateY}px)`;
+      });
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const graficoFondo = document.querySelector(".grafico-fondo-proyecto");
+
+  document.addEventListener("mousemove", function (e) {
+    const mouseX = e.clientX;
+    const windowWidth = window.innerWidth;
+    const percentX = (mouseX / windowWidth) * 100;
+    const offset = (percentX - 50) * 10; // Ajusta la velocidad del movimiento cambiando el valor multiplicativo
+
+    graficoFondo.style.transform = `translateX(${offset}px)`;
+  });
+});
+
+//////////
+window.addEventListener("scroll", function () {
+  var scrollY = window.scrollY;
+
+  document.querySelectorAll(".aro").forEach(function (aro) {
+    var speed = parseInt(aro.classList[1].split("_")[1]);
+    var offset = scrollY * speed * 0.04;
+    aro.style.top = 234 + offset + "px"; // Cambio de dirección: + en lugar de -
+  });
+});
+
+////////////////
+//las lineas de footer siguen al raton
+document.addEventListener("mousemove", function (event) {
+  var mouseX = event.clientX;
+  var mouseY = event.clientY;
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+  var translateX = (mouseX / windowWidth - 0.5) * 200;
+  var translateY = (mouseY / windowHeight - 0.5) * 200;
+
+  document.querySelector(".linea-naranja-contacto").style.transform =
+    "translateX(" + translateX + "px)";
+  document.querySelector(".linea-azul-contacto").style.transform =
+    "translateX(" + -translateX + "px)";
+  document.querySelector(".linea-amarilla-contacto").style.transform =
+    "translatex(" + translateY + "px)";
+});
+
+//las lineas del footer se mueven con el scroll aleatoriamente en dispositivos moviles y tablets
+window.addEventListener("scroll", function () {
+  var scrolled = window.scrollY;
+  var velocidadAzul = 0.02; // Ajusta la velocidad del movimiento azul
+  var velocidadNaranja = -0.2; // Ajusta la velocidad del movimiento naranja
+  var velocidadAmarilla = -0.08; // Ajusta la velocidad del movimiento amarillo
+
+  var azul = document.querySelector(".linea-azul-contacto");
+  var naranja = document.querySelector(".linea-naranja-contacto");
+  var amarilla = document.querySelector(".linea-amarilla-contacto");
+
+  azul.style.transform = "translateX(" + scrolled * velocidadAzul + "px)";
+  naranja.style.transform = "translateX(" + scrolled * velocidadNaranja + "px)";
+  amarilla.style.transform =
+    "translateX(" + scrolled * velocidadAmarilla + "px)";
+});
