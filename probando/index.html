@@ -773,6 +773,7 @@
             if (response.status === 'success') {
                 document.getElementById('success-message').style.display = 'block';
                 document.getElementById('error-message').style.display = 'none';
+                document.getElementById('imput-home').value = "";
             } else {
                 // Si la respuesta del servidor indica un error, muestra el mensaje de error y oculta el mensaje de éxito
                 document.getElementById('error-message').style.display = 'block';
