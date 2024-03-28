@@ -120,11 +120,14 @@ $(document).ready(function () {
       success: function (response) {
         if (response.status === "success") {
           $(".success-message").css("display", "block");
+          $(".error-message").css("display", "none");
         } else {
+          $(".success-message").css("display", "none");
           $(".error-message").css("display", "block");
         }
       },
       error: function () {
+        $(".success-message").css("display", "none");
         $(".error-message").css("display", "block");
       },
     });
