@@ -91,3 +91,14 @@ document.addEventListener("DOMContentLoaded", function () {
     graficoFondo.style.transform = `translateX(${offset}px)`;
   });
 });
+
+//////////
+window.addEventListener("scroll", function () {
+  var scrollY = window.scrollY;
+
+  document.querySelectorAll(".aro").forEach(function (aro) {
+    var speed = parseInt(aro.classList[1].split("_")[1]);
+    var offset = scrollY * speed * 0.04;
+    aro.style.top = 234 + offset + "px"; // Cambio de dirección: + en lugar de -
+  });
+});
