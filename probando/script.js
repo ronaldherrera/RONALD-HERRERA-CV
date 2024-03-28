@@ -102,3 +102,5 @@ window.addEventListener("scroll", function () {
     aro.style.top = 234 + offset + "px"; // Cambio de dirección: + en lugar de -
   });
 });
+
+////////////////

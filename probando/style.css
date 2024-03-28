@@ -1054,11 +1054,14 @@ label {
   background-color: #a2dda4;
   margin-top: auto;
   margin-bottom: auto;
-  font-weight: 800;
+  font-weight: 600;
+  padding: 10px;
 }
 
 .error-message {
   background-color: #e9afaf;
+  font-weight: 600;
+  padding: 10px;
 }
 
 .icono-redes {
