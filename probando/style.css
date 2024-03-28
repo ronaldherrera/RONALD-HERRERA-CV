@@ -1048,19 +1048,18 @@ label {
 .text-block-10, .text-block-9 {
   color: var(--negro);
   line-height: 20px;
+  font-weight: 600;
 }
 .success-message {
   height: 100%;
   background-color: #a2dda4;
   margin-top: auto;
   margin-bottom: auto;
-  font-weight: 600;
   padding: 10px;
 }
 
 .error-message {
   background-color: #e9afaf;
-  font-weight: 600;
   padding: 10px;
 }
 
