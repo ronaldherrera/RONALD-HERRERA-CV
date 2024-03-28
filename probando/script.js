@@ -50,37 +50,3 @@ enlaces.forEach(function (enlace) {
 });
 
 /////////
-
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("home-feedback");
-  const successMessage = document.querySelector(".success-message");
-  const errorMessage = document.querySelector(".error-message");
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Evitar el envío predeterminado del formulario
-
-    const formData = new FormData(form);
-
-    fetch(form.action, {
-      method: form.method,
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          successMessage.style.display = "block";
-          errorMessage.style.display = "none";
-          form.reset(); // Limpiar el formulario si se envió con éxito
-        } else {
-          throw new Error("Network response was not ok.");
-        }
-      })
-      .catch((error) => {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-        errorMessage.style.display = "block";
-        successMessage.style.display = "none";
-      });
-  });
-});
