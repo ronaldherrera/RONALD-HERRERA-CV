@@ -1541,6 +1541,9 @@ label {
 
 /*3*/
 @media screen and (max-width: 430px){
+    .fondo-seccion-cuadricula{
+      width: 50%;
+    }
     .derechos{
       margin-top: 20px;
     }
