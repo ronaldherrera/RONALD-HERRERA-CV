@@ -34,6 +34,6 @@ window.addEventListener("scroll", function () {
 
 /////////
 ///////////////////////////////////////////////
-document.getElementById("backButton").addEventListener("click", function () {
+document.getElementById("botonVolver").addEventListener("click", function () {
   window.history.back();
 });
