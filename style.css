@@ -1542,6 +1542,9 @@ label {
 
 /*3*/
 @media screen and (max-width: 430px){
+    .fondo-seccion-cuadricula{
+      display: none;
+    }
     .derechos{
       margin-top: 20px;
     }
