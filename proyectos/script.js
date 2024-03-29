@@ -34,7 +34,6 @@ window.addEventListener("scroll", function () {
 
 /////////
 ///////////////////////////////////////////////
-document.getElementById("botonVolver").addEventListener("click", function () {
-  event.preventDefault();
-  window.history.back(); // Volver a la página anterior en el historial del navegador
+document.getElementById("backButton").addEventListener("click", function () {
+  window.history.back();
 });
