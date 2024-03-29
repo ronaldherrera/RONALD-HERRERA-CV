@@ -746,7 +746,7 @@ fill: var(--amarillo);
     background-image: url(./recursos/Vectores/cuadricula-fondo.svg);
     background-position: 0%;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: contain auto;
     background-attachment: fixed;
     background-position-y: bottom;
     margin-right: 0;
@@ -1542,18 +1542,6 @@ label {
 
 /*3*/
 @media screen and (max-width: 430px){
-    .fondo-seccion-cuadricula{
-          z-index: 0;
-    width: 100%;
-    height: 100%;
-    margin-top: auto;
-    margin-left: auto;
-    position: absolute;
-    top: 0%;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
-    }
     .derechos{
       margin-top: 20px;
     }
