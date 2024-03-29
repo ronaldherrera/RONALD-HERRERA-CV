@@ -746,7 +746,7 @@ fill: var(--amarillo);
     background-image: url(./recursos/Vectores/cuadricula-fondo.svg);
     background-position: 0%;
     background-repeat: no-repeat;
-    background-size: contain auto;
+    background-size:  auto contain;
     background-attachment: fixed;
     background-position-y: bottom;
     margin-right: 0;
