@@ -7,7 +7,7 @@
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="./recursos/Logotipo/Icono-amarllo.svg"
+      href="../recursos/Logotipo/Icono-amarllo.svg"
     />
     <title>Ronald Herrera</title>
   </head>
@@ -15,7 +15,7 @@
     <nav class="barra-navegacion">
       <div class="estatica-fondo-oscuro"></div>
       <div class="navegador">
-        <a class="volver" href="#" id="enlace-retroceder">
+        <a class="volver" onclick="history.back()">
           <svg
             version="1.1"
             id="Capa_1"
@@ -55,7 +55,104 @@
       </div>
     </nav>
     <main>
-      <section></section>
+      <section>
+        <div class="contenedor">
+          <h1 class="heading">¡Ey! ¿Tienes ganas de más?</h1>
+          <h3>
+            Aquí es donde mi creatividad se desata y mis ideas toman forma.
+          </h3>
+          <p class="paragraph-2">
+            Desde locuras experimentales hasta proyectos más sólidos, ¡aquí los
+            encontrarás todos! También descubrirás cuáles son mis pasiones y
+            obsesiones. Y sí, puede que haya algunas historias detrás de cada
+            proyecto. ¡Espero que te gusten tanto como a mí crearlos!
+          </p>
+
+          <div class="coleccion-proyectos-destacados">
+            <a href="./subversum/"
+              ><div class="proyecto" id="diseñoGrafico">
+                <div class="portada-proyecto">
+                  <div class="estatica-fondo-claro"></div>
+                  <img src="./subversum/imagenes/gif mockups.gif" alt="" />
+                </div>
+                <h2 class="titulo-proyecto">SUBVERSUM</h2>
+                <p class="descripcion-proyecto">
+                  Una marca streetwear desafiante que fusiona rebeldía y
+                  creatividad en cada elemento visual.
+                </p>
+                <div class="info-proyecto">
+                  <div class="sector">diseño gráfico</div>
+                  <div class="herramientas">
+                    <img
+                      src="../recursos/iconos-herramientas/illustrator.svg"
+                      alt=""
+                    /><img
+                      src="../recursos/iconos-herramientas/photoshop.svg"
+                      alt=""
+                    />
+                  </div>
+                </div></div
+            ></a>
+
+            <a href="./imagym/"
+              ><div class="proyecto" id="ux-ui">
+                <div class="portada-proyecto">
+                  <div class="estatica-fondo-claro"></div>
+                  <img src="./imagym/recursos/miniatura.gif" alt="" />
+                </div>
+                <h2 class="titulo-proyecto">IMAGYM</h2>
+                <p class="descripcion-proyecto">
+                  Rediseñando la app del gimnasio, centrado en la usabilidad y
+                  la experiencia del usuario para optimizar el rendimiento y la
+                  motivación.
+                </p>
+                <div class="info-proyecto">
+                  <div class="sector">Ux/Ui</div>
+                  <div class="herramientas">
+                    <img
+                      src="../recursos/iconos-herramientas/figma.svg"
+                      alt=""
+                    /><img
+                      src="../recursos/iconos-herramientas/illustrator.svg"
+                      alt=""
+                    /><img
+                      src="../recursos/iconos-herramientas/photoshop.svg"
+                      alt=""
+                    />
+                  </div>
+                </div></div
+            ></a>
+
+            <a href="./mahou/"
+              ><div class="proyecto" id="diseñoGrafico">
+                <div class="portada-proyecto">
+                  <div class="estatica-fondo-claro"></div>
+                  <img src="./mahou/portada/miniatura.gif" alt="" />
+                </div>
+                <h2 class="titulo-proyecto">MAHOU</h2>
+                <p class="descripcion-proyecto">
+                  Rebranding de la marca, fusionando tradición y frescura en
+                  cada detalle.
+                </p>
+                <div class="info-proyecto">
+                  <div class="sector">diseño gráfico</div>
+                  <div class="herramientas">
+                    <img
+                      src="../recursos/iconos-herramientas/blender.svg"
+                      alt=""
+                    /><img
+                      src="../recursos/iconos-herramientas/illustrator.svg"
+                      alt=""
+                    /><img
+                      src="../recursos/iconos-herramientas/photoshop.svg"
+                      alt=""
+                    />
+                  </div>
+                </div></div
+            ></a>
+          </div>
+        </div>
+      </section>
       <div class="estatica-fondo-claro"></div>
     </main>
     <footer id="seccionContacto" class="seccion contacto">
@@ -175,11 +272,11 @@
               alt=""
               class="icono-redes" /></a
           ><a
-            href="https://github.com/ronaldherrera"
+            href="https://www.behance.net/ronald-herrera"
             target="_blank"
-            class="link-github w-inline-block"
+            class="link-behance w-inline-block"
             ><img
-              src="../recursos/iconos/Github.svg"
+              src="../recursos/iconos/github.svg"
               loading="lazy"
               alt=""
               class="icono-redes"
