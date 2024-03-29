@@ -137,3 +137,5 @@ window.addEventListener("scroll", function () {
   amarilla.style.transform =
     "translateX(" + scrolled * velocidadAmarilla + "px)";
 });
+
+/////////
