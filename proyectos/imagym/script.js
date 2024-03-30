@@ -1,34 +1,39 @@
-function mostrarPopUpInfo() {
-  var popUp = document.getElementById("popUpInfo");
-  popUp.style.display = "flex";
-}
+//las lineas de footer siguen al raton
+document.addEventListener("mousemove", function (event) {
+  var mouseX = event.clientX;
+  var mouseY = event.clientY;
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+  var translateX = (mouseX / windowWidth - 0.5) * 200;
+  var translateY = (mouseY / windowHeight - 0.5) * 200;
 
-function cerrarPopUpInfo() {
-  var popUp = document.getElementById("popUpInfo");
-  popUp.style.display = "none";
-}
-//
-document.addEventListener("DOMContentLoaded", function () {
-  const sections = document.querySelectorAll("main section");
-  const links = document.querySelectorAll(".navMain a");
+  document.querySelector(".linea-naranja-contacto").style.transform =
+    "translateX(" + translateX + "px)";
+  document.querySelector(".linea-azul-contacto").style.transform =
+    "translateX(" + -translateX + "px)";
+  document.querySelector(".linea-amarilla-contacto").style.transform =
+    "translatex(" + translateY + "px)";
+});
 
-  document.getElementById("estrategia").classList.add("seccion-activa");
+//las lineas del footer se mueven con el scroll aleatoriamente en dispositivos moviles y tablets
+window.addEventListener("scroll", function () {
+  var scrolled = window.scrollY;
+  var velocidadAzul = 0.02; // Ajusta la velocidad del movimiento azul
+  var velocidadNaranja = -0.2; // Ajusta la velocidad del movimiento naranja
+  var velocidadAmarilla = -0.08; // Ajusta la velocidad del movimiento amarillo
 
-  links.forEach(function (link) {
-    link.addEventListener("click", function (event) {
-      event.preventDefault();
+  var azul = document.querySelector(".linea-azul-contacto");
+  var naranja = document.querySelector(".linea-naranja-contacto");
+  var amarilla = document.querySelector(".linea-amarilla-contacto");
 
-      sections.forEach(function (section) {
-        section.classList.remove("seccion-activa");
-      });
+  azul.style.transform = "translateX(" + scrolled * velocidadAzul + "px)";
+  naranja.style.transform = "translateX(" + scrolled * velocidadNaranja + "px)";
+  amarilla.style.transform =
+    "translateX(" + scrolled * velocidadAmarilla + "px)";
+});
 
-      links.forEach(function (link) {
-        link.classList.remove("activo");
-      });
-
-      const targetId = link.getAttribute("href").substring(1);
-      document.getElementById(targetId).classList.add("seccion-activa");
-      link.classList.add("activo");
-    });
-  });
+/////////
+///////////////////////////////////////////////
+document.getElementById("botonVolver").addEventListener("click", function () {
+  window.history.back();
 });
