@@ -10,7 +10,7 @@ $asunto = 'MI WEB';
 
 // Establecer el contenido del correo electrónico
 $contenido_correo = '<html><body>';
-$contenido_correo .= '<h2>Feedback recibido del proyecto de SUBVERSUM:</h2>';
+$contenido_correo .= '<h2>Feedback recibido de proyectos:</h2>';
 $contenido_correo .= '<p>' . $mensaje . '</p>';
 $contenido_correo .= '</body></html>';
 
