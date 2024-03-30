@@ -1,95 +1,488 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <!--GRACIAS POR VEL CÓDIGO FUENTE DE MI PAGINA WEB, QUIERO QUE SEPAS QUE ABSOLUTAMENTE TODO LO QUE VAS A VER (CÓDIGO, ELEMENTOS GRÁFICOS, IMÁGENES...) ESTA CREADO O EJECUTADO POR MI-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="icon"
-      href="/recursos/iconos/cv-ronald.ico"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RONALD HERRERA |CV</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/recursos/Logotipo/Icono-amarllo.svg"
+    />
+    <title>Ronald Herrera</title>
   </head>
-
   <body>
-    <!--MENU ENCABEZADO-->
-    <header>
-      <div class="contenedorHeader" id="contenedorHeader">
-        <a href="https://ronaldherrera.es/"
-          ><i class="fa-solid fa-chevron-left"></i> Inicio</a
-        >
-        <span>
-          <h1>SUBVERSUM</h1>
-          <h2>manual de marca</h2>
-        </span>
-        <button onclick="mostrarPopUpInfo()">
-          <i class="fa-solid fa-circle-info"></i>
-        </button>
-
-        <div class="popUp" id="popUpInfo" onclick="cerrarPopUpInfo()">
-          <div class="popup-contenido">
-            <h1>Manual de marca de SUBVERSUM</h1>
-            <p>
-              Para la creación de esta marca de sweater me inspire en la
-              rebeldía y ansia de libertad de la juventud.
-            </p>
-            <p>
-              El nombre en latin declara su intención a subvertirlo todo y por
-              eso la idea es coger obras artísticas antiguas y darles un cambio
-              corrompiendo las lineas y dándoles color.
-            </p>
-            <p>
-              Para la tipografía del logotipo me inspire en la antigua roma y
-              los gladiadores, también le di la vuelta a la segunda ese para
-              exponer su esencia de ser único y salirse de la norma.
-            </p>
-            <div class="ofimatica" id="listaHerramientas">
-              <h2>Desarrollado con:</h2>
-              <div class="columna">
-                <div class="herramienta">
-                  <img src="/recursos/iconos/illustrator.svg" alt="" />
-                  <span>Adobe Illustrator</span>
-                </div>
-                <div class="herramienta">
-                  <img src="/recursos/iconos/photoshop.svg" alt="" />
-                  <span>Adobe Photoshop</span>
-                </div>
-                <div class="herramienta">
-                  <img src="/recursos/iconos/adobe_acrobat.svg" alt="" />
-                  <span>Adobe Acrobat</span>
-                </div>
+    <nav class="barra-navegacion">
+      <div class="estatica-fondo-oscuro"></div>
+      <div class="navegador">
+        <a class="volver" onclick="history.back()">
+          <svg
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 20 20"
+            style="enable-background: new 0 0 20 20"
+            xml:space="preserve"
+          >
+            <style type="text/css"></style>
+            <path
+              class="st0"
+              d="M10.5,20c-0.3,0-0.6-0.1-0.8-0.3l-9-9c-0.4-0.4-0.4-1.1,0-1.6l8.7-8.7c0.4-0.4,1.1-0.4,1.6,0s0.4,1.1,0,1.6
+	L3,9.8l8.2,8.2c0.4,0.4,0.4,1.1,0,1.6C11.1,19.9,10.8,20,10.5,20L10.5,20z"
+            />
+          </svg>
+        </a>
+        <p>PROYECTOS</p>
+        <a href="../" class="icono">
+          <svg
+            width="210"
+            height="180"
+            viewBox="0 0 210 180"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M80.5425 131.101C73.7747 120.846 56.7001 88.1175 56.7001 88.1175H42.5703L35.105 131.204H0L22.37 0.264675C44.8176 1.47875 93.4582 -4.6433 110.455 10.0806C138.147 31.1849 120.297 74.8401 89.2735 83.1837C92.3992 95.5828 119.367 139.47 162.118 141.692V180C109.19 177.236 89.1702 144.146 80.5683 131.075L80.5425 131.101ZM69.8483 28.266H52.7737L47.0908 61.5369H64.5528C88.8861 65.1275 97.5396 27.1294 69.8483 28.266Z"
+            />
+            <path
+              d="M131.172 54.9241C139.8 46.503 150.727 42.3183 163.952 42.3183C177.178 42.3183 188.053 46.5288 196.578 54.9241C205.205 63.3193 209.519 73.936 209.519 86.6968C209.519 99.4575 205.205 110.074 196.578 118.469C188.053 126.891 177.178 131.075 163.952 131.075C150.727 131.075 139.8 126.865 131.172 118.469C122.648 110.048 118.386 99.4575 118.386 86.6968C118.386 73.936 122.648 63.3193 131.172 54.9241ZM151.424 100.749C154.731 104.391 158.915 106.225 163.952 106.225C168.99 106.225 173.174 104.417 176.481 100.749C179.787 97.1068 181.44 92.4313 181.44 86.6968C181.44 80.9622 179.787 76.2867 176.481 72.6444C173.174 69.0022 168.99 67.1682 163.952 67.1682C158.915 67.1682 154.731 69.0022 151.424 72.6444C148.118 76.2867 146.465 80.9622 146.465 86.6968C146.465 92.4313 148.118 97.1068 151.424 100.749Z"
+            />
+          </svg>
+        </a>
+      </div>
+    </nav>
+    <main>
+      <div class="estatica-fondo-claro"></div>
+      <section>
+        <div class="contenedor">
+          <img
+            src="./imagenes/gif cabecera.gif"
+            loading="lazy"
+            alt=""
+            class="gif-cabecera"
+          />
+          <div class="hero">
+            <div class="columna-1-hero">
+              <img
+                src="https://assets-global.website-files.com/6606fca73274e37a6e39594e/6607164123986340947ad299_logotipo-subversum.svg"
+                loading="lazy"
+                alt=""
+                class="logotipo-hero"
+              />
+              <h3 class="encabezado">
+                La vida se te escapa, se va minuto a minuto y no puedes ir al
+                supermercado a comprar más vida, entonces, lucha por vivir, por
+                darle contenido a la vida. Tú puedes, en términos relativos, ser
+                artífice del camino de tu propia vida.
+              </h3>
+              <h2 class="subtitulo margen-superior">Venta online</h2>
+              <h3 class="encabezado">Camisetas</h3>
+              <p class="parrafo">
+                <span class="span-parrafo">SUBVERSUM</span> se caracteriza por
+                las ilustraciones de sus prendas que inspiradas en grabados
+                antiguos ilustran la vida y mitología de civilizaciones pasadas,
+                pretende subvertir la percepción de todo y provocar a la
+                rebeldía e inconformismo de un público aventurero e
+                introspectivo.
+              </p>
+              <h2 class="subtitulo margen-superior">OBJETIVO</h2>
+              <h3 class="encabezado">Perfil público</h3>
+              <p class="parrafo">
+                <span class="span-parrafo">SUBVERSUM</span> es para los jóvenes
+                que aman hacer planes con sus amigos y aprecian los momentos
+                simples de la vida.
+              </p>
+              <p class="parrafo">
+                Disfrutan de los deportes no competitivos y la naturaleza.
+              </p>
+              <p class="parrafo">
+                Conscientes del mundo que les rodea, son respetuosos con el
+                medio ambiente.<br />
+              </p>
+              <p class="parrafo">Sueñan con un mundo libre y sin fronteras.</p>
+              <h3 class="encabezado margen-superior">
+                Un pálido recuerdo vale más que un monumento...
+              </h3>
+            </div>
+            <div class="columna-2-hero">
+              <img
+                src="./imagenes/modelo-1.webp"
+                loading="lazy"
+                alt=""
+                class="img-hero"
+              />
+            </div>
+          </div>
+          <img
+            src="./imagenes/4.moodboard.webp"
+            loading="lazy"
+            alt=""
+            class="moodboard"
+          />
+          <div class="colores">
+            <div class="contenedor-color">
+              <div class="span-parrafo titulo-colores">MARMOL CLARO</div>
+              <div class="color marmol-claro"></div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">CMYK:</span> <br />7% 19% 24% 1%
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">RGB: <br />‍</span>217 204 193
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">HEX:</span> <br />#D9CCC1
               </div>
             </div>
-            <a
-              id="button"
-              class="descargaCv"
-              href="./descargas/manual de marca de subversum.pdf"
-              download="Manual_Marca_SUBVERSUM"
-              ><strong>Descargar manual</strong><span class="overlay"></span>
-            </a>
-            <p>Gracias por ver</p>
-            <button onclick="cerrarPopUpInfo()" class="cerrarPopUp">
-              <i class="fa-solid fa-circle-xmark"></i>
-            </button>
+            <div class="contenedor-color">
+              <div class="span-parrafo titulo-colores">PIEL</div>
+              <div class="color piel"></div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">CMYK:</span> <br />22% 44% 52% 10%
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">RGB: <br />‍</span>191 143 115
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">HEX:</span> <br />#BF8F73
+              </div>
+            </div>
+            <div class="contenedor-color">
+              <div class="span-parrafo titulo-colores">ARCILLA</div>
+              <div class="color arcilla"></div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">CMYK:</span> <br />27% 59% 62% 20%
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">RGB: <br />‍</span>166 105 83
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">HEX:</span> <br />#A66953
+              </div>
+            </div>
+            <div class="contenedor-color">
+              <div class="span-parrafo titulo-colores">TIERRA</div>
+              <div class="color tierra"></div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">CMYK:</span> <br />51% 62% 62% 71%
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">RGB: <br />‍</span>64 46 39
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">HEX:</span> <br />#402E27
+              </div>
+            </div>
+            <div class="contenedor-color">
+              <div class="span-parrafo titulo-colores">MARMOL OSCURO</div>
+              <div class="color marmol-oscuro"></div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">CMYK:</span> <br />71% 64% 63% 80%
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">RGB: <br />‍</span>35 32 29
+              </div>
+              <div class="parrafo codigo-colores">
+                <span class="span-parrafo">HEX:</span> <br />#23201D
+              </div>
+            </div>
+          </div>
+          <div class="logotipo">
+            <div class="icono">
+              <h3 class="encabezado">ICONO</h3>
+              <p class="parrafo">
+                Como norma general se usará el logotipo completo, si fuese
+                necesario se podrá usar la primera “S” del logotipo para la
+                representación de la marca.
+              </p>
+              <img
+                src="./recursos/icono.svg"
+                loading="lazy"
+                alt=""
+                class="imagen-logotipo"
+              />
+            </div>
+            <div class="area-logotipo">
+              <h3 class="encabezado">AREA DE SEGURIDAD</h3>
+              <p class="parrafo">
+                Se ha establecido un área de protección en torno al logotipo.
+                Esta área deberá estar exenta de elementos gráficos que
+                interfieran en la percepción y lectura de la marca.
+              </p>
+              <img
+                src="./recursos/area-seguridad.svg"
+                loading="lazy"
+                alt=""
+                class="imagen-logotipo"
+              />
+            </div>
+          </div>
+          <img
+            src="./recursos/tipografia.svg"
+            loading="lazy"
+            alt=""
+            class="tipografia"
+          />
+          <div class="galeria">
+            <h1 class="subtitulo">galería</h1>
+            <div class="bento-galeria">
+              <div id="bentoCard-1" class="bento-card">
+                <img
+                  src="./imagenes/sesion-1.webp"
+                  loading="lazy"
+                  id="bentoImagen-1"
+                  alt=""
+                  class="bento-imagen"
+                />
+              </div>
+              <div id="bentoCard-2" class="bento-card">
+                <img
+                  src="./imagenes/sesion-7.webp"
+                  loading="lazy"
+                  id="bentoImagen-2"
+                  alt=""
+                  class="bento-imagen"
+                />
+              </div>
+              <div id="bentoCard-3" class="bento-card">
+                <img
+                  src="./imagenes/sesion-5.webp"
+                  loading="lazy"
+                  id="bentoImagen-3"
+                  alt=""
+                  class="bento-imagen"
+                />
+              </div>
+              <div id="bentoCard-4" class="bento-card">
+                <img
+                  src="./imagenes/sesion-9.webp"
+                  loading="lazy"
+                  id="bentoImagen-4"
+                  alt=""
+                  class="bento-imagen"
+                />
+              </div>
+              <div id="bentoCard-5" class="bento-card">
+                <img
+                  src="./imagenes/sesion-6.webp"
+                  loading="lazy"
+                  id="bentoImagen-5"
+                  alt=""
+                  class="bento-imagen"
+                />
+              </div>
+              <div id="bentoCard-6" class="bento-card">
+                <img
+                  src="./imagenes/sesion-1.webp"
+                  loading="lazy"
+                  id="bentoImagen-6"
+                  alt=""
+                  class="bento-imagen"
+                />
+              </div>
+              <div id="bentoCard-7" class="bento-card">
+                <img
+                  src="./imagenes/sesion-8.webp"
+                  loading="lazy"
+                  id="bentoImagen-7"
+                  alt=""
+                  class="bento-imagen"
+                />
+              </div>
+            </div>
+          </div>
+          <img
+            src="./imagenes/gif mockups.gif"
+            loading="lazy"
+            alt=""
+            class="mockups"
+          /><img
+            src="./recursos/agradecimientos.svg"
+            loading="lazy"
+            alt=""
+            class="agradecimientos"
+          />
+        </div>
+      </section>
+    </main>
+    <footer id="seccionContacto" class="seccion contacto">
+      <div class="linea-naranja-contacto"></div>
+      <div class="linea-azul-contacto"></div>
+      <div class="linea-amarilla-contacto"></div>
+      <div class="estatica-fondo-oscuro"></div>
+      <div class="contenedor-contacto">
+        <div class="contactame">
+          <h1 class="heading seccion-contacto">¡Contáctame!</h1>
+          <p class="p-contacto">
+            ¿Tienes algún proyecto emocionante en mente? ¡Cuéntamelo!
+            <span class="text-span-9"
+              >Estoy abierto a nuevas oportunidades laborales y proyectos
+              serios</span
+            >. ¡Vamos, déjame saber qué tienes en mente y hagamos algo grandioso
+            juntos!
+          </p>
+          <div class="link-telefono w-inline-block">
+            <img
+              src="/recursos/iconos/telefono.svg"
+              loading="lazy"
+              alt=""
+              class="image-5"
+            />
+            <a href="tel:+34617987372" class="enlace-contacto"
+              >+34 671 987 372</a
+            >
+          </div>
+          <div class="link-mail w-inline-block">
+            <img
+              src="/recursos/iconos/e-mail.svg"
+              loading="lazy"
+              alt=""
+              class="image-5"
+            />
+            <a href="mailto:hola@ronaldherrera.es" class="enlace-contacto"
+              >hola@ronaldherrera.es</a
+            >
+          </div>
+        </div>
+        <div class="feedback">
+          <div class="form-block">
+            <div class="estatica-fondo-claro"></div>
+            <form
+              id="home-feedback"
+              name="home-feedback"
+              data-name="feedback"
+              method="post"
+              action="Envio-feedback.php"
+              class="form"
+            >
+              <label for="imput-home" class="field-label"
+                >¡Ayúdame a mejorar!</label
+              >
+              <textarea
+                id="imput-home"
+                name="imput-home"
+                maxlength="5000"
+                data-name="imput-home"
+                placeholder="¿Qué te parece mi sitio web? Deja aquí tu comentario para ayudarme a mejorar."
+                required=""
+                class="textarea"
+              ></textarea>
+              <input
+                type="submit"
+                data-wait="Espera un momento..."
+                class="submit-button"
+                value="Enviar feedback"
+              />
+            </form>
+            <div
+              id="success-message"
+              class="success-message"
+              style="display: none"
+            >
+              <div class="text-block-10">
+                ¡Gracias! Tu comentario me ayudará a mejorar, lo tendré en
+                cuenta para mi próxima versión del sitio.
+              </div>
+            </div>
+            <div id="error-message" class="error-message" style="display: none">
+              <div class="text-block-9">
+                ¡Oops! Algo ha ido mal, vuelve a intentarlo más tarde.
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </header>
-    <main>
-      <img src="./imagenes/gif cabecera.gif" alt="" />
-      <img src="./imagenes/sabana subversum.png" alt="" />
-      <img src="./imagenes/gif mockups.gif" alt="" />
-      <img src="./imagenes/agradecimientos y contacto.png" alt="" />
-    </main>
+      <div class="contenedor-redes-autoria">
+        <div class="redes">
+          <a
+            href="https://www.linkedin.com/in/ronald-sc-herrera/"
+            target="_blank"
+            class="link-linkedin w-inline-block"
+            ><img
+              src="/recursos/iconos/Linkedin.svg"
+              loading="lazy"
+              alt=""
+              class="icono-redes" /></a
+          ><a
+            href="https://www.instagram.com/artfulron/"
+            target="_blank"
+            class="link-linstagram w-inline-block"
+            ><img
+              src="/recursos/iconos/Instagram.svg"
+              loading="lazy"
+              alt=""
+              class="icono-redes" /></a
+          ><a
+            href="https://www.behance.net/ronald-herrera"
+            target="_blank"
+            class="link-behance w-inline-block"
+            ><img
+              src="/recursos/iconos/Behance.svg"
+              loading="lazy"
+              alt=""
+              class="icono-redes" /></a
+          ><a
+            href="https://www.behance.net/ronald-herrera"
+            target="_blank"
+            class="link-behance w-inline-block"
+            ><img
+              src="/recursos/iconos/github.svg"
+              loading="lazy"
+              alt=""
+              class="icono-redes"
+          /></a>
+        </div>
+        <div class="autoria">By Ronald Herrera©</div>
+      </div>
+      <div class="derechos">
+        Todos los derechos reservados<br />2024-2025<br />
+      </div>
+    </footer>
+    <script>
+      document
+        .getElementById("home-feedback")
+        .addEventListener("submit", function (event) {
+          // Detiene el envío predeterminado del formulario
+          event.preventDefault();
+
+          // Obtener el valor del textarea
+          var mensaje = document.getElementById("imput-home").value;
+
+          // Realiza una solicitud AJAX al servidor
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "Envio-feedback.php", true);
+          xhr.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+          );
+
+          // Maneja la respuesta del servidor
+          xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              // Si la respuesta del servidor es exitosa, muestra el mensaje de éxito y oculta el mensaje de error
+              var response = JSON.parse(xhr.responseText);
+              if (response.status === "success") {
+                document.getElementById("success-message").style.display =
+                  "block";
+                document.getElementById("error-message").style.display = "none";
+                document.getElementById("imput-home").value = "";
+              } else {
+                // Si la respuesta del servidor indica un error, muestra el mensaje de error y oculta el mensaje de éxito
+                document.getElementById("error-message").style.display =
+                  "block";
+                document.getElementById("success-message").style.display =
+                  "none";
+              }
+            }
+          };
+
+          // Envía los datos del formulario al servidor
+          xhr.send("imput-home=" + encodeURIComponent(mensaje));
+        });
+    </script>
+
     <script src="./script.js"></script>
   </body>
 </html>

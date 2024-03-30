@@ -50,39 +50,39 @@ html{
 
 /*tipografia*/
 @font-face {
-    font-family: brother;
-    src: url(../recursos/Tipografia/brother1816-TTF/Brother1816-LightItalic.ttf) format('truetype');
-    font-style: italic;
-    font-display: swap;
-    font-weight: 200;
+  font-family: brother;
+  src: url(../recursos/Tipografia/brother1816-TTF/Brother1816-LightItalic.ttf) format('truetype');
+  font-style: italic;
+  font-display: swap;
+  font-weight: 200;
 }
 @font-face {
-    font-family: brother;
-    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Regular.ttf) format('truetype');
-    font-style: normal;
-    font-display: swap;
-    font-weight: 400;
+  font-family: brother;
+  src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Regular.ttf) format('truetype');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
 }
 @font-face {
-    font-family: brother;
-    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Bold.ttf) format('truetype');
-    font-style: normal;
-    font-display: swap;
-    font-weight: 700;
+  font-family: brother;
+  src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Bold.ttf) format('truetype');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
 }
 @font-face {
-    font-family: brother;
-    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Black.ttf) format('truetype');
-    font-style: normal;
-    font-display: swap;
-    font-weight: 900;
+  font-family: brother;
+  src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Black.ttf) format('truetype');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 900;
 }
 @font-face {
-    font-family: brother;
-    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-BlackItalic.ttf) format('truetype');
-    font-style: italic;
-    font-display: swap;
-    font-weight: 900;
+  font-family: brother;
+  src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-BlackItalic.ttf) format('truetype');
+  font-style: italic;
+  font-display: swap;
+  font-weight: 900;
 }
 
 /*texto*/
@@ -131,29 +131,30 @@ a{
 }
 /*variables*/
 :root {
-    --h1: 3em;
-    --h2: 2em;
-    --h3: 1.5em;
-    --p: 1em;
-    --negro: #1d1d1d;
-    --blanco: #eadec4;
-    --amarillo: #c6a857;
-    --naranja: #ed8e6a;
-    --azul: #a7d5f3;
-    --trasparente: transparent;
-    --font-family: "Brother", Arial;
+  --h1: 3em;
+  --h2: 2em;
+  --h3: 1.5em;
+  --p: 1em;
+  --negro: #1d1d1d;
+  --blanco: #eadec4;
+  --amarillo: #c6a857;
+  --naranja: #ed8e6a;
+  --azul: #a7d5f3;
+  --trasparente: transparent;
+  --font-family: "Brother", Arial;
 }
 
 body{
-    background-color: var(--blanco);
-    display: block;
-    margin: 0;
+  background-color: var(--blanco);
+  display: block;
+  margin: 0;
 }
 
 main{
-    margin: auto;
-    width: 100%;
-    position: relative;
+  margin: auto;
+  width: 100%;
+  position: relative;
+    
 }
 
 section{
@@ -162,64 +163,67 @@ section{
   max-width: 1200px;
   overflow: hidden;
   margin: auto;
-  padding-top: 80px;
-  padding: 20px;
-    box-shadow: 0px 0px 51px 0px #00000041;
+  box-shadow: 0px 0px 51px 0px #00000041;
 }
 
 .contenedor{
+  background-color: #fff;
   width: 100%;
   max-width: 1200px;
-  padding: 20px 20px;
-  margin: auto;
-  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  font-family: Montserrat, sans-serif;
   position: relative;
+  top: 0;
+  left: auto;
+  right: auto;
 
 }
 
 /*navegador*/
 nav{
-    background-color: var(--negro);
-    z-index: 999;
-    width: 100%;
-    height: 60px;
-    font-family: var(--font-family);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 0;
-    padding-bottom: 0;
-    display: inline-block;
-    position: sticky;
-    top: 0%;
-    bottom: auto;
-    left: 0%;
-    right: 0%;
+  background-color: var(--negro);
+  z-index: 999;
+  width: 100%;
+  height: 60px;
+  font-family: var(--font-family);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: inline-block;
+  position: sticky;
+  top: 0%;
+  bottom: auto;
+  left: 0%;
+  right: 0%;
 }
 .navegador{
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 3px solid #c6a85760;
-    height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid #c6a85760;
+  height: 60px;
 
 }
 .volver{
-    cursor: pointer;
-    height: 60px;
-    display: flex;
-    align-items: center;
+  cursor: pointer;
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 .volver svg{
-height: 20px;
-width: 20px;
-fill: var(--blanco);
-transition: all 0.2s;
+  height: 20px;
+  width: 20px;
+  fill: var(--blanco);
+  transition: all 0.2s;
 }
 .volver svg:hover{
-fill: var(--amarillo);
+  fill: var(--amarillo);
 }
 .icono svg {
   width: 30px;
@@ -234,13 +238,72 @@ fill: var(--amarillo);
 
 }
 
-
 .navegador p{
   font-family: var(--h2);
   color: var(--blanco);
   font-style: italic;
 }
 
+/***********************main proyecto**********************************************/
+@font-face {
+  font-family: LeagueSpartan;
+  src: url(./recursos/LeagueSpartan-VariableFont_wght.ttf) format('truetype');
+}
+.titulo {
+  margin-bottom: 0px;
+  font-family: "LeagueSpartan", "sans-serif";
+  font-size: 2.5em;
+  line-height: 1em;
+  font-weight: 800;
+}
+.subtitulo {
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-family: "LeagueSpartan", "sans-serif";
+  font-size: 2em;
+  line-height: .8em;
+}
+.subtitulo.margen-superior {
+  margin-top: 60px;
+}
+.encabezado {
+  letter-spacing: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "LeagueSpartan", "sans-serif";
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1em;
+  font-style: normal;
+}
+.encabezado.margen-superior {
+  margin-top: 40px;
+  font-size: 1.8em;
+}
+.parrafo {
+  margin-top: .5em;
+  font-family: "LeagueSpartan", "sans-serif";
+  font-size: 1em;
+  line-height: 1.2em;
+}
+.span-parrafo {
+  font-weight: 700;
+}
+.span-parrafo.titulo-colores {
+  text-align: center;
+  margin-bottom: 0;
+}
+.parrafo.codigo-colores {
+  text-align: center;
+}
+
+img {
+  vertical-align: middle;
+    max-width: 100%;
+    display: inline-block;
+}
+/*/
 
 
 
@@ -253,6 +316,24 @@ fill: var(--amarillo);
 
 
 
+
+
+/*/
+@media screen and (max-width: 991px){
+
+  
+}
+@media screen and (max-width: 767px){
+  
+
+}
+@media screen and (max-width: 479px){
+  
+
+}
+
+
+/***********************main proyecto**********************************************/
 
 /*FOOTER*/
 .seccion.contacto {
