@@ -1,0 +1,383 @@
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  color: #333;
+  background-color: #fff;
+  min-height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  display: inline-block;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 38px;
+  line-height: 44px;
+}
+
+
+
+
+
+:root {
+  --negro: #1d1d1d;
+  --h2: 2em;
+  --h3: 1em;
+  --p: 1em;
+  --naranja: #ed8e6a;
+  --trasparente: transparent;
+  --blanco: #eadec4;
+  --amarillo: #c6a857;
+  --azul: #a7d5f3;
+  --font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-family-2: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --h1: 3em;
+}
+
+body {
+  background-color: var(--negro);
+  padding: 20px;
+  font-family: "Brother 1816", Arial, sans-serif;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "Brother 1816", Arial, sans-serif;
+  font-size: 3em;
+  font-style: italic;
+  font-weight: 800;
+}
+
+h2 {
+  font-family: "Brother 1816", Arial, sans-serif;
+  font-size: var(--h2);
+  text-transform: capitalize;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+h3 {
+  font-family: "Brother 1816", Arial, sans-serif;
+  font-size: 1em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+h4 {
+  font-size: var(--p);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-style: normal;
+}
+
+p {
+  font-size: 1em;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+a {
+  aspect-ratio: auto;
+  color: var(--naranja);
+  text-transform: none;
+  font-family: "Brother 1816", Arial, sans-serif;
+  font-size: 1.15em;
+  font-style: italic;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.ruido-fondo {
+  z-index: 0;
+  opacity: .45;
+  -webkit-text-fill-color: inherit;
+  mix-blend-mode: overlay;
+  background-color: rgba(109, 15, 15, 0);
+  background-image: url("https://ronaldherrera.es/recursos/imagenes/textura-ruido.webp");
+  background-position: 50%;
+  background-size: auto;
+  background-attachment: scroll;
+  background-clip: border-box;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.cuerpo {
+  background-color: var(--negro);
+  opacity: 1;
+  width: 100%;
+  height: auto;
+  padding-left: 0;
+  padding-right: 0;
+  display: block;
+  position: absolute;
+  box-shadow: inset 0 -11px 80px -20px rgba(234, 222, 196, .19);
+}
+
+.body {
+  background-color: var(--trasparente);
+  padding: 0;
+}
+
+.card-1 {
+  border: 5px solid var(--blanco);
+  border-radius: 20px;
+  max-width: 800px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  position: relative;
+}
+
+.avatar {
+  width: 100%;
+  max-width: none;
+  display: block;
+  position: relative;
+}
+
+.cuerpo-cad-1 {
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+}
+
+.logotipo {
+  width: 400px;
+  position: static;
+}
+
+.titulo-card-1 {
+  color: #ed8e6a;
+  text-align: right;
+  margin-bottom: 0;
+}
+
+.text-span {
+  color: #c6a857;
+}
+
+.subtitulo-card-1 {
+  color: var(--amarillo);
+  text-align: right;
+  margin-top: 10px;
+}
+
+.contenedor-rrss {
+  grid-column-gap: 19px;
+  grid-row-gap: 19px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  display: flex;
+}
+
+.rrss {
+  width: auto;
+  height: 30px;
+  box-shadow: 10px 10px 20px 5px rgba(209, 207, 179, .11);
+}
+
+.card-2 {
+  border: 5px solid #eadec4;
+  background-color: #eadec4;
+  border-radius: 20px;
+  flex-flow: column;
+  max-width: 800px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 5px 2px 20px rgba(234, 222, 196, .25);
+}
+
+.negrita {
+  color: #1d1d1d;
+  font-weight: 800;
+  position: relative;
+}
+
+.cuerpo-card-2 {
+  color: var(--negro);
+  font-weight: 400;
+  position: relative;
+}
+
+.card-3 {
+  grid-column-gap: 23px;
+  grid-row-gap: 23px;
+  width: auto;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  padding: 20px 0;
+  display: flex;
+  position: relative;
+}
+
+.lin-telefono {
+  color: var(--negro);
+}
+
+.t-visitar-web {
+  color: var(--negro);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.t-descargar--cv {
+  color: var(--naranja);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.boton-cv {
+  border: 3px solid var(--naranja);
+  background-color: var(--trasparente);
+  color: var(--negro);
+  border-radius: 11px;
+  align-self: center;
+  width: 50%;
+  padding: 9px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+.boton-web {
+  border: 3px solid #c6a857;
+  background-color: #c6a857;
+  border-radius: 11px;
+  align-self: center;
+  width: 50%;
+  padding: 9px;
+  box-shadow: 0 2px 5px rgba(234, 222, 196, .47);
+}
+
+.contenedor-avatar {
+  align-self: flex-end;
+  width: 300px;
+  position: absolute;
+}
+
+.ruido-fondo-cuerpo {
+  z-index: 0;
+  opacity: .45;
+  -webkit-text-fill-color: inherit;
+  mix-blend-mode: overlay;
+  background-color: rgba(109, 15, 15, 0);
+  background-image: url("https://ronaldherrera.es/recursos/imagenes/textura-ruido.webp");
+  background-position: 50%;
+  background-size: auto;
+  background-attachment: scroll;
+  background-clip: border-box;
+  width: 102%;
+  height: 104%;
+  margin-top: -30px;
+  margin-left: -28px;
+  position: absolute;
+}
+
+.contenedor {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .contenedor-avatar {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .titulo-card-1 {
+    margin-top: -4px;
+  }
+
+  .contenedor-rrss {
+    flex-flow: column;
+  }
+
+  .contenedor-avatar {
+    width: 230px;
+  }
+}
+
+@font-face {
+  font-family: 'Brother 1816';
+  src: url('https://ronaldherrera.es/recursos/Tipografia/brother1816-TTF/Brother1816-BookItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brother 1816';
+  src: url('https://ronaldherrera.es/recursos/Tipografia/brother1816-TTF/Brother1816-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brother 1816';
+  src: url('https://ronaldherrera.es/recursos/Tipografia/brother1816-TTF/Brother1816-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brother 1816';
+  src: url('https://ronaldherrera.es/recursos/Tipografia/brother1816-TTF/Brother1816Printed-ExtraBoldIta.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
