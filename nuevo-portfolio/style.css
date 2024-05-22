@@ -97,7 +97,8 @@ main{
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     overflow-y: scroll;
-    height: 100vh;
+    height: 100dvh;
+    width: 100dvw;
     
 
 }
@@ -106,7 +107,8 @@ main::-webkit-scrollbar {
 }
 
 section{
-    height: 100vh;
+    height: 100dvh;
+    width: 100dvw;
     display: flex;
     justify-content: center;
     align-items: center;
