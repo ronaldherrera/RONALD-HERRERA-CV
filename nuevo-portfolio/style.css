@@ -1,5 +1,11 @@
 @font-face {
     font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Thin.ttf) format('truetype');
+    font-display: swap;
+    font-weight: 200;
+}
+@font-face {
+    font-family: brother;
     src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-LightItalic.ttf) format('truetype');
     font-style: italic;
     font-display: swap;
@@ -19,6 +25,15 @@
     font-display: swap;
     font-weight: 700;
 }
+
+@font-face {
+    font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-BoldItalic.ttf) format('truetype');
+    font-style: italic;
+    font-display: swap;
+    font-weight: 700;
+}
+
 @font-face {
     font-family: brother;
     src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Black.ttf) format('truetype');
@@ -69,9 +84,6 @@ p {
   font-weight: 600;
 }
 
-a{
-  text-decoration: none;
-}
 
 :root {
     --negro: #1d1d1d;
@@ -89,23 +101,74 @@ a{
 }
 
 body{
-    border: 1px solid ;
     overflow: hidden;
 }
 
+nav{
+    position: absolute;
+    top: 0%;
+    bottom: auto;
+    left: 0%;
+    right: 0%;
+    mix-blend-mode: difference;
+    padding: 14px;
+}
+
+.movil{
+    display: none;
+}
+
+.escritorio ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    list-style-type: none; 
+}
+
+.logotipo svg{
+    margin-top: 2px;
+    height: 20px;
+    fill: var(--amarillo);
+
+}
+
+
+
+nav a{
+    text-decoration: none;
+    color: var(--blanco);
+    font-family: "Brother", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+}
+
+nav a:focus{
+    font-weight: 700;
+    font-style: italic;
+}
+
+.boton-descarga svg{
+    height: 20px;
+    fill: var(--naranja);
+}
+
+
+/**/
 main{
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     overflow-y: scroll;
     height: 100dvh;
     width: 100dvw;
-    
-
 }
 main::-webkit-scrollbar {
     display: none; 
 }
-
 section{
     height: 100dvh;
     width: 100dvw;
@@ -114,29 +177,36 @@ section{
     align-items: center;
     padding: 10px;
     scroll-snap-align: start;
-
 }
-
 .hero{
     background-color: var(--negro);
 }
-
 .claim{
     background-color: var(--naranja);
 }
-
 .proyectos{
     background-color: var(--blanco);
 }
-
 .skills{
     background-color: var(--amarillo);
 }
-
 .sobre-mi{
     background-color: var(--azul);
 }
-
 .contacto{
     background-color: var(--negro);
+}
+/**/
+
+
+@media screen and (max-width: 520px) {
+
+    .escritorio{
+        display: none;
+    }
+
+    .movil{
+        display: flex;
+        flex-direction: column;
+    }
 }

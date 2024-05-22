@@ -1,18 +1,9 @@
-/*/animacion de scroll
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector("#main");
-  const sections = document.querySelectorAll("#section");
-  let isScrolling;
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
 
-  container.addEventListener("scroll", () => {
-    window.clearTimeout(isScrolling);
-
-    isScrolling = setTimeout(() => {
-      let sectionIndex = Math.round(container.scrollTop / window.innerHeight);
-      main.scrollTo({
-        top: sections[sectionIndex].offsetTop,
-        behavior: "smooth",
-      });
-    }, 100);
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth",
+    });
   });
 });
