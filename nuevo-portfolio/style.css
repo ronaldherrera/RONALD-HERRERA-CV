@@ -219,6 +219,39 @@ section{
         width: 100%;
     }
 
+    .movil .enlaces{
+        list-style-type: none; 
+        padding: 0px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: #77858f;
+        position: fixed;
+        height: 300px;
+        width: 200px;
+        border-radius: 5px 0px 0px 5px;
+        right: 0px;
+        top: 50px;
+    }
+
+    .rrss{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .descargaCv{
+        display: flex;
+        justify-content: center;
+    }
+
+    .boton-descarga svg{
+    height: 25px;
+}
+
+    .rrss a{
+        font-size: 13px;
+    }
+
     .boton-menu {
     margin-top: 4px;
     height: 30px;
