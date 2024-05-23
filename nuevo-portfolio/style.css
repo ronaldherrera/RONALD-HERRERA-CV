@@ -217,19 +217,10 @@ section{
         justify-content: space-between;
     }
 
-    .navegador .menu::before{
-        content: "Menu";
-        color: var(--blanco);
-        font-family: "Brother", Arial, sans-serif;
-        font-size: 16px;
-        font-weight: 200;
+    .boton-menu {
+    margin-top: 2px;
+    height: 22px;
+    cursor: pointer;
     }
-
-    .navegador .menu::after{
-        content: "Cerrar menu";
-        color: var(--blanco);
-        font-family: "Brother", Arial, sans-serif;
-        font-size: 16px;
-        font-weight: 200;
-    }
+    
 }
