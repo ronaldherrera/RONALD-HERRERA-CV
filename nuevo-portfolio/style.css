@@ -107,7 +107,6 @@ body{
 .nav-var-scroll{
     width: 30px;
     height: 100%;
-    background-color: #202224;
     top: auto;
     bottom: auto;
     left: auto;
@@ -117,11 +116,34 @@ body{
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
-
+    mix-blend-mode: difference;
 }
 
+.puntos-scroll div{
+    height: 40px;
+    width: 8px;
+    background-color: var(--amarillo);
+    margin: 10px 0px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.puntos-scroll div.activo{
+    height: 150px;
+}
+
+div.puntoHero{
+    margin-bottom: 5px;
+    border-radius: 10px 0px 0px 0px;
+} 
+
+div.puntoClaim{
+    margin-top: 0px;
+    border-radius: 0px 0px 0px 10px;
+}
+
+
 .nav-var-scroll svg{
-    width: 6px;
+    width: 7px;
     fill: var(--amarillo);
 }
 
