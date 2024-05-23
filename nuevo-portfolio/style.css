@@ -182,8 +182,8 @@ section{
     /*box-shadow: 0px 70px 57px -20px var(--negro) inset;*/
 }
 .hero{
-    /*background-color: var(--negro);*/
-    background-image: url(/proyectos/mahou/imagenes/camion.webp);
+    background-color: var(--negro);
+    
 }
 .claim{
     background-color: var(--naranja);
