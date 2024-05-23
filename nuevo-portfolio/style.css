@@ -218,9 +218,13 @@ section{
     }
 
     .boton-menu {
-    margin-top: 2px;
-    height: 22px;
+    margin-top: 4px;
+    height: 30px;
     cursor: pointer;
+    }
+
+    .logotipo svg{
+        height: 28px;
     }
     
 }
