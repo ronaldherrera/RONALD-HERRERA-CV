@@ -104,13 +104,33 @@ body{
     overflow: hidden;
 }
 
+.nav-var-scroll{
+    width: 30px;
+    height: 100%;
+    background-color: #202224;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: 0%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+
+}
+
+.nav-var-scroll svg{
+    width: 6px;
+    fill: var(--amarillo);
+}
+
 nav{
     position: absolute;
     top: 0%;
     bottom: auto;
     left: 0%;
     right: 0%;
-    
     padding: 14px;
 }
 
