@@ -147,7 +147,7 @@ nav a{
     white-space: nowrap;
 }
 
-nav a:focus{
+nav a.activo{
     font-weight: 700;
     font-style: italic;
 }
@@ -219,7 +219,7 @@ section{
         width: 100%;
     }
 
-    .movil .enlaces{
+    .movil .enlaces.abierto{
         list-style-type: none; 
         padding: 0px 20px;
         display: flex;
@@ -232,13 +232,53 @@ section{
         border-radius: 5px 0px 0px 5px;
         right: 0px;
         top: 50px;
+        transition:  0.5s ease-in-out;
     }
 
-    .rrss{
+    .movil .enlaces{
+        list-style-type: none; 
+        padding: 0px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: #77858f;
+        position: fixed;
+        height: 300px;
+        width: 200px;
+        border-radius: 5px 0px 0px 5px;
+        right: -200px;
+        top: 50px;
+        transition:  0.5s ease-in-out;
+    }
+
+    .movil .enlaces-interes{
+        color: var(--blanco);
+        font-family: "Brother", Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 100;
+        text-align: end;
+        font-style: italic;
+    }
+
+    nav a.activo{
+    font-weight: 700;
+    font-style: italic;
+}
+
+    .movil .rrss{
+        border-top: solid 1px var(--blanco);
+        border-bottom: solid 1px var(--blanco);
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        font-style: normal;
     }
+
+    .movil .rrss a{
+        margin-top: 0px;
+        font-weight: 400;
+    }
+
     .descargaCv{
         display: flex;
         justify-content: center;

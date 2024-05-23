@@ -23,17 +23,20 @@ document.addEventListener("DOMContentLoaded", function () {
   // Función para manejar el clic
   document.getElementById("boton-menu").addEventListener("click", function () {
     var container = this;
+    var enlaces = document.querySelector(".enlaces");
     var totalFrames = animation.totalFrames;
 
     // Cambiar la velocidad de reproducción y la duración de la animación según el estado del contenedor
     if (container.classList.contains("abierto")) {
       container.classList.remove("abierto");
+      enlaces.classList.remove("abierto");
       // Reducir la velocidad de reproducción
       animation.setSpeed(animationSpeed);
       // Reproducir la animación desde el 100% al 0%
       animation.playSegments([totalFrames * 1.0, totalFrames * 0.0], true);
     } else {
       container.classList.add("abierto");
+      enlaces.classList.add("abierto");
       // Aumentar la velocidad de reproducción
       animation.setSpeed(animationSpeed); // Doble velocidad, puedes ajustar según tu preferencia
       // Reproducir la animación desde el 0% al 100%
