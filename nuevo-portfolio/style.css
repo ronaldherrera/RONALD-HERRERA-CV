@@ -129,6 +129,7 @@ nav{
 .logotipo svg{
     margin-top: 2px;
     height: 20px;
+    mix-blend-mode: difference;
     fill: var(--amarillo);
     
 
