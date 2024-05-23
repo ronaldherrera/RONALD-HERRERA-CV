@@ -129,7 +129,6 @@ nav{
 .logotipo svg{
     margin-top: 2px;
     height: 20px;
-    mix-blend-mode: difference;
     fill: var(--amarillo);
     
 
@@ -222,6 +221,7 @@ section{
         display: flex;
         justify-content: space-between;
         width: 100%;
+        mix-blend-mode: difference;
     }
 
     .movil .enlaces.abierto{
