@@ -50,6 +50,52 @@ function activarEnlaceAlScroll() {
     }
   });
 }
-
 // Llamar a la función cuando el DOM esté cargado
 document.addEventListener("DOMContentLoaded", activarEnlaceAlScroll);
+
+/*añadir clase "activo" a los puntos de scroll*/
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
+  const puntos = document.querySelectorAll(".puntos-scroll div");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const punto = document.querySelector(`#${entry.target.id}P`);
+        if (entry.isIntersecting) {
+          punto.classList.add("activo");
+        } else {
+          punto.classList.remove("activo");
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+});
+
+/*Añadir "oculto" a las flechas de scroll*/
+document.addEventListener("DOMContentLoaded", function () {
+  const sections = document.querySelectorAll("section");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.id;
+        const navItem = document.getElementById(`${id}F`);
+
+        if (entry.isIntersecting) {
+          navItem.classList.add("oculto"); // Si la sección está visible, remueve la clase 'oculto'
+        } else {
+          navItem.classList.remove("oculto"); // Si la sección no está visible, añade la clase 'oculto'
+        }
+      });
+    },
+    { threshold: 1.0 }
+  );
+
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+});
