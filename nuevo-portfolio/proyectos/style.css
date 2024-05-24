@@ -1,0 +1,160 @@
+@font-face {
+    font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Thin.ttf) format('truetype');
+    font-display: swap;
+    font-weight: 200;
+}
+@font-face {
+    font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-LightItalic.ttf) format('truetype');
+    font-style: italic;
+    font-display: swap;
+    font-weight: 200;
+}
+@font-face {
+    font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Regular.ttf) format('truetype');
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+}
+@font-face {
+    font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Bold.ttf) format('truetype');
+    font-style: normal;
+    font-display: swap;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-BoldItalic.ttf) format('truetype');
+    font-style: italic;
+    font-display: swap;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Black.ttf) format('truetype');
+    font-style: normal;
+    font-display: swap;
+    font-weight: 900;
+}
+@font-face {
+    font-family: brother;
+    src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-BlackItalic.ttf) format('truetype');
+    font-style: italic;
+    font-display: swap;
+    font-weight: 900;
+}
+
+h1 {
+  font-family: "Brother", Arial, sans-serif;
+  font-size: 3em;
+  font-style: italic;
+  font-weight: 800;
+}
+
+h2 {
+  font-family: "Brother", Arial, sans-serif;
+  font-size: var(--h2);
+  text-transform: capitalize;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+h3 {
+  font-family: "Brother", Arial, sans-serif;
+  font-size: var(--h3);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+p {
+  font-family: "Brother", Arial, sans-serif;
+  font-size: var(--p);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+
+:root {
+    --negro: #1d1d1d;
+    --blanco: #eadec4;
+    --amarillo: #c6a857;
+    --naranja: #ed8e6a;
+    --azul: #a7d5f3;
+    --trasparente: transparent;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    overflow: hidden;
+}
+
+main{
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    height: 100dvh;
+    width: 100dvw;
+}
+
+main::-webkit-scrollbar {
+    display: none; 
+}
+section{
+    height: 100dvh;
+    width: 100dvw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    scroll-snap-align: start;
+    /*box-shadow: 0px 70px 57px -20px var(--negro) inset;*/
+}
+
+.nombre-proyecto.uno {
+    background-color: var(--naranja);
+}
+.nombre-proyecto.dos {
+    background-color: var(--azul);
+}
+.nombre-proyecto.tres {
+    background-color: var(--amarillo);
+}
+
+nav{
+    position: absolute;
+    top: 0%;
+    bottom: auto;
+    left: 0%;
+    right: 0%;
+    padding: 14px;
+}
+
+nav a{
+    text-decoration: none;
+    color: var(--blanco);
+    font-family: "Brother", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    mix-blend-mode: difference;
+}
