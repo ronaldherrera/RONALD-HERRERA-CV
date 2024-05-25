@@ -116,43 +116,50 @@ body{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    justify-content: end;
+    justify-content: space-between;
     mix-blend-mode: difference;
 }
 
-
+.puntos-scroll{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 100%;
+}
 
 .puntos-scroll div{
-    height: 30px;
+    height: 50px;
     width: 5px;
     background-color: var(--amarillo);
-    margin: 10px 0px;
-    border-radius: 10px 0px 0px 10px;
+    margin: 3px 0px;
+    border-radius: 5px 5px 5px 5px;
     transition:  0.5s ease-in-out;
 }
 
 .puntos-scroll div.activo{
-    height: 120px;
+    height: 100%;
+    border: solid 1.5px var(--amarillo);
+    background-color: var(--trasparente);
 }
 
 div.puntoHero{
-    margin-bottom: 5px;
-    border-radius: 10px 0px 0px 0px;
+    margin-bottom: 3px;
+    border-radius: 5px 5px 0px 0px;
 } 
 
 div.puntoClaim{
     margin-top: 0px;
-    border-radius: 0px 0px 0px 10px;
+    border-radius: 0px 0px 5px 5px;
 }
 
 .flecha-subir{
-    height: 100px;
+    padding: 10px 0px;
     border-right: var(--amarillo) solid 1.5px;
     transition:  0.5s ease-in-out;
 }
 
-.flecha-subir.oculto{
-    height: 0px;
+.flecha-subir.focus{
+    padding: 10px 0px;
     transition:  0.3s ease-in-out;
 }
 
@@ -164,8 +171,8 @@ div.puntoClaim{
     transition:  0.5s ease-in-out;
 }
 
-.flecha-pie.oculto{
-    height: 0px;
+.flecha-pie.focus{
+    height: 30px;
     transition:  0.3s ease-in-out;
 }
 
@@ -288,7 +295,7 @@ section{
         mix-blend-mode: difference;
     }
 
-    .movil .enlaces.abierto{
+    .enlaces.abierto{
         box-shadow: -1px 1px 4px 0px #000000;
         list-style-type: none; 
         padding: 0px 20px;
@@ -296,32 +303,30 @@ section{
         flex-direction: column;
         justify-content: space-evenly;
         background-color: #42404050;
-        position: fixed;
         height: 300px;
         width: 200px;
         border-radius: 5px 0px 0px 5px;
-        right: 0px;
+        right: 5px;
         top: 50px;
         transition:  0.5s ease-in-out;
         backdrop-filter: blur(4px);
     }
 
-    .movil .enlaces{
+   .enlaces{
         list-style-type: none; 
-        padding: 0px 20px;
+        padding: 0px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        position: fixed;
-        height: 300px;
-        width: 200px;
+        overflow: hidden;
+        height: 0px;
+        width: 0px;
         border-radius: 5px 0px 0px 5px;
-        right: -200px;
-        top: 50px;
+
         transition:  0.5s ease-in-out;
     }
 
-    .movil .enlaces-interes{
+    .enlaces-interes{
         color: var(--blanco);
         font-family: "Brother", Arial, sans-serif;
         font-size: 10px;
@@ -335,7 +340,7 @@ section{
     font-style: italic;
 }
 
-    .movil .rrss{
+    .rrss{
         border-top: solid 1px var(--blanco);
         border-bottom: solid 1px var(--blanco);
         display: flex;
@@ -344,7 +349,7 @@ section{
         font-style: normal;
     }
 
-    .movil .rrss a{
+    .rrss a{
         margin-top: 0px;
         font-weight: 400;
     }

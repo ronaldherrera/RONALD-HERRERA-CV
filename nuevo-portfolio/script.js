@@ -26,7 +26,7 @@ function activarEnlaceAlScroll() {
         `nav.escritorio a[href="#${seccionId}"]`
       );
       const enlaceMovil = document.querySelector(
-        `nav.movil a[href="#${seccionId}"]`
+        `.enlaces a[href="#${seccionId}"]`
       );
 
       if (entrada.isIntersecting) {
@@ -86,9 +86,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const navItem = document.getElementById(`${id}F`);
 
         if (entry.isIntersecting) {
-          navItem.classList.add("oculto"); // Si la sección está visible, remueve la clase 'oculto'
+          navItem.classList.add("focus"); // Si la sección está visible, remueve la clase 'oculto'
         } else {
-          navItem.classList.remove("oculto"); // Si la sección no está visible, añade la clase 'oculto'
+          navItem.classList.remove("focus"); // Si la sección no está visible, añade la clase 'oculto'
         }
       });
     },
