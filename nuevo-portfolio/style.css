@@ -128,7 +128,7 @@ body{
 }
 
 .puntos-scroll div{
-    height: 50px;
+    height: 30px;
     width: 5px;
     background-color: var(--amarillo);
     margin: 3px 0px;
@@ -138,8 +138,8 @@ body{
 
 .puntos-scroll div.activo{
     height: 100%;
-    border: solid 1.5px var(--amarillo);
-    background-color: var(--trasparente);
+    /*border: solid 1.5px var(--amarillo);*/
+    background-color: var(--amarillo);
 }
 
 div.puntoHero{
