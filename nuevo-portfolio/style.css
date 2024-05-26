@@ -138,8 +138,8 @@ body{
 
 .puntos-scroll div.activo{
     height: 100%;
-    /*border: solid 1.5px var(--amarillo);*/
-    background-color: var(--amarillo);
+    border: solid 1.5px var(--amarillo);
+    background-color: var(--trasparente);
 }
 
 div.puntoHero{
