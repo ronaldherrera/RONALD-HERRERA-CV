@@ -245,14 +245,11 @@ nav .var{
 }
 
 .titulo-portada{
-    background-color: #1d1d1d62;
     position: absolute;
     bottom: 0px;
     left: 0px;
     padding: 14px;
     margin-right: 40px;
-    backdrop-filter: blur(10px);
-    box-shadow: 1px -1px 3px 0px #000000b4;
 }
 
 .contenido-portada{
@@ -278,21 +275,25 @@ nav .var{
     width: 180px;
     height: 40px;
     border-radius: 0px;
-    border: solid 1.5px;
-    background-color: var(--trasparente);
-    color:var(--amarillo);
-    mix-blend-mode: difference;
+    border: solid 1.5px var(--negro);
+    background-color: #66666631;
+    color:var(--negro);
+    
     margin-bottom: 10px;
     font-family: "Brother", Arial, sans-serif;
     font-weight: 700;
+    font-size: 1.2em;
+    backdrop-filter: blur(10px);
+    
 }
 
 p.caracteristicas{
     margin-bottom: 3px;
-    font-weight: 200;
+    font-weight: 600;
     font-style: italic;
-    color: var(--naranja);
-    mix-blend-mode: exclusion;
+    color: var(--negro);
+    
+    
 }
 
 .fondo-portada{
@@ -310,4 +311,17 @@ p.caracteristicas{
     object-fit: cover;
     object-position: center;
     
+}
+
+.boton-proyecto svg{
+    height: 50px;
+    fill: #000000;
+}
+
+/*.frame-proyecto{
+    background-color: var(--blanco);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
 }
