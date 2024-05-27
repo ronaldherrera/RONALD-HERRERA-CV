@@ -54,6 +54,7 @@ h1 {
   font-size: 3em;
   font-style: italic;
   font-weight: 800;
+  line-height: 0.9;
 }
 
 h2 {
@@ -244,17 +245,21 @@ nav .var{
 }
 
 .titulo-portada{
-    
+    background-color: #1d1d1d62;
     position: absolute;
     bottom: 0px;
-    left: 14px;
-    padding-right: 14px;
+    left: 0px;
+    padding: 14px;
+    margin-right: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 1px -1px 3px 0px #000000b4;
 }
 
 .contenido-portada{
     margin-bottom: 30px;
     max-width: 600px;
 }
+
 
 .caracteristicas{
     display: flex;
@@ -287,7 +292,7 @@ p.caracteristicas{
     font-weight: 200;
     font-style: italic;
     color: var(--naranja);
-    mix-blend-mode: difference;
+    mix-blend-mode: exclusion;
 }
 
 .fondo-portada{
@@ -304,4 +309,5 @@ p.caracteristicas{
     width: 100%; 
     object-fit: cover;
     object-position: center;
+    
 }
