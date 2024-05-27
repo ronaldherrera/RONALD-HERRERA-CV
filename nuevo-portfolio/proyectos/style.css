@@ -142,7 +142,11 @@ nav{
     bottom: auto;
     left: 0%;
     right: 0%;
-    padding: 14px;
+    padding: 14px 5px 0px 14px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    mix-blend-mode: difference;
 }
 
 nav a{
@@ -151,10 +155,61 @@ nav a{
     font-family: "Brother", Arial, sans-serif;
     font-size: 16px;
     font-weight: 700;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     white-space: nowrap;
+    
+}
+
+nav .marco{
+    
+    width: 100%;
+    height: 30px;
+    border: solid 1.5px var(--amarillo);
+    border-bottom: none;
+    border-left: none;
+    
+}
+
+.nav-var-scroll{
+    width: 30px;
+    height: 100%;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: 0%;
+    padding: 5px;
+    padding-top: 49px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
     mix-blend-mode: difference;
+}
+
+.puntos-scroll{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 200px;
+}
+
+.puntos-scroll div{
+    height: 10%;
+    width: 5px;
+    background-color: var(--amarillo);
+    margin: 3px 0px;
+    border-radius: 5px 5px 5px 5px;
+    transition:  0.5s ease-in-out;
+}
+
+.puntos-scroll div.activo{
+    height: 100%;
+    border: solid 1.5px var(--amarillo);
+    background-color: var(--trasparente);
+}
+
+.flecha-pie{
+    height: 50px;
+    margin-top: 3px;
+    border-right: var(--amarillo) solid 1.5px;
+    transition:  0.5s ease-in-out;
 }
