@@ -251,6 +251,39 @@ nav .var{
 }
 
 .contenido-portada{
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     max-width: 600px;
+}
+
+.caracteristicas{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 18px;
+    gap: 5px;
+    width: 220px;
+    font-size: 0.85em;
+    align-items: center;
+    
+}
+
+
+.contenido-portada button{
+    width: 180px;
+    height: 40px;
+    border-radius: 0px;
+    border: solid 1.5px;
+    background-color: var(--trasparente);
+    color:var(--amarillo);
+    mix-blend-mode: difference;
+    margin-bottom: 10px;
+    font-family: "Brother", Arial, sans-serif;
+    font-weight: 700;
+}
+
+p.caracteristicas{
+    margin-bottom: 3px;
+    font-weight: 200;
+    font-style: italic;
+    color: var(--naranja);
 }
