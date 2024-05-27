@@ -286,4 +286,5 @@ p.caracteristicas{
     font-weight: 200;
     font-style: italic;
     color: var(--naranja);
+    mix-blend-mode: difference;
 }
