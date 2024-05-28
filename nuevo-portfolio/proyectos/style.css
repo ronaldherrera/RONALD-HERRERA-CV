@@ -339,5 +339,40 @@ p.caracteristicas{
 }
 
 .modal-proyecto span{
-    
+    font-weight: 200;
+    font-style: italic;
+}
+
+.modal-proyecto button{
+    position: absolute;
+    top: 20px;
+    right: 14px;
+    border: 0px;
+    display: flex;
+    gap: 2px;
+    background-color: var(--trasparente);
+    font-weight: 700;
+    color: var(--blanco);
+    align-items: flex-end;
+    cursor: pointer;
+}
+
+
+.modal-proyecto button span{
+    font-size: 10px;
+    font-weight: 200;
+}
+
+.modal-proyecto .rrss{
+    color: var(--blanco);
+    font-family: "Brother", Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 200;
+}
+
+.modal-proyecto .rrss a{
+    color: var(--blanco);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
 }
