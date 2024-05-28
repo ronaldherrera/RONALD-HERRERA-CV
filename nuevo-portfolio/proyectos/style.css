@@ -241,7 +241,7 @@ nav .var{
     position: absolute;
     height: 20px;
     mix-blend-mode: difference;
-    z-index: 2;
+    z-index: 15;
 }
 
 .titulo-portada{
@@ -255,9 +255,8 @@ nav .var{
 }
 
 .contenido-portada{
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     max-width: 600px;
-    background: linear-gradient(to right, rgb(255, 255, 255), rgba(0, 0, 255, 0) 41%);
     padding: 14px;
     margin-left: -14px;
     
@@ -271,33 +270,17 @@ nav .var{
     height: 18px;
     gap: 5px;
     width: 220px;
-    font-size: 0.85em;
+    font-size: 1em;
     align-items: center;
     
 }
 
 
-.contenido-portada button{
-    width: 180px;
-    height: 40px;
-    border-radius: 0px;
-    border: solid 1.5px var(--negro);
-    background-color: #66666631;
-    color:var(--negro);
-    
-    margin-bottom: 10px;
-    font-family: "Brother", Arial, sans-serif;
-    font-weight: 700;
-    font-size: 1.2em;
-    backdrop-filter: blur(10px);
-    
-}
-
 p.caracteristicas{
     margin-bottom: 3px;
     font-weight: 600;
-    font-style: italic;
-    color: var(--negro);
+    
+    color: #000000;
     
     
 }
@@ -322,12 +305,39 @@ p.caracteristicas{
 .boton-proyecto svg{
     height: 50px;
     fill: #000000;
+    background-color: var(--blanco);
 }
 
-/*.frame-proyecto{
-    background-color: var(--blanco);
-    position: absolute;
+.boton-proyecto svg:hover{
+    background-color: var(--trasparente);
+    transition:  0.2s ease-in-out;
+    fill: var(--negro);
+}
+
+.modal-proyecto{
+    background-color: #1d1d1de3;
+    position: fixed;
     width: 100%;
     height: 100%;
     z-index: 10;
+    padding: 14px;
+    padding-top: 40px;
+    padding-bottom: 35px;
+}
+
+.modal-proyecto iframe{
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-proyecto .titulo{
+    position: absolute;
+    top: 14px;
+    margin-bottom: 0px;
+    color: var(--blanco);
+}
+
+.modal-proyecto span{
+    
 }
