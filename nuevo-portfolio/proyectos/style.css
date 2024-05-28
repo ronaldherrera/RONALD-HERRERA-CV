@@ -301,11 +301,17 @@ p.caracteristicas{
     object-position: center;
     
 }
+.contenido-portada button{
+    background-color: var(--trasparente);
+    border: none;
+    cursor: pointer;
+}
 
-.boton-proyecto svg{
+.contenido-portada button svg{
     height: 50px;
     fill: #000000;
-    background-color: var(--blanco);
+    background-color: #eadec45d;
+
 }
 
 .boton-proyecto svg:hover{
@@ -323,6 +329,9 @@ p.caracteristicas{
     padding: 14px;
     padding-top: 40px;
     padding-bottom: 35px;
+    display: block;
+    transition:  0.2s ease-in-out;
+    
 }
 
 .modal-proyecto iframe{
@@ -368,6 +377,7 @@ p.caracteristicas{
     font-family: "Brother", Arial, sans-serif;
     font-size: 10px;
     font-weight: 200;
+    font-style: italic;
 }
 
 .modal-proyecto .rrss a{
@@ -375,4 +385,9 @@ p.caracteristicas{
     font-weight: 700;
     text-decoration: none;
     font-size: 14px;
+    font-style: normal;
+}
+
+.modal-proyecto.oculto{
+    display: none;
 }
