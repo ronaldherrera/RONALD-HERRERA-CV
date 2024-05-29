@@ -248,7 +248,7 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 0px;
     scroll-snap-align: start;
     /*box-shadow: 0px 70px 57px -20px var(--negro) inset;*/
 }
@@ -271,6 +271,15 @@ section{
 .contacto{
     background-color: var(--negro);
 }
+
+
+.lottie{
+    height: 100%;
+    width: 100%; 
+    object-fit: cover;
+    object-position: center; 
+}
+
 /**/
 
 
@@ -281,12 +290,14 @@ section{
     }
 
     .movil{
-        padding: 5px;
+        padding: 0px;
         display: flex;
         flex-direction: column;
         list-style-type: none; 
         width: 100%;
     }
+
+
     .movil .navegador{
         list-style-type: none; 
         display: flex;
