@@ -1,3 +1,16 @@
+@keyframes entradaelementos {
+	0% {
+		opacity: 0;
+    scale: 0.5;
+	}
+
+	100% {
+		opacity: 1;
+    scale: 1;
+	}
+}
+
+
 @font-face {
     font-family: brother;
     src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Thin.ttf) format('truetype');
@@ -183,6 +196,7 @@ nav{
     left: 0%;
     right: 0%;
     padding: 14px;
+    z-index: 3;
 }
 
 .movil, .enlaces{
@@ -238,6 +252,8 @@ main{
     overflow-y: scroll;
     height: 100dvh;
     width: 100dvw;
+    position: static;
+    z-index: -4;
 }
 main::-webkit-scrollbar {
     display: none; 
@@ -245,17 +261,62 @@ main::-webkit-scrollbar {
 section{
     height: 100dvh;
     width: 100dvw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
+    padding: 10px;
+    padding-top: 30px;
     scroll-snap-align: start;
+    position: relative;
+    z-index: 1;
     /*box-shadow: 0px 70px 57px -20px var(--negro) inset;*/
 }
 .hero{
     background-color: var(--negro);
-    
 }
+
+.hero h1{
+    color: var(--blanco);
+    margin-top: 50px;
+    white-space: normal;
+    font-size: 5em;
+    line-height: 1em;
+    animation: entradaelementos 1s ease-in-out 0s 1 normal none;
+}
+
+.hero span.uno{
+    color: var(--azul);
+
+}
+.hero span.dos{
+    color: var(--amarillo);
+
+}
+
+
+.estatica-fondo-oscuro {
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: .25;
+  mix-blend-mode: overlay;
+  background-image: url("/recursos/imagenes/textura-ruido.webp");
+  background-position: 50%;
+  background-repeat: no repeat;
+  background-size: auto;
+  margin-right: 0;
+  display: block;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: auto;
+} 
+.avatar-hero{
+    height: 90%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+
+}
+
 .claim{
     background-color: var(--naranja);
 }
@@ -273,12 +334,7 @@ section{
 }
 
 
-.lottie{
-    height: 100%;
-    width: 100%; 
-    object-fit: cover;
-    object-position: center; 
-}
+
 
 /**/
 
