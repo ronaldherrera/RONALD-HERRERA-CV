@@ -1,15 +1,63 @@
-@keyframes entradaelementos {
+@keyframes entrada-hero {
+	0% {
+		transform: scaleY(0);
+		transform-origin: 0% 100%;
+        opacity: 0;
+	}
+
+	100% {
+		transform: scaleY(1);
+		transform-origin: 0% 100%;
+        opacity: 1;
+	}
+}
+
+@keyframes entrada-suave-abajo {
 	0% {
 		opacity: 0;
-    scale: 0.5;
+		transform: translateY(50px);
 	}
 
 	100% {
 		opacity: 1;
-    scale: 1;
+		transform: translateY(0);
 	}
 }
 
+@keyframes entrada-suave-arriba {
+	0% {
+		opacity: 0;
+		transform: translateY(-50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes entrada-suave-derecha {
+	0% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+@keyframes entrada-suave-izquierda {
+	0% {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
 
 @font-face {
     font-family: brother;
@@ -113,6 +161,7 @@ p {
     box-sizing: border-box;
 }
 
+
 body{
     overflow: hidden;
 }
@@ -131,6 +180,8 @@ body{
     align-items: flex-end;
     justify-content: space-between;
     mix-blend-mode: difference;
+    opacity: 0;
+    animation: entrada-suave-derecha .5s ease 1s 1 normal forwards;
 }
 
 .puntos-scroll{
@@ -196,6 +247,7 @@ nav{
     left: 0%;
     right: 0%;
     padding: 14px;
+    
     z-index: 3;
 }
 
@@ -209,14 +261,15 @@ nav{
     align-items: center;
     width: 100%;
     list-style-type: none; 
+    
 }
 
 .logotipo svg{
-    margin-top: 2px;
+    margin-top: 5px;
     height: 20px;
     fill: var(--amarillo);
-    
-
+    opacity: 0;
+    animation: entrada-suave-arriba .5s ease .1s 1 normal forwards;
 }
 
 
@@ -231,7 +284,9 @@ nav a{
     justify-content: space-between;
     align-items: center;
     white-space: nowrap;
-    mix-blend-mode: difference;
+    
+    opacity: 0;
+    animation: entrada-suave-arriba .5s ease .3s 1 normal forwards;
 }
 
 nav a.activo{
@@ -242,6 +297,8 @@ nav a.activo{
 .boton-descarga svg{
     height: 25px;
     fill: var(--naranja);
+    opacity: 0;
+    animation: entrada-suave-arriba .5s ease .5s 1 normal forwards;
 }
 
 
@@ -266,28 +323,60 @@ section{
     scroll-snap-align: start;
     position: relative;
     z-index: 1;
+
+
     /*box-shadow: 0px 70px 57px -20px var(--negro) inset;*/
 }
 .hero{
-    background-color: var(--negro);
+    background-image: radial-gradient(#302f2f, #1d1d1d);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-top: 40px;
+    padding-bottom: 100px;
 }
 
-.hero h1{
+.hero h2{
     color: var(--blanco);
-    margin-top: 50px;
     white-space: normal;
     font-size: 5em;
     line-height: 1em;
-    animation: entradaelementos 1s ease-in-out 0s 1 normal none;
+    width: fit-content;
+    
 }
 
-.hero span.uno{
+.hero h1{
+    width: fit-content;
+    opacity: 0;
+    color: var(--blanco);
+    white-space: normal;
+    font-size: 5em;
+    line-height: 1em; 
+}
+
+.hero h1.uno{
+
+    animation: entrada-hero .5s ease .5s 1 normal forwards;
+}
+
+.hero h1.dos{
+    animation: entrada-hero .5s ease .8s 1 normal forwards;
+}
+
+.hero h1.tres{
+    animation: entrada-hero .5s ease 1s 1 normal forwards;
+}
+
+.hero h1.uno span{
     color: var(--azul);
-
 }
-.hero span.dos{
-    color: var(--amarillo);
 
+.hero h1.dos span{
+    color: var(--amarillo);
+}
+
+.hero h1.tres span{
+    color: var(--naranja);
 }
 
 
@@ -310,15 +399,43 @@ section{
   right: auto;
 } 
 .avatar-hero{
-    height: 90%;
+    pointer-events: none;
+    width: 50%;
     position: absolute;
     bottom: 0px;
-    right: 0px;
-
+    right: -90px;
+    opacity: 0;
+    animation: entrada-suave-abajo 1s ease 1s 1 normal forwards;
 }
+.rrss-container{
+    width: fit-content;
+    grid-column-gap: 100px;
+    grid-row-gap: 32px;
+    display: flex;
+    justify-content: space-around;
+    opacity: 0;
+    animation: entrada-suave-izquierda 1s ease 1s 1 normal forwards;
+}
+.rrss-container svg{
+    height: 50px;
+    transition: all ease-in-out .2s;
+    border: solid 2px var(--blanco);
+    border-radius: 50%;
+    .cls-1{fill:var(--blanco);}
+    .cls-2{fill:var(--trasparente);
+    }
+}   
 
+.rrss-container svg:hover{
+    border-radius: 50%;
+    border: solid 2px var(--trasparente);
+    .cls-1{fill:var(--negro);}
+    .cls-2{fill:var(--blanco);
+    }
+  
+}
 .claim{
-    background-color: var(--naranja);
+    background-image: radial-gradient(#ed8e6a, #cf6a49)
 }
 .proyectos{
     background-color: var(--blanco);
@@ -337,20 +454,49 @@ section{
 
 
 /**/
+@media screen and (max-width: 900px){
+    .hero h2{
+    font-size: 4em;
+}
 
+.hero h1{
+    font-size: 3em;
+}
+}
 
 @media screen and (max-width: 700px) {
+    .avatar-hero{
+        width: 80%;
+        right: -40px;
+    }
+
+    .hero{
+        padding-bottom: 20px;
+    }
+
+    .rrss-container{
+    margin-top: 20px;
+    width: fit-content;
+    grid-column-gap: 100px;
+    grid-row-gap: 32px;
+    display: grid;
+}
 
     .escritorio{
         display: none;
     }
 
+    #boton-menu{
+        opacity: 0;
+        animation: entrada-suave-derecha .5s ease .5s 1 normal forwards;
+    }
     .movil{
-        padding: 0px;
+        padding: 5px;
         display: flex;
         flex-direction: column;
         list-style-type: none; 
         width: 100%;
+        mix-blend-mode: difference;
     }
 
 
@@ -359,24 +505,26 @@ section{
         display: flex;
         justify-content: space-between;
         width: 100%;
-        mix-blend-mode: difference;
+        
     }
 
     .enlaces.abierto{
-        box-shadow: -1px 1px 4px 0px #000000;
+        box-shadow: -1px 1px 4px 0px #0000001a;
         list-style-type: none; 
         padding: 0px 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        background-color: #42404050;
         height: 300px;
         width: 200px;
         border-radius: 5px 0px 0px 5px;
         right: 5px;
         top: 50px;
         transition:  0.5s ease-in-out;
-        backdrop-filter: blur(4px);
+       background-color: var(--amarillo);
+    }
+    .enlaces.abierto::before{
+        filter: blur(10px) contrast(200%) hue-rotate(90deg) saturate(300%);
     }
 
    .enlaces{
@@ -440,11 +588,25 @@ section{
     width: 140px;
     cursor: pointer;
     text-align: end;
-    mix-blend-mode: difference;
+    
     }
 
     .logotipo svg{
         height: 28px;
     }
     
+}
+
+@media screen and (max-width: 500px){
+    .hero h2{
+    font-size: 3em;
+    }
+
+    .hero h1{
+    font-size: 2em;
+    }
+    .avatar-hero{
+        width: 100%;
+        right: -40px;
+    }
 }
