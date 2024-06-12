@@ -59,6 +59,18 @@
 	}
 }
 
+@keyframes entrada {
+	0% {
+		transform: scale(0);
+        opacity: 0;
+	}
+
+	100% {
+		transform: scale(1);
+        opacity: 1;
+	}
+}
+
 @font-face {
     font-family: brother;
     src: url(/recursos/Tipografia/brother1816-TTF/Brother1816-Thin.ttf) format('truetype');
@@ -247,7 +259,7 @@ nav{
     left: 0%;
     right: 0%;
     padding: 14px;
-    
+    mix-blend-mode: difference;
     z-index: 3;
 }
 
@@ -256,6 +268,7 @@ nav{
 }
 
 .escritorio ul{
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -414,7 +427,7 @@ section{
     display: flex;
     justify-content: space-around;
     opacity: 0;
-    animation: entrada-suave-izquierda 1s ease 1s 1 normal forwards;
+    animation: entrada 1s ease 1s 1 normal forwards;
 }
 .rrss-container svg{
     height: 50px;
@@ -435,11 +448,44 @@ section{
   
 }
 .claim{
-    background-image: radial-gradient(#ed8e6a, #cf6a49)
+    background-image: radial-gradient(#ed8e6a, #cf6a49);
+    
+    
 }
 .proyectos{
-    background-color: var(--blanco);
+    background-image: radial-gradient(#dad7d0, #eadec4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
+
+.proyectos h3{
+    width: fit-content;
+    animation: entrada 1s ease 0s 1 normal forwards;
+    opacity: 0;
+    color: var(--negro);
+    white-space: normal;
+    font-size: 5em;
+    line-height: 1em; 
+}
+
+.proyectos p{
+    font-weight: 400;
+    text-align: center;
+}
+
+.proyectos svg{
+    fill: var(--negro);
+    height: 50px;
+}
+.proyectos svg:hover{
+    fill: var(--amarillo);
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 0px 5px 0px #0000002c;
+}
+
 .skills{
     background-color: var(--amarillo);
 }
