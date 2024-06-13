@@ -104,5 +104,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-////////////*funcion para configuracion de entorno fisico en la seccion SKILLS*/
+////////////*funcion para cargar iframe de skills cuando la seccion sea visible/
 /////
