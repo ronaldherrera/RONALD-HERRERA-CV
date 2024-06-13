@@ -29,14 +29,14 @@ function activarEnlaceAlScroll() {
         `.enlaces a[href="#${seccionId}"]`
       );
 
-      if (entrada.isIntersecting) {
-        // Añadir clase activo al enlace de la sección visible
-        enlaceEscritorio.classList.add("activo");
-        enlaceMovil.classList.add("activo");
-      } else {
-        // Si la sección no está intersectando, quitar la clase activo del enlace
-        enlaceEscritorio.classList.remove("activo");
-        enlaceMovil.classList.remove("activo");
+      if (enlaceEscritorio && enlaceMovil) {
+        if (entrada.isIntersecting) {
+          enlaceEscritorio.classList.add("activo");
+          enlaceMovil.classList.add("activo");
+        } else {
+          enlaceEscritorio.classList.remove("activo");
+          enlaceMovil.classList.remove("activo");
+        }
       }
     });
   }, opciones);
@@ -50,6 +50,7 @@ function activarEnlaceAlScroll() {
     }
   });
 }
+
 // Llamar a la función cuando el DOM esté cargado
 document.addEventListener("DOMContentLoaded", activarEnlaceAlScroll);
 
@@ -85,17 +86,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const id = entry.target.id;
         const navItem = document.getElementById(`${id}F`);
 
-        if (entry.isIntersecting) {
-          navItem.classList.add("focus"); // Si la sección está visible, remueve la clase 'oculto'
-        } else {
-          navItem.classList.remove("focus"); // Si la sección no está visible, añade la clase 'oculto'
+        if (navItem) {
+          // Verifica si navItem no es null
+          if (entry.isIntersecting) {
+            navItem.classList.add("focus"); // Añade la clase 'focus' cuando la sección es visible
+          } else {
+            navItem.classList.remove("focus"); // Remueve la clase 'focus' cuando la sección no es visible
+          }
         }
       });
     },
-    { threshold: 1.0 }
+    { threshold: 1.0 } // Umbral de intersección al 100%
   );
 
   sections.forEach((section) => {
     observer.observe(section);
   });
 });
+
+////////////*funcion para configuracion de entorno fisico en la seccion SKILLS*/
+/////
