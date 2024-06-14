@@ -19,34 +19,34 @@ var render = Render.create({
     width: window.innerWidth, // Ancho del canvas
     height: window.innerHeight, // Alto del canvas
     pixelRatio: 2, // Relación de píxeles para alta resolución
-    background: "#1d1d1d", // Color de fondo del canvas
+    background: "#1d1d1d00", // Color de fondo del canvas
     wireframes: false, // Desactivar la visualización de wireframes
   },
 });
 
 // Crear límites (bounds)
-var ground = Bodies.rectangle(
+var suelo = Bodies.rectangle(
   window.innerWidth / 2 + 160,
   window.innerHeight + 80,
   window.innerWidth + 320,
   160,
   { render: { fillStyle: "#080808" }, isStatic: true } // Suelo
 );
-var wallLeft = Bodies.rectangle(
+var paredIzquierda = Bodies.rectangle(
   -80,
   window.innerHeight / 2,
   160,
   window.innerHeight,
   { isStatic: true } // Pared izquierda
 );
-var wallRight = Bodies.rectangle(
+var paredDerecha = Bodies.rectangle(
   window.innerWidth + 80,
   window.innerHeight / 2,
   160,
   1200,
   { isStatic: true } // Pared derecha
 );
-var roof = Bodies.rectangle(
+var techo = Bodies.rectangle(
   window.innerWidth / 2 + 160,
   -80,
   window.innerWidth + 320,
@@ -58,193 +58,260 @@ var border = 2; // Tamaño del borde
 var radius = 6; // Radio de redondeo de las esquinas
 
 // Crear objetos
-var illustration = Bodies.rectangle(200, 500, 190.99, 45, {
+var wordpress = Bodies.rectangle(200, 500, 190.99, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
       texture: "./recursos/skill-wordpress.svg", // Textura del sprite
-      xScale: 1, // Escala en X del sprite
-      yScale: 1, // Escala en Y del sprite
     },
   },
 });
-var art = Bodies.rectangle(35, 460, 56, 45, {
+var dsmax = Bodies.rectangle(35, 460, 154.8, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/adobe_acrobat.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-3dsMax.svg",
     },
   },
 });
-var threeD = Bodies.rectangle(90, 460, 52, 45, {
+var acrobat = Bodies.rectangle(90, 460, 239.99, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/after_effects.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-acrobat.svg",
     },
   },
 });
-var graphic = Bodies.rectangle(60, 420, 105, 45, {
+var aftereffects = Bodies.rectangle(60, 420, 289.84, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-afetEffects.svg",
     },
   },
 });
-var photo = Bodies.rectangle(50, 380, 86, 45, {
+var autocad = Bodies.rectangle(50, 380, 162.58, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-autocad.svg",
     },
   },
 });
 
 // Video
-var documentary = Bodies.rectangle(220, 540, 165, 45, {
+var blender = Bodies.rectangle(220, 540, 165, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-blender.svg",
     },
   },
 });
-var animation = Bodies.rectangle(200, 490, 128, 45, {
+var css = Bodies.rectangle(200, 490, 129.27, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-css.svg",
     },
   },
 });
-var vintage = Bodies.rectangle(190, 440, 104, 45, {
+var excel = Bodies.rectangle(190, 440, 243.01, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-excel.svg",
     },
   },
 });
-var short = Bodies.rectangle(170, 390, 82, 45, {
+var figma = Bodies.rectangle(170, 390, 130.77, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-figma.svg",
     },
   },
 });
-var website = Bodies.rectangle(360, 420, 108, 45, {
+var git = Bodies.rectangle(360, 420, 110.92, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-git.svg",
     },
   },
 });
-var article = Bodies.rectangle(300, 380, 92, 45, {
+var github = Bodies.rectangle(300, 380, 148.99, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-github.svg",
     },
   },
 });
-var music = Bodies.rectangle(400, 360, 86, 45, {
+var html = Bodies.rectangle(400, 360, 153.32, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-html.svg",
     },
   },
 });
-var star = Bodies.rectangle(80, 260, 42, 45, {
+var illustrator = Bodies.rectangle(80, 260, 261.99, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-illustrator.svg",
     },
   },
 });
-var about = Bodies.rectangle(230, 140, 87, 45, {
+var indesign = Bodies.rectangle(230, 140, 248, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-indesign.svg",
     },
   },
 });
-var instagram = Bodies.rectangle(320, 180, 40, 45, {
+var javascript = Bodies.rectangle(320, 180, 187.99, 45, {
   id: "instagramBody",
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-javascript.svg",
     },
   },
-  url: "https://www.instagram.com/fuse.blog/", // URL de Instagram
+  //url: "https://www.instagram.com/fuse.blog/", // URL de Instagram
 });
-var random = Bodies.rectangle(230, 180, 112, 45, {
+var lumion = Bodies.rectangle(230, 180, 149.41, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "/recursos/iconos-herramientas/autocad.svg",
-      xScale: 0.5,
-      yScale: 0.5,
+      texture: "./recursos/skill-lumion.svg",
+    },
+  },
+});
+var mysql = Bodies.rectangle(230, 180, 155.99, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-mysql.svg",
+    },
+  },
+});
+var node = Bodies.rectangle(230, 180, 127.48, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-node.svg",
+    },
+  },
+});
+var photoshop = Bodies.rectangle(230, 180, 273.99, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-photoshop.svg",
+    },
+  },
+});
+var postman = Bodies.rectangle(230, 180, 168, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-postman.svg",
+    },
+  },
+});
+var react = Bodies.rectangle(230, 180, 133.44, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-react.svg",
+    },
+  },
+});
+var revit = Bodies.rectangle(230, 180, 121.67, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-revit.svg",
+    },
+  },
+});
+var sketchup = Bodies.rectangle(230, 180, 175.5, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-sketchup.svg",
+    },
+  },
+});
+var twinmotion = Bodies.rectangle(230, 180, 206.98, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-twinmotion.svg",
+    },
+  },
+});
+var visualStudioCode = Bodies.rectangle(230, 180, 168, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-visualStudioCode.svg",
+    },
+  },
+});
+var webflow = Bodies.rectangle(230, 180, 169, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-webflow.svg",
+    },
+  },
+});
+var word = Bodies.rectangle(230, 180, 243.99, 45, {
+  chamfer: { radius: radius },
+  render: {
+    sprite: {
+      texture: "./recursos/skill-word.svg",
     },
   },
 });
 
 // Añadir todos los cuerpos al mundo
 World.add(engine.world, [
-  ground,
-  wallLeft,
-  wallRight,
-  roof,
-  illustration,
-  art,
-  threeD,
-  graphic,
-  photo,
-  documentary,
-  animation,
-  vintage,
-  short,
-  website,
-  article,
-  music,
-  star,
-  about,
-  instagram,
-  random,
+  suelo,
+  paredIzquierda,
+  paredDerecha,
+  techo,
+  wordpress,
+  dsmax,
+  acrobat,
+  aftereffects,
+  autocad,
+  blender,
+  css,
+  excel,
+  figma,
+  git,
+  github,
+  html,
+  illustrator,
+  indesign,
+  javascript,
+  lumion,
+  mysql,
+  node,
+  photoshop,
+  postman,
+  react,
+  revit,
+  sketchup,
+  twinmotion,
+  visualStudioCode,
+  webflow,
+  word,
 ]);
 
 // Añadir control del ratón
