@@ -170,18 +170,15 @@ document.addEventListener("DOMContentLoaded", function () {
 /////////Con las siguientesfunciones hago que aparezcan los controles de navegación en dispositivos tactiles
 document.addEventListener("DOMContentLoaded", function () {
   var iframeSkills = document.getElementById("iframeSkills");
-  var scrollArriba = document.querySelector(".scroll-arriba");
-  var scrollAbajo = document.querySelector(".scroll-abajo");
+  var scroll = document.querySelector(".scroll");
   var dispositivoTactil = "ontouchstart" in window || navigator.maxTouchPoints;
 
   // Función para mostrar u ocultar los botones de subir y bajar
   function mostrarOcultarBotones() {
     if (dispositivoTactil) {
-      scrollArriba.style.display = "block";
-      scrollAbajo.style.display = "block";
+      scroll.style.display = "block";
     } else {
-      scrollArriba.style.display = "none";
-      scrollAbajo.style.display = "none";
+      scroll.style.display = "none";
       iframeSkills.style.height = "100vh"; // Ajusta la altura del iframe al 100% de la ventana
     }
   }

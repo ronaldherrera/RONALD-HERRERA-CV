@@ -63,7 +63,7 @@ var baseScale = 1.0; // Escala base para pantallas medianas
 var scale;
 
 if (screenWidth <= 600) {
-  scale = baseScale * 0.7; // Reducir escala para pantallas pequeñas
+  scale = baseScale * 0.6; // Reducir escala para pantallas pequeñas
 } else if (screenWidth <= 1200) {
   scale = baseScale * 1; // Escala base para pantallas medianas
 } else {
