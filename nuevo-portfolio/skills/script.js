@@ -146,7 +146,7 @@ var chatgpt = Bodies.rectangle(190, 190, 184 * scale, 45 * scale, {
   frictionAir: friccion,
   restitution: elasticidad,
 });
-var skillsItem = Bodies.rectangle(530, 80, 256 * scale, 71 * scale, {
+var skillsItem = Bodies.rectangle(250, 80, 256 * scale, 71 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
