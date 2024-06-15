@@ -494,16 +494,16 @@ section{
 }
 .skills iframe{
     width: 100%; 
-    height: calc(100dvh - 130px);
+    height: calc(100dvh - 150px);
 }
 .skills .scroll-arriba{
     width: 100%;
-    height: 80px;
+    height: 100px;
     background-color: var(--blanco);
     display: flex; 
     justify-content: center; 
     align-items: center;
-    padding-top: 30px;
+    padding-top: 50px;
 }
 
 .skills .scroll-abajo{
