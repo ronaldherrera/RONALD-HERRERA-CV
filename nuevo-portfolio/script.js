@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
       scroll.style.display = "block";
     } else {
       scroll.style.display = "none";
-      iframeSkills.style.height = "100%"; // Ajusta la altura del iframe al 100% de la ventana
+      iframeSkills.style.height = "100vh"; // Ajusta la altura del iframe al 100% de la ventana
     }
   }
 
