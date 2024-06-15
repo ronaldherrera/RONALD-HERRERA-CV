@@ -134,31 +134,35 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", reloadIframe);
 });
 
-// Función para detectar si el dispositivo tiene pantalla táctil
-function esPantallaTactil() {
-  return "ontouchstart" in window || navigator.maxTouchPoints;
-}
-
-// Función para deshabilitar el desplazamiento en el iframe si es pantalla táctil
-function manejarDesplazamientoIframe() {
-  var iframeSkills = document.getElementById("iframeSkills");
-
-  // Verificar si es pantalla táctil
-  if (esPantallaTactil()) {
-    // Deshabilitar el desplazamiento en el iframe
-    iframeSkills.style.pointerEvents = "none";
-  } else {
-    // Permitir el desplazamiento en el iframe
-    iframeSkills.style.pointerEvents = "none";
-  }
-}
-
-// Llamar a la función al cargar la página
+/////////Conlas siguiente funciones hago que se bloquee el scroll cuando interactúo dentro del iframe de la seccion skills
 document.addEventListener("DOMContentLoaded", function () {
-  manejarDesplazamientoIframe();
-});
+  var iframeSkills = document.getElementById("iframeSkills");
+  var dispositivoTactil = "ontouchstart" in window || navigator.maxTouchPoints;
 
-// También escuchar cambios en el tamaño de la ventana (resoluciones cambiadas)
-window.addEventListener("resize", function () {
-  manejarDesplazamientoIframe();
+  // Función para deshabilitar el scroll de la página
+  function deshabilitarScrollPagina() {
+    document.body.style.overflow = "hidden";
+  }
+
+  // Función para habilitar el scroll de la página
+  function habilitarScrollPagina() {
+    document.body.style.overflow = "";
+  }
+
+  // Evento para detectar interacciones dentro del iframe
+  iframeSkills.addEventListener("touchstart", function () {
+    if (dispositivoTactil) {
+      deshabilitarScrollPagina();
+    }
+  });
+
+  // Evento para detectar cuando termina la interacción dentro del iframe
+  iframeSkills.addEventListener("touchend", function () {
+    habilitarScrollPagina();
+  });
+
+  // Evento adicional para asegurarse de habilitar el scroll si el usuario cancela la interacción
+  iframeSkills.addEventListener("touchcancel", function () {
+    habilitarScrollPagina();
+  });
 });
