@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", reloadIframe);
 });
 
-/////////Conlas siguiente funciones hago que se bloquee el scroll cuando interactúo dentro del iframe de la seccion skills
+/////////Con las siguiente funciones hago que se bloquee el scroll cuando interactúo dentro del iframe de la seccion skills
 document.addEventListener("DOMContentLoaded", function () {
   var iframeSkills = document.getElementById("iframeSkills");
   var dispositivoTactil = "ontouchstart" in window || navigator.maxTouchPoints;
@@ -164,5 +164,33 @@ document.addEventListener("DOMContentLoaded", function () {
   // Evento adicional para asegurarse de habilitar el scroll si el usuario cancela la interacción
   iframeSkills.addEventListener("touchcancel", function () {
     habilitarScrollPagina();
+  });
+});
+
+/////////Con las siguientesfunciones hago que aparezcan los controles de navegación en dispositivos tactiles
+document.addEventListener("DOMContentLoaded", function () {
+  var iframeSkills = document.getElementById("iframeSkills");
+  var scrollArriba = document.querySelector(".scroll-arriba");
+  var scrollAbajo = document.querySelector(".scroll-abajo");
+  var dispositivoTactil = "ontouchstart" in window || navigator.maxTouchPoints;
+
+  // Función para mostrar u ocultar los botones de subir y bajar
+  function mostrarOcultarBotones() {
+    if (dispositivoTactil) {
+      scrollArriba.style.display = "block";
+      scrollAbajo.style.display = "block";
+    } else {
+      scrollArriba.style.display = "none";
+      scrollAbajo.style.display = "none";
+      iframeSkills.style.height = "100vh"; // Ajusta la altura del iframe al 100% de la ventana
+    }
+  }
+
+  // Llamar a la función al cargar la página
+  mostrarOcultarBotones();
+
+  // Evento adicional para asegurarse de mostrar u ocultar los botones si el tamaño de la ventana cambia
+  window.addEventListener("resize", function () {
+    mostrarOcultarBotones();
   });
 });
