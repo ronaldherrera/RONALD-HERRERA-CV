@@ -503,7 +503,7 @@ section{
     display: flex; 
     justify-content: center; 
     align-items: center;
-    margin-top: 30px;
+    padding-top: 30px;
 }
 
 .skills .scroll-abajo{
