@@ -104,5 +104,32 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-////////////*funcion para cargar iframe de skills cuando la seccion sea visible/
+////////////FUNCION PARA CARGAR EL IFRAME CUANDO SEA VISIBLE LA SECCION SKILLS//
 /////
+
+//FINCION PARA CARGAR IFRAME CUANDO CAMBIE EL TAMAÑO DE LA VENTANA//
+document.addEventListener("DOMContentLoaded", function () {
+  const iframe = document.getElementById("iframeSkills");
+  const skillsSection = document.getElementById("skills");
+
+  const reloadIframe = () => {
+    iframe.src = iframe.src; // Forzar recarga del iframe
+  };
+
+  const loadIframeContent = () => {
+    iframe.src = "./skills/escritorio/index.html"; // Cambiar a la URL deseada
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        loadIframeContent();
+        observer.unobserve(entry.target); // Dejar de observar una vez cargado el contenido
+      }
+    });
+  });
+
+  observer.observe(skillsSection);
+
+  window.addEventListener("resize", reloadIframe);
+});

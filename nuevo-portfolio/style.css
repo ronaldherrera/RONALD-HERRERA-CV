@@ -245,6 +245,7 @@ div.puntoClaim{
     border-right: var(--amarillo) solid 1.5px;
     border-bottom: var(--amarillo) solid 1.5px;
     transition:  0.5s ease-in-out;
+    pointer-events: none;
 }
 
 .flecha-pie.focus{
@@ -484,98 +485,12 @@ section{
     box-shadow: 0px 0px 5px 0px #0000002c;
 }
 
-#matter-canvas {
-  position: absolute;
-  width: 100vh;
-  height: 100vh;
-  pointer-events: none; /* Dejar que los eventos de puntero pasen a través del canvas */
-  z-index: 0;
-}
-
-.techo, .suelo, .pared-izquierda, .pared-derecha {
-    position: absolute;
-    background-color: #333; /* Colores de ejemplo para techo, suelo y paredes */
-}
-
-.techo {
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px; /* Altura del techo */
-}
-
-.suelo {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px; /* Altura del suelo */
-}
-
-.pared-izquierda {
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 3px; /* Ancho de la pared izquierda */
-}
-
-.pared-derecha {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 3px; /* Ancho de la pared derecha */
-}
 
 .skills{
     padding: 0px;
     position: relative;
     overflow: hidden;
-}
-
-.lista-items {
-  margin-top: 20px;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  flex-flow: wrap;
-  grid-template-rows: auto auto auto auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-columns: 1fr;
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: flex;
-}
-
-.icono-habilidades {
-  z-index: 1;
-  width: 20px;
-  clear: none;
-  flex: 0 auto;
-  position: relative;
-}
-
-.cuerpo-item {
-  grid-column-gap: 4px;
-  grid-row-gap: 4px;
-  object-fit: fill;
-  border-radius: 5px;
-  justify-content: center;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  line-height: 30px;
-  display: flex;
-  position: relative;
-  box-shadow: 0 2px 9px rgba(0, 0, 0, .2);
-  margin-left: 5px;
-  margin-bottom: 5px;
-  background-color: #dad7d0;
-}
-
-.texto-habilidades {
-  font-family: "Brother", Arial, sans-serif;
-  z-index: 1;
-  white-space: nowrap;
-  font-weight: 600;
-  position: relative;
+    background-color: var(--negro);
 }
 
 .sobre-mi{
@@ -738,6 +653,8 @@ section{
 }
 
 @media screen and (max-width: 500px){
+
+
     .hero h2{
     font-size: 3em;
     }
