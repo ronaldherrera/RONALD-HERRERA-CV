@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const loadIframeContent = () => {
-    iframe.src = "./skills/escritorio/index.html"; // Cambiar a la URL deseada
+    iframe.src = "./skills/index.html"; // Cambiar a la URL deseada
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -132,4 +132,33 @@ document.addEventListener("DOMContentLoaded", function () {
   observer.observe(skillsSection);
 
   window.addEventListener("resize", reloadIframe);
+});
+
+// Función para detectar si el dispositivo tiene pantalla táctil
+function esPantallaTactil() {
+  return "ontouchstart" in window || navigator.maxTouchPoints;
+}
+
+// Función para deshabilitar el desplazamiento en el iframe si es pantalla táctil
+function manejarDesplazamientoIframe() {
+  var iframeSkills = document.getElementById("iframeSkills");
+
+  // Verificar si es pantalla táctil
+  if (esPantallaTactil()) {
+    // Deshabilitar el desplazamiento en el iframe
+    iframeSkills.style.pointerEvents = "none";
+  } else {
+    // Permitir el desplazamiento en el iframe
+    iframeSkills.style.pointerEvents = "none";
+  }
+}
+
+// Llamar a la función al cargar la página
+document.addEventListener("DOMContentLoaded", function () {
+  manejarDesplazamientoIframe();
+});
+
+// También escuchar cambios en el tamaño de la ventana (resoluciones cambiadas)
+window.addEventListener("resize", function () {
+  manejarDesplazamientoIframe();
 });

@@ -78,7 +78,7 @@ var skillFeliz = Bodies.rectangle(310, 500, 52 * scale, 52 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-feliz.svg",
+      texture: "./recursos/skill-feliz.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -90,7 +90,7 @@ var skillCerebro = Bodies.rectangle(230, 80, 52 * scale, 52 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-cerebro.svg",
+      texture: "./recursos/skill-cerebro.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -102,7 +102,7 @@ var skillDiversion = Bodies.rectangle(310, 280, 52 * scale, 52 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-diversion.svg",
+      texture: "./recursos/skill-diversion.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -114,7 +114,7 @@ var skillCorazon = Bodies.rectangle(390, 180, 52 * scale, 52 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-corazon.svg",
+      texture: "./recursos/skill-corazon.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -126,7 +126,7 @@ var skillAvatar = Bodies.rectangle(330, 0, 148 * scale, 148 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-avatar.svg",
+      texture: "./recursos/skill-avatar.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -138,7 +138,7 @@ var chatgpt = Bodies.rectangle(190, 190, 184 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-chatgpt.svg",
+      texture: "./recursos/skill-chatgpt.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -150,7 +150,7 @@ var skillsItem = Bodies.rectangle(530, 80, 256 * scale, 71 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skills.svg",
+      texture: "./recursos/skills.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -162,7 +162,7 @@ var wordpress = Bodies.rectangle(200, 500, 190.99 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-wordpress.svg", // Textura del sprite
+      texture: "./recursos/skill-wordpress.svg", // Textura del sprite
       xScale: scale,
       yScale: scale,
     },
@@ -174,7 +174,7 @@ var dsmax = Bodies.rectangle(35, 460, 154.8 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-3dsMax.svg",
+      texture: "./recursos/skill-3dsMax.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -186,7 +186,7 @@ var acrobat = Bodies.rectangle(90, 460, 239.99 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-acrobat.svg",
+      texture: "./recursos/skill-acrobat.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -198,7 +198,7 @@ var aftereffects = Bodies.rectangle(60, 420, 289.84 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-afetEffects.svg",
+      texture: "./recursos/skill-afetEffects.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -210,7 +210,7 @@ var autocad = Bodies.rectangle(50, 380, 162.58 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-autocad.svg",
+      texture: "./recursos/skill-autocad.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -222,7 +222,7 @@ var blender = Bodies.rectangle(220, 540, 165 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-blender.svg",
+      texture: "./recursos/skill-blender.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -234,7 +234,7 @@ var css = Bodies.rectangle(200, 490, 129.27 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-css.svg",
+      texture: "./recursos/skill-css.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -246,7 +246,7 @@ var excel = Bodies.rectangle(190, 440, 243.01 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-excel.svg",
+      texture: "./recursos/skill-excel.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -258,7 +258,7 @@ var figma = Bodies.rectangle(170, 390, 130.77 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-figma.svg",
+      texture: "./recursos/skill-figma.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -270,7 +270,7 @@ var git = Bodies.rectangle(360, 420, 110.92 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-git.svg",
+      texture: "./recursos/skill-git.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -282,7 +282,7 @@ var github = Bodies.rectangle(300, 380, 148.99 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-github.svg",
+      texture: "./recursos/skill-github.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -294,7 +294,7 @@ var html = Bodies.rectangle(400, 360, 153.32 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-html.svg",
+      texture: "./recursos/skill-html.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -306,7 +306,7 @@ var illustrator = Bodies.rectangle(80, 260, 261.99 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-illustrator.svg",
+      texture: "./recursos/skill-illustrator.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -318,7 +318,7 @@ var indesign = Bodies.rectangle(230, 140, 248 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-indesign.svg",
+      texture: "./recursos/skill-indesign.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -331,7 +331,7 @@ var javascript = Bodies.rectangle(320, 180, 187.99 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-javascript.svg",
+      texture: "./recursos/skill-javascript.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -343,7 +343,7 @@ var lumion = Bodies.rectangle(230, 180, 149.41 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-lumion.svg",
+      texture: "./recursos/skill-lumion.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -355,7 +355,7 @@ var mysql = Bodies.rectangle(230, 180, 155.99 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-mysql.svg",
+      texture: "./recursos/skill-mysql.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -367,7 +367,7 @@ var notion = Bodies.rectangle(230, 180, 146 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-notion.svg",
+      texture: "./recursos/skill-notion.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -379,7 +379,7 @@ var node = Bodies.rectangle(230, 180, 127.48 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-node.svg",
+      texture: "./recursos/skill-node.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -391,7 +391,7 @@ var photoshop = Bodies.rectangle(230, 180, 273.99 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-photoshop.svg",
+      texture: "./recursos/skill-photoshop.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -403,7 +403,7 @@ var postman = Bodies.rectangle(230, 180, 168 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-postman.svg",
+      texture: "./recursos/skill-postman.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -415,7 +415,7 @@ var react = Bodies.rectangle(230, 180, 133.44 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-react.svg",
+      texture: "./recursos/skill-react.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -427,7 +427,7 @@ var revit = Bodies.rectangle(230, 180, 121.67, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-revit.svg",
+      texture: "./recursos/skill-revit.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -439,7 +439,7 @@ var sketchup = Bodies.rectangle(230, 180, 175.5, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-sketchup.svg",
+      texture: "./recursos/skill-sketchup.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -451,7 +451,7 @@ var twinmotion = Bodies.rectangle(230, 180, 206.98, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-twinmotion.svg",
+      texture: "./recursos/skill-twinmotion.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -463,7 +463,7 @@ var visualStudioCode = Bodies.rectangle(230, 180, 168, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-visualStudioCode.svg",
+      texture: "./recursos/skill-visualStudioCode.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -475,7 +475,7 @@ var webflow = Bodies.rectangle(230, 180, 169, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-webflow.svg",
+      texture: "./recursos/skill-webflow.svg",
       xScale: scale,
       yScale: scale,
     },
@@ -487,7 +487,7 @@ var word = Bodies.rectangle(230, 180, 243.99, 45, {
   chamfer: { radius: radius },
   render: {
     sprite: {
-      texture: "../recursos/skill-word.svg",
+      texture: "./recursos/skill-word.svg",
       xScale: scale,
       yScale: scale,
     },
