@@ -423,7 +423,7 @@ var react = Bodies.rectangle(230, 180, 133.44 * scale, 45 * scale, {
   frictionAir: friccion,
   restitution: elasticidad,
 });
-var revit = Bodies.rectangle(230, 180, 121.67, 45, {
+var revit = Bodies.rectangle(230, 180, 121.67 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
@@ -435,7 +435,7 @@ var revit = Bodies.rectangle(230, 180, 121.67, 45, {
   frictionAir: friccion,
   restitution: elasticidad,
 });
-var sketchup = Bodies.rectangle(230, 180, 175.5, 45, {
+var sketchup = Bodies.rectangle(230, 180, 175.5 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
@@ -447,7 +447,7 @@ var sketchup = Bodies.rectangle(230, 180, 175.5, 45, {
   frictionAir: friccion,
   restitution: elasticidad,
 });
-var twinmotion = Bodies.rectangle(230, 180, 206.98, 45, {
+var twinmotion = Bodies.rectangle(230, 180, 206.98 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
@@ -459,7 +459,7 @@ var twinmotion = Bodies.rectangle(230, 180, 206.98, 45, {
   frictionAir: friccion,
   restitution: elasticidad,
 });
-var visualStudioCode = Bodies.rectangle(230, 180, 168, 45, {
+var visualStudioCode = Bodies.rectangle(230, 180, 168 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
@@ -471,7 +471,7 @@ var visualStudioCode = Bodies.rectangle(230, 180, 168, 45, {
   frictionAir: friccion,
   restitution: elasticidad,
 });
-var webflow = Bodies.rectangle(230, 180, 169, 45, {
+var webflow = Bodies.rectangle(230, 180, 169 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
@@ -483,7 +483,7 @@ var webflow = Bodies.rectangle(230, 180, 169, 45, {
   frictionAir: friccion,
   restitution: elasticidad,
 });
-var word = Bodies.rectangle(230, 180, 243.99, 45, {
+var word = Bodies.rectangle(230, 180, 243.99 * scale, 45 * scale, {
   chamfer: { radius: radius },
   render: {
     sprite: {
