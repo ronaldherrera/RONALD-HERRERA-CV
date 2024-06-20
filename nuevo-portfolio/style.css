@@ -458,10 +458,6 @@ section{
 }
 
 
-
-
-
-
 @media (min-aspect-ratio: 1/1) {
     .claim .horizontal {
         display: block;
@@ -471,7 +467,7 @@ section{
         object-position: center; 
     }
     .claim .vertical {
-    display: none;
+    
     }
 }
 
