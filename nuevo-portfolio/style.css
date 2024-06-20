@@ -460,23 +460,29 @@ section{
 
 .claim .horizontal {
     display: none;
-    height: 100%;
     }
 
 .claim .vertical {
     display: none;
-    width: 100%;
     }
 
 @media (min-aspect-ratio: 1/1) {
     .claim .horizontal {
         display: block;
+        height: 100%;
+        width: 100%; 
+        object-fit: cover;
+        object-position: center; 
     }
 }
 
 @media (max-aspect-ratio: 1/1) {
     .claim .vertical {
         display: block;
+        height: 100%;
+        width: 100%; 
+        object-fit: cover;
+        object-position: center; 
     }
 }
 
