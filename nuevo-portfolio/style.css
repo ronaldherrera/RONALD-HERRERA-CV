@@ -467,7 +467,7 @@ section{
         object-position: center; 
     }
     .claim .vertical {
-    
+    display: none;
     }
 }
 
