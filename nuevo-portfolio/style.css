@@ -457,7 +457,13 @@ section{
     overflow: hidden;
 }
 
-
+.claim video{
+    display: block;
+        height: 100%;
+        width: 100%; 
+        object-fit: cover;
+        object-position: center; 
+}
 @media (min-aspect-ratio: 1/1) {
     .claim .horizontal {
         display: block;
@@ -474,8 +480,8 @@ section{
 @media (max-aspect-ratio: 1/1) {
     .claim .vertical {
         display: block;
-        
-        width: 100px; 
+        height: 100%;
+        width: 100%; 
         object-fit: cover;
         object-position: center; 
     }
