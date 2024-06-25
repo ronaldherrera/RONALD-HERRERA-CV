@@ -474,8 +474,8 @@ section{
 @media (max-aspect-ratio: 1/1) {
     .claim .vertical {
         display: block;
-        height: 100%;
-        width: 100%; 
+        
+        width: 100px; 
         object-fit: cover;
         object-position: center; 
     }
