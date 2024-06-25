@@ -176,6 +176,7 @@ p {
 
 body{
     overflow: hidden;
+    background-color: var(--negro);
 }
 
 .nav-var-scroll{
