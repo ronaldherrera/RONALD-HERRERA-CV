@@ -468,12 +468,13 @@ section{
 
 @media (min-aspect-ratio: 1/1) {
     .claim .horizontal {
+        position: absolute;
         display: block;
         height: 100%;
         width: 100%; 
         object-fit: cover;
         object-position: center; 
-        pointer-events: none;
+        z-index: 1;
     }
     .claim .vertical {
     display: none;
@@ -482,12 +483,13 @@ section{
 
 @media (max-aspect-ratio: 1/1) {
     .claim .vertical {
+        position: absolute;
         display: block;
         height: 100%;
         width: 100%; 
         object-fit: cover;
         object-position: center; 
-        pointer-events: none;
+        z-index: 1;
     }
     .claim .horizontal {
     display: none;
