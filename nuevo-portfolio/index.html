@@ -455,6 +455,52 @@
       </section>
       <section class="contacto" id="contacto">
         <h1>contacto</h1>
+        <div class="feedback">
+          <div class="form-block">
+            <form
+              id="home-feedback"
+              name="home-feedback"
+              data-name="feedback"
+              method="post"
+              action="Envio-feedback.php"
+              class="form"
+            >
+              <label for="imput-home" class="field-label"
+                >¡Ayúdame a mejorar!</label
+              >
+              <textarea
+                id="imput-home"
+                name="imput-home"
+                maxlength="5000"
+                data-name="imput-home"
+                placeholder="¿Qué te parece mi sitio web? Deja aquí tu comentario para ayudarme a mejorar."
+                required=""
+                class="textarea"
+              ></textarea>
+              <input
+                type="submit"
+                data-wait="Espera un momento..."
+                class="submit-button"
+                value="Enviar feedback"
+              />
+            </form>
+            <div
+              id="success-message"
+              class="success-message"
+              style="display: none"
+            >
+              <div class="text-block-10">
+                ¡Gracias! Tu comentario me ayudará a mejorar, lo tendré en
+                cuenta para mi próxima versión del sitio.
+              </div>
+            </div>
+            <div id="error-message" class="error-message" style="display: none">
+              <div class="text-block-9">
+                ¡Oops! Algo ha ido mal, vuelve a intentarlo más tarde.
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </body>
