@@ -214,6 +214,128 @@
       <div class="flecha-pie" id="contactoF"></div>
     </nav>
     <main id="main">
+      <section class="contacto" id="contacto">
+        <h1>¡Contáctame!</h1>
+        <p class="p-contacto">
+          ¿Tienes algún proyecto emocionante en mente? ¡Cuéntamelo!
+          <span
+            >Estoy abierto a nuevas oportunidades laborales y proyectos
+            serios</span
+          >. ¡Vamos, déjame saber qué tienes en mente y hagamos algo grandioso
+          juntos!
+        </p>
+        <div class="link-telefono">
+          <a href="tel:+34617987372" class="enlace-contacto"
+            ><img
+              src="/recursos/iconos/telefono.svg"
+              loading="lazy"
+              alt=""
+              class="iconos-contacto"
+            />+34 671 987 372</a
+          >
+        </div>
+        <div class="link-mail">
+          <a href="mailto:hola@ronaldherrera.es" class="enlace-contacto"
+            ><img
+              src="/recursos/iconos/e-mail.svg"
+              loading="lazy"
+              alt=""
+              class="iconos-contacto"
+            />hola@ronaldherrera.es</a
+          >
+        </div>
+        <div class="redes">
+          <a
+            href="https://www.linkedin.com/in/ronald-sc-herrera/"
+            target="_blank"
+            class="link-linkedin w-inline-block"
+            ><img
+              src="/recursos/iconos/Linkedin.svg"
+              loading="lazy"
+              alt=""
+              class="icono-redes" /></a
+          ><a
+            href="https://www.instagram.com/artfulron/"
+            target="_blank"
+            class="link-linstagram w-inline-block"
+            ><img
+              src="/recursos/iconos/Instagram.svg"
+              loading="lazy"
+              alt=""
+              class="icono-redes" /></a
+          ><a
+            href="https://www.behance.net/ronald-herrera"
+            target="_blank"
+            class="link-behance w-inline-block"
+            ><img
+              src="/recursos/iconos/Behance.svg"
+              loading="lazy"
+              alt=""
+              class="icono-redes" /></a
+          ><a
+            href="https://github.com/ronaldherrera"
+            target="_blank"
+            class="link-github w-inline-block"
+            ><img
+              src="/recursos/iconos/github.svg"
+              loading="lazy"
+              alt=""
+              class="icono-redes"
+          /></a>
+        </div>
+        <div class="feedback">
+          <div class="form-block">
+            <form
+              id="home-feedback"
+              name="home-feedback"
+              data-name="feedback"
+              method="post"
+              action="Envio-feedback.php"
+              class="form"
+            >
+              <label for="imput-home" class="field-label"
+                >¡Ayúdame a mejorar!</label
+              >
+              <textarea
+                id="imput-home"
+                name="imput-home"
+                maxlength="5000"
+                data-name="imput-home"
+                placeholder="¿Qué te parece mi sitio web? Deja aquí tu comentario para ayudarme a mejorar."
+                required=""
+                class="textarea"
+              ></textarea>
+              <input
+                type="submit"
+                data-wait="Espera un momento..."
+                class="submit-button"
+                value="Enviar feedback"
+              />
+            </form>
+            <div
+              id="success-message"
+              class="success-message"
+              style="display: none"
+            >
+              <div class="text-block-10">
+                ¡Gracias! Tu comentario me ayudará a mejorar, lo tendré en
+                cuenta para mi próxima versión del sitio.
+              </div>
+            </div>
+            <div id="error-message" class="error-message" style="display: none">
+              <div class="text-block-9">
+                ¡Oops! Algo ha ido mal, vuelve a intentarlo más tarde.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="creditos">
+          <p>By Ronald Herrera <sup>©</sup></p>
+          <p style="padding-top: 5px">
+            Todos los derechos reservados (2024-2025)
+          </p>
+        </div>
+      </section>
       <section class="hero" id="hero">
         <div class="estatica-fondo-oscuro"></div>
         <h2>
@@ -452,55 +574,6 @@
       </section>
       <section class="sobre-mi" id="sobre-mi">
         <h1>sobre-mi</h1>
-      </section>
-      <section class="contacto" id="contacto">
-        <h1>contacto</h1>
-        <div class="feedback">
-          <div class="form-block">
-            <form
-              id="home-feedback"
-              name="home-feedback"
-              data-name="feedback"
-              method="post"
-              action="Envio-feedback.php"
-              class="form"
-            >
-              <label for="imput-home" class="field-label"
-                >¡Ayúdame a mejorar!</label
-              >
-              <textarea
-                id="imput-home"
-                name="imput-home"
-                maxlength="5000"
-                data-name="imput-home"
-                placeholder="¿Qué te parece mi sitio web? Deja aquí tu comentario para ayudarme a mejorar."
-                required=""
-                class="textarea"
-              ></textarea>
-              <input
-                type="submit"
-                data-wait="Espera un momento..."
-                class="submit-button"
-                value="Enviar feedback"
-              />
-            </form>
-            <div
-              id="success-message"
-              class="success-message"
-              style="display: none"
-            >
-              <div class="text-block-10">
-                ¡Gracias! Tu comentario me ayudará a mejorar, lo tendré en
-                cuenta para mi próxima versión del sitio.
-              </div>
-            </div>
-            <div id="error-message" class="error-message" style="display: none">
-              <div class="text-block-9">
-                ¡Oops! Algo ha ido mal, vuelve a intentarlo más tarde.
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
     </main>
   </body>

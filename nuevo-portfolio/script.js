@@ -192,8 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-///////////////////
-
+///////////////////Envio de feedback
 document
   .getElementById("home-feedback")
   .addEventListener("submit", function (event) {
