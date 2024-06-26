@@ -474,7 +474,7 @@ section{
         width: 100%; 
         object-fit: cover;
         object-position: center; 
-        z-index: 1;
+        
     }
     .claim .vertical {
     display: none;
@@ -489,7 +489,7 @@ section{
         width: 100%; 
         object-fit: cover;
         object-position: center; 
-        z-index: 1;
+        
     }
     .claim .horizontal {
     display: none;
