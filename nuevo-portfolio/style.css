@@ -469,7 +469,7 @@ section{
 
 @media (min-aspect-ratio: 1/0.95) {
     .claim .horizontal {
-        position: absolute;
+        position: relative;
         display: block;
         height: 100%;
         width: 100%; 
@@ -484,7 +484,7 @@ section{
 
 @media (max-aspect-ratio: 1/0.95) {
     .claim .vertical {
-        position: absolute;
+        position: relative;
         display: block;
         height: 100%;
         width: 100%; 
