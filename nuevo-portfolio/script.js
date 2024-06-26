@@ -193,37 +193,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 ///////////////////
-document
-  .getElementById("home-feedback")
-  .addEventListener("submit", function (event) {
-    // Detiene el envío predeterminado del formulario
-    event.preventDefault();
-
-    // Obtener el valor del textarea
-    var mensaje = document.getElementById("imput-home").value;
-
-    // Realiza una solicitud AJAX al servidor
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "Envio-feedback.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    // Maneja la respuesta del servidor
-    xhr.onload = function () {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        // Si la respuesta del servidor es exitosa, muestra el mensaje de éxito y oculta el mensaje de error
-        var response = JSON.parse(xhr.responseText);
-        if (response.status === "success") {
-          document.getElementById("success-message").style.display = "block";
-          document.getElementById("error-message").style.display = "none";
-          document.getElementById("imput-home").value = "";
-        } else {
-          // Si la respuesta del servidor indica un error, muestra el mensaje de error y oculta el mensaje de éxito
-          document.getElementById("error-message").style.display = "block";
-          document.getElementById("success-message").style.display = "none";
-        }
-      }
-    };
-
-    // Envía los datos del formulario al servidor
-    xhr.send("imput-home=" + encodeURIComponent(mensaje));
-  });
