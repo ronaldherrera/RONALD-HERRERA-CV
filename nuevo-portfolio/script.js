@@ -167,6 +167,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+/////////Autopara video del claim
+document.addEventListener("DOMContentLoaded", (event) => {
+  const video = document.getElementById("videoClaim");
+  video.play().catch((error) => {
+    console.error("Error attempting to play video:", error);
+  });
+});
+
 /////////Con las siguientesfunciones hago que aparezcan los controles de navegación en dispositivos tactiles
 document.addEventListener("DOMContentLoaded", function () {
   var iframeSkills = document.getElementById("iframeSkills");
