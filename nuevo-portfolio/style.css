@@ -458,14 +458,14 @@ section{
     overflow: hidden;
 }
 
-.claim .video-overlay {
+/* .claim .video-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 2;
-    }
+    } */
 
 @media (min-aspect-ratio: 1/0.95) {
     .claim .horizontal {
@@ -475,7 +475,7 @@ section{
         width: 100%; 
         object-fit: cover;
         object-position: center; 
-        z-index: 1;
+        pointer-events: none;
     }
     .claim .vertical {
     display: none;
@@ -490,7 +490,7 @@ section{
         width: 100%; 
         object-fit: cover;
         object-position: center; 
-        z-index: 1;
+        pointer-events: none;
     }
     .claim .horizontal {
     display: none;
