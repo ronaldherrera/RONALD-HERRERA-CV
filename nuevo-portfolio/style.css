@@ -585,6 +585,109 @@ a.scroll {
 }
 
 
+.feedback {
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 0;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.form-block {
+  background-color: var(--blanco);
+  box-shadow: -13px 11px 30px -20px var(--blanco);
+  border-radius: 13px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 0;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.form {
+  z-index: 1;
+  background-color: var(--trasparente);
+  
+  border-radius: 6px;
+  padding: 10px 31px;
+  position: relative;
+  overflow: visible;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  display: block;
+}
+
+.field-label {
+  text-align: center;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+.textarea {
+  min-height: 75px;
+  max-width: 100%;
+  min-width: 100%;
+  margin-bottom: 25px;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+.submit-button {
+  width: 150px;
+  height: 40px;
+  border: 2px solid var(--negro);
+  background-color: var(--negro);
+  color: var(--blanco);
+  border-radius: 20px;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  font-weight: 800;
+  line-height: 10px;
+  transition: all .3s cubic-bezier(.645, .045, .355, 1);
+  display: block;
+  position: static;
+  box-shadow: 8px 3px 6px -1px rgba(0, 0, 0, .2);
+}
+
+.submit-button:hover {
+  background-color: var(--trasparente);
+  box-shadow: none;
+  color: var(--negro);
+  border-style: solid;
+}
+
+.text-block-10, .text-block-9 {
+  color: var(--negro);
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.success-message {
+  height: 100%;
+  background-color: #a2dda4;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 10px;
+}
+
+.error-message {
+  background-color: #e9afaf;
+  padding: 10px;
+}
+
 
 
 /**/
