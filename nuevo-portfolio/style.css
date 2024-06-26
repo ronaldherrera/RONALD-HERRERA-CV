@@ -466,7 +466,7 @@ section{
       height: 100%;
     }
 
-@media (min-aspect-ratio: 1/1) {
+@media (min-aspect-ratio: 1/0.95) {
     .claim .horizontal {
         position: absolute;
         display: block;
@@ -481,7 +481,7 @@ section{
     }
 }
 
-@media (max-aspect-ratio: 1/1) {
+@media (max-aspect-ratio: 1/0.95) {
     .claim .vertical {
         position: absolute;
         display: block;
@@ -503,6 +503,7 @@ section{
     justify-content: center;
     align-items: center;
     gap: 20px;
+    padding-right: 20px;
 }
 
 .proyectos h3{
