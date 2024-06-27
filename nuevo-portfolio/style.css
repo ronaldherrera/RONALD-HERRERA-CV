@@ -508,6 +508,7 @@ section{
     align-items: center;
     gap: 20px;
     padding-right: 20px;
+    color: var(--negro);
 }
 
 .proyectos h3{
@@ -582,7 +583,59 @@ a.scroll {
 
 .sobre-mi{
     background-color: var(--azul);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--negro);
+    overflow: hidden;
+    padding-right: 20px;
 }
+
+.sobre-mi img{
+    width: 50%;
+    max-width: 900px;
+    max-height: 900px;
+    filter: saturate(151%);
+}
+
+.sobre-mi .contenido{
+    max-width: 600px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.sobre-mi p{
+    font-weight: 400;
+    
+}
+.sobre-mi span{
+    font-weight: 600;
+}
+
+.cara-sol {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+}
+
+.sol {
+    width: 600px; /* Reemplaza $main-width por el valor deseado */
+    height: 600px; /* Reemplaza $main-height por el valor deseado */
+    border-radius: 50%;
+    background: #d89f04; /* Reemplaza $face por el color deseado */
+    box-shadow: inset 2px -4px 18px rgba(0, 0, 0, 0.199);
+    position: absolute;
+    top: -200px;
+    left: -200px;
+   
+}
+
+
 .contacto{
     background-color: var(--negro);
     padding-right: 20px;
@@ -784,6 +837,23 @@ label {
 
 /**/
 @media screen and (max-width: 900px){
+    .sol{
+        width: 300px;
+        height: 300px;
+        top: -100px;
+        left: -100px;
+    }
+    .sobre-mi img{
+        top: 70px;
+        position: absolute;
+        right: 20px;
+        height: auto;
+        width: 60%;
+    }
+    .sobre-mi{
+    flex-direction: column-reverse;   
+        align-items: flex-start;
+    }
     .hero h2{
     font-size: 4em;
 }
@@ -800,6 +870,12 @@ label {
 }
 
 @media screen and (max-width: 700px) {
+    .sol{
+        width: 200px;
+        height: 200px;
+        top: -50px;
+        left: -50px;
+    }
     .avatar-hero{
         width: 65%;
     }
@@ -932,7 +1008,12 @@ label {
 }
 
 @media screen and (max-width: 500px){
-
+    .sol{
+        width: 100px;
+        height: 100px;
+        top: 40px;
+        left: 20px;
+    }
 
     .hero h2{
     font-size: 3em;
