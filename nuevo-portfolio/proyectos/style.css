@@ -505,7 +505,7 @@ p.caracteristicas{
     font-style: normal;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
     h1{
         font-size: 4em;
     }
@@ -563,7 +563,7 @@ p.caracteristicas{
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     h1{
         font-size: 3em;
     }
@@ -621,7 +621,7 @@ p.caracteristicas{
     }
 }
 
-@media screen and (max-width: 428px) {
+@media screen and (max-width: 600px) {
     h1{
         font-size: 3em;
     }
