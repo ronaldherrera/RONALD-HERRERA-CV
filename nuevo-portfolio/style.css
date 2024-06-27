@@ -317,6 +317,15 @@ nav a.activo{
     fill: var(--naranja);
     opacity: 0;
     animation: entrada-suave-arriba .5s ease .5s 1 normal forwards;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+}
+
+.boton-descarga svg:hover{
+    height: 25px;
+    fill: var(--amarillo);
+    opacity: 0;
+    animation: entrada-suave-arriba .5s ease .5s 1 normal forwards;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
 }
 
 
@@ -435,6 +444,7 @@ section{
     animation: entrada 1s ease 1s 1 normal forwards;
 }
 .rrss-container svg{
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
     height: 50px;
     transition: all ease-in-out .2s;
     border: solid 2px var(--blanco);
@@ -445,6 +455,7 @@ section{
 }   
 
 .rrss-container svg:hover{
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
     border-radius: 50%;
     border: solid 2px var(--trasparente);
     .cls-1{fill:var(--negro);}
@@ -526,14 +537,27 @@ section{
     text-align: center;
 }
 
-.proyectos svg{
-    fill: var(--negro);
+.proyectos a{
+    background-color: var(--negro);
     height: 50px;
+    color: var(--blanco);
+    border: solid 2px var(--negro);
+    font-family: "Brother", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 7px 30px;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
 }
-.proyectos svg:hover{
-    fill: var(--amarillo);
-    transition: 0.3s ease-in-out;
-    box-shadow: 0px 0px 5px 0px #0000002c;
+.proyectos span{
+    font-weight: 400;
+    font-style: italic;
+}
+.proyectos a:hover{
+    background-color: var(--blanco);
+    color: var(--negro);
+    border: solid 2px var(--negro);
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    
 }
 
 
@@ -624,10 +648,10 @@ a.scroll {
 }
 
 .sol {
-    width: 600px; /* Reemplaza $main-width por el valor deseado */
-    height: 600px; /* Reemplaza $main-height por el valor deseado */
+    width: 600px; 
+    height: 600px; 
     border-radius: 50%;
-    background: #d89f04; /* Reemplaza $face por el color deseado */
+    background: #d89f04;
     box-shadow: inset 2px -4px 18px rgba(0, 0, 0, 0.199);
     position: absolute;
     top: -200px;
@@ -778,7 +802,7 @@ label {
     border: 2px solid var(--negro);
     background-color: var(--negro);
     color: var(--blanco);
-    
+    font-family: "Brother", Arial, sans-serif;
     flex-flow: row;
     justify-content: center;
     align-items: center;
@@ -786,6 +810,7 @@ label {
     margin-right: auto;
     padding: 0;
     font-weight: 800;
+    font-style: italic;
     line-height: 10px;
     transition: all .3s cubic-bezier(.645, .045, .355, 1);
     display: block;

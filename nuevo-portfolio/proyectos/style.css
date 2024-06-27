@@ -136,6 +136,16 @@ section{
     /*box-shadow: 0px 70px 57px -20px var(--negro) inset;*/
 }
 
+.disenio-grafico{
+    background-color: var(--amarillo);
+}
+.ux-ui{
+    background-color: var(--naranja);
+}
+.desarrollador{
+    background-color: var(--azul);
+}
+
 .nombre-proyecto.uno {
     background-color: var(--negro);
 }
@@ -245,6 +255,7 @@ nav .var{
     height: 20px;
     mix-blend-mode: difference;
     z-index: 15;
+    
 }
 
 .titulo-portada{
@@ -253,8 +264,9 @@ nav .var{
     left: 0px;
     padding: 14px;
     margin-right: 40px;
-    
-    
+    color: var(--amarillo);
+    mix-blend-mode: difference;
+    z-index: 10;
 }
 
 .contenido-portada{
@@ -275,51 +287,148 @@ nav .var{
     width: 220px;
     font-size: 1em;
     align-items: center; 
+    mix-blend-mode: difference;
 }
 
 
 p.caracteristicas{
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     font-weight: 600;
-    color: #000000;
+    color: var(--amarillo);
 }
 
-.fondo-portada{
-    height: 100%;
-    width: 100%;
+.portada{
+    width: 40%;
+    max-width: 500px;
+    min-width: 150px;
     display: flex;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
+    align-items: center;
+    position: relative;     
 }
 
-.fondo-portada img{
-    height: 100%;
-    width: 100%; 
-    object-fit: cover;
-    object-position: center; 
+.portada img{
+    display: block;
+    width: 100%;
+}
+
+.portada div{
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px 1px #0000003b;
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+}
+
+.portada .primera{
+    width: 100%;
+    z-index: 1;
+    
+}
+.portada .segunda{
+    box-shadow: 0px 0px 7px 1px #00000059;
+    z-index: 2;
+    width: 60%;
+    max-width: 250px;
+    min-width: 100px;
+    top: -30px;
+    left: -100px;
+
+}
+.portada .tercera{
+    box-shadow: 0px 0px 7px 1px #00000059;
+    z-index: 2;
+    width: 60%;
+    max-width: 350px;
+    min-width: 150px;
+    bottom: 50px;
+    right: -250px;
+}
+.portada .cuarta{
+    box-shadow: 0px 0px 7px 1px #00000059;
+    z-index: 1;
+    width: 60%;
+    max-width: 350px;
+    min-width: 80px;
+    top: -40px;
+    right: -380px;
+    
+}
+.portada .quinta{
+    box-shadow: 0px 0px 7px 1px #00000059;
+    z-index: 2;
+    width: 50%;
+    max-width: 350px;
+    min-width: 100px;
+    bottom: -40px;
+    left: -220px;
+    
+}
+.portada .primer-icono{
+    top: 80px;
+    left: -60px;
+    width: 50px;
+    height: 50px;
+    z-index: 0;
+    border-radius: 0px;
+    box-shadow: none;
+    
+}
+.portada .segundo-icono{
+    top: 150px;
+    left: -60px;
+    width: 50px;
+    height: 50px;
+    z-index: 0;
+    border-radius: 0px;
+    box-shadow: none;
+}
+.portada .tercero-icono{
+    top: 220px;
+    left: -60px;
+    width: 50px;
+    height: 50px;
+    z-index: 0;
+    border-radius: 0px;
+    box-shadow: none;
+}
+.portada .cuarto-icono{
+    top: 290px;
+    left: -60px;
+    width: 50px;
+    height: 50px;
+    z-index: 0;
+    border-radius: 0px;
+    box-shadow: none;
 }
 .contenido-portada button{
-    background-color: var(--trasparente);
+    background-color: var(--amarillo);
+    padding: 10px 30px;
+    font-size: 2rem;
     border: none;
     cursor: pointer;
+    mix-blend-mode: difference;
+    font-family: "Brother", Arial, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--negro);
+    border:var(--amarillo) solid 2px;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
 }
 
-.contenido-portada button svg{
-    height: 50px;
-    fill: #000000;
-    background-color: #eadec45d;
+.contenido-portada span{
+    font-style: italic;
+    font-weight: 400;
 
 }
 
-.boton-proyecto svg:hover{
+.contenido-portada button:hover{
     background-color: var(--trasparente);
-    transition:  0.2s ease-in-out;
-    fill: var(--negro);
+    color: var(--amarillo);
 }
 
 .modal-proyecto{
-    background-color: #1d1d1de3;
+    background-color: #1d1d1dc7;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -341,9 +450,11 @@ p.caracteristicas{
 }
 
 .modal-proyecto iframe{
-    background-color: #fff;
+    box-shadow: 0px 0px 7px 1px #0000008f;
+    overflow: hidden;
     width: 100%;
     height: 100%;
+    border-radius: 8px;
 }
 
 .modal-proyecto .titulo{
@@ -392,5 +503,237 @@ p.caracteristicas{
     text-decoration: none;
     font-size: 14px;
     font-style: normal;
+}
+
+@media screen and (max-width: 1024px) {
+    h1{
+        font-size: 4em;
+    }
+    .contenido-portada button{
+        font-size: 2em;
+        padding: 10px 20px;
+    }
+    .contenido-portada{
+        margin-bottom: -10px;
+    }
+
+    .portada .primera{
+        top: -40px;
+    }
+    .portada .segunda{
+        top: -90px;
+        left: -170px;
+    }
+    .portada .tercera{
+        bottom: -30px;
+        right: -150px;
+    }
+    .portada .cuarta{
+        top: -70px;
+        right: -260px;
+    }
+    .portada .quinta{
+        bottom: 80px;
+        left: -170px;
+    }
+
+    .portada .primer-icono{
+        top: 10px;
+        left: -60px;
+        width: 40px;
+        height: 40px;
+    }
+    .portada .segundo-icono{
+        top: 70px;
+        left: -60px;
+        width: 40px;
+        height: 40px;
+    }
+    .portada .tercero-icono{
+        top: 130px;
+        left: -60px;
+        width: 40px;
+        height: 40px;
+    }
+    .portada .cuarto-icono{
+        top: 190px;
+        left: -60px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1{
+        font-size: 3em;
+    }
+    .contenido-portada button{
+        font-size: 2em;
+        padding: 2px;
+    }
+    .contenido-portada{
+        margin-bottom: -10px;
+    }
+
+    .portada .primera{
+        top: -40px;
+    }
+    .portada .segunda{
+        top: -70px;
+        left: -150px;
+    }
+    .portada .tercera{
+        bottom: -50px;
+        right: -150px;
+    }
+    .portada .cuarta{
+        top: -90px;
+        right: -160px;
+    }
+    .portada .quinta{
+        bottom: -60px;
+        left: -80px;
+    }
+
+    .portada .primer-icono{
+        top: 40px;
+        left: -60px;
+        width: 40px;
+        height: 40px;
+    }
+    .portada .segundo-icono{
+        top: 100px;
+        left: -60px;
+        width: 40px;
+        height: 40px;
+    }
+    .portada .tercero-icono{
+        top: 160px;
+        left: -60px;
+        width: 40px;
+        height: 40px;
+    }
+    .portada .cuarto-icono{
+        top: 220px;
+        left: -60px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    h1{
+        font-size: 3em;
+    }
+    .contenido-portada button{
+        font-size: 2em;
+        padding: 2px;
+    }
+    .contenido-portada{
+        margin-bottom: -10px;
+    }
+
+    .portada .primera{
+        top: -40px;
+    }
+    .portada .segunda{
+        top: -70px;
+        left: -70px;
+    }
+    .portada .tercera{
+        bottom: -50px;
+        right: -50px;
+    }
+    .portada .cuarta{
+        top: -70px;
+        right: -60px;
+    }
+    .portada .quinta{
+        bottom: -60px;
+        left: -80px;
+    }
+
+    .portada .primer-icono{
+        top: -10px;
+        left: -60px;
+        width: 30px;
+        height: 30px;
+    }
+    .portada .segundo-icono{
+        top: 30px;
+        left: -60px;
+        width: 30px;
+        height: 30px;
+    }
+    .portada .tercero-icono{
+        top: 70px;
+        left: -60px;
+        width: 30px;
+        height: 30px;
+    }
+    .portada .cuarto-icono{
+        top: 110px;
+        left: -60px;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    h1{
+        font-size: 2em;
+    }
+    .contenido-portada button{
+        font-size: 1em;
+        padding: 2px;
+    }
+    .contenido-portada{
+        margin-bottom: -10px;
+    }
+
+    .portada .primera{
+        top: -40px;
+    }
+    .portada .segunda{
+        top: -60px;
+        left: -70px;
+    }
+    .portada .tercera{
+        bottom: -50px;
+        right: -50px;
+    }
+    .portada .cuarta{
+        top: -70px;
+        right: -60px;
+    }
+    .portada .quinta{
+        bottom: -15px;
+        left: -80px;
+    }
+
+    .portada .primer-icono{
+        top: -10px;
+        left: -60px;
+        width: 20px;
+        height: 20px;
+    }
+    .portada .segundo-icono{
+        top: 20px;
+        left: -60px;
+        width: 20px;
+        height: 20px;
+    }
+    .portada .tercero-icono{
+        top: 50px;
+        left: -60px;
+        width: 20px;
+        height: 20px;
+    }
+    .portada .cuarto-icono{
+        top: 80px;
+        left: -60px;
+        width: 20px;
+        height: 20px;
+    }
 }
 

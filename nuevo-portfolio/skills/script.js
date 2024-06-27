@@ -65,9 +65,9 @@ var scale;
 if (screenWidth <= 600) {
   scale = baseScale * 0.6; // Reducir escala para pantallas pequeñas
 } else if (screenWidth <= 1200) {
-  scale = baseScale * 1; // Escala base para pantallas medianas
+  scale = baseScale * 0.8; // Escala base para pantallas medianas
 } else {
-  scale = baseScale * 1.2; // Aumentar escala para pantallas grandes
+  scale = baseScale * 1; // Aumentar escala para pantallas grandes
 }
 
 var friccion = 0; // Ajusta la gravedad
