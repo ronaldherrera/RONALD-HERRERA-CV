@@ -59,27 +59,6 @@ function cerrarModal(closeClass, modalClass) {
   }
 }
 
-// funcion para ajustar la altura del contenedor de la portada a la altura de la imagen
-function ajustarAltura() {
-  var img = document.querySelector(".portada img");
-  var portada = document.querySelector(".portada");
-  portada.style.height = img.offsetHeight + "px";
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  var img = document.querySelector(".portada img");
-
-  // Ajustar la altura después de que la imagen se haya cargado
-  if (img.complete) {
-    ajustarAltura();
-  } else {
-    img.onload = ajustarAltura;
-  }
-
-  // Ajustar la altura al cambiar el tamaño de la ventana
-  window.addEventListener("resize", ajustarAltura);
-});
-
 //////////proyectos
 //
 // Abrir/cerrar modal de Subversum

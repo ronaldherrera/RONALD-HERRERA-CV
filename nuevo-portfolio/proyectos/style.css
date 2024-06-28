@@ -127,9 +127,7 @@ main::-webkit-scrollbar {
 section{
     height: 100dvh;
     width: 100dvw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
     overflow: hidden;
     scroll-snap-align: start;
     position: relative;
@@ -297,112 +295,7 @@ p.caracteristicas{
     color: var(--amarillo);
 }
 
-.portada{
-    width: 40%;
-    max-width: 500px;
-    min-width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;   
-    
-     
-}
 
-.portada img{
-    display: block;
-    width: 100%;
-}
-
-.portada div{
-    border-radius: 5px;
-    box-shadow: 0px 0px 7px 1px #0000003b;
-    overflow: hidden;
-    display: inline-block;
-    position: absolute;
-}
-
-.portada .primera{
-    width: 100%;
-    z-index: 1;
-    
-}
-.portada .segunda{
-    box-shadow: 0px 0px 7px 1px #00000059;
-    z-index: 2;
-    width: 60%;
-    max-width: 250px;
-    min-width: 100px;
-    top: -20px;
-    left: -100px;
-
-}
-.portada .tercera{
-    box-shadow: 0px 0px 7px 1px #00000059;
-    z-index: 2;
-    width: 60%;
-    max-width: 350px;
-    min-width: 150px;
-    bottom: 50px;
-    right: -250px;
-}
-.portada .cuarta{
-    box-shadow: 0px 0px 7px 1px #00000059;
-    z-index: 1;
-    width: 60%;
-    max-width: 350px;
-    min-width: 80px;
-    top: -20px;
-    right: -280px;
-    
-}
-.portada .quinta{
-    box-shadow: 0px 0px 7px 1px #00000059;
-    z-index: 2;
-    width: 50%;
-    max-width: 350px;
-    min-width: 100px;
-    bottom: 20px;
-    left: -180px;
-    
-}
-.portada .primer-icono{
-    top: 80px;
-    left: -60px;
-    width: 50px;
-    height: 50px;
-    z-index: 0;
-    border-radius: 0px;
-    box-shadow: none;
-    
-}
-.portada .segundo-icono{
-    top: 150px;
-    left: -60px;
-    width: 50px;
-    height: 50px;
-    z-index: 0;
-    border-radius: 0px;
-    box-shadow: none;
-}
-.portada .tercero-icono{
-    top: 220px;
-    left: -60px;
-    width: 50px;
-    height: 50px;
-    z-index: 0;
-    border-radius: 0px;
-    box-shadow: none;
-}
-.portada .cuarto-icono{
-    top: 290px;
-    left: -60px;
-    width: 50px;
-    height: 50px;
-    z-index: 0;
-    border-radius: 0px;
-    box-shadow: none;
-}
 .contenido-portada button{
     background-color: var(--amarillo);
     padding: 10px 30px;
@@ -507,262 +400,147 @@ p.caracteristicas{
     font-style: normal;
 }
 
-@media screen and (max-width: 1281px) {
-    h1{
-        font-size: 4em;
-    }
-    .contenido-portada button{
-        font-size: 2em;
-        padding: 10px 20px;
-    }
-    .contenido-portada{
-        margin-bottom: -10px;
-    }
-
-    .portada{
-        width: 40%;
-        top: 10px;
-    }
-
-    .portada .primera{
-        top: -40px;
-    }
-    .portada .segunda{
-        top: -90px;
-        left: -170px;
-    }
-    .portada .tercera{
-        bottom: -30px;
-        right: -150px;
-    }
-    .portada .cuarta{
-        top: -70px;
-        right: -260px;
-    }
-    .portada .quinta{
-        bottom: 80px;
-        left: -170px;
-    }
-
-    .portada .primer-icono{
-        top: 10px;
-        left: -60px;
-        width: 40px;
-        height: 40px;
-    }
-    .portada .segundo-icono{
-        top: 70px;
-        left: -60px;
-        width: 40px;
-        height: 40px;
-    }
-    .portada .tercero-icono{
-        top: 130px;
-        left: -60px;
-        width: 40px;
-        height: 40px;
-    }
-    .portada .cuarto-icono{
-        top: 190px;
-        left: -60px;
-        width: 40px;
-        height: 40px;
-    }
+.portada {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-@media screen and (max-width: 1000px) {
-    h1{
-        font-size: 3em;
-    }
-    .contenido-portada button{
-        font-size: 2em;
-        padding: 10px 20px;
-    }
-    .contenido-portada{
-        margin-bottom: -10px;
-    }
-
-    .portada{
-        width: 60%;
-        top: -20px;
-    }
-
-    .portada .primera{
-        top: -40px;
-    }
-    .portada .segunda{
-        top: -50px;
-        left: -140px;
-    }
-    .portada .tercera{
-        bottom: -50px;
-        right: -100px;
-    }
-    .portada .cuarta{
-        top: -20px;
-        right: -120px;
-        width: 40%;
-    }
-    .portada .quinta{
-        bottom: 60px;
-        left: -130px;
-        width: 40%;
-    }
-
-    .portada .primer-icono{
-        top: 60px;
-        left: -60px;
-        width: 40px;
-        height: 40px;
-    }
-    .portada .segundo-icono{
-        top: 120px;
-        left: -60px;
-        width: 40px;
-        height: 40px;
-    }
-    .portada .tercero-icono{
-        top: 180px;
-        left: -60px;
-        width: 40px;
-        height: 40px;
-    }
-    .portada .cuarto-icono{
-        top: 240px;
-        left: -60px;
-        width: 40px;
-        height: 40px;
-    }
+.caja img {
+    border-radius: 5px;
+    filter: drop-shadow(0px 1px 3px #00000083);
 }
 
-@media screen and (max-width: 600px) {
-    h1{
-        font-size: 3em;
-    }
-    .contenido-portada button{
-        font-size: 2em;
-        padding: 10px 20px;
-    }
-    .contenido-portada{
-        margin-bottom: -10px;
-    }
+/* Estilo para las cajas e iconos */
+.caja, .icono {
+  position: absolute;
+  transition: all 0.5s ease;
+  filter: drop-shadow(0px 1px 3px #0000005b);
+}
+
+.caja img, .icono img {
+  width: 100%;
+  height: auto;
+}
+
+/* Animación de flotación */
+@keyframes flotar {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(0) translateX(0);
+  }
+  75% {
+    transform: translateY(10px) translateX(-5px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes aparecer {
+  0% {
+    transform: scale(0); /* Escala inicial: 0 */
+    opacity: 0; /* Opacidad inicial: 0 */
+  }
+  60% {
+    transform: scale(1.1); /* Escala intermedia: ligeramente más grande */
+    opacity: 1; /* Opacidad intermedia: completamente visible */
+  }
+  100% {
+    transform: scale(1); /* Escala final: tamaño normal */
+    opacity: 1; /* Opacidad final: completamente visible */
+  }
+}
+
+.caja, .icono {
+  transform: scale(0); /* Escala inicial: 0 */
+    opacity: 0;
+}
+
+.caja, .icono {
+  animation: aparecer 1s ease-out forwards, flotar 10s ease-in-out infinite;
+}
+
+/* Posiciones iniciales de las cajas e iconos */
+.primera { top: 5%; left: 30%; width: 30%; animation-delay: 0s; }
+.segunda { top: 10%; left: 15%; width: 25%; animation-delay: .2s; }
+.tercera { top: 70%; left: 55%; width: 20%; animation-delay: .4s; }
+.cuarta { top: 5%; left: 58%; width: 15%; animation-delay: .6s; }
+.quinta { top: 50%; left: 15%; width: 15%; animation-delay: .8s; }
+
+.primer-icono { top: calc(30% + 0px); left: 25%; width: 5%; max-width: 30px; animation-delay: 1s; }
+.segundo-icono { top: calc(30% + 45px); left: 25%; width: 5%; max-width: 30px; animation-delay: 1.1s; }
+.tercer-icono { top: calc(30% + 90px); left: 25%; width: 5%; max-width: 30px; animation-delay: 1.2s; }
+.cuarto-icono { top: calc(30% + 135px); left: 25%; width: 5%; max-width: 30px; animation-delay: 1.3s; }
+
+
+
+@media (max-width: 1280px){
     
-    .portada{
-        width: 50%;
-        top: -30px;
-    }
+    .primera { top: 5%; left: 30%; width: 30%; animation-delay: 0s; }
+    .segunda { top: 10%; left: 15%; width: 25%; animation-delay: 1s; }
+    .tercera { top: 70%; left: 55%; width: 20%; animation-delay: 2s; }
+    .cuarta { top: 5%; left: 58%; width: 15%; animation-delay: 3s; }
+    .quinta { top: 58%; left: 23%; width: 14%; animation-delay: 4s; }
 
-    .portada .primera{
-        top: -40px;
-    }
-    .portada .segunda{
-        top: -70px;
-        left: -70px;
-    }
-    .portada .tercera{
-        bottom: -70px;
-        right: -80px;
-        width: 100%;
-    }
-    .portada .cuarta{
-        top: -100px;
-        right: -80px;
-    }
-    .portada .quinta{
-        bottom: -40px;
-        left: -80px;
-        width: 65%;
-    }
-
-    .portada .primer-icono{
-        top: -10px;
-        left: -60px;
-        width: 30px;
-        height: 30px;
-    }
-    .portada .segundo-icono{
-        top: 30px;
-        left: -60px;
-        width: 30px;
-        height: 30px;
-    }
-    .portada .tercero-icono{
-        top: 70px;
-        left: -60px;
-        width: 30px;
-        height: 30px;
-    }
-    .portada .cuarto-icono{
-        top: 110px;
-        left: -60px;
-        width: 30px;
-        height: 30px;
-    }
+    .primer-icono { top: calc(30% + 0px); left: 25%; width: 5%; max-width: 30px; animation-delay: 0.5s; }
+    .segundo-icono { top: calc(30% + 45px); left: 25%; width: 5%; max-width: 30px; animation-delay: 1.5s; }
+    .tercer-icono { top: calc(30% + 90px); left: 25%; width: 5%; max-width: 30px; animation-delay: 2.5s; }
+    .cuarto-icono { top: calc(30% + 135px); left: 25%; width: 5%; max-width: 30px; animation-delay: 3.5s; }
 }
 
+@media (max-width: 884px){
+    
+    .primera { top: 5%; left: 30%; width: 50%; animation-delay: 0s; }
+    .segunda { top: 10%; left: 15%; width: 25%; animation-delay: 1s; }
+    .tercera { top: 70%; left: 55%; width: 40%; animation-delay: 2s; }
+    .cuarta { top: 8%; left: 70%; width: 25%; animation-delay: 3s; }
+    .quinta { top: 55%; left: 18%; width: 24%; animation-delay: 4s; }
 
-@media screen and (max-width: 320px) {
-    h1{
+    .primer-icono { top: calc(30% + 0px); left: 25%; width: 5%; max-width: 30px; animation-delay: 0.5s; }
+    .segundo-icono { top: calc(30% + 45px); left: 25%; width: 5%; max-width: 30px; animation-delay: 1.5s; }
+    .tercer-icono { top: calc(30% + 90px); left: 25%; width: 5%; max-width: 30px; animation-delay: 2.5s; }
+    .cuarto-icono { top: calc(30% + 135px); left: 25%; width: 5%; max-width: 30px; animation-delay: 3.5s; }
+}
+
+@media (max-width: 428px){
+    
+    .primera { top: 15%; left: 20%; width: 60%; animation-delay: 0s; }
+    .segunda { top: 8%; left: 6%; width: 40%; animation-delay: 1s; }
+    .tercera { top: 60%; left: 45%; width: 50%; animation-delay: 2s; }
+    .cuarta { top: 8%; left: 65%; width: 30%; animation-delay: 3s; }
+    .quinta { top: 50%; left: 5%; width: 32%; animation-delay: 4s; }
+
+    .primer-icono { top: calc(20% + 0px); left: 10%; width: 5%; max-width: 30px; animation-delay: 0.5s; }
+    .segundo-icono { top: calc(20% + 45px); left: 10%; width: 5%; max-width: 30px; animation-delay: 1.5s; }
+    .tercer-icono { top: calc(20% + 90px); left: 10%; width: 5%; max-width: 30px; animation-delay: 2.5s; }
+    .cuarto-icono { top: calc(20% + 135px); left: 10%; width: 5%; max-width: 30px; animation-delay: 3.5s; }
+}
+
+@media (max-width: 320px){
+    .titulo-portada h1{
         font-size: 2em;
     }
-    .contenido-portada button{
-        font-size: 1em;
-        padding: 2px;
-    }
     .contenido-portada{
-        margin-bottom: -10px;
+        margin-bottom: 0px;
+    }
+    .contenido-portada button {
+        font-size: 1em;
     }
 
-    .portada{
-        width: 50%;
-        top: 10px;
-    }
+    .primera { top: 15%; left: 25%; width: 50%; animation-delay: 0s; }
+    .segunda { top: 8%; left: 6%; width: 40%; animation-delay: 1s; }
+    .tercera { top: 60%; left: 45%; width: 50%; animation-delay: 2s; }
+    .cuarta { top: 8%; left: 65%; width: 30%; animation-delay: 3s; }
+    .quinta { top: 50%; left: 5%; width: 32%; animation-delay: 4s; }
 
-    .portada .primera{
-        top: -40px;
-    }
-    .portada .segunda{
-        top: -60px;
-        left: -70px;
-    }
-    .portada .tercera{
-        bottom: 10px;
-        right: 70px;
-        
-    }
-    .portada .cuarta{
-        top: -70px;
-        right: -60px;
-    }
-    .portada .quinta{
-        bottom: 0px;
-        left: 100px;
-        
-    }
-
-    .portada .primer-icono{
-        top: -10px;
-        left: -60px;
-        width: 20px;
-        height: 20px;
-    }
-    .portada .segundo-icono{
-        top: 20px;
-        left: -60px;
-        width: 20px;
-        height: 20px;
-    }
-    .portada .tercero-icono{
-        top: 50px;
-        left: -60px;
-        width: 20px;
-        height: 20px;
-    }
-    .portada .cuarto-icono{
-        top: 80px;
-        left: -60px;
-        width: 20px;
-        height: 20px;
-    }
+    .primer-icono { top: calc(20% + 0px); left: 10%; width: 15%; max-width: 30px; animation-delay: 0.5s; }
+    .segundo-icono { top: calc(20% + 45px); left: 10%; width: 15%; max-width: 30px; animation-delay: 1.5s; }
+    .tercer-icono { top: calc(20% + 90px); left: 10%; width: 15%; max-width: 30px; animation-delay: 2.5s; }
+    .cuarto-icono { top: calc(20% + 135px); left: 10%; width: 15%; max-width: 30px; animation-delay: 3.5s; }
 }
-
