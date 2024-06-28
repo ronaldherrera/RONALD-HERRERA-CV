@@ -130,7 +130,7 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    overflow: hidden;
     scroll-snap-align: start;
     position: relative;
     /*box-shadow: 0px 70px 57px -20px var(--negro) inset;*/
@@ -304,7 +304,9 @@ p.caracteristicas{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;     
+    position: relative;   
+    
+     
 }
 
 .portada img{
@@ -331,7 +333,7 @@ p.caracteristicas{
     width: 60%;
     max-width: 250px;
     min-width: 100px;
-    top: -30px;
+    top: -20px;
     left: -100px;
 
 }
@@ -350,8 +352,8 @@ p.caracteristicas{
     width: 60%;
     max-width: 350px;
     min-width: 80px;
-    top: -40px;
-    right: -380px;
+    top: -20px;
+    right: -280px;
     
 }
 .portada .quinta{
@@ -360,8 +362,8 @@ p.caracteristicas{
     width: 50%;
     max-width: 350px;
     min-width: 100px;
-    bottom: -40px;
-    left: -220px;
+    bottom: 20px;
+    left: -180px;
     
 }
 .portada .primer-icono{
@@ -505,7 +507,7 @@ p.caracteristicas{
     font-style: normal;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1281px) {
     h1{
         font-size: 4em;
     }
@@ -515,6 +517,11 @@ p.caracteristicas{
     }
     .contenido-portada{
         margin-bottom: -10px;
+    }
+
+    .portada{
+        width: 40%;
+        top: 10px;
     }
 
     .portada .primera{
@@ -569,52 +576,59 @@ p.caracteristicas{
     }
     .contenido-portada button{
         font-size: 2em;
-        padding: 2px;
+        padding: 10px 20px;
     }
     .contenido-portada{
         margin-bottom: -10px;
+    }
+
+    .portada{
+        width: 60%;
+        top: -20px;
     }
 
     .portada .primera{
         top: -40px;
     }
     .portada .segunda{
-        top: -70px;
-        left: -150px;
+        top: -50px;
+        left: -140px;
     }
     .portada .tercera{
         bottom: -50px;
-        right: -150px;
+        right: -100px;
     }
     .portada .cuarta{
-        top: -90px;
-        right: -160px;
+        top: -20px;
+        right: -120px;
+        width: 40%;
     }
     .portada .quinta{
-        bottom: -60px;
-        left: -80px;
+        bottom: 60px;
+        left: -130px;
+        width: 40%;
     }
 
     .portada .primer-icono{
-        top: 40px;
+        top: 60px;
         left: -60px;
         width: 40px;
         height: 40px;
     }
     .portada .segundo-icono{
-        top: 100px;
+        top: 120px;
         left: -60px;
         width: 40px;
         height: 40px;
     }
     .portada .tercero-icono{
-        top: 160px;
+        top: 180px;
         left: -60px;
         width: 40px;
         height: 40px;
     }
     .portada .cuarto-icono{
-        top: 220px;
+        top: 240px;
         left: -60px;
         width: 40px;
         height: 40px;
@@ -627,10 +641,15 @@ p.caracteristicas{
     }
     .contenido-portada button{
         font-size: 2em;
-        padding: 2px;
+        padding: 10px 20px;
     }
     .contenido-portada{
         margin-bottom: -10px;
+    }
+    
+    .portada{
+        width: 50%;
+        top: -30px;
     }
 
     .portada .primera{
@@ -641,16 +660,18 @@ p.caracteristicas{
         left: -70px;
     }
     .portada .tercera{
-        bottom: -50px;
-        right: -50px;
+        bottom: -70px;
+        right: -80px;
+        width: 100%;
     }
     .portada .cuarta{
-        top: -70px;
-        right: -60px;
+        top: -100px;
+        right: -80px;
     }
     .portada .quinta{
-        bottom: -60px;
+        bottom: -40px;
         left: -80px;
+        width: 65%;
     }
 
     .portada .primer-icono{
@@ -679,6 +700,7 @@ p.caracteristicas{
     }
 }
 
+
 @media screen and (max-width: 320px) {
     h1{
         font-size: 2em;
@@ -691,6 +713,11 @@ p.caracteristicas{
         margin-bottom: -10px;
     }
 
+    .portada{
+        width: 50%;
+        top: 10px;
+    }
+
     .portada .primera{
         top: -40px;
     }
@@ -699,16 +726,18 @@ p.caracteristicas{
         left: -70px;
     }
     .portada .tercera{
-        bottom: -50px;
-        right: -50px;
+        bottom: 10px;
+        right: 70px;
+        
     }
     .portada .cuarta{
         top: -70px;
         right: -60px;
     }
     .portada .quinta{
-        bottom: -15px;
-        left: -80px;
+        bottom: 0px;
+        left: 100px;
+        
     }
 
     .portada .primer-icono{
