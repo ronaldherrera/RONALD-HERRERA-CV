@@ -89,3 +89,5 @@ document.addEventListener("DOMContentLoaded", function () {
   // Remover la clase no-scroll del main al cargar la página
   mainElement.classList.remove("no-scroll");
 });
+
+//añadir clase flotante a los elementos de portada

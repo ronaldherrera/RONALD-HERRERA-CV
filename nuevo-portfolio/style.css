@@ -195,7 +195,6 @@ body{
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
-    mix-blend-mode: difference;
     opacity: 0;
     animation: entrada-suave-derecha .5s ease 1s 1 normal forwards;
 }
@@ -233,13 +232,19 @@ div.puntoClaim{
 }
 
 .flecha-subir{
-    padding: 10px 0px;
-    border-right: var(--amarillo) solid 1.5px;
+    display: flex;
+    
     transition:  0.5s ease-in-out;
 }
 
+.flecha-subir .borde{
+    height: 100%;
+    min-height: 40px;
+    border-right: var(--amarillo) solid 1.5px;
+}
+
 .flecha-subir.focus{
-    padding: 10px 0px;
+    
     transition:  0.3s ease-in-out;
 }
 
@@ -250,6 +255,7 @@ div.puntoClaim{
     border-bottom: var(--amarillo) solid 1.5px;
     transition:  0.5s ease-in-out;
     pointer-events: none;
+    mix-blend-mode: difference;
 }
 
 .flecha-pie.focus{
@@ -264,7 +270,6 @@ nav{
     left: 0%;
     right: 0%;
     padding: 14px;
-    mix-blend-mode: difference;
     z-index: 3;
 }
 
@@ -972,7 +977,7 @@ label {
         height: 0px;
         width: 0px;
         border-radius: 5px 0px 0px 5px;
-
+        margin: 10px 0px;
         transition:  0.5s ease-in-out;
     }
 
