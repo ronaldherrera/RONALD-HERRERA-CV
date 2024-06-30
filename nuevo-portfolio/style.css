@@ -182,6 +182,8 @@ body{
     background-color: var(--negro);
 }
 
+
+
 .nav-var-scroll{
     width: 15px;
     height: 100%;
@@ -198,16 +200,16 @@ body{
     opacity: 0;
     animation: entrada-suave-derecha .5s ease 1s 1 normal forwards;
     mix-blend-mode: difference;
-    
 }
+
+
 
 .puntos-scroll{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     height: 100%;
-    mix-blend-mode: color;
-    mix-blend-mode: difference;
+    mix-blend-mode: color; 
 }
 
 .puntos-scroll div{
@@ -243,7 +245,7 @@ div.puntoClaim{
 }
 
 .flecha-subir .borde{
-    mix-blend-mode: difference;
+    
     height: 100%;
     min-height: 40px;
     border-right: var(--amarillo) solid 1.5px;
@@ -261,13 +263,22 @@ div.puntoClaim{
     border-bottom: var(--amarillo) solid 1.5px;
     transition:  0.5s ease-in-out;
     pointer-events: none;
-    mix-blend-mode: difference;
+    
 }
 
 .flecha-pie.focus{
     height: 30px;
     transition:  0.3s ease-in-out;
 }
+.nav-var-scroll.menu{
+    mix-blend-mode: normal;
+    margin-right: 1.5px;
+}
+
+.nav-var-scroll.menu .borde, .nav-var-scroll.menu .puntos-scroll, .nav-var-scroll.menu .flecha-pie{
+    display: none;
+}
+
 
 nav{
     position: absolute;
@@ -280,6 +291,12 @@ nav{
     
 }
 
+nav.escritorio{
+    mix-blend-mode: difference;
+}
+nav.movil{
+    mix-blend-mode: difference;
+} 
 .movil, .enlaces{
     display: none;
 }
@@ -955,7 +972,8 @@ label {
     }
 
     .enlaces.abierto{
-        box-shadow: -1px 1px 4px 0px #0000001a;
+        backdrop-filter: blur(20px);
+        box-shadow: -1px 1px 7px -2px #696969;
         list-style-type: none; 
         padding: 0px 20px;
         display: flex;
@@ -967,17 +985,24 @@ label {
         right: 5px;
         top: 50px;
         transition:  0.5s ease-in-out;
-        background-color: var(--amarillo);
-        mix-blend-mode: unset;
+        background-color: #222222;
+        opacity: 0.95;
+        
     
     }
+
+    .enlaces.fondo.abierto{
+        background-color: var(--trasparente);
+        width: 0px;
+        box-shadow: -1px 1px 4px 0px #eeeeee00;
+    }
+
     .enlaces.abierto a{
-        color: #1d1d1d;
-       font-weight: 700;
+        color: var(--blanco);
+       font-weight: 200;
+       padding: 0px;
     }
-    .enlaces.abierto::before{
-        filter: blur(10px) contrast(200%) hue-rotate(90deg) saturate(300%);
-    }
+    
 
    .enlaces{
         list-style-type: none; 
@@ -994,7 +1019,7 @@ label {
     }
 
     .enlaces-interes{
-        color: var(--negro);
+        color: var(--amarillo);
         font-family: "Brother", Arial, sans-serif;
         font-size: 10px;
         font-weight: 100;
@@ -1003,14 +1028,14 @@ label {
     }
 
     .enlaces.abierto a.activo{
-    font-weight: 400;
+    font-weight: 700;
     font-style: italic;
     
 }
 
     .rrss{
-        border-top: solid 1px var(--negro);
-        border-bottom: solid 2px var(--negro);
+        border-top: solid 1px var(--amarillo);
+        border-bottom: solid 2px var(--amarillo);
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -1028,7 +1053,8 @@ label {
     }
 
     .boton-descarga svg{
-    height: 25px;
+        
+    
 }
 
     .rrss a{

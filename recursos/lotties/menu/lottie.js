@@ -1,9 +1,9 @@
-/*control lottie boton-menu*/
+/* Control Lottie para el botón del menú */
 document.addEventListener("DOMContentLoaded", function () {
   // Asegúrate de que esta ruta sea correcta
   var animationPath = "/recursos/lotties/menu/data.json";
 
-  // Verificar si la animación se carga correctamente
+  // Cargar la animación Lottie
   var animation = lottie.loadAnimation({
     container: document.getElementById("boton-menu"),
     renderer: "svg",
@@ -20,27 +20,33 @@ document.addEventListener("DOMContentLoaded", function () {
   // Definir la velocidad de reproducción inicial
   var animationSpeed = 2.0;
 
-  // Función para manejar el clic
+  // Función para manejar el clic en el botón del menú
   document.getElementById("boton-menu").addEventListener("click", function () {
     var container = this;
-    var enlaces = document.querySelector(".enlaces");
+    var enlaces = document.querySelectorAll(".enlaces.fondo, .enlaces");
     var totalFrames = animation.totalFrames;
 
-    // Cambiar la velocidad de reproducción y la duración de la animación según el estado del contenedor
+    // Alternar la clase "abierto" en el contenedor y en los enlaces
     if (container.classList.contains("abierto")) {
       container.classList.remove("abierto");
-      enlaces.classList.remove("abierto");
-      // Reducir la velocidad de reproducción
+      // Eliminar la clase "abierto" de todos los elementos seleccionados
+      enlaces.forEach(function (enlace) {
+        enlace.classList.remove("abierto");
+      });
+      // Reducir la velocidad de reproducción para cerrar el menú
       animation.setSpeed(animationSpeed);
       // Reproducir la animación desde el 100% al 0%
-      animation.playSegments([totalFrames * 1.0, totalFrames * 0.0], true);
+      animation.playSegments([totalFrames, 0], true);
     } else {
       container.classList.add("abierto");
-      enlaces.classList.add("abierto");
-      // Aumentar la velocidad de reproducción
-      animation.setSpeed(animationSpeed); // Doble velocidad, puedes ajustar según tu preferencia
+      // Añadir la clase "abierto" a todos los elementos seleccionados
+      enlaces.forEach(function (enlace) {
+        enlace.classList.add("abierto");
+      });
+      // Aumentar la velocidad de reproducción para abrir el menú
+      animation.setSpeed(animationSpeed);
       // Reproducir la animación desde el 0% al 100%
-      animation.playSegments([totalFrames * 0.0, totalFrames * 1.0], true);
+      animation.playSegments([0, totalFrames], true);
     }
   });
 });
