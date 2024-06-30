@@ -197,6 +197,8 @@ body{
     justify-content: space-between;
     opacity: 0;
     animation: entrada-suave-derecha .5s ease 1s 1 normal forwards;
+    mix-blend-mode: difference;
+    
 }
 
 .puntos-scroll{
@@ -204,6 +206,8 @@ body{
     flex-direction: column;
     align-items: flex-end;
     height: 100%;
+    mix-blend-mode: color;
+    mix-blend-mode: difference;
 }
 
 .puntos-scroll div{
@@ -213,6 +217,7 @@ body{
     margin: 3px 0px;
     border-radius: 5px 5px 5px 5px;
     transition:  0.5s ease-in-out;
+    
 }
 
 .puntos-scroll div.activo{
@@ -238,6 +243,7 @@ div.puntoClaim{
 }
 
 .flecha-subir .borde{
+    mix-blend-mode: difference;
     height: 100%;
     min-height: 40px;
     border-right: var(--amarillo) solid 1.5px;
@@ -271,6 +277,7 @@ nav{
     right: 0%;
     padding: 14px;
     z-index: 3;
+    
 }
 
 .movil, .enlaces{
@@ -936,7 +943,6 @@ label {
         flex-direction: column;
         list-style-type: none; 
         width: 100%;
-        mix-blend-mode: difference;
     }
 
 
@@ -961,7 +967,13 @@ label {
         right: 5px;
         top: 50px;
         transition:  0.5s ease-in-out;
-       background-color: var(--amarillo);
+        background-color: var(--amarillo);
+        mix-blend-mode: unset;
+    
+    }
+    .enlaces.abierto a{
+        color: #1d1d1d;
+       font-weight: 700;
     }
     .enlaces.abierto::before{
         filter: blur(10px) contrast(200%) hue-rotate(90deg) saturate(300%);
@@ -982,7 +994,7 @@ label {
     }
 
     .enlaces-interes{
-        color: var(--blanco);
+        color: var(--negro);
         font-family: "Brother", Arial, sans-serif;
         font-size: 10px;
         font-weight: 100;
@@ -990,14 +1002,15 @@ label {
         font-style: italic;
     }
 
-    nav a.activo{
-    font-weight: 700;
+    .enlaces.abierto a.activo{
+    font-weight: 400;
     font-style: italic;
+    
 }
 
     .rrss{
-        border-top: solid 1px var(--blanco);
-        border-bottom: solid 1px var(--blanco);
+        border-top: solid 1px var(--negro);
+        border-bottom: solid 2px var(--negro);
         display: flex;
         flex-direction: row;
         justify-content: space-around;
