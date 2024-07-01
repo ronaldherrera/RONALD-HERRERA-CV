@@ -145,7 +145,7 @@ a{
 }
 
 body{
-  background-color: var(--blanco);
+  background-color: #123e41;
   display: block;
   margin: 0;
 }
