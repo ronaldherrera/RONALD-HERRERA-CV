@@ -484,9 +484,10 @@ section{
 }   
 
 .rrss-container svg:hover{
+    background-color: var(--blanco);
     transition: all .3s cubic-bezier(.645, .045, .355, 1);
     border-radius: 50%;
-    border: solid 2px var(--trasparente);
+    border: solid 2px var(--blanco);
     .cls-1{fill:var(--negro);}
     .cls-2{fill:var(--blanco);
     }
@@ -845,6 +846,7 @@ label {
     display: block;
     position: static;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    cursor: pointer
 
 }
 
@@ -1052,10 +1054,6 @@ label {
         justify-content: center;
     }
 
-    .boton-descarga svg{
-        
-    
-}
 
     .rrss a{
         font-size: 13px;
