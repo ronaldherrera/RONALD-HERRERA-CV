@@ -3,7 +3,7 @@
 $mensaje = $_POST['imput-home']; // El nombre del textarea del formulario
 
 // Establecer la dirección de correo electrónico de destino
-$destinatario = 'ronaldherrera3d@gmail.com';
+$destinatario = 'hola@ronaldherrera.es';
 
 // Establecer el asunto del correo electrónico
 $asunto = 'MI WEB';
@@ -15,7 +15,7 @@ $contenido_correo .= '<p>' . $mensaje . '</p>';
 $contenido_correo .= '</body></html>';
 
 // Establecer la dirección de correo electrónico del remitente (debe ser una dirección válida en tu servidor)
-$remitente = 'hola@ronaldherrera.es';
+$remitente = 'ronaldherrera3d@gmail.com';
 
 // Cabeceras del correo electrónico
 $headers = "From: $remitente\r\n";
