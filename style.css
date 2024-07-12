@@ -494,12 +494,18 @@ section{
   
 }
 .claim{
-    background-image: radial-gradient(#ed8e6a, #cf6a49);   
+    background-color: var(--negro); 
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0px;
     overflow: hidden;
+    padding: 80px 20px 20px;
+}
+
+.claim video{
+    border-radius: 10px;
+    box-shadow: -1px 1px 7px -2px #6b6b6b;
 }
 
 .claim .video-overlay {
@@ -552,7 +558,7 @@ section{
     color: var(--negro);
 }
 
-.proyectos h3{
+.proyectos h2{
     width: fit-content;
     animation: entrada 1s ease 0s 1 normal forwards;
     opacity: 0;
