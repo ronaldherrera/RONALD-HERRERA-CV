@@ -227,5 +227,3 @@ document
     // Envía los datos del formulario al servidor
     xhr.send("imput-home=" + encodeURIComponent(mensaje));
   });
-
-//////////////para que el sol mire al cursor
