@@ -10,7 +10,7 @@ function loadCSS(href, before, media) {
     ss.media = media || "all";
   });
 }
-loadCSS("./style.csss");
+loadCSS("./style.css");
 
 /*Escroll automatico y suabe*/
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
