@@ -719,7 +719,7 @@ a.scroll {
     font-weight: 600;
 }
 
-.iconos-contacto {
+img.iconos-contacto {
   height: 30px;
   width: auto;
   
@@ -765,14 +765,14 @@ a.scroll {
     margin-top: 10px;
     margin-bottom: 30px;
 }
-.icono-redes {
+img.icono-redes {
     display: block;
     height: 20px;
     width: auto;
     opacity: 1;
     transition: all ease .2s;
 }
-.icono-redes:hover{
+img.icono-redes:hover{
   opacity: 0.8;
 }
 
