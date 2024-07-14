@@ -1,3 +1,19 @@
+document.addEventListener("DOMContentLoaded", function () {
+  var video = document.getElementById("avatarHero");
+  var fallbackImage = document.getElementById("fallbackImage");
+
+  video.onerror = function () {
+    video.style.display = "none";
+    fallbackImage.style.display = "block";
+  };
+
+  // Check if the video can play
+  if (!video.canPlayType("video/webm")) {
+    video.style.display = "none";
+    fallbackImage.style.display = "block";
+  }
+});
+
 //Carga asincrona de css
 function loadCSS(href, before, media) {
   var ss = window.document.createElement("link");
