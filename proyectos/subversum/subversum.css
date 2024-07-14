@@ -306,9 +306,18 @@ img {
     display: inline-block;
 }
 
+.cabecera {
+  vertical-align: middle;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+
 .hero {
   display: flex;
   flex-direction: row;
+  margin-top: -5px;
 }
 .columna-1-hero {
   width: 60%;

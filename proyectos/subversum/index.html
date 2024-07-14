@@ -40,7 +40,7 @@
     <main>
       <section>
         <div class="contenedor">
-          <img src="./imagenes/gif cabecera.gif" alt="" class="gif-cabecera" />
+          <div class="cabecera" id="lottie-cabecera"></div>
           <div class="hero">
             <div class="columna-1-hero">
               <img
@@ -283,5 +283,19 @@
         </div>
       </section>
     </main>
+    <script src="./lottie/lottie.js"></script>
+    <script>
+      // Selecciona el contenedor donde se reproducirá la animación
+      var container = document.getElementById("lottie-cabecera");
+
+      // Carga la animación Lottie
+      var animation = lottie.loadAnimation({
+        container: container, // El contenedor donde se reproducirá la animación
+        renderer: "svg", // El tipo de renderizador
+        loop: true, // Reproduce en bucle
+        autoplay: true, // Reproduce automáticamente
+        path: "./lottie/cabecera.json", // Ruta al archivo Lottie (.json)
+      });
+    </script>
   </body>
 </html>
