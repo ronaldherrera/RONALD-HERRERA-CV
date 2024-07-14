@@ -307,6 +307,7 @@ img {
 
 .hero {
   display: flex;
+  flex-direction: row;
 }
 .columna-1-hero {
   width: 60%;
