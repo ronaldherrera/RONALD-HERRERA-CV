@@ -419,6 +419,11 @@ p.caracteristicas{
     filter: drop-shadow(0px 1px 3px #00000083);
 }
 
+.caja video {
+    border-radius: 5px;
+    filter: drop-shadow(0px 1px 3px #00000083);
+}
+
 /* Estilo para las cajas e iconos */
 .caja, .icono {
   position: absolute;
