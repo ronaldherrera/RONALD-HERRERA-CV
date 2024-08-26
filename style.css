@@ -471,6 +471,7 @@ section{
     justify-content: space-around;
     opacity: 0;
     animation: entrada 1s ease 1s 1 normal forwards;
+    z-index: 30;
 }
 .rrss-container svg{
     transition: all .3s cubic-bezier(.645, .045, .355, 1);
