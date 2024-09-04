@@ -62,6 +62,10 @@ function cerrarModal(closeClass, modalClass) {
 //////////proyectos
 //
 // Abrir/cerrar modal de Subversum
+abrirModal("verEcoFresh", "ecoFresh");
+cerrarModal("cerrar-ecoFresh", "ecoFresh");
+
+// Abrir/cerrar modal de Subversum
 abrirModal("verSubversum", "subversum");
 cerrarModal("cerrar-subversum", "subversum");
 
