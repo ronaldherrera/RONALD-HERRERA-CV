@@ -17,12 +17,15 @@
 
 body{
   background-color: var(--blanco);
-  display: flex
+  display: flex;
+  justify-content: center;
 }
 
 main{
   overflow: hidden;
   padding: 0px 5px;
+  max-width: 1000px;
+  
 }
 
 section{
@@ -96,7 +99,8 @@ p{
 
 /*//*/
 .marquesina-superior{
-  width: 100%;
+  margin-left: -20px;
+  width: 110%;
   max-width: 120%;
   overflow: hidden;
   background-color: var(--naranja);
@@ -106,10 +110,13 @@ p{
   z-index: 2;
   padding: 5px 0px;
   opacity: 0.9;
+  
 }
 
 .marquesina-superior p{
   color: var(--blanco);
+
+    
 }
 
 .marquesina-superior div{
@@ -130,7 +137,8 @@ p{
 }
 
 .marquesina-inferior{
-  width: 100%;
+  margin-left: -20px;
+  width: 110%;
   max-width: 120%;
   overflow: hidden;
   background-color: var(--trasparente);
@@ -455,9 +463,9 @@ position: relative;
 .variaciones .imagotipo-variante{
   top: 0px;
   bottom: 0px;
-  padding: 20px;
+  width: calc(100% - 40px);
   position: absolute;
-  
+  padding: 20px;
 }
 
 .variaciones .imagotipo-variante img{
@@ -708,6 +716,62 @@ position: relative;
     width: 90%;
   }
 
+  .variaciones .grid { 
+    height: 1400px; 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      "textura1 textura1 combinacion3 combinacion4"
+      "combinacion1 combinacion1 combinacion2 combinacion2"
+      "combinacion1 combinacion1 combinacion2 combinacion2"
+      "combinacion5 combinacion6 combinacion7 combinacion7"
+      "titulo titulo imagen4 imagen4"
+      "imagen2 imagen2 imagen4 imagen4"
+      "imagen2 imagen2 imagen4 imagen4"
+      "imagen3 imagen3 imagen3 imagen3"
+      "imagen3 imagen3 imagen3 imagen3"
+      "imagen1 imagen1 imagen1 imagen1"
+      "imagen1 imagen1 imagen1 imagen1"
+      "imagen1 imagen1 imagen1 imagen1";
+  }
 
 
+
+
+
+}
+
+@media (max-width: 435px){
+
+  .variaciones .grid { 
+    height: 1800px; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      "textura1 textura1"
+      "combinacion3 combinacion4"
+      "combinacion1 combinacion2"
+      "combinacion1 combinacion2"
+      "combinacion5 combinacion6"
+      "combinacion7 combinacion7"
+      "titulo titulo"
+      "imagen4 imagen4"
+      "imagen4 imagen4"
+      "imagen4 imagen4"
+      "imagen4 imagen4"
+      "imagen2 imagen2"
+      "imagen2 imagen2"
+      "imagen3 imagen3"
+      "imagen3 imagen3"
+      "imagen1 imagen1"
+      "imagen1 imagen1"
+      "imagen1 imagen1";
+  }
+
+  .variaciones .titulo, .variaciones .textura1{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
 }
