@@ -3,17 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Informe Embebido</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .iframe-container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      iframe {
+        border: 0;
+        transform: scale(0.85); /* Ajusta el zoom del contenido */
+        transform-origin: top left;
+        width: 120%;
+        height: 120%;
+      }
+    </style>
   </head>
   <body>
-    <iframe
-      width="600"
-      height="805"
-      src="https://lookerstudio.google.com/embed/reporting/c617ccf1-e8be-42a0-8728-f8b91f4d9a89/page/p_pe8rqfkqqd"
-      frameborder="0"
-      style="border: 0"
-      allowfullscreen
-      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-    ></iframe>
+    <div class="iframe-container">
+      <iframe
+        src="https://lookerstudio.google.com/embed/reporting/c617ccf1-e8be-42a0-8728-f8b91f4d9a89/page/p_pe8rqfkqqd"
+        frameborder="0"
+        allowfullscreen
+        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+      ></iframe>
+    </div>
   </body>
 </html>
