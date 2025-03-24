@@ -8,8 +8,8 @@ html, body {
 }
 
 .iframe-wrapper {
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,13 +31,13 @@ iframe.active {
 }
 
 #iframe-vertical {
-  height: 100vh;
+  height: 100dvh;
   aspect-ratio: 9 / 16;
   width: auto;
 }
 
 #iframe-horizontal {
-  width: 100vw;
+  width: 100dvw;
   aspect-ratio: 16 / 9;
   height: auto;
 }
