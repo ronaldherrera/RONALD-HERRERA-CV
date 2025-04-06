@@ -2,28 +2,30 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Control para objetivo</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Redirección por orientación</title>
+    <script>
+      function redirigirSegunOrientacion() {
+        const esVertical = window.innerHeight > window.innerWidth;
+        const enlaceVertical = "https://lookerstudio.google.com/s/mFS5t2iuAPU";
+        const enlaceHorizontal =
+          "https://lookerstudio.google.com/s/kueSAPb88E4";
+
+        const urlDestino = esVertical ? enlaceVertical : enlaceHorizontal;
+
+        // Redirige solo si no estamos ya en la URL de destino
+        if (window.location.href !== urlDestino) {
+          window.location.href = urlDestino;
+        }
+      }
+
+      // Redirige al cargar la página
+      window.addEventListener("load", redirigirSegunOrientacion);
+
+      // Redirige al cambiar tamaño/orientación
+      window.addEventListener("resize", redirigirSegunOrientacion);
+    </script>
   </head>
   <body>
-    <div class="iframe-wrapper">
-      <iframe
-        id="iframe-vertical"
-        src="https://lookerstudio.google.com/embed/reporting/2c07538c-ffab-4436-b7cb-a50be4da1948/page/p_nf66fz5sqd"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
-
-      <iframe
-        id="iframe-horizontal"
-        src="https://lookerstudio.google.com/embed/reporting/d8cb9205-29e6-46d1-8d82-486c0a4692ce/page/p_y97kzx9vqd"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
-      <div class="marca-tapada"></div>
-    </div>
-
-    <script src="script.js"></script>
+    <p>Redirigiendo según la orientación de la pantalla...</p>
   </body>
 </html>
