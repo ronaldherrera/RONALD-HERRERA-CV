@@ -131,7 +131,7 @@ function mostrarTarjetas(lista, contenedor) {
                 </table>
               </div>
               <div class="detalle-pedidos">
-              <span>PEDIDOS EN CURSO</span><br>
+              <span>PEDIDOS EN<br>CURSO</span><br>
                 <strong style="font-size: 25px; font-style: bold;">${
                   p["Total Pedido en Curso"] || ""
                 }</strong>
@@ -144,7 +144,7 @@ function mostrarTarjetas(lista, contenedor) {
       p["Fecha prevista entrega"] || ""
     }</strong></div>
                 <strong style="font-size: 25px; font-style: bold;">${
-                  p["Qts. Próximo pedido"] || ""
+                  p["Qts. Próximo pedido"] || "NO SE ESPERA"
                 }</strong>
               </div>
               <div class="detalle-causa">
