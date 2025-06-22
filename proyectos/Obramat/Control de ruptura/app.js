@@ -163,9 +163,9 @@ function mostrarTarjetas(lista, contenedor) {
       <div class="tarjeta-pie">
         <label>Stock real: <input class="stock-real" type="text" data-indice="${i}" /></label>
         <div class="grupo-radio">
-          ¿Rectificado?
-          <label><input type="radio" name="r${i}" value="Sí" /> Sí</label>
-          <label><input type="radio" name="r${i}" value="No" /> No</label>
+          ¿Rectificado? 
+          <label>Sí<input type="radio" name="r${i}" value="Sí" /></label>
+          <label>No<input type="radio" name="r${i}" value="No" /></label>
         </div>
         <button class="btn-decision">Pedir/No pedir</button>
       </div>
