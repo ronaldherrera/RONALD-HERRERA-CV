@@ -269,12 +269,18 @@ label{
 }
 
 input.stock-real {
-  background: #fff7dd;
+  background: #ffffff;
   border: 1px solid #ccc;
   padding: 0.3rem;
   border-radius: 3px;
-  width: 25px;
+  width: 30px;
   height: 10px;
+  color: #120949;
+}
+
+input.stock-real:focus{
+  outline: none;
+  border: 1px solid #FF5800;
 }
 
 .grupo-radio {
@@ -291,6 +297,11 @@ input.stock-real {
 
 .grupo-radio input{
   margin: 0px;
+}
+
+.grupo-radio input[type="radio"]{
+  accent-color: #FF5800;
+
 }
 
 .btn-decision {
