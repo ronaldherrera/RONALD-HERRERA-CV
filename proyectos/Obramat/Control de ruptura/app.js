@@ -48,11 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
         ...p,
         "Stock real": inputStock?.value || "",
         Rectificado: radio?.value || "",
+        Pedido: productos[i]["Pedido"] || "",
       };
     });
 
     const hoja = XLSX.utils.json_to_sheet(actualizados, {
-      header: cabeceras.concat(["Stock real", "Rectificado"]),
+      header: cabeceras.concat(["Stock real", "Rectificado", "Pedido"]),
     });
     const libro = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(libro, hoja, "Control actualizado");
@@ -81,7 +82,6 @@ function mostrarTarjetas(lista, contenedor) {
         <div class="cabecera-izquierda">
           <div class="nombre">
           <img class="toggle-icon" src="./recursos/flecha_desplegar.svg" alt="">
-
             <strong>${p["Descripción"]}</strong>
           </div>
           <div class="ean"><em>EAN:</em> <span>${p["EAN"]}</span></div>
@@ -170,6 +170,33 @@ function mostrarTarjetas(lista, contenedor) {
         <button class="btn-decision">Pedir/No pedir</button>
       </div>
     `;
+
+    // Comportamiento del botón pedir/no pedir
+    const boton = tarjeta.querySelector(".btn-decision");
+    const estado = p["Pedido"] || "neutro";
+    if (estado === "pedir") {
+      boton.classList.add("estado-pedir");
+      boton.textContent = "Pedir";
+    } else if (estado === "nopedir") {
+      boton.classList.add("estado-nopedir");
+      boton.textContent = "No pedir";
+    } else {
+      boton.classList.add("estado-neutro");
+      boton.textContent = "Pedir/No pedir";
+    }
+
+    boton.addEventListener("click", () => {
+      const actual = productos[i]["Pedido"];
+      if (actual === "pedir") {
+        productos[i]["Pedido"] = "nopedir";
+        boton.className = "btn-decision estado-nopedir";
+        boton.textContent = "No pedir";
+      } else {
+        productos[i]["Pedido"] = "pedir";
+        boton.className = "btn-decision estado-pedir";
+        boton.textContent = "Pedir";
+      }
+    });
 
     tarjeta.querySelector(".tarjeta-cabecera").addEventListener("click", () => {
       const abierta = tarjeta.dataset.abierta === "true";
