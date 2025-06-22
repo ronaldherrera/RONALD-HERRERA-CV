@@ -99,18 +99,21 @@ function mostrarTarjetas(lista, contenedor) {
                 } días
               </div>
               <div class="detalle-ubicacion">
+              <div>
                 <span>UBICACIÓN FIJA: </span><br>${
                   p["Ubicación fija"] || ""
-                }<br>
-                <span>AVS: </span> ${p["Fecha AVS"] || "-"}<br>
-                <div class="">
-                <div class="">
+                }<br></div>
+                <div>
+                <span>AVS: </span> <i style="color: #FF5800;">${
+                  p["Fecha AVS"] || "-"
+                }</i><br>
                 <span>ÚLTIMA RECEPCIÓN: </span> <br>
-                ${p["Última Recepción"] || "-"} 
-              </div><div class="">
-                ${p["Qts entregadas último pedido"] || "-"} 
-              </div>
-              </div>
+                ${
+                  p["Última Recepción"] || "-"
+                }>> <strong style="color: #FF5800;">${
+      p["Qts entregadas último pedido"] || "-"
+    } </strong>
+                </div>
               </div>
               <div class="detalle-ventas">
                 <span>VENTAS</span>
@@ -128,17 +131,33 @@ function mostrarTarjetas(lista, contenedor) {
                 </table>
               </div>
               <div class="detalle-pedidos">
-                ${p["Total Pedido en Curso"] || ""}
+              <span>PEDIDOS EN CURSO</span><br>
+                <strong style="font-size: 25px; font-style: bold;">${
+                  p["Total Pedido en Curso"] || ""
+                }</strong>
               </div>
               <div class="detalle-proximo">
-                ${p["Próximo pedido"] || ""}<br>
-                Qts: ${p["Qts. Próximo pedido"] || ""}
+              <div><span>PRÓXIMO PEDIDO</span><br>
+                <strong style="font-size: 10px; font-weight: 400;">${
+                  p["Próximo pedido"] || ""
+                }>> </strong> <strong style="font-size: 12px; font-weight: 600; color:#120949;">${
+      p["Fecha prevista entrega"] || ""
+    }</strong></div>
+                <strong style="font-size: 25px; font-style: bold;">${
+                  p["Qts. Próximo pedido"] || ""
+                }</strong>
               </div>
               <div class="detalle-causa">
-                ${p["Posible Causa de la Ruptura"] || ""}
+                <span>POSIBLE CAUSA DE LA RUPTURA:</span><br>
+                <strong style="font-size: 10px; font-weight: 400;">${
+                  p["Posible Causa de la Ruptura"] || ""
+                }</strong>
               </div>
               <div class="detalle-edita">
-                ${p["Día de edición"] || ""}
+              <span>SE EDITA:</span><br>
+                <strong style="font-size: 10px; font-weight: 400;">${
+                  p["Día de edición"] || ""
+                }</strong>
               </div>
             </div>
       <div class="tarjeta-pie">
