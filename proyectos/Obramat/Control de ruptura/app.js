@@ -15,15 +15,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const botonDescargar = document.getElementById("boton-descargar");
   const contenedor = document.getElementById("contenedor-productos");
 
-  // SUBIDA DE ARCHIVO
   inputArchivo.addEventListener("change", function () {
     const nombre = inputNombre.value.trim();
+    const regexTexto = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+
     if (!nombre) {
       alert("Introduce tu nombre antes de continuar");
+      inputNombre.focus();
       return;
     }
 
-    // Mostrar encabezado alternativo
+    if (!regexTexto.test(nombre)) {
+      alert("El nombre solo puede contener letras y espacios.");
+      inputNombre.focus();
+      return;
+    }
+
     document.getElementById("seccion-inicial").style.display = "none";
     document.getElementById("header-principal").style.display = "none";
     document.getElementById("header-secundario").style.display = "block";
@@ -47,16 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
       cabeceras = Object.keys(filas[0]);
       productos = filas;
 
-      // Mostrar sección colaborador
       document.getElementById("info-final").style.display = "block";
       document.getElementById("campo-nombre").textContent = nombre;
+
       const secciones = [
         ...new Set(filas.map((f) => f["Sección"]).filter(Boolean)),
       ];
       document.getElementById("campo-seccion").textContent =
         secciones.length === 1 ? secciones[0] : "varias";
 
-      // Mostrar tarjetas
       mostrarTarjetas(productos, contenedor);
       botonDescargar.style.display = "inline-block";
     };
@@ -64,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     lector.readAsArrayBuffer(archivo);
   });
 
-  // DESCARGAR ARCHIVO MODIFICADO
   botonDescargar.textContent = "Descargar informe de ruptura";
 
   botonDescargar.addEventListener("click", () => {
@@ -73,27 +78,51 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Validación por tarjeta
+    for (let i = 0; i < productos.length; i++) {
+      const stockInput = document.querySelector(
+        `input.stock-real[data-indice="${i}"]`
+      );
+      const rectificado = document.querySelector(`input[name="r${i}"]:checked`);
+      const pedido = productos[i]["Pedido"];
+
+      if (
+        !stockInput ||
+        stockInput.value.trim() === "" ||
+        isNaN(stockInput.value.trim())
+      ) {
+        alert(
+          `Debes introducir un stock real válido para el producto: ${productos[i]["Descripción"]}`
+        );
+        abrirTarjeta(i);
+        stockInput?.focus();
+        return;
+      }
+
+      if (!rectificado) {
+        alert(
+          `Debes indicar si se ha rectificado o no en el producto: ${productos[i]["Descripción"]}`
+        );
+        abrirTarjeta(i);
+        const radios = document.getElementsByName(`r${i}`);
+        radios[0]?.focus();
+        return;
+      }
+
+      if (pedido !== "pedir" && pedido !== "nopedir") {
+        alert(
+          `Debes seleccionar "Pedir" o "No pedir" en el producto: ${productos[i]["Descripción"]}`
+        );
+        abrirTarjeta(i);
+        const boton = document.querySelectorAll(".btn-decision")[i];
+        boton?.focus();
+        return;
+      }
+    }
+
     const nombreColaborador =
       document.getElementById("campo-nombre").textContent;
     const fecha = new Date().toLocaleDateString("es-ES");
-
-    const datos = productos.map((p, i) => {
-      const stockReal =
-        document.querySelector(`input.stock-real[data-indice="${i}"]`)?.value ||
-        "";
-      const rectificado =
-        document.querySelector(`input[name="r${i}"]:checked`)?.value || "";
-      const pedido = p["Pedido"] || "";
-
-      return [
-        p["Referencia"] || "",
-        p["Descripción"] || "",
-        p["Stock disponible"] || "",
-        stockReal,
-        pedido.toUpperCase(),
-        rectificado,
-      ];
-    });
 
     const docDefinition = {
       pageOrientation: "landscape",
@@ -102,11 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
           columns: [
             { text: "Informe de rupturas", style: "titulo", width: "*" },
-            {
-              image: "logo",
-              width: 30,
-              alignment: "right",
-            },
+            { image: "logo", width: 30, alignment: "right" },
           ],
         },
         {
@@ -188,14 +213,8 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       ],
       styles: {
-        titulo: {
-          fontSize: 18,
-          bold: true,
-          color: "#120949",
-        },
-        subheader: {
-          fontSize: 10,
-        },
+        titulo: { fontSize: 18, bold: true, color: "#120949" },
+        subheader: { fontSize: 10 },
         th: {
           bold: true,
           color: "white",
@@ -215,184 +234,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Convertir imagen <img> en base64 para PDF
-  function getBase64Image(img) {
-    const canvas = document.createElement("canvas");
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    return canvas.toDataURL("image/png");
-  }
-
-  // BOTÓN REINICIAR
   document.getElementById("boton-reiniciar").addEventListener("click", () => {
     const inputArchivo = document.getElementById("archivo-excel");
-    inputArchivo.value = ""; // limpiar el anterior
-    inputArchivo.click(); // abrir selector
+    inputArchivo.value = "";
+    inputArchivo.click();
   });
 });
 
-// MOSTRAR TARJETAS
-function mostrarTarjetas(lista, contenedor) {
-  contenedor.innerHTML = "";
-
-  lista.forEach((p, i) => {
-    const tarjeta = document.createElement("div");
-    tarjeta.className = "tarjeta";
-    tarjeta.dataset.abierta = "false";
-
-    const ventas = [
-      "Ventas M-3",
-      "Ventas M-2",
-      "Ventas M-1",
-      "Ventas M",
-      "Ventas M A-1",
-    ].map((k) => p[k] || 0);
-
-    tarjeta.innerHTML = `
-      <div class="tarjeta-cabecera">
-        <div class="cabecera-izquierda">
-          <div class="nombre">
-            <img class="toggle-icon" src="./recursos/flecha_desplegar.svg" alt="">
-            <strong>${p["Descripción"]}</strong>
-          </div>
-          <div class="ean"><em>EAN:</em> <span>${p["EAN"]}</span></div>
-        </div>
-        <div class="cabecera-derecha">
-          <div class="stock"><span>Stock:</span> ${p["Stock disponible"]} </div>
-          <div class="referencia">${p["Referencia"]}</div>
-        </div>
-      </div>
-      <div class="tarjeta-detalle">
-        <div class="detalle-proveedor">
-          <span>PROVEEDOR:</span> ${p["Proveedor"] || ""}<br>
-          <span>PLAZO DE ENTREGA:</span> ${p["Plazo de Entrega"] || ""} días
-        </div>
-        <div class="detalle-ubicacion">
-          <div>
-            <span>UBICACIÓN FIJA: </span><br>${p["Ubicación fija"] || ""}<br>
-          </div>
-          <div>
-            <span>AVS: </span> <i style="color: #FF5800;">${
-              p["Fecha AVS"] || "-"
-            }</i><br>
-            <span>ÚLTIMA RECEPCIÓN: </span><br>
-            ${p["Última Recepción"] || "-"}>> <strong style="color: #FF5800;">${
-      p["Qts entregadas último pedido"] || "-"
-    }</strong>
-          </div>
-        </div>
-        <div class="detalle-ventas">
-          <span>VENTAS</span>
-          <table>
-            <tr>
-              <th>M-3</th><th>M-2</th><th>M-1</th><th>M</th><th>M A-1</th>
-            </tr>
-            <tr>
-              <td>${p["Ventas M-3"] || 0}</td>
-              <td>${p["Ventas M-2"] || 0}</td>
-              <td>${p["Ventas M-1"] || 0}</td>
-              <td>${p["Ventas M"] || 0}</td>
-              <td>${p["Ventas M A-1"] || 0}</td>
-            </tr>
-          </table>
-        </div>
-        <div class="detalle-pedidos">
-          <span>PEDIDOS EN<br>CURSO</span><br>
-          <strong style="font-size: 25px;">${
-            p["Total Pedido en Curso"] || ""
-          }</strong>
-        </div>
-        <div class="detalle-proximo">
-          <div>
-            <span>PRÓXIMO PEDIDO</span><br>
-            <strong style="font-size: 10px; font-weight: 400;">${
-              p["Próximo pedido"] || ""
-            } >> </strong>
-            <strong style="font-size: 12px; font-weight: 600; color:#120949;">${
-              p["Fecha prevista entrega"] || ""
-            }</strong>
-          </div>
-          <strong style="font-size: 25px;">${
-            p["Qts. Próximo pedido"] || "NO SE ESPERA"
-          }</strong>
-        </div>
-        <div class="detalle-causa">
-          <span>POSIBLE CAUSA DE LA RUPTURA:</span><br>
-          <strong style="font-size: 10px; font-weight: 400;">${
-            p["Posible Causa de la Ruptura"] || ""
-          }</strong>
-        </div>
-        <div class="detalle-edita">
-          <span>SE EDITA:</span><br>
-          <strong style="font-size: 10px; font-weight: 400;">${
-            p["Día de edición"] || ""
-          }</strong>
-        </div>
-      </div>
-      <div class="tarjeta-pie">
-        <label>Stock real: <input class="stock-real" type="text" data-indice="${i}" /></label>
-        <div class="grupo-radio">
-          ¿Rectificado? 
-          <label>Sí<input type="radio" name="r${i}" value="Sí" /></label>
-          <label>No<input type="radio" name="r${i}" value="No" /></label>
-        </div>
-        <button class="btn-decision">Pedir/No pedir</button>
-      </div>
-    `;
-
-    // Estado del botón pedir/no pedir
-    const boton = tarjeta.querySelector(".btn-decision");
-    const estado = p["Pedido"] || "neutro";
-    if (estado === "pedir") {
-      boton.classList.add("estado-pedir");
-      boton.textContent = "Pedir";
-    } else if (estado === "nopedir") {
-      boton.classList.add("estado-nopedir");
-      boton.textContent = "No pedir";
-    } else {
-      boton.classList.add("estado-neutro");
-      boton.textContent = "Pedir/No pedir";
-    }
-
-    boton.addEventListener("click", () => {
-      const actual = productos[i]["Pedido"];
-      if (actual === "pedir") {
-        productos[i]["Pedido"] = "nopedir";
-        boton.className = "btn-decision estado-nopedir";
-        boton.textContent = "No pedir";
-      } else {
-        productos[i]["Pedido"] = "pedir";
-        boton.className = "btn-decision estado-pedir";
-        boton.textContent = "Pedir";
-      }
-
-      // Añadir animación pulse
-      boton.classList.add("animar");
-      setTimeout(() => boton.classList.remove("animar"), 300);
-    });
-
-    const cabecera = tarjeta.querySelector(".tarjeta-cabecera");
-    const icono = tarjeta.querySelector(".toggle-icon");
-
-    cabecera.addEventListener("click", () => {
-      const abierta = tarjeta.dataset.abierta === "true";
-
-      // Cerrar todas las tarjetas primero
-      document.querySelectorAll(".tarjeta").forEach((t) => {
-        t.dataset.abierta = "false";
-        const icono = t.querySelector(".toggle-icon");
-        if (icono) icono.style.transform = "rotate(0deg)";
-      });
-
-      // Si la actual no estaba abierta, la abrimos
-      if (!abierta) {
-        tarjeta.dataset.abierta = "true";
-        icono.style.transform = "rotate(180deg)";
-      }
-    });
-
-    contenedor.appendChild(tarjeta);
+function abrirTarjeta(index) {
+  document.querySelectorAll(".tarjeta").forEach((t, i) => {
+    t.dataset.abierta = i === index ? "true" : "false";
+    const icono = t.querySelector(".toggle-icon");
+    if (icono)
+      icono.style.transform = i === index ? "rotate(180deg)" : "rotate(0deg)";
   });
 }
