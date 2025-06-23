@@ -140,7 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     };
 
-    pdfMake.createPdf(contenido).open();
+    pdfMake.createPdf(contenido).getBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      window.open(url, "_blank");
+    });
   });
 
   // Convertir imagen <img> en base64 para PDF
