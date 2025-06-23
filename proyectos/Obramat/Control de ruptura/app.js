@@ -141,15 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     pdfMake.createPdf(contenido).getBlob((blob) => {
-      pdfMake.createPdf(contenido).getBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.textContent = "Ver informe online";
-        link.target = "_blank";
-        link.style = "display:block; margin:10px auto; text-align:center;";
-        document.body.appendChild(link);
-      });
+      const url = URL.createObjectURL(blob);
+      window.open(url, "_blank");
     });
   });
 
