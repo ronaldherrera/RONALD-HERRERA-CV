@@ -477,3 +477,13 @@ input.stock-real:focus{
   margin-top: 20px;
   margin-bottom: 50px;
 }
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.btn-decision.animar {
+  animation: pulse 0.3s ease;
+}

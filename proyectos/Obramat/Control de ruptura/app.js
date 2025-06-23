@@ -229,6 +229,10 @@ function mostrarTarjetas(lista, contenedor) {
         boton.className = "btn-decision estado-pedir";
         boton.textContent = "Pedir";
       }
+
+      // Añadir animación pulse
+      boton.classList.add("animar");
+      setTimeout(() => boton.classList.remove("animar"), 300);
     });
 
     const cabecera = tarjeta.querySelector(".tarjeta-cabecera");
@@ -236,9 +240,19 @@ function mostrarTarjetas(lista, contenedor) {
 
     cabecera.addEventListener("click", () => {
       const abierta = tarjeta.dataset.abierta === "true";
-      tarjeta.dataset.abierta = !abierta;
-      icono.style.transform = abierta ? "rotate(0deg)" : "rotate(180deg)";
-      icono.style.transition = "transform 0.6s ease";
+
+      // Cerrar todas las tarjetas primero
+      document.querySelectorAll(".tarjeta").forEach((t) => {
+        t.dataset.abierta = "false";
+        const icono = t.querySelector(".toggle-icon");
+        if (icono) icono.style.transform = "rotate(0deg)";
+      });
+
+      // Si la actual no estaba abierta, la abrimos
+      if (!abierta) {
+        tarjeta.dataset.abierta = "true";
+        icono.style.transform = "rotate(180deg)";
+      }
     });
 
     contenedor.appendChild(tarjeta);
