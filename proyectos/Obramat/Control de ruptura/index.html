@@ -6,6 +6,7 @@
     <title>Control de Ruptura Obramat</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
   </head>
   <body>
     <header>
@@ -13,8 +14,15 @@
     </header>
 
     <main>
-      <h2>Control de ruptura</h2>
-      <p id="info-usuario">Introduce tu nombre y sube un archivo Excel</p>
+      <div>
+        <h2>Control de ruptura</h2>
+        <div id="animacion-lupa" style="width: 100px; height: 100px"></div>
+        <p id="info-usuario">
+          <strong>1º </strong>Introduce tu nombre<br /><strong>2º </strong>Sube
+          un archivo .xls
+        </p>
+      </div>
+
       <div id="seccion-inicial">
         <input type="text" id="nombre-usuario" placeholder="¿Quién eres?" />
         <br />

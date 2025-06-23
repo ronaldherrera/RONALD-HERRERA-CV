@@ -1,3 +1,11 @@
+lottie.loadAnimation({
+  container: document.getElementById("animacion-lupa"),
+  renderer: "svg",
+  loop: true,
+  autoplay: true,
+  path: "./recursos/lottie-buscar.json", // ruta a tu archivo
+});
+
 let cabeceras = [];
 let productos = [];
 
