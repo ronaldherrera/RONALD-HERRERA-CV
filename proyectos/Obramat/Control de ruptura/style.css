@@ -446,12 +446,13 @@ input.stock-real:focus{
   border-radius: 5px;
   cursor: pointer;
   color: white;
-  width: 80px;
+  width: 90px;
   font-size: 10px;
 }
 
 .estado-neutro {
   background-color: #120949;
+  font-size: 8px;
 }
 
 .estado-pedir {
