@@ -141,17 +141,15 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     pdfMake.createPdf(contenido).getBlob((blob) => {
-      const url = URL.createObjectURL(blob);
-      const win = window.open("", "_blank");
-      win.document.write(`
-  <!DOCTYPE html>
-  <html>
-    <head><title>Informe de ruptura</title></head>
-    <body style="margin:0">
-      <iframe src="${url}" width="100%" height="100%" style="border:none;"></iframe>
-    </body>
-  </html>
-`);
+      pdfMake.createPdf(contenido).getBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.textContent = "Ver informe online";
+        link.target = "_blank";
+        link.style = "display:block; margin:10px auto; text-align:center;";
+        document.body.appendChild(link);
+      });
     });
   });
 
