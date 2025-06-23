@@ -104,8 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
             { text: "Informe de rupturas", style: "titulo", width: "*" },
             {
               image: "logo",
-              width: 80,
-              alignment: "right",
+              width: 30,
+              alignment: "left",
             },
           ],
         },
@@ -206,7 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       images: {
         logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAADSUlEQVR4nNXZPUwTYRgH8P97dQBquEtNMA4csUKMST8Y3cSExOqAkwkmJDChAw6yyGKAgUQYdMGFBYkY4mhMmiYsGEN0lMIAMZC0xAECpm3SyoKvQzkod+/X3ZVc/U/c3Xu9Hw/PPXcAwUmMplRPiJBxCnQDMNAAIcAKNPrusJxZONkGIi0PxkHpRKAyUQiZ+F1JT5IrTakhSsh80B5Z/lJ6VwMhg0FDVBIiZFyjQE/QEJVQoFsLGuEixiWVVWbLn4uGIF9plq5Rwvabv/Di5k/fIF6mN7sws9UpXafUBjObnZje6vKNYkUVCihigYsBu4ECCtipmSenX9cTXAvVjTDef3wpPUfYs7oextORh9CNMEaGXwOoggH46mE79FPmFeKJG9LzhJWNJ6IAgMcDvZidGz3d76fCIqjZcdU7NpY8+27rAbb3qL2isZPieMKaZtu5bT9gO/Tt3KjjR1+3yvoBs6D9A73O6yWue8fqepi53w1YFQpAepNxsboeFvaQCtgNFADavbZBXNLsMrBbKFAtkKhvuXO21bgsxVpgAOfm8OpBBKsHEVdQK7FEFPncHvOYr8rWgmsr7BUKiCcCFxtLqmMBJxhwDwXEE4GLNU1xs7NSC/YCBcQTgUSa71PWgcNK2vWFrORze9IBz0uxWEb02iPmMWZl4y5bwB6vUEA8EZjYdg8tUM/w5ju7sgqTYCO74xpRKpax+jUrXeeqsiqTYHrqA0aG30jXWSkVy+i7N4b05+/StbyJwHwo6Lr8gbCb30d67RsAYHbuuXCtBV3PbqO9o024FuBPBHZl4/LKrq9tAwCWFpeFFa6FAmrtw3tHcGDjySh0g/22ZcX+OOSB7VDr3GKhLPx83kRwYPVWMRSotoA9S4vLuHP72SmEBT07n/3srw1rIjiwrBduezYYAGt/X2oMu7l9LrS6Tt4KrMo6bjD7rzKs5HPOyp5BttF9a0h4/np2B/2Sa5iMG9FTZa2by2t4r4DnHIyJ4MQqTIJSqaLIYkelDVg9y32RacT8T3+fhUaBQtAI1Wga8CNohEoIxRftmNLJoCEqOQ7Rea1wlFlBo4MpnSyUMwvE2jaaUkMhkEFKGua/NwVCsXYMOlE4yqwAwD+4DGJwefgiLgAAAABJRU5ErkJggg==",
-        fit: [60, 60],
       },
     };
 
