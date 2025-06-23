@@ -9,27 +9,68 @@
     <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
   </head>
   <body>
-    <header>
+    <header id="header-principal">
       <img src="./recursos/logo m.svg" alt="" />
     </header>
 
+    <header id="header-secundario" style="display: none">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #120949;
+
+          color: white;
+        "
+      >
+        <div>
+          <strong>Control de ruptura</strong>
+          <span
+            id="fecha-header"
+            style="color: #ff5800; font-weight: 400; margin-left: 8px"
+          ></span>
+        </div>
+        <img src="./recursos/logo m.svg" alt="logo" style="height: 30px" />
+      </div>
+    </header>
+
     <main>
-      <div>
-        <h2>Control de ruptura</h2>
-        <div id="animacion-lupa" style="width: 100px; height: 100px"></div>
-        <p id="info-usuario">
-          <strong>1º </strong>Introduce tu nombre<br /><strong>2º </strong>Sube
-          un archivo .xls
-        </p>
-      </div>
-
       <div id="seccion-inicial">
-        <input type="text" id="nombre-usuario" placeholder="¿Quién eres?" />
-        <br />
-        <label for="archivo-excel" class="boton-subir">Sube tu archivo</label>
-        <input type="file" id="archivo-excel" accept=".xls,.xlsx" />
+        <div class="inicio">
+          <h2>Control de ruptura</h2>
+          <div id="animacion-lupa" style="width: 100px; height: 100px"></div>
+          <p id="info-usuario">
+            <strong>1º </strong>Introduce tu nombre<br /><strong>2º </strong
+            >Sube un archivo .xls
+          </p>
+        </div>
+
+        <div class="inicio">
+          <input type="text" id="nombre-usuario" placeholder="¿Quién eres?" />
+          <br />
+          <label for="archivo-excel" class="boton-subir">Sube tu archivo</label>
+          <input type="file" id="archivo-excel" accept=".xls,.xlsx" />
+        </div>
       </div>
 
+      <div id="info-final" style="display: none">
+        <div class="info-linea">
+          <span>Colaborador/a:</span>
+          <div id="campo-nombre" class="info-output"></div>
+        </div>
+
+        <div class="info-linea fila-secundaria">
+          <div class="info-seccion">
+            <span>Sección:</span>
+            <div id="campo-seccion" class="info-output"></div>
+          </div>
+          <button id="boton-reiniciar" class="boton-reiniciar">
+            Volver a subir archivo
+          </button>
+        </div>
+      </div>
+      <span class="productos-titulo">Productos</span>
       <div id="contenedor-productos"></div>
       <button id="boton-descargar" style="display: none">
         Descargar Excel Modificado
