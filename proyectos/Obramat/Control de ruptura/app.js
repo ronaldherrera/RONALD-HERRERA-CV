@@ -66,25 +66,95 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // DESCARGAR ARCHIVO MODIFICADO
   botonDescargar.addEventListener("click", () => {
-    const actualizados = productos.map((p, i) => {
-      const inputStock = document.querySelector(
-        `input.stock-real[data-indice="${i}"]`
-      );
-      const radio = document.querySelector(`input[name="r${i}"]:checked`);
-      return {
-        ...p,
-        "Stock real": inputStock?.value || "",
-        Rectificado: radio?.value || "",
-        Pedido: productos[i]["Pedido"] || "",
-      };
-    });
+    fetch("./recursos/Control_ruptura_plantilla.xlsx")
+      .then((res) => res.arrayBuffer())
+      .then((data) => {
+        const nombreColaborador =
+          document.getElementById("campo-nombre").textContent;
+        const fecha = new Date().toLocaleDateString("es-ES");
 
-    const hoja = XLSX.utils.json_to_sheet(actualizados, {
-      header: cabeceras.concat(["Stock real", "Rectificado", "Pedido"]),
-    });
-    const libro = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(libro, hoja, "Control actualizado");
-    XLSX.writeFile(libro, "control_ruptura_modificado.xlsx");
+        const workbook = XLSX.read(data, { type: "array" });
+        const hoja = workbook.Sheets[workbook.SheetNames[0]];
+
+        // Escribir nombre y fecha en la plantilla (A1 y F1 son posiciones estándar)
+        hoja["B1"] = { t: "s", v: nombreColaborador };
+        hoja["G1"] = { t: "s", v: fecha };
+
+        // Orden esperado de columnas
+        const columnasPlantilla = [
+          "Sección",
+          "Referencia",
+          "Stock disponible",
+          "Stock real",
+          "Pedido",
+          "Rectificado",
+          "EAN",
+          "Descripción",
+          "Proveedor",
+          "Plazo de Entrega",
+          "Ubicación fija",
+          "Fecha AVS",
+          "Última Recepción",
+          "Qts entregadas último pedido",
+          "Ventas M-3",
+          "Ventas M-2",
+          "Ventas M-1",
+          "Ventas M",
+          "Ventas M A-1",
+          "Total Pedido en Curso",
+          "Próximo pedido",
+          "Qts. Próximo pedido",
+          "Fecha prevista entrega",
+          "Posible Causa de la Ruptura",
+          "Día de edición",
+        ];
+
+        const datosFinales = productos.map((p, i) => {
+          const inputStock = document.querySelector(
+            `input.stock-real[data-indice="${i}"]`
+          );
+          const radio = document.querySelector(`input[name="r${i}"]:checked`);
+          return {
+            Sección: p["Sección"] || "",
+            Referencia: p["Referencia"] || "",
+            "Stock disponible": p["Stock disponible"] || "",
+            "Stock real": inputStock?.value || "",
+            Pedido: p["Pedido"] || "",
+            Rectificado: radio?.value || "",
+            EAN: p["EAN"] || "",
+            Descripción: p["Descripción"] || "",
+            Proveedor: p["Proveedor"] || "",
+            "Plazo de Entrega": p["Plazo de Entrega"] || "",
+            "Ubicación fija": p["Ubicación fija"] || "",
+            "Fecha AVS": p["Fecha AVS"] || "",
+            "Última Recepción": p["Última Recepción"] || "",
+            "Qts entregadas último pedido":
+              p["Qts entregadas último pedido"] || "",
+            "Ventas M-3": p["Ventas M-3"] || 0,
+            "Ventas M-2": p["Ventas M-2"] || 0,
+            "Ventas M-1": p["Ventas M-1"] || 0,
+            "Ventas M": p["Ventas M"] || 0,
+            "Ventas M A-1": p["Ventas M A-1"] || 0,
+            "Total Pedido en Curso": p["Total Pedido en Curso"] || "",
+            "Próximo pedido": p["Próximo pedido"] || "",
+            "Qts. Próximo pedido": p["Qts. Próximo pedido"] || "",
+            "Fecha prevista entrega": p["Fecha prevista entrega"] || "",
+            "Posible Causa de la Ruptura":
+              p["Posible Causa de la Ruptura"] || "",
+            "Día de edición": p["Día de edición"] || "",
+          };
+        });
+
+        // Insertar los datos desde la fila 3
+        XLSX.utils.sheet_add_json(hoja, datosFinales, {
+          header: columnasPlantilla,
+          skipHeader: true,
+          origin: "A3",
+        });
+
+        // Guardar archivo
+        XLSX.writeFile(workbook, "control_ruptura_modificado.xlsx");
+      });
   });
 
   // BOTÓN REINICIAR
