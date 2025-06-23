@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
               image: "logo",
               width: 30,
-              alignment: "left",
+              alignment: "right",
             },
           ],
         },
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   pedido,
                   p["EAN"] || "",
                   p["Descripción"] || "",
-                  p["AVS"] || p["Ubicación fija"] || "",
+                  p["AVS"] || "-",
                   p["Última Recepción"] || "",
                   p["Qts entregadas último pedido"] || "",
                   p["Qts. Próximo pedido"] || "",
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
         th: {
           bold: true,
           color: "white",
-          fillColor: "#FF5800",
+          fillColor: "#120949",
           fontSize: 9,
           alignment: "center",
         },
