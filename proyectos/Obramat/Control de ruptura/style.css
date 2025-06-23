@@ -408,7 +408,7 @@ input.stock-real {
   padding: 4px 2px 2px;
   border-radius: 3px;
   width: 30px;
-  height: 10px;
+  height: 15px;
   color: black;
   font-size: 16px;
 }
@@ -440,13 +440,13 @@ input.stock-real:focus{
 }
 
 .btn-decision {
-  padding: 5px;
+  height: 22px;
   font-weight: 400;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   color: white;
-  width: 80px;
+  width: 90px;
   font-size: 10px;
 }
 
