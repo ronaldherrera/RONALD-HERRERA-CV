@@ -65,97 +65,144 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // DESCARGAR ARCHIVO MODIFICADO
+  botonDescargar.textContent = "Descargar informe de ruptura";
+
   botonDescargar.addEventListener("click", () => {
-    fetch("./recursos/Control_ruptura_plantilla.xlsx")
-      .then((res) => res.arrayBuffer())
-      .then((data) => {
-        const nombreColaborador =
-          document.getElementById("campo-nombre").textContent;
-        const fecha = new Date().toLocaleDateString("es-ES");
+    const nombreColaborador =
+      document.getElementById("campo-nombre").textContent;
+    const fecha = new Date().toLocaleDateString("es-ES");
 
-        const workbook = XLSX.read(data, { type: "array" });
-        const hoja = workbook.Sheets[workbook.SheetNames[0]];
+    const datos = productos.map((p, i) => {
+      const stockReal =
+        document.querySelector(`input.stock-real[data-indice="${i}"]`)?.value ||
+        "";
+      const rectificado =
+        document.querySelector(`input[name="r${i}"]:checked`)?.value || "";
+      const pedido = p["Pedido"] || "";
 
-        // Escribir nombre y fecha en la plantilla (A1 y F1 son posiciones estándar)
-        hoja["C1"] = { t: "s", v: nombreColaborador };
-        hoja["G1"] = { t: "s", v: fecha };
+      return [
+        p["Referencia"] || "",
+        p["Descripción"] || "",
+        p["Stock disponible"] || "",
+        stockReal,
+        pedido.toUpperCase(),
+        rectificado,
+        p["Proveedor"] || "",
+        p["Plazo de Entrega"] || "",
+        p["Ubicación fija"] || "",
+        p["Fecha AVS"] || "",
+        p["Última Recepción"] || "",
+        p["Qts entregadas último pedido"] || "",
+        p["Ventas M-3"] || 0,
+        p["Ventas M-2"] || 0,
+        p["Ventas M-1"] || 0,
+        p["Ventas M"] || 0,
+        p["Ventas M A-1"] || 0,
+        p["Total Pedido en Curso"] || "",
+        p["Próximo pedido"] || "",
+        p["Qts. Próximo pedido"] || "",
+        p["Fecha prevista entrega"] || "",
+        p["Posible Causa de la Ruptura"] || "",
+        p["Día de edición"] || "",
+      ];
+    });
 
-        // Orden esperado de columnas
-        const columnasPlantilla = [
-          "Sección",
-          "Referencia",
-          "Stock disponible",
-          "Stock real",
-          "Pedido",
-          "Rectificado",
-          "EAN",
-          "Descripción",
-          "Proveedor",
-          "Plazo de Entrega",
-          "Ubicación fija",
-          "Fecha AVS",
-          "Última Recepción",
-          "Qts entregadas último pedido",
-          "Ventas M-3",
-          "Ventas M-2",
-          "Ventas M-1",
-          "Ventas M",
-          "Ventas M A-1",
-          "Total Pedido en Curso",
-          "Próximo pedido",
-          "Qts. Próximo pedido",
-          "Fecha prevista entrega",
-          "Posible Causa de la Ruptura",
-          "Día de edición",
-        ];
+    const contenido = {
+      content: [
+        {
+          image: "logo",
+          width: 80,
+          alignment: "left",
+          margin: [0, 0, 0, 10],
+        },
+        {
+          text: "CONTROL DE RUPTURA",
+          style: "header",
+        },
+        {
+          text: `Colaborador/a: ${nombreColaborador} – Fecha: ${fecha}`,
+          style: "subheader",
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: Array(23).fill("auto"),
+            body: [
+              [
+                "Referencia",
+                "Descripción",
+                "Stock disp.",
+                "Stock real",
+                "Pedido",
+                "Rectif.",
+                "Proveedor",
+                "Plazo",
+                "Ubicación",
+                "Fecha AVS",
+                "Últ. recepción",
+                "Qts. últ. pedido",
+                "V M-3",
+                "V M-2",
+                "V M-1",
+                "V M",
+                "V M A-1",
+                "En curso",
+                "Próximo pedido",
+                "Qts. próxima",
+                "F. prevista",
+                "Causa ruptura",
+                "Editado",
+              ],
+              ...datos,
+            ],
+          },
+          layout: {
+            fillColor: function (rowIndex, node, columnIndex) {
+              if (rowIndex === 0) return "#FF5800";
+              const pedido = node.table.body[rowIndex][4];
+              if (pedido === "PEDIR") return "#ffe7d3";
+              if (pedido === "NOPEDIR") return "#e2e2e2";
+              return null;
+            },
+          },
+          fontSize: 7,
+          margin: [0, 10, 0, 0],
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 14,
+          bold: true,
+          color: "#120949",
+          margin: [0, 0, 0, 5],
+        },
+        subheader: {
+          fontSize: 9,
+          bold: false,
+          margin: [0, 0, 0, 10],
+        },
+      },
+      images: {
+        logo: getBase64Image(document.querySelector("#header-principal img")),
+      },
+      defaultStyle: {
+        font: "Helvetica",
+      },
+      pageOrientation: "landscape",
+    };
 
-        const datosFinales = productos.map((p, i) => {
-          const inputStock = document.querySelector(
-            `input.stock-real[data-indice="${i}"]`
-          );
-          const radio = document.querySelector(`input[name="r${i}"]:checked`);
-          return {
-            Sección: p["Sección"] || "",
-            Referencia: p["Referencia"] || "",
-            "Stock disponible": p["Stock disponible"] || "",
-            "Stock real": inputStock?.value || "",
-            Pedido: p["Pedido"] || "",
-            Rectificado: radio?.value || "",
-            EAN: p["EAN"] || "",
-            Descripción: p["Descripción"] || "",
-            Proveedor: p["Proveedor"] || "",
-            "Plazo de Entrega": p["Plazo de Entrega"] || "",
-            "Ubicación fija": p["Ubicación fija"] || "",
-            "Fecha AVS": p["Fecha AVS"] || "",
-            "Última Recepción": p["Última Recepción"] || "",
-            "Qts entregadas último pedido":
-              p["Qts entregadas último pedido"] || "",
-            "Ventas M-3": p["Ventas M-3"] || 0,
-            "Ventas M-2": p["Ventas M-2"] || 0,
-            "Ventas M-1": p["Ventas M-1"] || 0,
-            "Ventas M": p["Ventas M"] || 0,
-            "Ventas M A-1": p["Ventas M A-1"] || 0,
-            "Total Pedido en Curso": p["Total Pedido en Curso"] || "",
-            "Próximo pedido": p["Próximo pedido"] || "",
-            "Qts. Próximo pedido": p["Qts. Próximo pedido"] || "",
-            "Fecha prevista entrega": p["Fecha prevista entrega"] || "",
-            "Posible Causa de la Ruptura":
-              p["Posible Causa de la Ruptura"] || "",
-            "Día de edición": p["Día de edición"] || "",
-          };
-        });
-
-        // Insertar los datos desde la fila 3
-        XLSX.utils.sheet_add_json(hoja, datosFinales, {
-          header: columnasPlantilla,
-          skipHeader: true,
-          origin: "A3",
-        });
-
-        // Guardar archivo
-        XLSX.writeFile(workbook, "control_ruptura_modificado.xlsx");
-      });
+    pdfMake.createPdf(contenido).download("informe_ruptura.pdf");
   });
+
+  // Convertir imagen <img> en base64 para PDF
+  function getBase64Image(img) {
+    const canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    return canvas.toDataURL("image/png");
+  }
 
   // BOTÓN REINICIAR
   document.getElementById("boton-reiniciar").addEventListener("click", () => {
