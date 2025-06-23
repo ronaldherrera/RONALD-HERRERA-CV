@@ -142,10 +142,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     pdfMake.createPdf(contenido).getBlob((blob) => {
       const url = URL.createObjectURL(blob);
-      const newWindow = window.open();
-      newWindow.document.write(
-        `<iframe src="${url}" width="100%" height="100%" style="border:none;"></iframe>`
-      );
+      const win = window.open("", "_blank");
+      win.document.write(`
+  <!DOCTYPE html>
+  <html>
+    <head><title>Informe de ruptura</title></head>
+    <body style="margin:0">
+      <iframe src="${url}" width="100%" height="100%" style="border:none;"></iframe>
+    </body>
+  </html>
+`);
     });
   });
 
