@@ -142,7 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     pdfMake.createPdf(contenido).getBlob((blob) => {
       const url = URL.createObjectURL(blob);
-      window.open(url, "_blank");
+      const newWindow = window.open();
+      newWindow.document.write(
+        `<iframe src="${url}" width="100%" height="100%" style="border:none;"></iframe>`
+      );
     });
   });
 
