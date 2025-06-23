@@ -68,6 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
   botonDescargar.textContent = "Descargar informe de ruptura";
 
   botonDescargar.addEventListener("click", () => {
+    if (!productos.length) {
+      alert("Primero debes subir un archivo.");
+      return;
+    }
+
     const nombreColaborador =
       document.getElementById("campo-nombre").textContent;
     const fecha = new Date().toLocaleDateString("es-ES");
@@ -87,36 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
         stockReal,
         pedido.toUpperCase(),
         rectificado,
-        p["Proveedor"] || "",
-        p["Plazo de Entrega"] || "",
-        p["Ubicación fija"] || "",
-        p["Fecha AVS"] || "",
-        p["Última Recepción"] || "",
-        p["Qts entregadas último pedido"] || "",
-        p["Ventas M-3"] || 0,
-        p["Ventas M-2"] || 0,
-        p["Ventas M-1"] || 0,
-        p["Ventas M"] || 0,
-        p["Ventas M A-1"] || 0,
-        p["Total Pedido en Curso"] || "",
-        p["Próximo pedido"] || "",
-        p["Qts. Próximo pedido"] || "",
-        p["Fecha prevista entrega"] || "",
-        p["Posible Causa de la Ruptura"] || "",
-        p["Día de edición"] || "",
       ];
     });
 
     const contenido = {
       content: [
         {
-          image: "logo",
-          width: 80,
-          alignment: "left",
-          margin: [0, 0, 0, 10],
-        },
-        {
-          text: "CONTROL DE RUPTURA",
+          text: "INFORME DE RUPTURA",
           style: "header",
         },
         {
@@ -126,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
           table: {
             headerRows: 1,
-            widths: Array(23).fill("auto"),
+            widths: ["auto", "*", "auto", "auto", "auto", "auto"],
             body: [
               [
                 "Referencia",
@@ -135,37 +117,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Stock real",
                 "Pedido",
                 "Rectif.",
-                "Proveedor",
-                "Plazo",
-                "Ubicación",
-                "Fecha AVS",
-                "Últ. recepción",
-                "Qts. últ. pedido",
-                "V M-3",
-                "V M-2",
-                "V M-1",
-                "V M",
-                "V M A-1",
-                "En curso",
-                "Próximo pedido",
-                "Qts. próxima",
-                "F. prevista",
-                "Causa ruptura",
-                "Editado",
               ],
               ...datos,
             ],
           },
-          layout: {
-            fillColor: function (rowIndex, node, columnIndex) {
-              if (rowIndex === 0) return "#FF5800";
-              const pedido = node.table.body[rowIndex][4];
-              if (pedido === "PEDIR") return "#ffe7d3";
-              if (pedido === "NOPEDIR") return "#e2e2e2";
-              return null;
-            },
-          },
-          fontSize: 7,
+          layout: "lightHorizontalLines",
+          fontSize: 8,
           margin: [0, 10, 0, 0],
         },
       ],
@@ -178,17 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         subheader: {
           fontSize: 9,
-          bold: false,
           margin: [0, 0, 0, 10],
         },
       },
-      images: {
-        logo: getBase64Image(document.querySelector("#header-principal img")),
-      },
-      defaultStyle: {
-        font: "Helvetica",
-      },
-      pageOrientation: "landscape",
     };
 
     pdfMake.createPdf(contenido).open();
