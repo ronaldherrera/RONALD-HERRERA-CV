@@ -253,14 +253,26 @@ label.boton-subir {
 
 
 .tarjeta-detalle {
-  display: grid;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  display: grid; /* se mantiene pero no se verá mientras esté colapsada */
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, auto);
   gap: 10px;
-  padding: 10px;
+  padding: 0px;
   background-color: #F1F1F1;
   text-align: start;
 }
+
+.tarjeta[data-abierta="true"] .tarjeta-detalle {
+  padding: 10px;
+  max-height: 1000px; /* lo suficientemente grande para cualquier tarjeta */
+  opacity: 1;
+}
+
+
 
 .tarjeta-detalle > div {
   padding: 0.5rem;
@@ -398,7 +410,8 @@ input.stock-real {
   width: 30px;
   height: 10px;
   color: black;
-  font-size: 12px;
+  font-size: 16px;
+  transform: scale(0.85);
 }
 
 input.stock-real:focus{

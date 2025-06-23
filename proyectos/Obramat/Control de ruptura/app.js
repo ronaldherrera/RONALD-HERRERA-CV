@@ -231,16 +231,16 @@ function mostrarTarjetas(lista, contenedor) {
       }
     });
 
-    tarjeta.querySelector(".tarjeta-cabecera").addEventListener("click", () => {
+    const cabecera = tarjeta.querySelector(".tarjeta-cabecera");
+    const icono = tarjeta.querySelector(".toggle-icon");
+
+    cabecera.addEventListener("click", () => {
       const abierta = tarjeta.dataset.abierta === "true";
       tarjeta.dataset.abierta = !abierta;
-      tarjeta.querySelector(".tarjeta-detalle").style.display = abierta
-        ? "none"
-        : "grid";
-      tarjeta.querySelector(".toggle-icon").textContent = abierta ? "🔽" : "🔼";
+      icono.style.transform = abierta ? "rotate(0deg)" : "rotate(180deg)";
+      icono.style.transition = "transform 0.6s ease";
     });
 
-    tarjeta.querySelector(".tarjeta-detalle").style.display = "none";
     contenedor.appendChild(tarjeta);
   });
 }
