@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       },
       images: {
-        logo: "./recursos/logo m.svg", // ← Cámbialo por tu ruta real
+        logo: "./recursos/icono.png", // ← Cámbialo por tu ruta real
       },
     };
 
