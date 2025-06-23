@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ];
     });
 
-    const contenido = {
+    const docDefinition = {
       pageOrientation: "landscape",
       pageMargins: [20, 30, 20, 30],
       content: [
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       },
       images: {
-        logo: "./recursos/icono.png", // ← Cámbialo por tu ruta real
+        logo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAiEAAABQCAYAAADP9qXKAAAUrUlEQVR4nO3df0zUd57H8ae9blsUhy...", // ← pega aquí el base64 completo
       },
     };
 
