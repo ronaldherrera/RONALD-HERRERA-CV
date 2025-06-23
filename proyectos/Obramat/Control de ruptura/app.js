@@ -96,47 +96,116 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const contenido = {
+      pageOrientation: "landscape",
+      pageMargins: [20, 30, 20, 30],
       content: [
         {
-          text: "INFORME DE RUPTURA",
-          style: "header",
+          columns: [
+            { text: "Informe de rupturas", style: "titulo", width: "*" },
+            {
+              image: "logo",
+              width: 80,
+              alignment: "right",
+            },
+          ],
         },
         {
-          text: `Colaborador/a: ${nombreColaborador} – Fecha: ${fecha}`,
+          text: `Colaborador/a: ${nombreColaborador}   –   Fecha: ${fecha}`,
           style: "subheader",
+          margin: [0, 0, 0, 15],
         },
         {
           table: {
             headerRows: 1,
-            widths: ["auto", "*", "auto", "auto", "auto", "auto"],
+            widths: [
+              "auto",
+              "auto",
+              "auto",
+              "auto",
+              "auto",
+              "auto",
+              "auto",
+              "*",
+              "auto",
+              "auto",
+              "auto",
+              "auto",
+              "auto",
+            ],
             body: [
               [
-                "Referencia",
-                "Descripción",
-                "Stock disp.",
-                "Stock real",
-                "Pedido",
-                "Rectif.",
+                { text: "Sección", style: "th" },
+                { text: "Referencia", style: "th" },
+                { text: "Stock disp.", style: "th" },
+                { text: "Stock real", style: "th" },
+                { text: "Pedir", style: "th" },
+                { text: "Rectif.", style: "th" },
+                { text: "EAN", style: "th" },
+                { text: "Descripción", style: "th" },
+                { text: "AVS", style: "th" },
+                { text: "Últ. recepción", style: "th" },
+                { text: "Qts últ. pedido", style: "th" },
+                { text: "Qts próxim.", style: "th" },
+                { text: "Pedido curso", style: "th" },
               ],
-              ...datos,
+              ...productos.map((p, i) => {
+                const stockReal =
+                  document.querySelector(`input.stock-real[data-indice="${i}"]`)
+                    ?.value || "";
+                const rectificado =
+                  document.querySelector(`input[name="r${i}"]:checked`)
+                    ?.value || "";
+                const pedido = p["Pedido"]?.toUpperCase() || "";
+
+                return [
+                  p["Sección"] || "",
+                  p["Referencia"] || "",
+                  p["Stock disponible"] || "",
+                  stockReal,
+                  pedido,
+                  rectificado,
+                  p["EAN"] || "",
+                  p["Descripción"] || "",
+                  p["AVS"] || p["Ubicación fija"] || "",
+                  p["Última Recepción"] || "",
+                  p["Qts entregadas último pedido"] || "",
+                  p["Qts. Próximo pedido"] || "",
+                  p["Total Pedido en Curso"] || "",
+                ].map((celda) => ({
+                  text: celda,
+                  fillColor: i % 2 === 0 ? "#FAFAFA" : null,
+                  alignment: "center",
+                  fontSize: 8,
+                }));
+              }),
             ],
           },
-          layout: "lightHorizontalLines",
-          fontSize: 8,
-          margin: [0, 10, 0, 0],
+          layout: {
+            fillColor: (rowIndex) => (rowIndex === 0 ? "#FF5800" : null),
+            hLineColor: () => "#CCCCCC",
+            vLineColor: () => "#CCCCCC",
+          },
         },
       ],
       styles: {
-        header: {
-          fontSize: 14,
+        titulo: {
+          fontSize: 18,
           bold: true,
           color: "#120949",
-          margin: [0, 0, 0, 5],
         },
         subheader: {
-          fontSize: 9,
-          margin: [0, 0, 0, 10],
+          fontSize: 10,
         },
+        th: {
+          bold: true,
+          color: "white",
+          fillColor: "#FF5800",
+          fontSize: 9,
+          alignment: "center",
+        },
+      },
+      images: {
+        logo: "https://tudominio.com/ruta-al-logo.png", // ← Cámbialo por tu ruta real
       },
     };
 
