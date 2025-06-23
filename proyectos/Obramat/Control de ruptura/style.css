@@ -102,6 +102,7 @@ label.boton-subir {
   padding: 10px;
   font-weight: 800;
   margin-top: 20px;
+  padding-bottom: 0px;
 }
 
 
@@ -120,6 +121,7 @@ label.boton-subir {
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 20px;
 }
 
 /* Contenedor para sección */
@@ -167,7 +169,6 @@ label.boton-subir {
   font-weight: 700;
   margin-bottom: 2px;
   font-size: 20px;
-  
 }
 
 .tarjeta {
@@ -462,5 +463,5 @@ input.stock-real:focus{
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.212);
   align-self: center;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 }
