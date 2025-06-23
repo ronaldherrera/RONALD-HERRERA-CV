@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     };
 
-    pdfMake.createPdf(contenido).download("informe_ruptura.pdf");
+    pdfMake.createPdf(contenido).open();
   });
 
   // Convertir imagen <img> en base64 para PDF
