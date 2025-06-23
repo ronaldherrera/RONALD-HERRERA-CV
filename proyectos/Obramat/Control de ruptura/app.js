@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const hoja = workbook.Sheets[workbook.SheetNames[0]];
 
         // Escribir nombre y fecha en la plantilla (A1 y F1 son posiciones estándar)
-        hoja["B1"] = { t: "s", v: nombreColaborador };
+        hoja["C1"] = { t: "s", v: nombreColaborador };
         hoja["G1"] = { t: "s", v: fecha };
 
         // Orden esperado de columnas
