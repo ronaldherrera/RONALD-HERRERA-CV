@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       },
       images: {
-        logo: "https://tudominio.com/ruta-al-logo.png", // ← Cámbialo por tu ruta real
+        logo: "./recursos/logo m.svg", // ← Cámbialo por tu ruta real
       },
     };
 
