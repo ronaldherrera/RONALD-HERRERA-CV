@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     };
 
-    pdfMake.createPdf(contenido).getBlob((blob) => {
+    pdfMake.createPdf(docDefinition).getBlob((blob) => {
       const url = URL.createObjectURL(blob);
       window.open(url, "_blank");
     });
