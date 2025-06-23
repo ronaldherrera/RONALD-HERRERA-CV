@@ -407,7 +407,7 @@ input.stock-real {
   border: 1px solid #ccc;
   padding: 4px 2px 2px;
   border-radius: 3px;
-  width: 30px;
+  width: 40px;
   height: 15px;
   color: black;
   font-size: 16px;
@@ -446,7 +446,7 @@ input.stock-real:focus{
   border-radius: 5px;
   cursor: pointer;
   color: white;
-  width: 90px;
+  width: 80px;
   font-size: 10px;
 }
 
