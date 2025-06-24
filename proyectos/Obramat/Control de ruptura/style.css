@@ -158,7 +158,7 @@ label.boton-subir {
 /* Botón naranja */
 .boton-reiniciar {
   background: #FF5800;
-  color: #120949;
+  color: #ffffff;
   font-weight: bold;
   border: none;
   height: 25px;
@@ -490,8 +490,8 @@ input[type="number"] {
 
 
 #boton-descargar {
-  background: #FF5800;
-  color: #120949;
+  background: #120949;
+  color: #ffffff;
   font-weight: bold;
   border: none;
   height: 40px;

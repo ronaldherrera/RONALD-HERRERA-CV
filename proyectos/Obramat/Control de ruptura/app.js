@@ -152,19 +152,19 @@ document.addEventListener("DOMContentLoaded", () => {
             ],
             body: [
               [
-                { text: "Sección", style: "th" },
                 { text: "Referencia", style: "th" },
+                { text: "Descripción", style: "th" },
+                { text: "AVS", style: "th" },
                 { text: "Stock disp.", style: "th" },
                 { text: "Stock real", style: "th" },
                 { text: "Rectif.", style: "th" },
                 { text: "Pedir", style: "th" },
-                { text: "EAN", style: "th" },
-                { text: "Descripción", style: "th" },
-                { text: "AVS", style: "th" },
-                { text: "Últ. recepción", style: "th" },
-                { text: "Qts últ. pedido", style: "th" },
-                { text: "Qts próxim.", style: "th" },
-                { text: "Pedido curso", style: "th" },
+                { text: "Proveedor", style: "th" },
+                { text: "Última recepción", style: "th" },
+                { text: "Cantidad recibida", style: "th" },
+                { text: "Póxima recepción", style: "th" },
+                { text: "Cantidad a recibir.", style: "th" },
+                { text: "Total pedidos", style: "th" },
               ],
               ...productos.map((p, i) => {
                 const stockReal =
@@ -176,17 +176,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 const pedido = p["Pedido"]?.toUpperCase() || "";
 
                 return [
-                  p["Sección"] || "",
                   p["Referencia"] || "",
+                  p["Descripción"] || "",
+                  p["AVS"] || "-",
                   p["Stock disponible"] || "",
                   stockReal,
                   rectificado,
                   pedido,
-                  p["EAN"] || "",
-                  p["Descripción"] || "",
-                  p["AVS"] || "-",
+                  p["Proveedor"] || "",
                   p["Última Recepción"] || "",
                   p["Qts entregadas último pedido"] || "",
+                  p["Fecha prevista entrega"] || "",
                   p["Qts. Próximo pedido"] || "",
                   p["Total Pedido en Curso"] || "",
                 ].map((celda) => ({
