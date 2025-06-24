@@ -292,23 +292,9 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     };
 
-    const nombreArchivo = `Control_ruptura_${
-      nombreColaborador.split(" ")[0]
-    }_${fecha.replaceAll("/", "-")}.pdf`;
-
     pdfMake.createPdf(docDefinition).getBlob((blob) => {
-      const blobUrl = URL.createObjectURL(blob);
-
-      // Abrir el PDF en una nueva pestaña
-      window.open(blobUrl, "_blank");
-
-      // Crear un enlace oculto con el nombre correcto para cuando el usuario descargue desde ahí
-      const a = document.createElement("a");
-      a.href = blobUrl;
-      a.download = nombreArchivo;
-      document.body.appendChild(a);
-      a.click(); // Esto solo inicializa el nombre de descarga internamente
-      document.body.removeChild(a);
+      const url = URL.createObjectURL(blob);
+      window.open(url, "_blank");
     });
   });
 
