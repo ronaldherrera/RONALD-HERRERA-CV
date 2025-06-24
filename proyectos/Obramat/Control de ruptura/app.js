@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ].map((celda) => ({
                   text: celda,
                   fillColor: i % 2 === 0 ? "#FAFAFA" : null,
-                  alignment: "center",
+                  alignment: "left",
                   fontSize: 8,
                 }));
               }),
