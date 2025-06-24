@@ -292,10 +292,11 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     };
 
-    pdfMake.createPdf(docDefinition).getBlob((blob) => {
-      const url = URL.createObjectURL(blob);
-      window.open(url, "_blank");
-    });
+    const nombreArchivo = `Control_ruptura_${
+      nombreColaborador.split(" ")[0]
+    }_${fecha.replaceAll("/", "-")}.pdf`;
+
+    pdfMake.createPdf(docDefinition).open({}, window, nombreArchivo);
   });
 
   // Convertir imagen <img> en base64 para PDF
