@@ -23,6 +23,9 @@ header {
 }
 
 main {
+  margin: auto;
+  align-self: center;
+  max-width: 800px;
   height: auto;
   padding: 5px;
   text-align: center;
@@ -173,7 +176,7 @@ label.boton-subir {
 
 .tarjeta {
   background: white;
-  margin: 0px auto 10px;
+  margin: 0px auto 20px;
   padding: 0;
   width: 95%;
   max-width: 800px;
@@ -418,6 +421,19 @@ input.stock-real:focus{
   border: 1px solid #FF5800;
 }
 
+/* Eliminar flechas de input[type=number] (Chrome, Safari, Edge) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
 .grupo-radio {
   display: inline-flex;
   align-items: center;
@@ -440,7 +456,7 @@ input.stock-real:focus{
 }
 
 .btn-decision {
-  height: 22px;
+  height: 30px;
   font-weight: 400;
   border: none;
   border-radius: 5px;
@@ -451,8 +467,7 @@ input.stock-real:focus{
 }
 
 .estado-neutro {
-  background-color: #120949;
-  font-size: 8px;
+  background-color: #797979;
 }
 
 .estado-pedir {
@@ -460,7 +475,17 @@ input.stock-real:focus{
 }
 
 .estado-nopedir {
-  background-color: black;
+  background-color: #120949;
+}
+
+
+#boton-descargar:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+  box-shadow: 0px 0px 5px 0px #00000046 inset;
 }
 
 

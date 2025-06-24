@@ -13,15 +13,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputArchivo = document.getElementById("archivo-excel");
   const inputNombre = document.getElementById("nombre-usuario");
   const botonDescargar = document.getElementById("boton-descargar");
+  botonDescargar.disabled = true; // desactivado de primeras
+
   const contenedor = document.getElementById("contenedor-productos");
+
+  // Validar antes de abrir selector de archivo
+  document
+    .querySelector("label.boton-subir")
+    .addEventListener("click", function (e) {
+      const nombre = inputNombre.value.trim();
+
+      if (!nombre) {
+        alert("Introduce tu nombre antes de continuar");
+        e.preventDefault();
+        return;
+      }
+
+      if (/\d/.test(nombre)) {
+        alert("El nombre no puede contener números.");
+        e.preventDefault();
+        return;
+      }
+    });
 
   // SUBIDA DE ARCHIVO
   inputArchivo.addEventListener("change", function () {
     const nombre = inputNombre.value.trim();
-    if (!nombre) {
-      alert("Introduce tu nombre antes de continuar");
-      return;
-    }
 
     // Mostrar encabezado alternativo
     document.getElementById("seccion-inicial").style.display = "none";
@@ -59,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Mostrar tarjetas
       mostrarTarjetas(productos, contenedor);
       botonDescargar.style.display = "inline-block";
+      verificarFormularioCompleto(); // comprobar si se puede activar el botón
     };
 
     lector.readAsArrayBuffer(archivo);
@@ -332,7 +350,7 @@ function mostrarTarjetas(lista, contenedor) {
         </div>
       </div>
       <div class="tarjeta-pie">
-        <label>Stock real: <input class="stock-real" type="text" data-indice="${i}" /></label>
+        <label>Stock real: <input class="stock-real" type="number" data-indice="${i}" /></label>
         <div class="grupo-radio">
           ¿Rectificado? 
           <label>Sí<input type="radio" name="r${i}" value="Sí" /></label>
@@ -368,6 +386,8 @@ function mostrarTarjetas(lista, contenedor) {
         boton.textContent = "Pedir";
       }
 
+      verificarFormularioCompleto();
+
       // Añadir animación pulse
       boton.classList.add("animar");
       setTimeout(() => boton.classList.remove("animar"), 300);
@@ -394,5 +414,64 @@ function mostrarTarjetas(lista, contenedor) {
     });
 
     contenedor.appendChild(tarjeta);
+
+    const inputStock = tarjeta.querySelector(".stock-real");
+    inputStock.addEventListener("input", verificarFormularioCompleto);
+    tarjeta
+      .querySelectorAll(`input[name="r${i}"]`)
+      .forEach((r) =>
+        r.addEventListener("change", verificarFormularioCompleto)
+      );
+
+    // Bloquear letras, signos y flechas arriba/abajo
+    inputStock.addEventListener("keydown", (e) => {
+      const teclasPermitidas = [
+        "Backspace",
+        "ArrowLeft",
+        "ArrowRight",
+        "Tab",
+        "Delete",
+      ];
+      const esNumero = /^[0-9]$/.test(e.key);
+
+      if (!esNumero && !teclasPermitidas.includes(e.key)) {
+        e.preventDefault();
+      }
+
+      // Bloquear flechas arriba/abajo
+      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+        e.preventDefault();
+      }
+    });
+
+    // Prevenir pegado de cosas raras
+    inputStock.addEventListener("paste", (e) => {
+      const texto = e.clipboardData.getData("text");
+      if (!/^\d+$/.test(texto)) {
+        e.preventDefault();
+      }
+    });
   });
+}
+
+function verificarFormularioCompleto() {
+  const botonDescargar = document.getElementById("boton-descargar");
+  const tarjetas = document.querySelectorAll(".tarjeta");
+
+  const completas = Array.from(tarjetas).every((tarjeta, i) => {
+    const stock = tarjeta.querySelector(
+      `input.stock-real[data-indice="${i}"]`
+    )?.value;
+    const rectif = tarjeta.querySelector(`input[name="r${i}"]:checked`);
+    const pedir = productos[i]["Pedido"];
+    return stock !== "" && rectif && (pedir === "pedir" || pedir === "nopedir");
+  });
+
+  if (completas) {
+    botonDescargar.disabled = false;
+    botonDescargar.textContent = "Generar informe de ruptura";
+  } else {
+    botonDescargar.disabled = true;
+    botonDescargar.textContent = "Completa todas las tarjetas para activarme";
+  }
 }
