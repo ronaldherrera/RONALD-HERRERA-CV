@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include 'inc/header.php'; ?>
 <main class="login">
     <h1>Iniciar sesión</h1>
     <?php if (!empty($errores)): ?>
@@ -50,4 +49,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     <p class="enlace-registro">¿No tienes cuenta? <a href="registro.php">Regístrate aquí</a></p>
 </main>
-<?php include 'inc/footer.php'; ?>
+
