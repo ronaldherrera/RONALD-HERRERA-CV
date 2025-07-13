@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p style="color:red; font-weight:bold;">⚠️ <?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
 
-    <form method="POST" id="form-cuenta" action="../index.php" style="display:inline; >
+    <form method="POST" id="form-cuenta" >
         <label>Nombre:
             <input type="text" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required readonly>
             <button type="button" class="editar" onclick="habilitarCampo(this)">✏️</button>
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <button type="button" onclick="mostrarCamposContrasena(this)">🔒 Cambiar contraseña</button>
-        <button type="submit">Actualizar datos</button>
+        <button type="submit" action="../index.php" style="display:inline;">Actualizar datos</button>
     </form>
 
     <hr>
