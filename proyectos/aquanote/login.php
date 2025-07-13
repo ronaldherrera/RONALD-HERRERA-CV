@@ -1,3 +1,4 @@
+
 <?php
 require_once 'config.php';
 session_start();
@@ -39,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     <?php endif; ?>
 
-    <form method="POST" action="index.php">
+    <form method="POST" action="">
         <label>Email:
             <input type="email" name="email" required>
         </label>
