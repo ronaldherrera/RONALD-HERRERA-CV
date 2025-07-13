@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errores)) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $db->prepare('INSERT INTO usuarios (pais, edad, nombre, correo, contrasena) VALUES (?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO usuarios (pais, edad, nombre, email, contrasena) VALUES (?, ?, ?, ?, ?)');
         try {
             $stmt->execute([$pais, $edad, $nombre, $email, $hash]);
             header('Location: login.php');
