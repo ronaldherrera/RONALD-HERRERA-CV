@@ -1,8 +1,8 @@
 <?php
-$host = 'srv1230.hstgr.io';
-$dbname = 'u656964704_Aquanote';
-$user = 'u656964704_hola';
-$pass = '7HolaRonald*'; // ojo con el carácter especial, debe estar bien escapado si lo usas
+$host = 'localhost';
+$dbname = 'u656964704_aquanote';
+$user = 'u656964704_root';
+$pass = '7HolaRonald*';
 
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
