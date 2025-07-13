@@ -7,23 +7,36 @@ $stmt = $db->prepare("SELECT * FROM usuarios WHERE id = ? LIMIT 1");
 $stmt->execute([$_SESSION['usuario_id']]);
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$error = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nuevo_nombre = trim($_POST['nombre'] ?? '');
     $nuevo_correo = trim($_POST['correo'] ?? '');
+    $contrasena_actual = $_POST['contrasena_actual'] ?? '';
     $nueva_contrasena = $_POST['nueva_contrasena'] ?? '';
+    $confirmar_contrasena = $_POST['confirmar_contrasena'] ?? '';
 
     if (!empty($nuevo_nombre) && !empty($nuevo_correo)) {
         $stmt = $db->prepare("UPDATE usuarios SET nombre = ?, correo = ? WHERE id = ?");
         $stmt->execute([$nuevo_nombre, $nuevo_correo, $_SESSION['usuario_id']]);
-        
-        if (!empty($nueva_contrasena)) {
-            $hash = password_hash($nueva_contrasena, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("UPDATE usuarios SET contrasena = ? WHERE id = ?");
-            $stmt->execute([$hash, $_SESSION['usuario_id']]);
-        }
 
-        header("Location: ../index.php");
-        exit;
+        if (!empty($nueva_contrasena)) {
+            if (!password_verify($contrasena_actual, $usuario['contrasena'])) {
+                $error = 'La contraseña actual es incorrecta.';
+            } elseif ($nueva_contrasena !== $confirmar_contrasena) {
+                $error = 'La nueva contraseña no coincide con la confirmación.';
+            } else {
+                $hash = password_hash($nueva_contrasena, PASSWORD_DEFAULT);
+                $stmt = $db->prepare("UPDATE usuarios SET contrasena = ? WHERE id = ?");
+                $stmt->execute([$hash, $_SESSION['usuario_id']]);
+
+                header("Location: ../index.php");
+                exit;
+            }
+        } else {
+            header("Location: ../index.php");
+            exit;
+        }
     }
 }
 ?>
@@ -31,6 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main class="mi-cuenta">
     <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin actualizar</a>
     <h1>Mi Cuenta</h1>
+
+    <?php if (!empty($error)): ?>
+        <p style="color:red; font-weight:bold;">⚠️ <?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
 
     <form method="POST" id="form-cuenta">
         <label>Nombre:
@@ -43,11 +60,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="button" class="editar" onclick="habilitarCampo(this)">✏️</button>
         </label>
 
-        <label id="label-contrasena" style="display: none;">Nueva contraseña:
-            <input type="password" name="nueva_contrasena" placeholder="Solo si deseas cambiarla">
-        </label>
-        <button type="button" onclick="mostrarCampoContrasena()">🔒 Cambiar contraseña</button>
+        <div id="cambio-contrasena" style="display: none;">
+            <label>Contraseña actual:
+                <input type="password" name="contrasena_actual" required>
+            </label>
 
+            <label>Nueva contraseña:
+                <input type="password" name="nueva_contrasena" required>
+            </label>
+
+            <label>Confirmar nueva contraseña:
+                <input type="password" name="confirmar_contrasena" required>
+            </label>
+        </div>
+
+        <button type="button" onclick="mostrarCamposContrasena(this)">🔒 Cambiar contraseña</button>
         <button type="submit">Actualizar datos</button>
     </form>
 
@@ -69,8 +96,9 @@ function habilitarCampo(boton) {
     boton.style.display = 'none';
 }
 
-function mostrarCampoContrasena() {
-    document.getElementById('label-contrasena').style.display = 'block';
+function mostrarCamposContrasena(boton) {
+    document.getElementById('cambio-contrasena').style.display = 'block';
+    boton.style.display = 'none';
 }
 </script>
 
