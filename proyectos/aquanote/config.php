@@ -11,24 +11,10 @@ try {
 // Crear tabla de usuarios si no existe
 $db->exec("CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pais TEXT NOT NULL,
+    edad INTEGER NOT NULL,
     nombre TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    contraseña TEXT NOT NULL,
+    correo TEXT NOT NULL UNIQUE,
+    contrasena TEXT NOT NULL,
     creado_en DATETIME DEFAULT CURRENT_TIMESTAMP
 )");
-
-// Crear tabla de acuarios si no existe
-$db->exec("
-    CREATE TABLE IF NOT EXISTS acuarios (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        usuario_id INTEGER NOT NULL,
-        nombre TEXT NOT NULL,
-        tipo TEXT NOT NULL,
-        volumen TEXT,
-        fecha_inicio TEXT,
-        notas TEXT,
-        parametros TEXT,
-        creado_en DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
-    )
-");
