@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin actualizar</a>
     <h1>Mi Cuenta</h1>
 
-    <form method="POST">
+    <form method="POST" action="../index.php" style="display:inline;">
         <label>Nombre:
             <input type="text" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
         </label>
