@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <main class="mi-cuenta">
+    <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin guardar</a>
     <h1>Mi Cuenta</h1>
 
     <?php if (isset($_GET['actualizado'])): ?>

@@ -9,7 +9,7 @@ include 'inc/header.php';
     <a href="logout.php">Cerrar sesión</a>
     <ul>
             <li><a href="usuarios/mi_acuario.php">Configurar acuario</a></li>
-            <li><a href="usuarios/datos/">Mi cuenta</a></li>
+            <li><a href="usuarios/mi_cuenta.php">Mi cuenta</a></li>
         </ul>
 </main>
 

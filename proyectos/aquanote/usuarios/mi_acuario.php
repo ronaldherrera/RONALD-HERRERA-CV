@@ -166,8 +166,8 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
 ?>
 
 <main class="configuracion">
-    <h1>Mi Acuario</h1>
     <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin guardar</a>
+    <h1>Mi Acuario</h1>
     <form method="POST">
         <label>Nombre del acuario:
             <input type="text" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
