@@ -29,21 +29,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <main class="mi-cuenta">
-  <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin actualizar</a>
+    <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin actualizar</a>
     <h1>Mi Cuenta</h1>
 
-    <form method="POST" action="../index.php" style="display:inline;">
+    <form method="POST" id="form-cuenta">
         <label>Nombre:
-            <input type="text" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
+            <input type="text" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required readonly>
+            <button type="button" class="editar" onclick="habilitarCampo(this)">✏️</button>
         </label>
 
         <label>Correo electrónico:
-            <input type="email" name="correo" value="<?= htmlspecialchars($usuario['correo']) ?>" required>
+            <input type="email" name="correo" value="<?= htmlspecialchars($usuario['correo']) ?>" required readonly>
+            <button type="button" class="editar" onclick="habilitarCampo(this)">✏️</button>
         </label>
 
-        <label>Nueva contraseña:
+        <label id="label-contrasena" style="display: none;">Nueva contraseña:
             <input type="password" name="nueva_contrasena" placeholder="Solo si deseas cambiarla">
         </label>
+        <button type="button" onclick="mostrarCampoContrasena()">🔒 Cambiar contraseña</button>
 
         <button type="submit">Actualizar datos</button>
     </form>
@@ -57,5 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" style="background:red;color:white;">Eliminar cuenta</button>
     </form>
 </main>
+
+<script>
+function habilitarCampo(boton) {
+    const input = boton.previousElementSibling;
+    input.removeAttribute('readonly');
+    input.focus();
+    boton.style.display = 'none';
+}
+
+function mostrarCampoContrasena() {
+    document.getElementById('label-contrasena').style.display = 'block';
+}
+</script>
 
 <?php include '../inc/footer.php'; ?>
