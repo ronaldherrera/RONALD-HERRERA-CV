@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p style="color:red; font-weight:bold;">⚠️ <?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
 
-    <form method="POST" id="form-cuenta">
+    <form method="POST" id="form-cuenta" action="../index.php" style="display:inline; >
         <label>Nombre:
             <input type="text" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required readonly>
             <button type="button" class="editar" onclick="habilitarCampo(this)">✏️</button>
