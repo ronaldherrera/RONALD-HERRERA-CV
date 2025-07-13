@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     <?php endif; ?>
 
-    <form method="POST" action=".//login.php">
+    <form method="POST" action="./login.php">
         <label>País:
             <input type="text" name="pais" required>
         </label>
