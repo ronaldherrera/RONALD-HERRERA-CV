@@ -22,19 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$hash, $_SESSION['usuario_id']]);
         }
 
-        header("Location: mi_cuenta.php?actualizado=1");
+        header("Location: ../index.php");
         exit;
     }
 }
 ?>
 
 <main class="mi-cuenta">
-    <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin guardar</a>
+  <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin actualizar</a>
     <h1>Mi Cuenta</h1>
-
-    <?php if (isset($_GET['actualizado'])): ?>
-        <p style="color: green;">Datos actualizados correctamente.</p>
-    <?php endif; ?>
 
     <form method="POST">
         <label>Nombre:
