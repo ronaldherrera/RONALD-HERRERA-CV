@@ -5,7 +5,7 @@ include '../inc/header.php';
 
 // Lista de parámetros posibles con iconos y descripciones personalizados
 $parametros_info = [
-    'Temperatura' => ['🌡️', '<strong>Temperatura</strong>, mantiene estables las condiciones vitales de los organismos acuáticos.'],
+    'Temperatura' => ['🌡️', 'Mantiene estables las condiciones vitales de los organismos acuáticos.'],
     'pH 3.0–10.0' => ['🧪', '<strong>Potencial de hidrógeno</strong>, indica la acidez o alcalinidad del agua (rango completo).'],
     'pH 6.0–7.6' => ['🧪', '<strong>Potencial de hidrógeno</strong>, indica la acidez o alcalinidad del agua (rango medio).'],
     'pH 7.4–9.0' => ['🧪', '<strong>Potencial de hidrógeno</strong>, indica la acidez o alcalinidad del agua (rango alto).'],
@@ -26,10 +26,10 @@ $parametros_info = [
     'NO₂' => ['🚫', '<strong>Nitritos</strong>, compuestos tóxicos intermedios del ciclo del nitrógeno.'],
     'NO₃' => ['⚠️', '<strong>Nitratos</strong>, producto final del ciclo del nitrógeno. Menos tóxico, pero peligroso en exceso.'],
     'Cambio de agua' => ['💧', '<strong>Cambio de agua</strong>, registro de la última renovación parcial del agua.'],
-    'Limpieza de filtro' => ['🧽', '<strong>Limpieza de filtro</strong>, control de mantenimiento del sistema de filtrado.'],
-    'Limpieza de skimmer' => ['🫙', '<strong>Limpieza de skimmer</strong>, control de limpieza del skimmer en acuarios marinos.'],
-    'Salinidad / Densidad' => ['🌊', '<strong>Salinidad</strong>, nivel de sal en acuarios marinos, esencial para especies marinas.'],
-    'Parámetros de cría' => ['🍼', '<strong>Parámetros de cría</strong>, notas específicas para acuarios de cría o cuarentena: temperatura, alimentación, cuidados, etc.'],
+    'Limpieza de filtro' => ['🧽', 'Control de mantenimiento del sistema de filtrado.'],
+    'Limpieza de skimmer' => ['🫙', 'Control de limpieza del skimmer en acuarios marinos.'],
+    'Salinidad / Densidad' => ['🌊', 'Nivel de sal en acuarios marinos, esencial para especies marinas.'],
+    'Parámetros de cría' => ['🍼', 'Notas específicas para acuarios de cría o cuarentena: temperatura, alimentación, cuidados, etc.'],
 ];
 
 $parametros_disponibles = array_keys($parametros_info);
