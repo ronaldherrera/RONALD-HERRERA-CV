@@ -1,4 +1,4 @@
-# Acuanote
+# Acuanote0
 
 **Aquanote** es una aplicación web diseñada para gestionar el seguimiento y mantenimiento de acuarios marinos o de agua dulce. Está pensada para funcionar de forma totalmente responsive (adaptada a móvil, tablet y ordenador), y permite a cualquier usuario llevar el control completo de su acuario desde cualquier lugar.
 
