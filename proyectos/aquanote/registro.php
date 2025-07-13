@@ -4,44 +4,26 @@ require_once 'config.php';
 $errores = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pais = trim($_POST['pais'] ?? '');
-    $edad = trim($_POST['edad'] ?? '');
     $nombre = trim($_POST['nombre'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
-    $confirmar = $_POST['confirmar'] ?? '';
 
-    // Validaciones
-    if (empty($pais)) {
-        $errores[] = 'Selecciona un país';
-    }
-    if (!is_numeric($edad) || (int)$edad < 0) {
-        $errores[] = 'Edad no válida';
-    }
-    if (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/u", $nombre)) {
-        $errores[] = 'El nombre solo puede contener letras y espacios';
-    }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errores[] = 'Email no válido';
-    }
-    if (strlen($password) < 6) {
-        $errores[] = 'La contraseña debe tener al menos 6 caracteres';
-    }
-    if ($password !== $confirmar) {
-        $errores[] = 'Las contraseñas no coinciden';
-    }
+    // Validaciones básicas
+    if ($nombre === '') $errores[] = 'El nombre es obligatorio';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errores[] = 'Email no válido';
+    if (strlen($password) < 6) $errores[] = 'La contraseña debe tener al menos 6 caracteres';
 
     // Si no hay errores, registrar usuario
     if (empty($errores)) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $db->prepare('INSERT INTO usuarios (pais, edad, nombre, correo, contrasena) VALUES (?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO usuarios (nombre, email, contraseña) VALUES (?, ?, ?)');
         try {
-            $stmt->execute([$pais, $edad, $nombre, $email, $hash]);
+            $stmt->execute([$nombre, $email, $hash]);
             header('Location: login.php');
             exit;
         } catch (PDOException $e) {
-            $errores[] = 'El correo ya está registrado';
+            $errores[] = 'El email ya está registrado';
         }
     }
 }
@@ -58,27 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     <?php endif; ?>
 
-    <form method="POST" action="./login.php">
-        <label>País:
-            <input type="text" name="pais" required>
-        </label>
-        <label>Edad:
-            <input type="number" name="edad" min="0" required>
-        </label>
+    <form method="POST" action="">
         <label>Nombre:
-            <input type="text" name="nombre" pattern="[a-zA-ZÀ-ÿ\s]+" title="Solo letras y espacios" required>
+            <input type="text" name="nombre" required>
         </label>
-        <label>Correo electrónico:
+        <label>Email:
             <input type="email" name="email" required>
         </label>
         <label>Contraseña:
             <input type="password" name="password" required>
         </label>
-        <label>Confirmar contraseña:
-            <input type="password" name="confirmar" required>
-        </label>
-        <button type="submit" >Registrarse</button>
+        <button type="submit">Registrarse</button>
     </form>
-    <p class="enlace-login">¿Ya tienes cuenta? <a href=".//login.php">Inicia sesión aquí</a></p>
 </main>
 <?php include 'inc/footer.php'; ?>
