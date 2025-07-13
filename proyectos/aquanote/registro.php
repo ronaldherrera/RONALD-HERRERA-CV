@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     <?php endif; ?>
 
-    <form method="POST" action="">
+    <form method="POST" action=".//login.php">
         <label>País:
             <input type="text" name="pais" required>
         </label>
@@ -77,8 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label>Confirmar contraseña:
             <input type="password" name="confirmar" required>
         </label>
-        <button type="submit">Registrarse</button>
+        <button type="submit" >Registrarse</button>
     </form>
-    <p class="enlace-login">¿Ya tienes cuenta? <a href="login.php">Inicia sesión aquí</a></p>
+    <p class="enlace-login">¿Ya tienes cuenta? <a href=".//login.php">Inicia sesión aquí</a></p>
 </main>
 <?php include 'inc/footer.php'; ?>
