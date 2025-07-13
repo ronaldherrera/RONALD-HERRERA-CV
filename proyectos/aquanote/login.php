@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <main class="registro">
+    <img src="/img/logo.svg" alt="">
     <h1>Iniciar sesión</h1>
     <?php if (!empty($errores)): ?>
         <ul class="errores">
