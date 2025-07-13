@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <hr>
-    <form method="POST" action="cerrar_sesion.php" style="display:inline;">
+    <form method="POST" action="logout.php" style="display:inline;">
         <button type="submit">Cerrar sesión</button>
     </form>
 
