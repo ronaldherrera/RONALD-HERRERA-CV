@@ -1,18 +1,14 @@
 <?php
-// config.php – Conexión con SQLite y configuración general
+$host = 'srv1230.hstgr.io';
+$dbname = 'u656964704_Aquanote';
+$user = 'u656964704_hola';
+$pass = '7HolaRonald*'; // ojo con el carácter especial, debe estar bien escapado si lo usas
 
 try {
-    $db = new PDO('sqlite:' . __DIR__ . '/db/database.sqlite');
+    $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "✅ Conexión exitosa a la base de datos.";
 } catch (PDOException $e) {
-    die("Error al conectar con la base de datos: " . $e->getMessage());
+    echo "❌ Error: " . $e->getMessage();
 }
-
-// Crear tabla de usuarios si no existe
-$db->exec("CREATE TABLE IF NOT EXISTS usuarios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    contraseña TEXT NOT NULL,
-    creado_en DATETIME DEFAULT CURRENT_TIMESTAMP
-)");
+?>
