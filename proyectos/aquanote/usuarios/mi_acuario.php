@@ -210,6 +210,7 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
         </fieldset>
 
         <button type="submit">Guardar</button>
+        <a href="index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin guardar</a>
     </form>
 </main>
 
