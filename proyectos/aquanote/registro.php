@@ -5,43 +5,31 @@ $errores = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pais = trim($_POST['pais'] ?? '');
-    $edad = trim($_POST['edad'] ?? '');
+    $edad = intval($_POST['edad'] ?? 0);
     $nombre = trim($_POST['nombre'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
-    $confirmar = $_POST['confirmar'] ?? '';
+    $confirmar_password = $_POST['confirmar_password'] ?? '';
 
-    // Validaciones
-    if (empty($pais)) {
-        $errores[] = 'Selecciona un país';
-    }
-    if (!is_numeric($edad) || (int)$edad < 0) {
-        $errores[] = 'Edad no válida';
-    }
-    if (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/u", $nombre)) {
-        $errores[] = 'El nombre solo puede contener letras y espacios';
-    }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errores[] = 'Email no válido';
-    }
-    if (strlen($password) < 6) {
-        $errores[] = 'La contraseña debe tener al menos 6 caracteres';
-    }
-    if ($password !== $confirmar) {
-        $errores[] = 'Las contraseñas no coinciden';
-    }
+    // Validaciones básicas
+    if ($pais === '') $errores[] = 'El país es obligatorio';
+    if ($edad <= 0) $errores[] = 'La edad debe ser un número positivo';
+    if ($nombre === '') $errores[] = 'El nombre es obligatorio';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errores[] = 'Email no válido';
+    if (strlen($password) < 6) $errores[] = 'La contraseña debe tener al menos 6 caracteres';
+    if ($password !== $confirmar_password) $errores[] = 'Las contraseñas no coinciden';
 
     // Si no hay errores, registrar usuario
     if (empty($errores)) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $db->prepare('INSERT INTO usuarios (pais, edad, nombre, email, contrasena) VALUES (?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO usuarios (pais, edad, nombre, email, contraseña) VALUES (?, ?, ?, ?, ?)');
         try {
             $stmt->execute([$pais, $edad, $nombre, $email, $hash]);
             header('Location: login.php');
             exit;
         } catch (PDOException $e) {
-            $errores[] = 'El correo ya está registrado';
+            $errores[] = 'El email ya está registrado';
         }
     }
 }
@@ -58,24 +46,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     <?php endif; ?>
 
-    <form method="POST" action="/login.php">
+    <form method="POST" action="./index.php">
         <label>País:
             <input type="text" name="pais" required>
         </label>
         <label>Edad:
-            <input type="number" name="edad" min="0" required>
+            <input type="number" name="edad" min="1" required>
         </label>
         <label>Nombre:
-            <input type="text" name="nombre" pattern="[a-zA-ZÀ-ÿ\s]+" title="Solo letras y espacios" required>
+            <input type="text" name="nombre" required>
         </label>
-        <label>Correo electrónico:
+        <label>Email:
             <input type="email" name="email" required>
         </label>
         <label>Contraseña:
             <input type="password" name="password" required>
         </label>
         <label>Confirmar contraseña:
-            <input type="password" name="confirmar" required>
+            <input type="password" name="confirmar_password" required>
         </label>
         <button type="submit">Registrarse</button>
     </form>
