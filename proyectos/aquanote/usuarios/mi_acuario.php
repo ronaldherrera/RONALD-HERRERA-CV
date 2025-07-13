@@ -35,15 +35,102 @@ $parametros_info = [
 $parametros_disponibles = array_keys($parametros_info);
 
 $presets = [
-    'agua_dulce_comunitario' => ["Temperatura", "pH", "KH", "GH", "NO₂ (Nitritos)", "NO₃ (Nitratos)", "NH₃ / NH₄ (Amoniaco)", "Cambio de agua", "Limpieza de filtro"],
-    'plantado' => ["Temperatura", "pH", "KH", "GH", "NO₂ (Nitritos)", "NO₃ (Nitratos)", "CO₂", "Hierro (Fe)", "Fosfatos (PO₄)", "Potasio (K)", "Cambio de agua", "Limpieza de filtro"],
-    'ciclidos_africanos' => ["Temperatura", "pH", "KH", "GH", "NO₂ (Nitritos)", "NO₃ (Nitratos)", "NH₃ / NH₄ (Amoniaco)", "Cambio de agua", "Limpieza de filtro"],
-    'marino_peces' => ["Temperatura", "pH", "Salinidad / Densidad", "NO₂ (Nitritos)", "NO₃ (Nitratos)", "NH₃ / NH₄ (Amoniaco)", "Cambio de agua", "Limpieza de filtro"],
-    'marino_peces+roca' => ["Temperatura", "pH", "Salinidad / Densidad", "Calcio (Ca)", "Magnesio (Mg)", "Alcalinidad", "NO₂ (Nitritos)", "NO₃ (Nitratos)", "NH₃ / NH₄ (Amoniaco)", "Cambio de agua", "Limpieza de filtro"],
-    'marino_corales+peces' => ["Temperatura", "pH", "Salinidad / Densidad", "Calcio (Ca)", "Magnesio (Mg)", "Alcalinidad", "NO₂ (Nitritos)", "NO₃ (Nitratos)", "NH₃ / NH₄ (Amoniaco)", "Cambio de agua", "Limpieza de filtro"],
-    'cria/cuarentena' => ["Temperatura", "pH", "NO₂ (Nitritos)", "NO₃ (Nitratos)", "NH₃ / NH₄ (Amoniaco)", "Cambio de agua", "Parámetros de cría"],
+    'agua_dulce_comunitario' => [
+        "Temperatura",
+        "pH 6.0–7.6",
+        "KH",
+        "GH",
+        "NO₂",
+        "NO₃",
+        "NH₄",
+        "Cambio de agua",
+        "Limpieza de filtro"
+    ],
+
+    'plantado' => [
+        "Temperatura",
+        "pH 6.0–7.6",
+        "KH",
+        "GH",
+        "NO₂",
+        "NO₃",
+        "CO₂ Direct",
+        "Fe",
+        "PO₄ Sensitive",
+        "K",
+        "Cambio de agua",
+        "Limpieza de filtro"
+    ],
+
+    'ciclidos_africanos' => [
+        "Temperatura",
+        "pH 7.4–9.0",
+        "KH",
+        "GH",
+        "NO₂",
+        "NO₃",
+        "NH₄",
+        "Cambio de agua",
+        "Limpieza de filtro"
+    ],
+
+    'marino_peces' => [
+        "Temperatura",
+        "pH 7.4–9.0",
+        "Salinidad / Densidad",
+        "NO₂",
+        "NO₃",
+        "NH₄",
+        "Cambio de agua",
+        "Limpieza de filtro",
+        "Limpieza de skimmer"
+    ],
+
+    'marino_peces+roca' => [
+        "Temperatura",
+        "pH 7.4–9.0",
+        "Salinidad / Densidad",
+        "Ca",
+        "Mg (Marine water)",
+        "KH",  // usas KH como "alcalinidad"
+        "NO₂",
+        "NO₃",
+        "NH₄",
+        "Cambio de agua",
+        "Limpieza de filtro",
+        "Limpieza de skimmer"
+    ],
+
+    'marino_corales+peces' => [
+        "Temperatura",
+        "pH 7.4–9.0",
+        "Salinidad / Densidad",
+        "Ca",
+        "Mg (Marine water)",
+        "KH",  // alcalinidad en marino
+        "NO₂",
+        "NO₃",
+        "NH₄",
+        "CO₂ Direct",
+        "Fe",
+        "Cambio de agua",
+        "Limpieza de filtro",
+        "Limpieza de skimmer"
+    ],
+
+    'cria/cuarentena' => [
+        "Temperatura",
+        "pH 6.0–7.6",
+        "NO₂",
+        "NO₃",
+        "NH₄",
+        "Cambio de agua",
+        "Parámetros de cría"
+    ],
+
     'otro/personalizado' => []
 ];
+
 
 $stmt = $db->prepare("SELECT * FROM acuarios WHERE usuario_id = ? LIMIT 1");
 $stmt->execute([$_SESSION['usuario_id']]);
