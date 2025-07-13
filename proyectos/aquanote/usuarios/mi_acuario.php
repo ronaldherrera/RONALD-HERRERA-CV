@@ -21,13 +21,13 @@ $parametros_info = [
     'K' => ['⚡', '<strong>Potasio</strong>, macronutriente fundamental en acuarios plantados.'],
     'Cu' => ['🧪', '<strong>Cobre</strong>, tóxico en exceso, se mide para controlar tratamientos o evitar dañar invertebrados.'],
     'O₂' => ['💨', '<strong>Oxígeno disuelto</strong>, vital para la respiración de peces, plantas y bacterias.'],
-    'CO₂ Direct' => ['🫧', '<strong>Dióxido de carbono</strong>, medido directamente, importante para plantas acuáticas.'],
+    'CO₂ Direct' => ['🮧', '<strong>Dióxido de carbono</strong>, medido directamente, importante para plantas acuáticas.'],
     'NH₄' => ['☠️', '<strong>Amoniaco/Amonio</strong>, altamente tóxico si no hay filtración biológica efectiva.'],
     'NO₂' => ['🚫', '<strong>Nitritos</strong>, compuestos tóxicos intermedios del ciclo del nitrógeno.'],
     'NO₃' => ['⚠️', '<strong>Nitratos</strong>, producto final del ciclo del nitrógeno. Menos tóxico, pero peligroso en exceso.'],
     'Cambio de agua' => ['💧', '<strong>Cambio de agua</strong>, registro de la última renovación parcial del agua.'],
-    'Limpieza de filtro' => ['🧽', 'Control de mantenimiento del sistema de filtrado.'],
-    'Limpieza de skimmer' => ['🫙', 'Control de limpieza del skimmer en acuarios marinos.'],
+    'Limpieza de filtro' => ['🧹', 'Control de mantenimiento del sistema de filtrado.'],
+    'Limpieza de skimmer' => ['🯙', 'Control de limpieza del skimmer en acuarios marinos.'],
     'Salinidad / Densidad' => ['🌊', 'Nivel de sal en acuarios marinos, esencial para especies marinas.'],
     'Parámetros de cría' => ['🍼', 'Notas específicas para acuarios de cría o cuarentena: temperatura, alimentación, cuidados, etc.'],
 ];
@@ -92,7 +92,7 @@ $presets = [
         "Salinidad / Densidad",
         "Ca",
         "Mg (Marine water)",
-        "KH",  // usas KH como "alcalinidad"
+        "KH",
         "NO₂",
         "NO₃",
         "NH₄",
@@ -107,7 +107,7 @@ $presets = [
         "Salinidad / Densidad",
         "Ca",
         "Mg (Marine water)",
-        "KH",  // alcalinidad en marino
+        "KH",
         "NO₂",
         "NO₃",
         "NH₄",
@@ -182,8 +182,8 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
             </select>
         </label>
 
-        <label>Volumen / tamaño:
-            <input type="text" name="volumen" value="<?= htmlspecialchars($volumen) ?>">
+        <label>Volumen (en litros):
+            <input type="number" name="volumen" value="<?= htmlspecialchars($volumen) ?>" min="0" step="1" required>
         </label>
 
         <label>Fecha de inicio:
