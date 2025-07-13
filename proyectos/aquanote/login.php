@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     <?php endif; ?>
 
-    <form method="POST" action="">
+    <form method="POST" action=".//index.php">
         <label>Email:
             <input type="email" name="email" required>
         </label>
