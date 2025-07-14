@@ -33,6 +33,7 @@
                     link.addEventListener("click", () => {
                         container.classList.remove("abierto");
                         dropdown.classList.remove("abierto");
+
                     });
                 });
             }
@@ -45,15 +46,21 @@
     <div class="logo">
         <img src="/proyectos/aquanote/img/logo-horizontal.svg" alt="Aquanote" height="40">
     </div>
-    <div class="menu-contenedor" id="menu-contenedor">
-        <button id="menu-toggle" class="menu-toggle"><span></span>
-  <span></span>
-  <span></span></button>
-        <div class="menu-dropdown">
-            <a href="/proyectos/aquanote/index.php">Inicio</a>
-            <a href="/proyectos/aquanote/usuarios/mi_cuenta.php">Mi cuenta</a>
-            <a href="/proyectos/aquanote/usuarios/mi_acuario.php">Mi acuario</a>
-            <a href="/proyectos/aquanote/logout.php">Cerrar sesión</a>
+    <?php 
+    $page = basename($_SERVER['PHP_SELF']);
+    if ($page !== 'mi_cuenta.php' && $page !== 'mi_acuario.php') : ?>
+        <div class="menu-contenedor" id="menu-contenedor">
+            <button id="menu-toggle" class="menu-toggle"><span></span><span></span><span></span></button>
+            <div class="menu-dropdown">
+                <a href="/proyectos/aquanote/usuarios/mi_acuario.php">Mi acuario</a>
+                <a href="/proyectos/aquanote/usuarios/mi_cuenta.php">Mi cuenta</a>
+                <a href="/proyectos/aquanote/logout.php" style="color:#AD2222">Cerrar sesión</a>
+            </div>
         </div>
-    </div>
+    <?php else: ?>
+        <div class="volver-index">
+            <a href="/proyectos/aquanote/index.php">&larr; Volver sin guardar</a>
+        </div>
+    <?php endif; ?>
+</div>
 </header>
