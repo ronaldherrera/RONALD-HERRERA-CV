@@ -43,9 +43,9 @@
 <body>
 <header>
     <div class="contenedor">
-    <div class="logo">
+    <a class="logo" href="/proyectos/aquanote/index.php">
         <img src="/proyectos/aquanote/img/logo-horizontal.svg" alt="Aquanote" height="40">
-    </div>
+    </a>
     <?php 
     $page = basename($_SERVER['PHP_SELF']);
     if ($page !== 'mi_cuenta.php' && $page !== 'mi_acuario.php') : ?>
