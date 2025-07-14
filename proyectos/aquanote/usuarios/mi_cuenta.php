@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Iniciar sesión</title>
     <link rel="stylesheet" href="/proyectos/aquanote/css/style.css">
 </head>
-<body>
+<body class="mi-cuenta">
 <main class="mi-cuenta">
     <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin actualizar</a>
     <h1>Mi Cuenta</h1>

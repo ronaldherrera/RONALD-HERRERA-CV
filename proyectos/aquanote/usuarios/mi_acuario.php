@@ -172,7 +172,7 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
     <title>Iniciar sesión</title>
     <link rel="stylesheet" href="/proyectos/aquanote/css/style.css">
 </head>
-<body>
+<body class="mi-acuario">
 <main class="configuracion">
     <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin guardar</a>
     <h1>Mi Acuario</h1>

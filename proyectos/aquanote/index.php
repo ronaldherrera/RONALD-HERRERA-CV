@@ -9,8 +9,8 @@ include 'inc/header.php';
     <title>Iniciar sesión</title>
     <link rel="stylesheet" href="/proyectos/aquanote/css/style.css">
 </head>
-<body>
-<main class="dashboard">
+<body class="index">
+<main class="index">
     <h1>Bienvenido, <?= htmlspecialchars($_SESSION['usuario']) ?> 👋</h1>
     <p>Este será tu panel de control de Acuario. Aquí verás tus últimos registros y tareas pendientes.</p>
     <a href="logout.php">Cerrar sesión</a>

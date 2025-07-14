@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
-<body>
+<body class="registro">
 <main class="registro">
     <img src="./img/logo.svg" alt="">
     <h1>Crear cuenta</h1>
