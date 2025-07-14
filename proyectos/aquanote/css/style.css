@@ -1,7 +1,7 @@
 /* style.css */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #f4f6f8;
+  background: #152D41;
   margin: 0;
   padding: 0;
   display: flex;
@@ -11,31 +11,38 @@ body {
 }
 
 main.registro {
-  background: #fff;
   padding: 2rem 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.08);
   width: 100%;
   max-width: 400px;
+}
+
+main.registro img {
+  width: 10em;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 5em;
 }
 
 main.registro h1 {
   margin-bottom: 1.5rem;
   font-size: 1.6rem;
-  color: #333;
+  color: #ffffff;
 }
 
 form label {
   display: block;
   margin-bottom: 1rem;
-  font-weight: 500;
-  color: #444;
+  font-weight: 300;
+  color: #ffffff;
 }
 
 form input {
   width: 100%;
   padding: 0.7rem;
-  border: 1px solid #ccc;
+  border: 2px solid #39B6C6;
   border-radius: 6px;
   margin-top: 0.3rem;
   box-sizing: border-box;
@@ -43,7 +50,7 @@ form input {
 }
 
 button[type="submit"] {
-  background-color: #0077cc;
+  background-color: #39B6C6;
   color: white;
   padding: 0.8rem 1rem;
   border: none;
@@ -56,7 +63,8 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #005fa3;
+  background-color: #fff;
+  color: #152D41;
 }
 
 ul.errores {
