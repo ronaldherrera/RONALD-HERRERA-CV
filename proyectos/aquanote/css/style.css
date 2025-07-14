@@ -1,27 +1,33 @@
 /* style.css */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #152D41;
   margin: 0;
-  padding: 0;
+  padding: 0px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+body.login, body.registro{
+  background: #152D41;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
 }
-
 /* Estilo general del header */
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffffff;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #152D41;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
+
 }
 
 /* Logo e identidad */
@@ -34,11 +40,22 @@ header .logo {
   color: #333;
 }
 
+header .contenedor{
+    width: 100%;
+    max-width: 1200px;
+}
+
 header .logo img {
-  height: 40px;
+  height: 30px;
   width: auto;
 }
 
+main{
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+}
 
 main.login, main.registro {
   padding: 2rem 2.5rem;

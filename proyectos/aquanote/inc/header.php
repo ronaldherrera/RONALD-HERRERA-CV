@@ -10,8 +10,9 @@
 </head>
 <body>
 <header>
+    <div class="contenedor">
     <div class="logo">
         <img src="/proyectos/aquanote/img/logo-horizontal.svg" alt="Aquanote" height="40">
-        <span>Aquanote</span>
+    </div>
     </div>
 </header>
