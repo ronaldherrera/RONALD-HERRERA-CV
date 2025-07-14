@@ -165,6 +165,14 @@ $notas = $acuario['notas'] ?? '';
 $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true) : [];
 ?>
 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 <main class="configuracion">
     <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin guardar</a>
     <h1>Mi Acuario</h1>
@@ -214,6 +222,8 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
         
     </form>
 </main>
+</body>
+</html>
 
 <script>
 const presets = <?= json_encode($presets) ?>;

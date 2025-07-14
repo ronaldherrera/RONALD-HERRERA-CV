@@ -41,6 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 <main class="mi-cuenta">
     <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin actualizar</a>
     <h1>Mi Cuenta</h1>
@@ -87,6 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" style="background:red;color:white;">Eliminar cuenta</button>
     </form>
 </main>
+</body>
+</html>
 
 <script>
 function habilitarCampo(boton) {
