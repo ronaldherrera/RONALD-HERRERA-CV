@@ -35,8 +35,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include 'inc/header.php'; ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .form-row label {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
 <main class="registro">
+    <img src="./img/logo.svg" alt="">
     <h1>Crear cuenta</h1>
     <?php if (!empty($errores)): ?>
         <ul class="errores">
@@ -47,12 +65,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="POST" action="">
-        <label>País:
-            <input type="text" name="pais" required>
-        </label>
-        <label>Edad:
-            <input type="number" name="edad" min="1" required>
-        </label>
+        <div class="form-row">
+            <label>País:
+                <select name="pais" required>
+                    <option value="">Seleccione un país</option>
+                    <?php
+$paises = ["Alemania", "Argentina", "Australia", "Austria", "Bélgica", "Bolivia", "Brasil", "Canadá", "Chile",
+    "China", "Colombia", "Corea del Sur", "Costa Rica", "Cuba", "Dinamarca", "Ecuador", "Egipto", "El Salvador",
+    "Emiratos Árabes Unidos", "España", "Estados Unidos", "Filipinas", "Finlandia", "Francia", "Grecia", "Guatemala",
+    "Honduras", "India", "Indonesia", "Irlanda", "Israel", "Italia", "Japón", "Luxemburgo", "México", "Marruecos",
+    "Noruega", "Nueva Zelanda", "Países Bajos", "Panamá", "Paraguay", "Perú", "Polonia", "Portugal", "Puerto Rico",
+    "Reino Unido", "República Checa", "República Dominicana", "Rumanía", "Rusia", "Suecia", "Suiza", "Tailandia",
+    "Turquía", "Ucrania", "Uruguay", "Venezuela", "Vietnam"];
+foreach ($paises as $p) {
+    echo '<option value="' . htmlspecialchars($p) . '"' . ($pais === $p ? ' selected' : '') . '>' . htmlspecialchars($p) . '</option>';
+}
+?>
+
+                </select>
+            </label>
+            <label>Edad:
+                <input type="number" name="edad" min="1" required>
+            </label>
+        </div>
         <label>Nombre:
             <input type="text" name="nombre" required>
         </label>
@@ -69,4 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     <p class="enlace-login">¿Ya tienes cuenta? <a href="login.php">Inicia sesión aquí</a></p>
 </main>
+</body>
+</html>
 <?php include 'inc/footer.php'; ?>

@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<main class="registro">
+<main class="login">
     <img src="./img/logo.svg" alt="">
     <h1>Iniciar sesión</h1>
     <?php if (!empty($errores)): ?>
@@ -60,3 +60,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 </body>
 </html>
+<?php include 'inc/footer.php'; ?>
