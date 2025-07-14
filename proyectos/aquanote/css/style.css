@@ -118,7 +118,7 @@ header .volver-index a:hover {
   top: 82%;
   background: #39B6C6;
   border-radius: 5px;
-  width: 100px;
+  width: 0px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   display: none;
@@ -126,6 +126,22 @@ header .volver-index a:hover {
   gap: 0.5rem;
   z-index: 999;
 }
+
+/*.menu-dropdown.abierto {
+  position: absolute;
+  right: 0;
+  top: 82%;
+  background: #39B6C6;
+  border-radius: 5px;
+  width: 100px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 999;
+}*/
+
 .menu-dropdown a {
   text-decoration: none;
   color: #333;
