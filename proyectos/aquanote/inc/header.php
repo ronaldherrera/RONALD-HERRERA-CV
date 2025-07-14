@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aquanote</title>
-    <link rel="stylesheet" href="https://ronaldherrera.es/proyectos/aquanote/img/logo-horizontal.svg">
+    <link rel="stylesheet" href="/img/logo-horizontal.svg">
 </head>
 <body>
 <header>
