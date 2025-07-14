@@ -11,7 +11,7 @@
 <body>
 <header>
     <div class="logo">
-        <img src="/proyectos/aquanote/usuarios/img/logo-horizontal.svg" alt="Aquanote" height="40">
+        <img src="/proyectos/aquanote/img/logo-horizontal.svg" alt="Aquanote" height="40">
         <span>Aquanote</span>
     </div>
 </header>
