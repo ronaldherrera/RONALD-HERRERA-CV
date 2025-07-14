@@ -56,7 +56,7 @@ header .logo img {
   font-size: 1.5rem;
   cursor: pointer;
 }
-.menu-container {
+.menu-contenedor {
   position: relative;
 }
 .menu-dropdown {
@@ -76,7 +76,7 @@ header .logo img {
   text-decoration: none;
   color: #333;
 }
-.menu-container.open .menu-dropdown {
+.menu-contenedorr.abierto .menu-dropdown {
   display: flex;
 }
 

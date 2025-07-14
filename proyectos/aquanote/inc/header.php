@@ -13,7 +13,7 @@
             const container = document.getElementById("menu-contenedor");
             if (toggle && container) {
                 toggle.addEventListener("click", () => {
-                    container.classList.toggle("open");
+                    container.classList.toggle("abierto");
                 });
             }
         });
