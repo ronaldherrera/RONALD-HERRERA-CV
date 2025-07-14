@@ -11,9 +11,29 @@
         document.addEventListener("DOMContentLoaded", () => {
             const toggle = document.getElementById("menu-toggle");
             const container = document.getElementById("menu-contenedor");
+            const dropdown = container?.querySelector(".menu-dropdown");
+
             if (toggle && container) {
-                toggle.addEventListener("click", () => {
+                toggle.addEventListener("click", (e) => {
+                    e.stopPropagation();
                     container.classList.toggle("abierto");
+                    dropdown.classList.toggle("abierto");
+                });
+
+                // Cerrar al hacer clic fuera del menú
+                document.addEventListener("click", (e) => {
+                    if (!container.contains(e.target)) {
+                        container.classList.remove("abierto");
+                        dropdown.classList.remove("abierto");
+                    }
+                });
+
+                // Cerrar al hacer clic en un enlace
+                dropdown.querySelectorAll("a").forEach(link => {
+                    link.addEventListener("click", () => {
+                        container.classList.remove("abierto");
+                        dropdown.classList.remove("abierto");
+                    });
                 });
             }
         });
@@ -26,12 +46,14 @@
         <img src="/proyectos/aquanote/img/logo-horizontal.svg" alt="Aquanote" height="40">
     </div>
     <div class="menu-contenedor" id="menu-contenedor">
-        <button id="menu-toggle" class="menu-toggle">☰</button>
+        <button id="menu-toggle" class="menu-toggle"><span></span>
+  <span></span>
+  <span></span></button>
         <div class="menu-dropdown">
-            <a href="../index.php">Inicio</a>
-            <a href="../cuenta.php">Mi cuenta</a>
-            <a href="../mi-acuario.php">Mi acuario</a>
-            <a href="../logout.php">Cerrar sesión</a>
+            <a href="/proyectos/aquanote/index.php">Inicio</a>
+            <a href="/proyectos/aquanote/usuarios/mi_cuenta.php">Mi cuenta</a>
+            <a href="/proyectos/aquanote/usuarios/mi_acuario.php">Mi acuario</a>
+            <a href="/proyectos/aquanote/logout.php">Cerrar sesión</a>
         </div>
     </div>
 </header>
