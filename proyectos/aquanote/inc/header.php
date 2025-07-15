@@ -52,8 +52,8 @@
         <div class="menu-contenedor" id="menu-contenedor">
             <button id="menu-toggle" class="menu-toggle"><span></span><span></span><span></span></button>
             <div class="menu-dropdown">
-                <a href="/proyectos/aquanote/mi_acuario.php">Mi acuario</a>
-                <a href="/proyectos/aquanote/mi_cuenta.php">Mi cuenta</a>
+                <a href="/proyectos/aquanote/usuarios/mi_acuario.php">Mi acuario</a>
+                <a href="/proyectos/aquanote/usuarios/mi_cuenta.php">Mi cuenta</a>
                 <a href="/proyectos/aquanote/logout.php" style="color:#AD2222">Cerrar sesión</a>
             </div>
         </div>
