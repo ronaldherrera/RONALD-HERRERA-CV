@@ -418,6 +418,95 @@ textarea::-webkit-scrollbar-button {
   display: none; /* quita las flechas */
 }
     
+fieldset{
+    background-color: #BEF8FF;
+}
+
+#parametros-lista input[type="checkbox"] {
+  display: none;
+}
+
+ .tarjeta-parametros {
+    background-color: #BEF8FF;
+}
+
+ .tarjeta-parametros.activo{
+    background-color: #39B6C6;
+ }
+ 
+.tarjeta {
+    user-select: none;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 140px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #1c2d3a;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-align: center;
+  box-shadow: 0 0 0 2px transparent;
+}
+
+.tarjeta.activo {
+  background-color: #39B6C6;
+  color: #001f2a;
+  box-shadow: 0 0 8px rgba(57, 182, 198, 0.5);
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.icono-parametro {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.nombre-parametro {
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.info-icono {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  font-size: 0.8em;
+  width: 180px;
+  margin-top: 8px;
+  display: none;
+  z-index: 10;
+}
+
+.tooltip.visible {
+  display: block;
+}
+
+
 
     
  @media (min-width: 601px) and (max-width: 1024px) {

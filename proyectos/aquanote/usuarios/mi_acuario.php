@@ -205,18 +205,27 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
         
         <span>¿Qué parámetros quieres registrar?</span>
        <fieldset>
-    <div id="parametros-lista">
+     <div id="parametros-lista">
         <?php foreach ($parametros_disponibles as $param): 
             $icono = $parametros_info[$param][0] ?? '🔘';
             $desc  = $parametros_info[$param][1] ?? ucfirst($param);
             $checked = in_array($param, $parametros_seleccionados);
             $clase = $checked ? 'activo' : 'desactivado';
         ?>
-            <label class="tarjeta <?= $clase ?>">
-                <input type="checkbox" name="parametros[]" value="<?= $param ?>" <?= $checked ? 'checked' : '' ?>>
-                <?= $icono ?> <strong><?= $param ?></strong><br>
-                <small style="opacity:0.7; font-size: 0.85em;"><?= $desc ?></small>
-            </label>
+            <div class="tarjeta <?= $clase ?>" data-parametro="<?= $param ?>">
+    <input type="checkbox" name="parametros[]" value="<?= $param ?>" <?= $checked ? 'checked' : '' ?> hidden>
+
+    <span class="info-icono" onclick="mostrarTooltip(this, event)">ℹ️</span>
+
+    <div class="contenido-parametro">
+        <div class="icono-parametro"><?= $icono ?></div>
+        <div class="nombre-parametro"><?= $param ?></div>
+    </div>
+
+    <div class="tooltip"><?= $desc ?></div>
+</div>
+
+
         <?php endforeach; ?>
     </div>
 
@@ -261,17 +270,58 @@ checkboxes.forEach(c => {
 resetBtn.addEventListener('click', () => aplicarPreset(tipoSelect.value));
 
   document.querySelectorAll('#parametros-lista input[type="checkbox"]').forEach((checkbox) => {
-    checkbox.addEventListener('change', function () {
-      const label = this.closest('label');
-      if (this.checked) {
-        label.classList.add('activo');
-        label.classList.remove('desactivado');
-      } else {
-        label.classList.remove('activo');
-        label.classList.add('desactivado');
-      }
-    });
+  checkbox.addEventListener('change', function () {
+    const tarjeta = this.closest('.tarjeta');
+    if (this.checked) {
+      tarjeta.classList.add('activo');
+      tarjeta.classList.remove('desactivado');
+    } else {
+      tarjeta.classList.remove('activo');
+      tarjeta.classList.add('desactivado');
+    }
   });
+});
+
+
+  
+// Toggle tarjeta al hacer clic
+document.querySelectorAll('.tarjeta').forEach((tarjeta) => {
+  tarjeta.addEventListener('click', function (e) {
+    // Evitar que al hacer clic en el ícono info se active el toggle
+    if (e.target.classList.contains('info-icono') || e.target.closest('.tooltip')) {
+      return;
+    }
+
+    const checkbox = this.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
+
+    if (checkbox.checked) {
+      this.classList.add('activo');
+      this.classList.remove('desactivado');
+    } else {
+      this.classList.remove('activo');
+      this.classList.add('desactivado');
+    }
+  });
+});
+
+// Mostrar/ocultar tooltip
+function mostrarTooltip(icono, event) {
+  event.stopPropagation();
+  const tooltip = icono.parentElement.querySelector('.tooltip');
+  tooltip.classList.toggle('visible');
+
+  document.querySelectorAll('.tooltip').forEach(t => {
+    if (t !== tooltip) t.classList.remove('visible');
+  });
+}
+
+// Cerrar tooltip si se hace clic fuera
+document.addEventListener('click', function (e) {
+  if (!e.target.classList.contains('info-icono')) {
+    document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('visible'));
+  }
+});
 </script>
 
 <?php include '../inc/footer.php'; ?>
