@@ -200,6 +200,10 @@ main.form-row {
   gap: 1rem;
 }
 
+.configuracion form label {
+  color: #000A11;
+}
+
 /* Hace que los labels se distribuyan proporcionalmente */
 .form-row label:first-child {
   flex: 2; /* el campo país ocupará el doble */
@@ -345,3 +349,33 @@ p.enlace-login a, p.enlace-registro a {
 p.enlace-login a:hover, p.enlace-registro a:hover {
   text-decoration: underline;
 }
+
+
+.configuracion .bloque-cabecera{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+    
+}
+
+.bloque-cabecera .descripcion{
+  display:flex;
+  width: 50%;
+  flex-direction: column;
+}
+
+.bloque-cabecera .descripcion div{
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.bloque-cabecera label{
+    display: flex;
+}
+
+
+
+

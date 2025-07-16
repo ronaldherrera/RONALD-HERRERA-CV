@@ -1,4 +1,4 @@
-<?php
+.bloque-cabecer<?php
 require_once '../config.php';
 require_once '../inc/auth.php';
 include '../inc/header.php';
@@ -27,7 +27,7 @@ $parametros_info = [
     'NO₃' => ['⚠️', '<strong>Nitratos</strong>, producto final del ciclo del nitrógeno. Menos tóxico, pero peligroso en exceso.'],
     'Cambio de agua' => ['💧', '<strong>Cambio de agua</strong>, registro de la última renovación parcial del agua.'],
     'Limpieza de filtro' => ['🧹', 'Control de mantenimiento del sistema de filtrado.'],
-    'Limpieza de skimmer' => ['🯙', 'Control de limpieza del skimmer en acuarios marinos.'],
+    'Limpieza de skimmer' => ['🫧', 'Control de limpieza del skimmer en acuarios marinos.'],
     'Salinidad / Densidad' => ['🌊', 'Nivel de sal en acuarios marinos, esencial para especies marinas.'],
     'Parámetros de cría' => ['🍼', 'Notas específicas para acuarios de cría o cuarentena: temperatura, alimentación, cuidados, etc.'],
 ];
@@ -177,30 +177,39 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
     <a href="../index.php" class="boton-secundario" style="margin-left: 1em;">Volver sin guardar</a>
     <h1>Mi Acuario</h1>
     <form method="POST">
-        <label>Nombre del acuario:
-            <input type="text" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
-        </label>
-
-        <label>Tipo:
-            <select name="tipo" id="tipo-acuario" required>
-                <option value="">-- Selecciona --</option>
-                <?php foreach ($presets as $clave => $valores): ?>
-                    <option value="<?= $clave ?>" <?= $tipo === $clave ? 'selected' : '' ?>><?= ucfirst(str_replace('_', ' ', $clave)) ?></option>
-                <?php endforeach; ?>
-            </select>
-        </label>
-
-        <label>Volumen (en litros):
-            <input type="number" name="volumen" value="<?= htmlspecialchars($volumen) ?>" min="0" step="1" required>
-        </label>
-
-        <label>Fecha de inicio:
-            <input type="date" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>">
-        </label>
-
-        <label>Notas:
+        <div class="bloque-cabecera">
+            <div class="descripcion">
+                <div>
+                <label>Nombre:
+                <input type="text" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
+            </label>
+            <label>Tipo:
+                <select name="tipo" id="tipo-acuario" required>
+                    <option value="">-- Selecciona --</option>
+                    <?php foreach ($presets as $clave => $valores): ?>
+                        <option value="<?= $clave ?>" <?= $tipo === $clave ? 'selected' : '' ?>><?= ucfirst(str_replace('_', ' ', $clave)) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
+            </div>
+           
+                <div>
+                <label>Volumen (litros):
+                <input type="number" name="volumen" value="<?= htmlspecialchars($volumen) ?>" min="0" step="1" required>
+            </label>
+            <label>Inicio:
+                <input type="date" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>">
+            </label>
+            </div>
+            </div>
+            
+            
+            <label>Notas:
             <textarea name="notas" rows="3"><?= htmlspecialchars($notas) ?></textarea>
         </label>
+            
+        </div>
+        
 
         <fieldset>
             <legend>¿Qué parámetros quieres registrar?</legend>
@@ -218,8 +227,9 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
             <button type="button" id="reset-parametros" style="display:none; margin-top:10px;">🔄 Restablecer selección</button>
         </fieldset>
 
-        <button type="submit">Guardar</button>
         
+
+        <button type="submit">Guardar</button>
     </form>
 </main>
 </body>
