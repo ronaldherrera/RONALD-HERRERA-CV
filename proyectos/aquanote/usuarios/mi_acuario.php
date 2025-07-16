@@ -251,21 +251,38 @@ const resetBtn = document.getElementById('reset-parametros');
 let parametrosIniciales = Array.from(checkboxes).filter(c => c.checked).map(c => c.value);
 
 function aplicarPreset(tipo) {
-    if (presets[tipo]) {
-        checkboxes.forEach(c => c.checked = presets[tipo].includes(c.value));
-        resetBtn.style.display = 'none';
-        parametrosIniciales = presets[tipo];
+  const preset = presets[tipo] || [];
+
+  checkboxes.forEach(c => {
+    const activo = preset.includes(c.value);
+    c.checked = activo;
+
+    const tarjeta = c.closest('.tarjeta');
+    if (activo) {
+      tarjeta.classList.add('activo');
+      tarjeta.classList.remove('desactivado');
+    } else {
+      tarjeta.classList.remove('activo');
+      tarjeta.classList.add('desactivado');
     }
+  });
+
+  // Guarda esta selección como la base para comparación
+  parametrosIniciales = [...preset];
+
+  // Oculta el botón de reset
+  resetBtn.style.display = 'none';
 }
+
 
 tipoSelect.addEventListener('change', () => aplicarPreset(tipoSelect.value));
 
-checkboxes.forEach(c => {
-    c.addEventListener('change', () => {
-        const actual = Array.from(checkboxes).filter(c => c.checked).map(c => c.value);
-        resetBtn.style.display = JSON.stringify(actual.sort()) !== JSON.stringify(parametrosIniciales.sort()) ? 'inline-block' : 'none';
-    });
-});
+function comprobarDiferencias() {
+  const actual = Array.from(checkboxes).filter(c => c.checked).map(c => c.value);
+  const distintos = JSON.stringify(actual.sort()) !== JSON.stringify(parametrosIniciales.sort());
+  resetBtn.style.display = distintos ? 'inline-block' : 'none';
+}
+
 
 resetBtn.addEventListener('click', () => aplicarPreset(tipoSelect.value));
 
@@ -279,6 +296,8 @@ resetBtn.addEventListener('click', () => aplicarPreset(tipoSelect.value));
       tarjeta.classList.remove('activo');
       tarjeta.classList.add('desactivado');
     }
+    comprobarDiferencias();
+
   });
 });
 
@@ -287,11 +306,7 @@ resetBtn.addEventListener('click', () => aplicarPreset(tipoSelect.value));
 // Toggle tarjeta al hacer clic
 document.querySelectorAll('.tarjeta').forEach((tarjeta) => {
   tarjeta.addEventListener('click', function (e) {
-    // Evitar que al hacer clic en el ícono info se active el toggle
-    if (e.target.classList.contains('info-icono') || e.target.closest('.tooltip')) {
-      return;
-    }
-
+    // ...
     const checkbox = this.querySelector('input[type="checkbox"]');
     checkbox.checked = !checkbox.checked;
 
@@ -302,6 +317,9 @@ document.querySelectorAll('.tarjeta').forEach((tarjeta) => {
       this.classList.remove('activo');
       this.classList.add('desactivado');
     }
+
+    // 👇 AÑADE ESTA LÍNEA
+    comprobarDiferencias();
   });
 });
 
