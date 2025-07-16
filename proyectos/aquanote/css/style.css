@@ -199,9 +199,7 @@ main.form-row {
   gap: 1rem;
 }
 
-.configuracion form label {
-  color: #000A11;
-}
+
 
 /* Hace que los labels se distribuyan proporcionalmente */
 .form-row label:first-child {
@@ -224,8 +222,9 @@ input[type="number"] {
 
 
 select {
+  height: 40px;
   width: 100%;
-  padding: 0.7rem;
+  padding: 0.3rem 0.7rem;
   background-color: transparent;
   color: white;
   border: 2px solid #39B6C6;
@@ -265,7 +264,7 @@ select::-webkit-scrollbar-button {
 /* Elimina el borde azul al enfocar */
 select:focus {
   outline: none;
-  border-color: transparent;
+  
   background-color: #152D41;
 }
 
@@ -294,6 +293,7 @@ input:focus {
 
 
 form input {
+  height: 40px;
   width: 100%;
   padding: 0.7rem;
   border: 2px solid #39B6C6;
@@ -349,9 +349,22 @@ p.enlace-login a:hover, p.enlace-registro a:hover {
   text-decoration: underline;
 }
 
+.configuracion form label {
+  color: #FFFFFF;
+  font-weight: 400;
+}
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(70%) sepia(47%) saturate(316%) hue-rotate(145deg) brightness(98%) contrast(93%);
+  cursor: pointer;
+}
 
 .grid-cabecera {
+  box-shadow: 0px 0px 2px 0px #000000;
+  background-color: #152D41;
+  padding: 20px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -368,15 +381,44 @@ p.enlace-login a:hover, p.enlace-registro a:hover {
 .grid-cabecera label{
     display: flex;
     flex-direction: column;
+    margin: 0px;
+}
+
+.grid-cabecera select{
+    font-size: 14px;
+    font-style: italic;
 }
 
 .grid-cabecera textarea{
     margin-top: 4.8px;
     height: 100%;
     resize: none;
+    border-radius: 6px;
+    padding: 0.4rem;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 9px 0px #000000;
+}
+
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #39B6C6;  /* el color de la barrita */
+  border-radius: 10px;
+  border: none;
+}
+
+textarea::-webkit-scrollbar-button {
+  display: none; /* quita las flechas */
 }
     
-    
+
     
  @media (min-width: 601px) and (max-width: 1024px) {
   .grid-cabecera {
