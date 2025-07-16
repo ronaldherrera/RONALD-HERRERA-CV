@@ -203,22 +203,26 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
                 </label>
         </div>
         
+        <span>¿Qué parámetros quieres registrar?</span>
+       <fieldset>
+    <div id="parametros-lista">
+        <?php foreach ($parametros_disponibles as $param): 
+            $icono = $parametros_info[$param][0] ?? '🔘';
+            $desc  = $parametros_info[$param][1] ?? ucfirst($param);
+            $checked = in_array($param, $parametros_seleccionados);
+            $clase = $checked ? 'activo' : 'desactivado';
+        ?>
+            <label class="tarjeta <?= $clase ?>">
+                <input type="checkbox" name="parametros[]" value="<?= $param ?>" <?= $checked ? 'checked' : '' ?>>
+                <?= $icono ?> <strong><?= $param ?></strong><br>
+                <small style="opacity:0.7; font-size: 0.85em;"><?= $desc ?></small>
+            </label>
+        <?php endforeach; ?>
+    </div>
 
-        <fieldset>
-            <legend>¿Qué parámetros quieres registrar?</legend>
-            <div id="parametros-lista">
-                <?php foreach ($parametros_disponibles as $param): 
-                    $icono = $parametros_info[$param][0] ?? '🔘';
-                    $desc  = $parametros_info[$param][1] ?? ucfirst($param);
-                ?>
-                    <label style="display:inline-block; width: 260px; margin-bottom: 8px;">
-                        <input type="checkbox" name="parametros[]" value="<?= $param ?>" <?= in_array($param, $parametros_seleccionados) ? 'checked' : '' ?>>
-                        <?= $icono ?> <strong><?= $param ?></strong><br><small style="opacity:0.7; font-size: 0.85em;"><?= $desc ?></small>
-                    </label>
-                <?php endforeach; ?>
-            </div>
-            <button type="button" id="reset-parametros" style="display:none; margin-top:10px;">🔄 Restablecer selección</button>
-        </fieldset>
+    <button type="button" id="reset-parametros" style="display:none; margin-top:10px;">🔄 Restablecer selección</button>
+</fieldset>
+
 
         
 
@@ -255,6 +259,19 @@ checkboxes.forEach(c => {
 });
 
 resetBtn.addEventListener('click', () => aplicarPreset(tipoSelect.value));
+
+  document.querySelectorAll('#parametros-lista input[type="checkbox"]').forEach((checkbox) => {
+    checkbox.addEventListener('change', function () {
+      const label = this.closest('label');
+      if (this.checked) {
+        label.classList.add('activo');
+        label.classList.remove('desactivado');
+      } else {
+        label.classList.remove('activo');
+        label.classList.add('desactivado');
+      }
+    });
+  });
 </script>
 
 <?php include '../inc/footer.php'; ?>
