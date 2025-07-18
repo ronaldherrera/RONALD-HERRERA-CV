@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <main class="mis-acuarios">
     <h1>Mis Acuarios</h1>
-    <a href="configuracion_acuario.php" class="boton">➕ Añadir nuevo acuario</a>
+    <a href="../usuarios/config_acuario.php" class="boton">➕ Añadir nuevo acuario</a>
     <ul class="lista-acuarios">
         <?php foreach ($acuarios as $a): ?>
             <li>
