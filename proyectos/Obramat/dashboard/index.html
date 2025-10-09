@@ -1,278 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Embebidos según orientación</title>
+    <style>
+      :root {
+        --vh: 1vh;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: #0f1115;
+      }
 
-    <!---->
+      /* Ocultar ambos por defecto */
+      .panel {
+        display: none;
+      }
+
+      /* Mostrar solo en vertical */
+      @media (orientation: portrait) {
+        .panel.vertical {
+          display: block;
+        }
+      }
+
+      /* Mostrar solo en horizontal */
+      @media (orientation: landscape) {
+        .panel.horizontal {
+          display: block;
+        }
+      }
+
+      /* El iframe ocupa el alto real de la ventana */
+      .panel iframe {
+        width: 100%;
+        height: calc(var(--vh, 1vh) * 100);
+        border: 0;
+        display: block;
+      }
+
+      /* Opcional: limita el ancho en pantallas muy grandes si quieres */
+      .limit {
+        max-width: 1920px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Vista para orientación VERTICAL -->
+    <div class="panel vertical limit">
+      <iframe
+        src="https://lookerstudio.google.com/embed/reporting/3b6703a2-6902-4fbd-bf60-f5eb4c1d2b61/page/1n0UF"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+
+    <!-- Vista para orientación HORIZONTAL -->
+    <div class="panel horizontal limit">
+      <iframe
+        src="https://lookerstudio.google.com/embed/reporting/d913b5d4-2993-43e9-9b58-0fa7b828298b/page/fd0UF"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+
     <script>
-      /** ========= CONFIG ========= */
-      const ORG_DOMAIN = "obramat.es"; // dominio corporativo
-      const SHEET_ID = "10LF4uEPzFzB_1Gae7OBjP_bow5XMaZT2w7NsHog5fAs"; // ID del Google Sheet
-      const TAB_NAME = "HISTÓRICO VENTAS"; // nombre exacto de la pestaña de datos
-
-      // Lista fija de secciones para el desplegable (sin leer del Sheet)
-      const SECTIONS_PRESET = [
-        "TOTAL",
-        "MATERIALES DE CONSTRUCCIÓN",
-        "MADERA - ORDENACION",
-        "ELECTRICIDAD - ILUMINACION",
-        "HERRAMIENTAS",
-        "CERAMICA",
-        "SANITARIO",
-        "FONTANERIA - CALEFACCION",
-        "FERRETERIA",
-        "PINTURA - DROGUERIA",
-      ];
-      const DEFAULT_SECTION = "TOTAL";
-
-      /** ====== Web App ====== */
-      function doGet() {
-        const tpl = HtmlService.createTemplateFromFile("index");
-        // Inyectamos la lista fija y los valores por defecto para pintar sin llamadas extra
-        tpl.sections = SECTIONS_PRESET;
-        const tz = Session.getScriptTimeZone() || "Europe/Madrid";
-        tpl.defaultDate = Utilities.formatDate(new Date(), tz, "yyyy-MM-dd");
-        tpl.defaultSection = DEFAULT_SECTION;
-        return tpl
-          .evaluate()
-          .setTitle("Total ventas+IVA")
-          .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
-      }
-
-      function include_(name) {
-        return HtmlService.createHtmlOutputFromFile(name).getContent();
-      }
-
-      /** ====== API ====== */
-      function getSectionsMenu() {
-        // devolvemos la lista fija directamente sin ir al Sheet
-        return SECTIONS_PRESET;
-      }
-
-      function getTotalVentas(req) {
-        try {
-          const ss = SpreadsheetApp.openById(SHEET_ID);
-          const sh = ss.getSheetByName(TAB_NAME);
-          if (!sh)
-            return {
-              ok: false,
-              header: "",
-              valor: 0,
-              msg: "Pestaña no encontrada: " + TAB_NAME,
-            };
-
-          const lastRow = sh.getLastRow();
-          const lastCol = sh.getLastColumn();
-          if (lastRow <= 1)
-            return { ok: true, header: "Total ventas+IVA", valor: 0 };
-
-          const headers = sh
-            .getRange(1, 1, 1, lastCol)
-            .getValues()[0]
-            .map((h) => String(h).trim());
-          const colFechaIdx = headers.indexOf("Fecha");
-          const colSeccNameIdx = headers.indexOf("Sección");
-          const colTotalIdx = headers.indexOf("Total ventas+IVA");
-          if (
-            colFechaIdx === -1 ||
-            colSeccNameIdx === -1 ||
-            colTotalIdx === -1
-          ) {
-            return {
-              ok: false,
-              header: "",
-              valor: 0,
-              msg: "Comprueba columnas: Fecha / Sección / Total ventas+IVA",
-            };
-          }
-
-          const headerName = headers[colTotalIdx]; // <-- lo devolvemos al front
-
-          const colFecha = colFechaIdx + 1;
-          const colSeccName = colSeccNameIdx + 1;
-          const colTotal = colTotalIdx + 1;
-
-          const numRows = lastRow - 1;
-          const fechas = sh.getRange(2, colFecha, numRows, 1).getValues();
-          const secc = sh.getRange(2, colSeccName, numRows, 1).getValues();
-          const totales = sh.getRange(2, colTotal, numRows, 1).getValues();
-
-          const tz = Session.getScriptTimeZone() || "Europe/Madrid";
-          const todayISO = Utilities.formatDate(new Date(), tz, "yyyy-MM-dd");
-          const wantISO = normalizeToISO_(
-            req && req.date ? req.date : todayISO,
-            tz
-          );
-          const rawName =
-            req &&
-            typeof req.sectionName !== "undefined" &&
-            req.sectionName !== null
-              ? String(req.sectionName)
-              : DEFAULT_SECTION;
-          const wantName = rawName.trim().toUpperCase();
-          const wantIsTotal = wantName === "TOTAL";
-
-          let total = 0;
-          for (let i = 0; i < numRows; i++) {
-            const f = fechas[i][0];
-            const rowISO =
-              f instanceof Date
-                ? Utilities.formatDate(f, tz, "yyyy-MM-dd")
-                : normalizeToISO_(f, tz);
-            if (rowISO !== wantISO) continue;
-
-            const nameU = String(secc[i][0] || "")
-              .trim()
-              .toUpperCase();
-            if (wantIsTotal) {
-              if (nameU !== "TOTAL") continue;
-            } else {
-              if (nameU === "TOTAL") continue;
-              if (wantName && nameU !== wantName) continue;
-            }
-
-            total += toNumEU_(totales[i][0]);
-          }
-
-          return { ok: true, header: headerName, valor: total };
-        } catch (err) {
-          return {
-            ok: false,
-            header: "",
-            valor: 0,
-            msg: "Error en getTotalVentas: " + err.message,
-          };
-        }
-      }
-
-      // Solo para forzar consentimiento de permisos si hace falta
-      function _authOnce() {
-        SpreadsheetApp.openById(SHEET_ID).getSheets()[0].getName();
-      }
-
-      /** ====== helpers ====== */
-      function normalizeToISO_(s, tz) {
-        if (!s) return "";
-        const str = String(s).trim();
-        const m = /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/.exec(str);
-        if (m) {
-          const d = ("0" + m[1]).slice(-2),
-            mo = ("0" + m[2]).slice(-2);
-          const y = m[3].length === 2 ? "20" + m[3] : m[3];
-          return `${y}-${mo}-${d}`;
-        }
-        if (/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
-        const date = s instanceof Date ? s : new Date(str);
-        return Utilities.formatDate(
-          date,
-          tz || Session.getScriptTimeZone(),
-          "yyyy-MM-dd"
+      // Ajuste de altura real en móviles (corrige barras del navegador)
+      function setVH() {
+        document.documentElement.style.setProperty(
+          "--vh",
+          window.innerHeight * 0.01 + "px"
         );
       }
-
-      function toNumEU_(v) {
-        if (typeof v === "string")
-          v = v.replace(/[€\s\.]/g, "").replace(",", ".");
-        const n = Number(v);
-        return isNaN(n) ? 0 : n;
-      }
+      setVH();
+      window.addEventListener("resize", setVH, { passive: true });
+      window.addEventListener("orientationchange", setVH, { passive: true });
     </script>
-    <!---->
-
-    <!---->
-    <style>
-            :root{
-  --bg:#0f1115;--card:#151823;--txt:#e8ebf4;--muted:#98a0b3;--brand:#ff5800;--br:14px
-            }
-            *{box-sizing:border-box}
-            body.dashboard{outline:4px solid magenta; margin:0; background-color:#0f1115; color:var(--txt); font:14px/1.4 system-ui,Inter,Arial }
-
-            .topbar{
-              position:sticky;top:0;padding:10px 14px;
-              background:#0e1118;border-bottom:1px solid #22263a;
-              display:flex;gap:12px;align-items:center
-            }
-            .brand{font-weight:700;margin-right:auto}
-
-            .wrap{max-width:1200px;margin:0 auto;padding:16px;display:grid;gap:16px}
-
-            .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-            .kpi{
-              background:var(--card);padding:16px;border-radius:var(--br);border:1px solid #1e2233
-            }
-            .kpi-title{opacity:.8;font-size:12px;text-transform:uppercase}
-            .kpi-val{font-size:28px;font-weight:700;margin-top:6px}
-
-            .bar{height:8px;background:#1f2334;border-radius:999px;margin-top:10px;overflow:hidden}
-            #bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#ffa466)}
-
-            .charts{display:grid;grid-template-columns:2fr 2fr 1.2fr;gap:16px}
-            .card{background:var(--card);border-radius:var(--br);border:1px solid #1e2233;padding:12px}
-
-            .table{overflow:auto}
-            table{width:100%;border-collapse:collapse}
-            thead th{
-              background:#171b27;position:sticky;top:0;text-align:left;padding:8px
-            }
-            tbody td{padding:8px;border-top:1px solid #20253a}
-            .muted{color:var(--muted)}
-
-            @media (max-width:1000px){.charts{grid-template-columns:1fr 1fr}}
-            @media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.charts{grid-template-columns:1fr}}
-            @media (max-width:520px){.kpis{grid-template-columns:1fr}}
-
-    </style>
-    <!---->
-
-    
-    <title>Document</title>
-
-
-  </head>
-
-  <body>
-    <h1>Total ventas+IVA</h1>
-  <label>Fecha: <input type="date" id="fecha" value="<?= defaultDate ?>"></label>
-  <label>Sección:
-    <select id="seccion">
-      <? for (var i=0; i<sections.length; i++) { ?>
-        <option value="<?= sections[i] ?>" <?= sections[i] == defaultSection ? 'selected' : '' ?>><?= sections[i] ?></option>
-      <? } ?>
-    </select>
-  </label>
-  <div id="resultado"></div>
-
-    <!---->
-    <script>
-      (function () {
-        const $fecha = document.getElementById("fecha");
-        const $secc = document.getElementById("seccion");
-        const $out = document.getElementById("resultado");
-
-        function recalcular() {
-          const date = $fecha.value;
-          const sectionName = $secc.value || null;
-          $out.textContent = "Buscando ventas...";
-          google.script.run
-            .withSuccessHandler((res) => {
-              if (!res || res.ok === false) {
-                $out.textContent = (res && res.msg) || "Sin datos";
-                return;
-              }
-              $out.textContent = `${res.header}: ${res.valor}`;
-            })
-            .withFailureHandler((err) => {
-              $out.textContent = "Error: " + err.message;
-            })
-            .getTotalVentas({ date, sectionName });
-        }
-
-        window.addEventListener("load", recalcular);
-        $fecha.addEventListener("change", recalcular);
-        $secc.addEventListener("change", recalcular);
-      })();
-    </script>
-    <!---->
   </body>
 </html>
