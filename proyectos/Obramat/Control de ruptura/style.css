@@ -108,6 +108,10 @@ label.boton-subir {
   padding-bottom: 0px;
 }
 
+.boton-volver{
+  display: flex;
+}
+
 
 
 /* Cada línea (nombre o sección + botón) */
@@ -203,6 +207,8 @@ label.boton-subir {
 
 .toggle-icon{
   width: 15px;
+  transition: transform 0.3s ease; /* animación fluida */
+  transform-origin: center; 
 }
 
 .cabecera-izquierda .nombre {
@@ -217,6 +223,7 @@ label.boton-subir {
   font-size: 0.85rem;
   color: #555;
   font-style: italic;
+  display: flex;
 }
 
 .cabecera-izquierda .ean em {
@@ -224,6 +231,72 @@ label.boton-subir {
   font-weight: bold;
   color: #666;
 }
+
+.switch-informe{
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 15px;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.switch-informe input{
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-text{
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background-color: #478140;      /* verde (Incluido) */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 400;
+  transition: background-color .2s ease;
+  pointer-events: none;
+  font-style: normal;
+  box-shadow: inset 0px  0px  3px 0.15px #000000a6 ;
+}
+
+/* El TEXTO vive en ::after y cambia solo con :checked */
+.slider-text::after{
+  content: "incluido";
+}
+
+.switch-informe input:not(:checked) + .slider-text{
+  background-color: #792f2f;      /* rojo (Excluido) */
+}
+.switch-informe input:not(:checked) + .slider-text::after{
+  content: "excluido";
+}
+
+/* Bolita con transición suave */
+.slider-text::before{
+  content: "";
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  left: 2px;
+  top: 2px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0px  0px  3px 0.15px #000000a6 ;
+  transition: transform .3s ease;
+  transform: translateX(55px);    /* estado marcado: derecha */
+}
+.switch-informe input:not(:checked) + .slider-text::before{
+  transform: translateX(0);       /* no marcado: izquierda */
+}
+
+
+
 
 .cabecera-derecha {
   text-align: right;
@@ -386,11 +459,39 @@ label.boton-subir {
   padding: 10px;
   background: #DEDDDD;
   display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tarjeta-pie1 {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-
 }
+
+.comentario-input {
+  flex: 1 1 100%;
+  width: 100%;
+  min-height: 28px;
+  max-height: 120px;
+  resize: none;              /* controlamos altura con JS */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 6px 8px;
+  font-size: 12px;
+  line-height: 1.2;
+  background: #ffffff;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.comentario-input:focus {
+  outline: none;
+  border-color: #FF5800;
+  box-shadow: 0 0 0 1px #FF5800 inset;
+}
+
 
 label{
   margin: 0px;
@@ -467,7 +568,7 @@ input[type="number"] {
 }
 
 .estado-neutro {
-  background-color: #797979;
+  background-color: #232323;
 }
 
 .estado-pedir {
