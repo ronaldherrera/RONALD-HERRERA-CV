@@ -488,7 +488,7 @@ label.boton-subir {
 
 .comentario-input:focus {
   outline: none;
-  border-color: #FF5800;
+  border-color: 1px solid #FF5800;
   box-shadow: 0 0 0 1px #FF5800 inset;
 }
 
