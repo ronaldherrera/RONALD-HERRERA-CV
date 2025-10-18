@@ -623,55 +623,10 @@ document.addEventListener("DOMContentLoaded", () => {
         type: "application/pdf",
       });
 
-      // Cargar visor de forma compatible con móviles:
-      // 1) Usamos dataURL en el iframe (funciona en iOS/Android).
-      // 2) Mantenemos el blob para descargar/compartir.
-      // 3) Fallback: botón "Abrir en pestaña nueva" si algo falla.
-
       const visor = document.getElementById("visor-pdf");
       const inputNombreArchivo = document.getElementById("nombre-archivo");
       if (inputNombreArchivo) inputNombreArchivo.value = nombreSugerido;
-
-      // Convertimos el Blob a dataURL para el iframe
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (visor) {
-          visor.src = String(reader.result); // data:application/pdf;base64,....
-          // Fallback por si el visor queda en blanco en algún móvil:
-          setTimeout(() => {
-            try {
-              // Si el iframe no logró cargar nada, mostramos botón de apertura externa
-              const box = document.getElementById("contenido-modal");
-              if (box && visor.contentWindow === null) {
-                // Añade un botón "Abrir en pestaña nueva"
-                let abrirBtn = document.getElementById("abrir-externo");
-                if (!abrirBtn) {
-                  abrirBtn = document.createElement("button");
-                  abrirBtn.id = "abrir-externo";
-                  abrirBtn.textContent = "Abrir en una pestaña nueva";
-                  abrirBtn.style.cssText =
-                    "margin:8px 12px;align-self:flex-end;background:#e6e6e6;border:0;border-radius:6px;padding:8px 10px;cursor:pointer";
-                  box.insertBefore(abrirBtn, box.lastElementChild); // antes de la fila de acciones
-                  abrirBtn.addEventListener("click", () => {
-                    window.open(window.__ultimoBlobUrl__, "_blank", "noopener");
-                  });
-                }
-              }
-            } catch (_) {}
-          }, 500);
-        }
-      };
-      reader.readAsDataURL(blob); // ← dataURL para el visor
-
-      // Mantenemos el blob para compartir/descargar
-      window.__ultimoBlobUrl__ = URL.createObjectURL(blob);
-      window.__ultimoBlobFile__ = new File([blob], nombreSugerido, {
-        type: "application/pdf",
-      });
-
-      // Abrir modal
-      modal.style.display = "flex";
-      document.body.style.overflow = "hidden";
+      if (visor) visor.src = window.__ultimoBlobUrl__ + "#toolbar=1&navpanes=0";
 
       // Abrir modal
       modal.style.display = "flex";
