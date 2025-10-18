@@ -526,7 +526,6 @@ document.addEventListener("DOMContentLoaded", () => {
           '<label for="nombre-archivo" style="font:600 12px/1 Roboto,system-ui;color:#333;">Nombre del documento:</label>' +
           '<input id="nombre-archivo" type="text" value="informe.pdf" style="flex:1;min-width:0;padding:6px 8px;border:1px solid #ccc;border-radius:6px; margin: 2px 0;" />' +
           "</div>" +
-          '<iframe id="visor-pdf" title="Informe PDF" style="flex:1;width:100%;border:0;background:#f7f7f7"></iframe>' +
           '<div style="padding:8px 12px;text-align:right;border-top:1px solid #eee;display:flex;gap:10px;justify-content:flex-end;">' +
           '<button id="btn-descargar-pdf" style="background:#120949;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Descargar</button>' +
           '<button id="btn-enviar-pdf" style="background:#FF5800;color:#120949;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Enviar por correo</button>' +
@@ -681,6 +680,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const pdf = await pdfjs.getDocument({ data }).promise;
 
         let scale = 1.1;
+        // --- Ajustar al ancho del contenedor ---
+        async function fitToWidth() {
+          // Tomamos la primera página como referencia
+          const page1 = await pdf.getPage(1);
+          const unscaled = page1.getViewport({ scale: 1 }); // tamaño "real" de la página
+          // Ancho disponible en el contenedor (menos padding visual)
+          const containerW = visorDiv.clientWidth - 16; // margen de seguridad
+          // Escala para que la página quepa en ancho
+          const newScale = containerW / unscaled.width;
+          // Limitamos por si acaso
+          scale = Math.min(3, Math.max(0.5, newScale));
+          document.getElementById("pdf-zoom-value").textContent =
+            Math.round(scale * 100) + "%";
+        }
 
         async function renderAllPages() {
           visorDiv.innerHTML = "";
@@ -705,14 +718,23 @@ document.addEventListener("DOMContentLoaded", () => {
             Math.round(scale * 100) + "%";
         }
 
+        await fitToWidth();
         await renderAllPages();
 
+        // 🔽 AÑADE AQUÍ este bloque de reajuste automático
+        let __rzTimer;
+        window.addEventListener("resize", async () => {
+          clearTimeout(__rzTimer);
+          __rzTimer = setTimeout(async () => {
+            await fitToWidth();
+            await renderAllPages();
+            visorDiv.scrollTop = 0; // recoloca arriba tras reajuste
+          }, 150);
+        });
+
+        // 🔽 Después siguen tus botones de zoom
         document.getElementById("pdf-zoom-in").onclick = async () => {
           scale = Math.min(3, scale + 0.1);
-          await renderAllPages();
-        };
-        document.getElementById("pdf-zoom-out").onclick = async () => {
-          scale = Math.max(0.5, scale - 0.1);
           await renderAllPages();
         };
       })();
