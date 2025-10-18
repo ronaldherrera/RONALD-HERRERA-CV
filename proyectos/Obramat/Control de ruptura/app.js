@@ -702,10 +702,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const viewport = page.getViewport({ scale });
             const canvas = document.createElement("canvas");
             canvas.className = "pdf-page";
-            canvas.width = viewport.width * 2; // resolución doble
-            canvas.height = viewport.height * 2;
+            canvas.width = viewport.width * 3; // resolución doble
+            canvas.height = viewport.height * 3;
             canvas.style.width = "100%";
-            canvas.style.height = viewport.height + "px";
+            canvas.style.height = "auto";
             const context = canvas.getContext("2d");
             await page.render({
               canvasContext: context,
