@@ -615,18 +615,107 @@ document.addEventListener("DOMContentLoaded", () => {
           });
       }
 
-      // Cargar visor con el blob
-      if (window.__ultimoBlobUrl__)
-        URL.revokeObjectURL(window.__ultimoBlobUrl__);
-      window.__ultimoBlobUrl__ = URL.createObjectURL(blob);
-      window.__ultimoBlobFile__ = new File([blob], nombreSugerido, {
-        type: "application/pdf",
-      });
+      // ================================================
+      // NUEVO VISOR PDF COMPATIBLE CON MÓVILES (PDF.js)
+      // ================================================
 
-      const visor = document.getElementById("visor-pdf");
-      const inputNombreArchivo = document.getElementById("nombre-archivo");
-      if (inputNombreArchivo) inputNombreArchivo.value = nombreSugerido;
-      if (visor) visor.src = window.__ultimoBlobUrl__ + "#toolbar=1&navpanes=0";
+      // Limpia visor y toolbar si ya existían
+      const contenidoModal = document.getElementById("contenido-modal");
+      let viejoVisor = document.getElementById("pdf-viewer");
+      if (viejoVisor) viejoVisor.remove();
+      let viejaToolbar = document.getElementById("pdf-toolbar");
+      if (viejaToolbar) viejaToolbar.remove();
+
+      // Crear toolbar y visor desde JS
+      const toolbar = document.createElement("div");
+      toolbar.id = "pdf-toolbar";
+      toolbar.style.cssText =
+        "display:flex;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid #eee;background:#f5f5f5";
+      toolbar.innerHTML = `
+  <button id="pdf-zoom-out" title="Alejar" style="border:1px solid #ccc;border-radius:4px;padding:4px 8px">−</button>
+  <span id="pdf-zoom-value" style="min-width:50px;text-align:center">100%</span>
+  <button id="pdf-zoom-in" title="Acercar" style="border:1px solid #ccc;border-radius:4px;padding:4px 8px">+</button>
+`;
+
+      const visorDiv = document.createElement("div");
+      visorDiv.id = "pdf-viewer";
+      visorDiv.style.cssText =
+        "flex:1;overflow:auto;background:#2a2a2a;padding:8px;display:flex;flex-direction:column;align-items:center;";
+
+      // Insertamos justo antes de los botones “Descargar / Enviar por correo”
+      const botonesAccion = contenidoModal.querySelector("div:last-child");
+      contenidoModal.insertBefore(toolbar, botonesAccion);
+      contenidoModal.insertBefore(visorDiv, botonesAccion);
+
+      // Añadir librería PDF.js si no está ya cargada
+      if (typeof pdfjsLib === "undefined") {
+        const script = document.createElement("script");
+        script.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+        document.head.appendChild(script);
+        const worker = document.createElement("script");
+        worker.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        document.head.appendChild(worker);
+      }
+
+      // Esperar a que PDF.js esté disponible
+      function esperarPdfjs() {
+        return new Promise((resolve) => {
+          const check = setInterval(() => {
+            if (window.pdfjsLib) {
+              clearInterval(check);
+              pdfjsLib.GlobalWorkerOptions.workerSrc =
+                "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+              resolve(pdfjsLib);
+            }
+          }, 100);
+        });
+      }
+
+      // Renderizar PDF dentro del visor
+      (async () => {
+        const pdfjs = await esperarPdfjs();
+
+        const data = await blob.arrayBuffer();
+        const pdf = await pdfjs.getDocument({ data }).promise;
+
+        let scale = 1.1;
+
+        async function renderAllPages() {
+          visorDiv.innerHTML = "";
+          for (let num = 1; num <= pdf.numPages; num++) {
+            const page = await pdf.getPage(num);
+            const viewport = page.getViewport({ scale });
+            const canvas = document.createElement("canvas");
+            canvas.className = "pdf-page";
+            canvas.width = viewport.width * 2; // resolución doble
+            canvas.height = viewport.height * 2;
+            canvas.style.width = viewport.width + "px";
+            canvas.style.height = viewport.height + "px";
+            const context = canvas.getContext("2d");
+            await page.render({
+              canvasContext: context,
+              transform: [2, 0, 0, 2, 0, 0],
+              viewport,
+            }).promise;
+            visorDiv.appendChild(canvas);
+          }
+          document.getElementById("pdf-zoom-value").textContent =
+            Math.round(scale * 100) + "%";
+        }
+
+        await renderAllPages();
+
+        document.getElementById("pdf-zoom-in").onclick = async () => {
+          scale = Math.min(3, scale + 0.1);
+          await renderAllPages();
+        };
+        document.getElementById("pdf-zoom-out").onclick = async () => {
+          scale = Math.max(0.5, scale - 0.1);
+          await renderAllPages();
+        };
+      })();
 
       // Abrir modal
       modal.style.display = "flex";
