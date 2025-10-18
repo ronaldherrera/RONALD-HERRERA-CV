@@ -616,37 +616,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // ================================================
       // NUEVO VISOR PDF COMPATIBLE CON MÓVILES (PDF.js)
+      // (sin toolbar; zoom con Ctrl+scroll y pinch)
       // ================================================
 
-      // Limpia visor y toolbar si ya existían
+      // Limpia visor si ya existía
       const contenidoModal = document.getElementById("contenido-modal");
       let viejoVisor = document.getElementById("pdf-viewer");
       if (viejoVisor) viejoVisor.remove();
-      let viejaToolbar = document.getElementById("pdf-toolbar");
-      if (viejaToolbar) viejaToolbar.remove();
 
-      // Crear toolbar y visor desde JS
-      const toolbar = document.createElement("div");
-      toolbar.id = "pdf-toolbar";
-      toolbar.style.cssText =
-        "display:flex;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid #eee;background:#f5f5f5";
-      toolbar.innerHTML = `
-  <button id="pdf-zoom-out" title="Alejar" style="border:1px solid #ccc;border-radius:4px;padding:4px 8px">−</button>
-  <span id="pdf-zoom-value" style="min-width:50px;text-align:center">100%</span>
-  <button id="pdf-zoom-in" title="Acercar" style="border:1px solid #ccc;border-radius:4px;padding:4px 8px">+</button>
-`;
-
+      // Crear contenedor del visor
       const visorDiv = document.createElement("div");
       visorDiv.id = "pdf-viewer";
       visorDiv.style.cssText =
-        "flex:1;overflow:auto;background:#2a2a2a;padding:8px;display:flex;flex-direction:column;align-items:center;";
-
-      // Insertamos justo antes de los botones “Descargar / Enviar por correo”
+        "flex:1;overflow:auto;background:#e9e9e9;padding:12px;display:flex;flex-direction:column;align-items:center;";
       const botonesAccion = contenidoModal.querySelector("div:last-child");
-      contenidoModal.insertBefore(toolbar, botonesAccion);
       contenidoModal.insertBefore(visorDiv, botonesAccion);
 
-      // Añadir librería PDF.js si no está ya cargada
+      // Añadir librería PDF.js si no está cargada
       if (typeof pdfjsLib === "undefined") {
         const script = document.createElement("script");
         script.src =
@@ -679,64 +665,140 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await blob.arrayBuffer();
         const pdf = await pdfjs.getDocument({ data }).promise;
 
-        let scale = 1.1;
-        // --- Ajustar al ancho del contenedor ---
+        let scale = 1.4;
+
+        // Ajustar escala para que la página quepa al ancho del visor
         async function fitToWidth() {
-          // Tomamos la primera página como referencia
           const page1 = await pdf.getPage(1);
-          const unscaled = page1.getViewport({ scale: 1 }); // tamaño "real" de la página
-          // Ancho disponible en el contenedor (menos padding visual)
-          const containerW = visorDiv.clientWidth - 16; // margen de seguridad
-          // Escala para que la página quepa en ancho
+          const unscaled = page1.getViewport({ scale: 1 });
+          const containerW = visorDiv.clientWidth - 24; // margen de seguridad
           const newScale = containerW / unscaled.width;
-          // Limitamos por si acaso
           scale = Math.min(3, Math.max(0.5, newScale));
-          document.getElementById("pdf-zoom-value").textContent =
-            Math.round(scale * 100) + "%";
         }
 
+        // Pinta todas las páginas (en "hojas" separadas)
         async function renderAllPages() {
           visorDiv.innerHTML = "";
           for (let num = 1; num <= pdf.numPages; num++) {
             const page = await pdf.getPage(num);
             const viewport = page.getViewport({ scale });
+
+            // Canvas en alta resolución
             const canvas = document.createElement("canvas");
-            canvas.className = "pdf-page";
-            canvas.width = viewport.width * 2; // resolución doble
-            canvas.height = viewport.height * 2;
+            const ctx = canvas.getContext("2d");
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = Math.floor(viewport.width * dpr);
+            canvas.height = Math.floor(viewport.height * dpr);
+            canvas.style.width = Math.floor(viewport.width) + "px";
+            canvas.style.height = Math.floor(viewport.height) + "px";
+
+            await page.render({
+              canvasContext: ctx,
+              viewport,
+              transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : undefined,
+            }).promise;
+
+            // Envolver como "hoja"
+            const pageWrap = document.createElement("div");
+            pageWrap.className = "pdf-sheet";
+            pageWrap.style.cssText =
+              "background:#fff;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
+            canvas.style.display = "block";
+
+            // Ajuste visual responsivo: que la hoja ocupe todo el ancho disponible
             canvas.style.width = "100%";
             canvas.style.height = "auto";
-            const context = canvas.getContext("2d");
-            await page.render({
-              canvasContext: context,
-              transform: [2, 0, 0, 2, 0, 0],
-              viewport,
-            }).promise;
-            visorDiv.appendChild(canvas);
+
+            pageWrap.appendChild(canvas);
+            visorDiv.appendChild(pageWrap);
           }
-          document.getElementById("pdf-zoom-value").textContent =
-            Math.round(scale * 100) + "%";
         }
 
         await fitToWidth();
         await renderAllPages();
 
-        // 🔽 AÑADE AQUÍ este bloque de reajuste automático
-        let __rzTimer;
-        window.addEventListener("resize", async () => {
-          clearTimeout(__rzTimer);
-          __rzTimer = setTimeout(async () => {
-            await fitToWidth();
+        // ---------- ZOOM NATURAL (sin toolbar) ----------
+        const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+        let rerenderTimer = null;
+        const requestRerender = () => {
+          clearTimeout(rerenderTimer);
+          rerenderTimer = setTimeout(async () => {
             await renderAllPages();
-            visorDiv.scrollTop = 0; // recoloca arriba tras reajuste
-          }, 150);
-        });
-
-        // 🔽 Después siguen tus botones de zoom
-        document.getElementById("pdf-zoom-in").onclick = async () => {
-          scale = Math.min(3, scale + 0.1);
-          await renderAllPages();
+          }, 80);
         };
+
+        // Ctrl + rueda (PC)
+        visorDiv.addEventListener(
+          "wheel",
+          (ev) => {
+            if (!ev.ctrlKey) return; // solo con Ctrl
+            ev.preventDefault(); // evita zoom del navegador
+            const factor = ev.deltaY > 0 ? 0.9 : 1.1;
+            scale = clamp(scale * factor, 0.5, 3);
+            requestRerender();
+          },
+          { passive: false }
+        );
+
+        // Pinch (móvil/tablet)
+        let pinchStartDist = null;
+        let pinchBaseScale = null;
+        const touchDistance = (t0, t1) => {
+          const dx = t0.clientX - t1.clientX;
+          const dy = t0.clientY - t1.clientY;
+          return Math.hypot(dx, dy);
+        };
+
+        visorDiv.addEventListener(
+          "touchstart",
+          (ev) => {
+            if (ev.touches.length === 2) {
+              pinchStartDist = touchDistance(ev.touches[0], ev.touches[1]);
+              pinchBaseScale = scale;
+            }
+          },
+          { passive: true }
+        );
+
+        visorDiv.addEventListener(
+          "touchmove",
+          (ev) => {
+            if (ev.touches.length === 2 && pinchStartDist) {
+              ev.preventDefault(); // evita zoom del navegador
+              const dist = touchDistance(ev.touches[0], ev.touches[1]);
+              const factor = dist / pinchStartDist;
+              scale = clamp(pinchBaseScale * factor, 0.5, 3);
+              requestRerender();
+            }
+          },
+          { passive: false }
+        );
+
+        visorDiv.addEventListener(
+          "touchend",
+          () => {
+            if (event.touches?.length < 2) {
+              pinchStartDist = null;
+              pinchBaseScale = null;
+            }
+          },
+          { passive: true }
+        );
+
+        // Reajuste automático al cambiar tamaño/orientación
+        let __rzTimer;
+        window.addEventListener(
+          "resize",
+          () => {
+            clearTimeout(__rzTimer);
+            __rzTimer = setTimeout(async () => {
+              await fitToWidth();
+              await renderAllPages();
+              visorDiv.scrollTop = 0;
+            }, 150);
+          },
+          { passive: true }
+        );
       })();
 
       // Abrir modal
