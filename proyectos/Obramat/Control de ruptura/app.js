@@ -14,13 +14,31 @@ let indiceTarjetaAbierta = null; // recordar qué tarjeta quedó abierta
 // --- Utilidad: guardar/restaurar caché (30 días) ---
 function guardarEnCache() {
   try {
+    // Lee la caché previa para no pisar con vacíos
+    const previaRaw = localStorage.getItem("rupturaCache");
+    const previa = previaRaw ? JSON.parse(previaRaw) : {};
+
+    const nombreCampo =
+      document.getElementById("campo-nombre")?.textContent?.trim() || "";
+    const nombreInput =
+      document.getElementById("nombre-usuario")?.value?.trim() || "";
+    // Prioriza: campo visible > input > valor ya guardado
+    const nombre = nombreCampo || nombreInput || previa.nombre || "";
+
+    const seccionCampo =
+      document.getElementById("campo-seccion")?.textContent?.trim() || "";
+    // Prioriza: campo visible > valor ya guardado
+    const seccion = seccionCampo || previa.seccion || "";
+
     const datos = {
-      nombre: document.getElementById("campo-nombre")?.textContent || "",
-      seccion: document.getElementById("campo-seccion")?.textContent || "",
-      productos,
+      nombre,
+      seccion,
+      productos, // estado actual de tarjetas
       abiertaIndex: indiceTarjetaAbierta, // null o número
+      scrollY: window.scrollY || 0,
       fecha: new Date().toISOString(),
     };
+
     localStorage.setItem("rupturaCache", JSON.stringify(datos));
   } catch (e) {
     console.warn("No se pudo guardar en cache:", e);
@@ -42,30 +60,42 @@ function restaurarDeCacheSiAplica() {
       return false;
     }
 
-    // Restaurar estado visual y datos
-    productos = datos.productos || [];
-    document.getElementById("nombre-usuario").value = datos.nombre || "";
+    // --- Restaurar datos y UI
+    productos = Array.isArray(datos.productos) ? datos.productos : [];
+
+    // Sincroniza input y campos visibles
+    const nombre = datos.nombre || "";
+    const seccion = datos.seccion || "";
+
+    const inputNombre = document.getElementById("nombre-usuario");
+    if (inputNombre) inputNombre.value = nombre;
 
     document.getElementById("seccion-inicial").style.display = "none";
     document.getElementById("header-principal").style.display = "none";
     document.getElementById("header-secundario").style.display = "block";
     document.getElementById("fecha-header").textContent =
       new Date().toLocaleDateString("es-ES");
+
     document.getElementById("info-final").style.display = "block";
-    document.getElementById("campo-nombre").textContent = datos.nombre || "";
-    document.getElementById("campo-seccion").textContent = datos.seccion || "";
+    document.getElementById("campo-nombre").textContent = nombre;
+    document.getElementById("campo-seccion").textContent = seccion;
 
     indiceTarjetaAbierta = Number.isInteger(datos.abiertaIndex)
       ? datos.abiertaIndex
       : null;
 
     const contenedor = document.getElementById("contenedor-productos");
-    // pintar tarjetas y abrir la que estaba abierta
     mostrarTarjetas(productos, contenedor, indiceTarjetaAbierta);
 
     const botonDescargar = document.getElementById("boton-descargar");
     botonDescargar.style.display = "inline-block";
     verificarFormularioCompleto();
+
+    // Restaurar scroll tras pintar
+    const y = typeof datos.scrollY === "number" ? datos.scrollY : 0;
+    setTimeout(() => {
+      window.scrollTo({ top: y, behavior: "auto" });
+    }, 50);
 
     return true;
   } catch (e) {
@@ -74,7 +104,7 @@ function restaurarDeCacheSiAplica() {
   }
 }
 
-// Pequeño debounce para no escribir en cada tecla
+// (se mantiene tu debounce)
 let tGuardar = null;
 function guardarEnCacheDebounced() {
   clearTimeout(tGuardar);
@@ -82,6 +112,8 @@ function guardarEnCacheDebounced() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Guardar scroll de forma pasiva (debounced)
+  window.addEventListener("scroll", guardarEnCacheDebounced, { passive: true });
   const inputArchivo = document.getElementById("archivo-excel");
   const inputNombre = document.getElementById("nombre-usuario");
   const botonDescargar = document.getElementById("boton-descargar");
@@ -451,8 +483,154 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     pdfMake.createPdf(docDefinition).getBlob((blob) => {
-      const url = URL.createObjectURL(blob);
-      window.open(url, "_blank");
+      const d = new Date();
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+      // Tomar nombre de usuario (prioriza el que muestras en la cabecera)
+      const nombreUsuarioRaw = (
+        document.getElementById("campo-nombre")?.textContent ||
+        document.getElementById("nombre-usuario")?.value ||
+        ""
+      ).trim();
+
+      // Helper para limpiar: quitar acentos, espacios, símbolos raros y limitar longitud
+      const slugify = (s) =>
+        s
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "") // sin acentos
+          .replace(/\s+/g, "_") // espacios -> _
+          .replace(/[^A-Za-z0-9._-]/g, "") // solo seguro
+          .slice(0, 40); // límite opcional
+
+      const nombreUsuario = nombreUsuarioRaw
+        ? `_${slugify(nombreUsuarioRaw)}`
+        : "";
+      const nombreSugerido = `${nombreUsuarioRaw}_Rupturas_${yyyy}.${mm}.${dd}`;
+
+      // Asegurar modal (inyectar si no existe)
+      let modal = document.getElementById("modal-visor");
+      if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "modal-visor";
+        modal.setAttribute("aria-hidden", "true");
+        modal.style.cssText =
+          "position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.5);z-index:9999;";
+        modal.innerHTML =
+          '<div id="contenido-modal" style="background:#fff;width:min(960px,95vw);height:min(90vh,720px);border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:hidden;">' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;background:#120949;color:#fff;padding:8px 12px;">' +
+          '<strong style="font-family:Roboto,system-ui">Visor del informe</strong>' +
+          '<button id="cerrar-modal" aria-label="Cerrar" style="background:transparent;color:#FF5800;border:none;font-size:22px;cursor:pointer">×</button>' +
+          "</div>" +
+          '<div style="display:flex;/* gap:8px; */align-items: flex-start;padding:10px;border-bottom:1px solid #eee;flex-direction: column;">' +
+          '<label for="nombre-archivo" style="font:600 12px/1 Roboto,system-ui;color:#333;">Nombre del documento:</label>' +
+          '<input id="nombre-archivo" type="text" value="informe.pdf" style="flex:1;min-width:0;padding:6px 8px;border:1px solid #ccc;border-radius:6px; margin: 2px 0;" />' +
+          "</div>" +
+          '<iframe id="visor-pdf" title="Informe PDF" style="flex:1;width:100%;border:0;background:#f7f7f7"></iframe>' +
+          '<div style="padding:8px 12px;text-align:right;border-top:1px solid #eee;display:flex;gap:10px;justify-content:flex-end;">' +
+          '<button id="btn-descargar-pdf" style="background:#120949;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Descargar</button>' +
+          '<button id="btn-enviar-pdf" style="background:#FF5800;color:#120949;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Enviar por correo</button>' +
+          "</div>" +
+          "</div>";
+        document.body.appendChild(modal);
+
+        // Cerrar modal
+        const cerrar = () => {
+          const visor = document.getElementById("visor-pdf");
+          if (visor) visor.src = "about:blank";
+          if (window.__ultimoBlobUrl__) {
+            URL.revokeObjectURL(window.__ultimoBlobUrl__);
+            window.__ultimoBlobUrl__ = null;
+          }
+          document.body.style.overflow = "";
+          modal.style.display = "none";
+        };
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) cerrar();
+        });
+        modal.querySelector("#cerrar-modal").addEventListener("click", cerrar);
+
+        // Descargar
+        modal
+          .querySelector("#btn-descargar-pdf")
+          .addEventListener("click", () => {
+            if (!window.__ultimoBlobUrl__) return;
+            const nombre = (
+              document.getElementById("nombre-archivo").value || "informe"
+            )
+              .replace(/\s+/g, "_")
+              .replace(/[^A-Za-z0-9._-]/g, "");
+            const a = document.createElement("a");
+            a.href = window.__ultimoBlobUrl__;
+            a.download = nombre.endsWith(".pdf") ? nombre : nombre + ".pdf";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          });
+
+        // Enviar por correo (Web Share si hay soporte; si no, descarga + mailto)
+        modal
+          .querySelector("#btn-enviar-pdf")
+          .addEventListener("click", async () => {
+            if (!window.__ultimoBlobUrl__) return;
+            const nombre = (
+              document.getElementById("nombre-archivo").value || "informe"
+            )
+              .replace(/\s+/g, "_")
+              .replace(/[^A-Za-z0-9._-]/g, "");
+            const nombreFinal = nombre.endsWith(".pdf")
+              ? nombre
+              : nombre + ".pdf";
+            try {
+              if (
+                window.__ultimoBlobFile__ &&
+                navigator.canShare &&
+                navigator.canShare({ files: [window.__ultimoBlobFile__] })
+              ) {
+                await navigator.share({
+                  files: [
+                    new File([window.__ultimoBlobFile__], nombreFinal, {
+                      type: "application/pdf",
+                    }),
+                  ],
+                  title: "Informe de ruptura",
+                  text: "Te envío el informe de ruptura adjunto.",
+                });
+                return;
+              }
+            } catch (_) {}
+            // Fallback
+            const a = document.createElement("a");
+            a.href = window.__ultimoBlobUrl__;
+            a.download = nombreFinal;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            const subject = encodeURIComponent("Informe de ruptura");
+            const body = encodeURIComponent(
+              "Adjunto el informe de ruptura.\n\nSi no aparece adjunto automáticamente, se ha descargado como: " +
+                nombreFinal
+            );
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+          });
+      }
+
+      // Cargar visor con el blob
+      if (window.__ultimoBlobUrl__)
+        URL.revokeObjectURL(window.__ultimoBlobUrl__);
+      window.__ultimoBlobUrl__ = URL.createObjectURL(blob);
+      window.__ultimoBlobFile__ = new File([blob], nombreSugerido, {
+        type: "application/pdf",
+      });
+
+      const visor = document.getElementById("visor-pdf");
+      const inputNombreArchivo = document.getElementById("nombre-archivo");
+      if (inputNombreArchivo) inputNombreArchivo.value = nombreSugerido;
+      if (visor) visor.src = window.__ultimoBlobUrl__ + "#toolbar=1&navpanes=0";
+
+      // Abrir modal
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
     });
   });
 
@@ -839,3 +1017,116 @@ function verificarFormularioCompleto() {
     ? "Generar informe de ruptura"
     : "Completa todas las tarjetas para activarme";
 }
+
+// DESCARGAR ARCHIVO MODIFICADO
+botonDescargar.textContent = "Descargar informe de ruptura";
+
+// --- utilidades del modal/visor ---
+let ultimoBlobUrl = null;
+let ultimoArchivo = null;
+
+function abrirModal() {
+  const modal = document.getElementById("modal-visor");
+  modal.setAttribute("aria-hidden", "false");
+  // Evita scroll del body
+  document.body.style.overflow = "hidden";
+}
+function cerrarModal() {
+  const modal = document.getElementById("modal-visor");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  // Limpieza de blob URL para no filtrar memoria
+  const visor = document.getElementById("visor-pdf");
+  if (ultimoBlobUrl) URL.revokeObjectURL(ultimoBlobUrl);
+  ultimoBlobUrl = null;
+  ultimoArchivo = null;
+  visor.src = "about:blank";
+}
+// listeners estáticos del modal
+document.getElementById("cerrar-modal").addEventListener("click", cerrarModal);
+document
+  .getElementById("btn-cerrar-modal")
+  .addEventListener("click", cerrarModal);
+
+botonDescargar.addEventListener("click", () => {
+  if (!productos.length) {
+    alert("Primero debes subir un archivo.");
+    return;
+  }
+
+  const nombreColaborador = document.getElementById("campo-nombre").textContent;
+  const fecha = new Date().toLocaleDateString("es-ES");
+
+  // ... aquí mantén todo tu cálculo de productosConComentario y docDefinition ...
+
+  const docDefinition = {
+    /* ← tu definición exacta (sin cambios) */
+  };
+});
+
+// Acción: Descargar (usa el nombre del input)
+document.getElementById("btn-descargar-pdf").addEventListener("click", () => {
+  if (!ultimoBlobUrl) return;
+  const nombre = (
+    document.getElementById("nombre-archivo").value || "informe.pdf"
+  )
+    .replace(/\s+/g, "_")
+    .replace(/[^A-Za-z0-9._-]/g, "");
+  const a = document.createElement("a");
+  a.href = ultimoBlobUrl;
+  a.download = nombre.endsWith(".pdf") ? nombre : `${nombre}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+});
+
+// Acción: Enviar por correo
+document
+  .getElementById("btn-enviar-pdf")
+  .addEventListener("click", async () => {
+    if (!ultimoBlobUrl) return;
+
+    const nombre = (
+      document.getElementById("nombre-archivo").value || "informe.pdf"
+    )
+      .replace(/\s+/g, "_")
+      .replace(/[^A-Za-z0-9._-]/g, "");
+    const nombreFinal = nombre.endsWith(".pdf") ? nombre : `${nombre}.pdf`;
+
+    // 1) Intento con Web Share API (adjunta el archivo directamente en móviles/desktop compatibles)
+    try {
+      if (
+        ultimoArchivo &&
+        navigator.canShare &&
+        navigator.canShare({ files: [ultimoArchivo] })
+      ) {
+        await navigator.share({
+          files: [
+            new File([ultimoArchivo], nombreFinal, { type: "application/pdf" }),
+          ],
+          title: "Informe de ruptura",
+          text: "Te envío el informe de ruptura adjunto.",
+        });
+        return;
+      }
+    } catch (_) {
+      // caemos al plan B
+    }
+    // 2) Fallback: forzar descarga y abrir cliente de correo
+    // (Los navegadores no permiten adjuntar archivos a un mailto automáticamente)
+    const subject = encodeURIComponent("Informe de ruptura");
+    const body = encodeURIComponent(
+      "Adjunto el informe de ruptura.\n\nSi no aparece adjunto automáticamente, te lo acabo de descargar con el nombre:\n" +
+        `${nombreFinal}\n\nPor favor, añádelo a este correo y envíalo.`
+    );
+    const mailto = `mailto:?subject=${subject}&body=${body}`;
+    // Disparamos descarga para que el usuario lo tenga a mano
+    const a = document.createElement("a");
+    a.href = ultimoBlobUrl;
+    a.download = nombreFinal;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    // Abrimos el cliente de correo
+    window.location.href = mailto;
+  });
