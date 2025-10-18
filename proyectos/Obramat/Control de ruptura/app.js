@@ -704,7 +704,7 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.className = "pdf-page";
             canvas.width = viewport.width * 2; // resolución doble
             canvas.height = viewport.height * 2;
-            canvas.style.width = viewport.width + "px";
+            canvas.style.width = "100%";
             canvas.style.height = viewport.height + "px";
             const context = canvas.getContext("2d");
             await page.render({
