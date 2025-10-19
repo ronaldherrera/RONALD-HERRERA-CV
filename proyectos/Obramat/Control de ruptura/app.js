@@ -487,28 +487,39 @@ document.addEventListener("DOMContentLoaded", () => {
       const yyyy = d.getFullYear();
       const mm = String(d.getMonth() + 1).padStart(2, "0");
       const dd = String(d.getDate()).padStart(2, "0");
-      // Tomar nombre de usuario (prioriza el que muestras en la cabecera)
+
+      // Tomar nombre de usuario (prioriza el visible en cabecera)
       const nombreUsuarioRaw = (
         document.getElementById("campo-nombre")?.textContent ||
         document.getElementById("nombre-usuario")?.value ||
         ""
       ).trim();
 
-      // Helper para limpiar: quitar acentos, espacios, símbolos raros y limitar longitud
+      // Helper para limpiar texto del nombre
       const slugify = (s) =>
         s
           .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "") // sin acentos
-          .replace(/\s+/g, "_") // espacios -> _
-          .replace(/[^A-Za-z0-9._-]/g, "") // solo seguro
-          .slice(0, 40); // límite opcional
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/\s+/g, "_")
+          .replace(/[^A-Za-z0-9._-]/g, "")
+          .slice(0, 40);
 
-      const nombreUsuario = nombreUsuarioRaw
-        ? `_${slugify(nombreUsuarioRaw)}`
-        : "";
-      const nombreSugerido = `${nombreUsuarioRaw}_Rupturas_${yyyy}.${mm}.${dd}`;
+      const nombreLimpio = nombreUsuarioRaw
+        ? slugify(nombreUsuarioRaw)
+        : "informe";
+      const nombreSugeridoFinal = `${nombreLimpio}_Rupturas_${yyyy}-${mm}-${dd}.pdf`;
 
-      // Asegurar modal (inyectar si no existe)
+      // --- GUARDAR REFERENCIAS GLOBALES PARA DESCARGA/COMPARTIR ---
+      try {
+        if (window.__ultimoBlobUrl__)
+          URL.revokeObjectURL(window.__ultimoBlobUrl__);
+        window.__ultimoBlobUrl__ = URL.createObjectURL(blob);
+        window.__ultimoBlobFile__ = blob;
+      } catch (e) {
+        console.warn("No se pudo crear URL del blob:", e);
+      }
+
+      // --- ASEGURAR MODAL ---
       let modal = document.getElementById("modal-visor");
       if (!modal) {
         modal = document.createElement("div");
@@ -522,21 +533,19 @@ document.addEventListener("DOMContentLoaded", () => {
           '<strong style="font-family:Roboto,system-ui">Visor del informe</strong>' +
           '<button id="cerrar-modal" aria-label="Cerrar" style="background:transparent;color:#FF5800;border:none;font-size:22px;cursor:pointer">×</button>' +
           "</div>" +
-          '<div style="display:flex;/* gap:8px; */align-items: flex-start;padding:10px;border-bottom:1px solid #eee;flex-direction: column;">' +
+          '<div style="display:flex;flex-direction:column;padding:10px;border-bottom:1px solid #eee;">' +
           '<label for="nombre-archivo" style="font:600 12px/1 Roboto,system-ui;color:#333;">Nombre del documento:</label>' +
-          '<input id="nombre-archivo" type="text" value="informe.pdf" style="flex:1;min-width:0;padding:6px 8px;border:1px solid #ccc;border-radius:6px; margin: 2px 0;" />' +
+          `<input id="nombre-archivo" type="text" value="${nombreSugeridoFinal}" style="flex:1;min-width:0;padding:6px 8px;border:1px solid #ccc;border-radius:6px; margin: 2px 0;" />` +
           "</div>" +
           '<div style="padding:8px 12px;text-align:right;border-top:1px solid #eee;display:flex;gap:10px;justify-content:flex-end;">' +
           '<button id="btn-descargar-pdf" style="background:#120949;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Descargar</button>' +
-          '<button id="btn-enviar-pdf" style="background:#FF5800;color:#120949;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Enviar por correo</button>' +
+          '<button id="btn-compartir" style="background:#FF5800;color:#120949;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Enviar por correo</button>' +
           "</div>" +
           "</div>";
         document.body.appendChild(modal);
 
         // Cerrar modal
         const cerrar = () => {
-          const visor = document.getElementById("visor-pdf");
-          if (visor) visor.src = "about:blank";
           if (window.__ultimoBlobUrl__) {
             URL.revokeObjectURL(window.__ultimoBlobUrl__);
             window.__ultimoBlobUrl__ = null;
@@ -549,7 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         modal.querySelector("#cerrar-modal").addEventListener("click", cerrar);
 
-        // Descargar
+        // --- DESCARGAR PDF ---
         modal
           .querySelector("#btn-descargar-pdf")
           .addEventListener("click", () => {
@@ -567,11 +576,14 @@ document.addEventListener("DOMContentLoaded", () => {
             a.remove();
           });
 
-        // Enviar por correo (Web Share si hay soporte; si no, descarga + mailto)
+        // --- ENVIAR POR CORREO ---
+        // --- COMPARTIR (Web Share con archivo si es posible, si no: texto + descarga) ---
         modal
-          .querySelector("#btn-enviar-pdf")
+          .querySelector("#btn-compartir")
           .addEventListener("click", async () => {
             if (!window.__ultimoBlobUrl__) return;
+
+            // Nombre final
             const nombre = (
               document.getElementById("nombre-archivo").value || "informe"
             )
@@ -580,51 +592,88 @@ document.addEventListener("DOMContentLoaded", () => {
             const nombreFinal = nombre.endsWith(".pdf")
               ? nombre
               : nombre + ".pdf";
+
+            // Archivo a compartir (si el navegador lo permite)
+            const blob = window.__ultimoBlobFile__ || null;
+            const file = blob
+              ? new File([blob], nombreFinal, { type: "application/pdf" })
+              : null;
+
+            // 1) Web Share API con archivos (lo ideal)
             try {
               if (
-                window.__ultimoBlobFile__ &&
+                file &&
                 navigator.canShare &&
-                navigator.canShare({ files: [window.__ultimoBlobFile__] })
+                navigator.canShare({ files: [file] })
               ) {
                 await navigator.share({
-                  files: [
-                    new File([window.__ultimoBlobFile__], nombreFinal, {
-                      type: "application/pdf",
-                    }),
-                  ],
+                  files: [file],
                   title: "Informe de ruptura",
-                  text: "Te envío el informe de ruptura adjunto.",
+                  text: "Te comparto el informe de ruptura.",
                 });
                 return;
               }
-            } catch (_) {}
-            // Fallback
+            } catch (err) {
+              // Si falla, seguimos a otros fallbacks
+              console.warn("navigator.share con archivo falló:", err);
+            }
+
+            // 2) Web Share API sin archivos: comparte texto y descargamos el PDF
+            try {
+              if (navigator.share) {
+                // Disparamos descarga para que el usuario lo tenga en "Descargas"
+                const a = document.createElement("a");
+                a.href = window.__ultimoBlobUrl__;
+                a.download = nombreFinal;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                await navigator.share({
+                  title: "Informe de ruptura",
+                  text:
+                    'He descargado el informe de ruptura como "' +
+                    nombreFinal +
+                    '". Si tu sistema no adjunta archivos desde esta ventana, compártelo desde tu gestor de archivos.',
+                });
+                return;
+              }
+            } catch (err) {
+              console.warn("navigator.share (solo texto) falló:", err);
+            }
+
+            // 3) Fallback clásico: descarga + mailto (opcional)
             const a = document.createElement("a");
             a.href = window.__ultimoBlobUrl__;
             a.download = nombreFinal;
             document.body.appendChild(a);
             a.click();
             a.remove();
+
             const subject = encodeURIComponent("Informe de ruptura");
             const body = encodeURIComponent(
-              "Adjunto el informe de ruptura.\n\nSi no aparece adjunto automáticamente, se ha descargado como: " +
-                nombreFinal
+              "Acabo de descargar el informe de ruptura como: " +
+                nombreFinal +
+                "\n\nAdjúntalo a este correo y envíalo."
             );
             window.location.href = `mailto:?subject=${subject}&body=${body}`;
           });
+      } else {
+        // Si el modal ya existe, solo actualiza el nombre sugerido
+        const inputNombre = document.getElementById("nombre-archivo");
+        if (inputNombre) inputNombre.value = nombreSugeridoFinal;
       }
 
       // ================================================
       // NUEVO VISOR PDF COMPATIBLE CON MÓVILES (PDF.js)
-      // (sin toolbar; zoom con Ctrl+scroll y pinch)
       // ================================================
 
-      // Limpia visor si ya existía
+      // Limpia visor anterior
       const contenidoModal = document.getElementById("contenido-modal");
       let viejoVisor = document.getElementById("pdf-viewer");
       if (viejoVisor) viejoVisor.remove();
 
-      // Crear contenedor del visor
+      // Crear contenedor
       const visorDiv = document.createElement("div");
       visorDiv.id = "pdf-viewer";
       visorDiv.style.cssText =
@@ -632,7 +681,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const botonesAccion = contenidoModal.querySelector("div:last-child");
       contenidoModal.insertBefore(visorDiv, botonesAccion);
 
-      // Añadir librería PDF.js si no está cargada
+      // Cargar librería PDF.js si no existe
       if (typeof pdfjsLib === "undefined") {
         const script = document.createElement("script");
         script.src =
@@ -644,7 +693,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.head.appendChild(worker);
       }
 
-      // Esperar a que PDF.js esté disponible
+      // Esperar carga de PDF.js
       function esperarPdfjs() {
         return new Promise((resolve) => {
           const check = setInterval(() => {
@@ -658,32 +707,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Renderizar PDF dentro del visor
+      // Renderizar PDF
       (async () => {
         const pdfjs = await esperarPdfjs();
-
         const data = await blob.arrayBuffer();
         const pdf = await pdfjs.getDocument({ data }).promise;
-
         let scale = 1.1;
 
-        // Ajustar escala para que la página quepa al ancho del visor
         async function fitToWidth() {
           const page1 = await pdf.getPage(1);
           const unscaled = page1.getViewport({ scale: 1 });
-          const containerW = visorDiv.clientWidth - 24; // margen de seguridad
+          const containerW = visorDiv.clientWidth - 24;
           const newScale = containerW / unscaled.width;
           scale = Math.min(3, Math.max(0.5, newScale));
         }
 
-        // Pinta todas las páginas (en "hojas" separadas)
         async function renderAllPages() {
           visorDiv.innerHTML = "";
           for (let num = 1; num <= pdf.numPages; num++) {
             const page = await pdf.getPage(num);
             const viewport = page.getViewport({ scale });
-
-            // Canvas en alta resolución
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
             const dpr = window.devicePixelRatio || 1;
@@ -691,24 +734,19 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.height = Math.floor(viewport.height * dpr);
             canvas.style.width = Math.floor(viewport.width) + "px";
             canvas.style.height = Math.floor(viewport.height) + "px";
-
             await page.render({
               canvasContext: ctx,
               viewport,
               transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : undefined,
             }).promise;
 
-            // Envolver como "hoja"
             const pageWrap = document.createElement("div");
             pageWrap.className = "pdf-sheet";
             pageWrap.style.cssText =
-              "background:#fff;margin: 10px auto 4px;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
+              "background:#fff;margin:10px auto 0;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
             canvas.style.display = "block";
-
-            // Ajuste visual responsivo: que la hoja ocupe todo el ancho disponible
             canvas.style.width = "100%";
             canvas.style.height = "auto";
-
             pageWrap.appendChild(canvas);
             visorDiv.appendChild(pageWrap);
           }
@@ -717,31 +755,21 @@ document.addEventListener("DOMContentLoaded", () => {
         await fitToWidth();
         await renderAllPages();
 
-        // ---------- BLOQUEA CUALQUIER ZOOM ----------
-
-        // 1) Evita pinch-zoom y doble-tap en el visor
-        visorDiv.style.touchAction = "pan-y"; // permite scroll vertical, desactiva pinch
-        visorDiv.style.webkitTouchCallout = "none";
+        // Bloquear zoom y gestos
+        visorDiv.style.touchAction = "pan-y";
         visorDiv.style.userSelect = "none";
+        visorDiv.style.webkitTouchCallout = "none";
 
-        // Aplica también al contenido (cada hoja/canvas) después de renderizar
         const aplicarNoZoom = () => {
           visorDiv.querySelectorAll("canvas, .pdf-sheet").forEach((el) => {
             el.style.touchAction = "pan-y";
-            el.style.webkitUserSelect = "none";
             el.style.userSelect = "none";
           });
         };
 
-        // Llama tras cada render
-        await fitToWidth();
-        await renderAllPages();
         aplicarNoZoom();
 
-        // 2) Bloquea gestos de zoom en iOS Safari
-        const stopGesture = (e) => {
-          e.preventDefault();
-        };
+        const stopGesture = (e) => e.preventDefault();
         window.addEventListener("gesturestart", stopGesture, {
           passive: false,
         });
@@ -750,7 +778,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         window.addEventListener("gestureend", stopGesture, { passive: false });
 
-        // 3) Bloquea Ctrl + rueda (intento de zoom en escritorio dentro del visor)
         const stopCtrlWheel = (e) => {
           if (e.ctrlKey) {
             e.preventDefault();
@@ -759,10 +786,8 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         visorDiv.addEventListener("wheel", stopCtrlWheel, { passive: false });
 
-        // 4) Bloquea atajos de teclado de zoom mientras el modal está abierto
         const stopKeyZoom = (e) => {
           if (!e.ctrlKey) return;
-          // Ctrl + '+', '-', '0' (varían por layout)
           const keys = ["+", "=", "-", "0"];
           if (
             keys.includes(e.key) ||
@@ -781,7 +806,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         document.addEventListener("keydown", stopKeyZoom, true);
 
-        // 5) Re-render al cambiar orientación/tamaño, manteniendo "fit to width"
         let __rzTimer;
         window.addEventListener(
           "resize",
@@ -796,14 +820,6 @@ document.addEventListener("DOMContentLoaded", () => {
           },
           { passive: true }
         );
-
-        /* (Opcional) si al cerrar el modal limpias eventos, recuerda quitar:
-window.removeEventListener("gesturestart",  stopGesture);
-window.removeEventListener("gesturechange", stopGesture);
-window.removeEventListener("gestureend",    stopGesture);
-visorDiv.removeEventListener("wheel", stopCtrlWheel);
-document.removeEventListener("keydown", stopKeyZoom, true);
-*/
       })();
 
       // Abrir modal
@@ -1259,52 +1275,50 @@ document.getElementById("btn-descargar-pdf").addEventListener("click", () => {
 });
 
 // Acción: Enviar por correo
-document
-  .getElementById("btn-enviar-pdf")
-  .addEventListener("click", async () => {
-    if (!ultimoBlobUrl) return;
+document.getElementById("btn-compartir").addEventListener("click", async () => {
+  if (!ultimoBlobUrl) return;
 
-    const nombre = (
-      document.getElementById("nombre-archivo").value || "informe.pdf"
-    )
-      .replace(/\s+/g, "_")
-      .replace(/[^A-Za-z0-9._-]/g, "");
-    const nombreFinal = nombre.endsWith(".pdf") ? nombre : `${nombre}.pdf`;
+  const nombre = (
+    document.getElementById("nombre-archivo").value || "informe.pdf"
+  )
+    .replace(/\s+/g, "_")
+    .replace(/[^A-Za-z0-9._-]/g, "");
+  const nombreFinal = nombre.endsWith(".pdf") ? nombre : `${nombre}.pdf`;
 
-    // 1) Intento con Web Share API (adjunta el archivo directamente en móviles/desktop compatibles)
-    try {
-      if (
-        ultimoArchivo &&
-        navigator.canShare &&
-        navigator.canShare({ files: [ultimoArchivo] })
-      ) {
-        await navigator.share({
-          files: [
-            new File([ultimoArchivo], nombreFinal, { type: "application/pdf" }),
-          ],
-          title: "Informe de ruptura",
-          text: "Te envío el informe de ruptura adjunto.",
-        });
-        return;
-      }
-    } catch (_) {
-      // caemos al plan B
+  // 1) Intento con Web Share API (adjunta el archivo directamente en móviles/desktop compatibles)
+  try {
+    if (
+      ultimoArchivo &&
+      navigator.canShare &&
+      navigator.canShare({ files: [ultimoArchivo] })
+    ) {
+      await navigator.share({
+        files: [
+          new File([ultimoArchivo], nombreFinal, { type: "application/pdf" }),
+        ],
+        title: "Informe de ruptura",
+        text: "Te envío el informe de ruptura adjunto.",
+      });
+      return;
     }
-    // 2) Fallback: forzar descarga y abrir cliente de correo
-    // (Los navegadores no permiten adjuntar archivos a un mailto automáticamente)
-    const subject = encodeURIComponent("Informe de ruptura");
-    const body = encodeURIComponent(
-      "Adjunto el informe de ruptura.\n\nSi no aparece adjunto automáticamente, te lo acabo de descargar con el nombre:\n" +
-        `${nombreFinal}\n\nPor favor, añádelo a este correo y envíalo.`
-    );
-    const mailto = `mailto:?subject=${subject}&body=${body}`;
-    // Disparamos descarga para que el usuario lo tenga a mano
-    const a = document.createElement("a");
-    a.href = ultimoBlobUrl;
-    a.download = nombreFinal;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    // Abrimos el cliente de correo
-    window.location.href = mailto;
-  });
+  } catch (_) {
+    // caemos al plan B
+  }
+  // 2) Fallback: forzar descarga y abrir cliente de correo
+  // (Los navegadores no permiten adjuntar archivos a un mailto automáticamente)
+  const subject = encodeURIComponent("Informe de ruptura");
+  const body = encodeURIComponent(
+    "Adjunto el informe de ruptura.\n\nSi no aparece adjunto automáticamente, te lo acabo de descargar con el nombre:\n" +
+      `${nombreFinal}\n\nPor favor, añádelo a este correo y envíalo.`
+  );
+  const mailto = `mailto:?subject=${subject}&body=${body}`;
+  // Disparamos descarga para que el usuario lo tenga a mano
+  const a = document.createElement("a");
+  a.href = ultimoBlobUrl;
+  a.download = nombreFinal;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  // Abrimos el cliente de correo
+  window.location.href = mailto;
+});
