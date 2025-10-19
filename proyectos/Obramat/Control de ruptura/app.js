@@ -631,7 +631,6 @@ document.addEventListener("DOMContentLoaded", () => {
           .addEventListener("click", async () => {
             if (!window.__ultimoBlobUrl__) return;
 
-            // Nombre final
             const nombre = (
               document.getElementById("nombre-archivo").value || "informe"
             )
@@ -641,13 +640,12 @@ document.addEventListener("DOMContentLoaded", () => {
               ? nombre
               : nombre + ".pdf";
 
-            // Archivo a compartir (si el navegador lo permite)
             const blob = window.__ultimoBlobFile__ || null;
             const file = blob
               ? new File([blob], nombreFinal, { type: "application/pdf" })
               : null;
 
-            // 1) Web Share API con archivos (lo ideal)
+            // 1) Web Share API con archivo
             try {
               if (
                 file &&
@@ -657,54 +655,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 await navigator.share({
                   files: [file],
                   title: "Informe de ruptura",
-                  text: "Te comparto el informe de ruptura.",
+                  text: "Informe de ruptura generado.",
                 });
                 return;
               }
             } catch (err) {
-              // Si falla, seguimos a otros fallbacks
-              console.warn("navigator.share con archivo falló:", err);
+              console.warn("Error al compartir archivo:", err);
             }
 
-            // 2) Web Share API sin archivos: comparte texto y descargamos el PDF
-            try {
-              if (navigator.share) {
-                // Disparamos descarga para que el usuario lo tenga en "Descargas"
-                const a = document.createElement("a");
-                a.href = window.__ultimoBlobUrl__;
-                a.download = nombreFinal;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-
-                await navigator.share({
-                  title: "Informe de ruptura",
-                  text:
-                    'He descargado el informe de ruptura como "' +
-                    nombreFinal +
-                    '". Si tu sistema no adjunta archivos desde esta ventana, compártelo desde tu gestor de archivos.',
-                });
-                return;
-              }
-            } catch (err) {
-              console.warn("navigator.share (solo texto) falló:", err);
-            }
-
-            // 3) Fallback clásico: descarga + mailto (opcional)
+            // 2) Si no se puede compartir archivo, solo descarga el PDF
             const a = document.createElement("a");
             a.href = window.__ultimoBlobUrl__;
             a.download = nombreFinal;
             document.body.appendChild(a);
             a.click();
             a.remove();
-
-            const subject = encodeURIComponent("Informe de ruptura");
-            const body = encodeURIComponent(
-              "Acabo de descargar el informe de ruptura como: " +
-                nombreFinal +
-                "\n\nAdjúntalo a este correo y envíalo."
-            );
-            window.location.href = `mailto:?subject=${subject}&body=${body}`;
           });
       } else {
         // Si el modal ya existe, solo actualiza el nombre sugerido
