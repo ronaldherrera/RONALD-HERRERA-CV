@@ -585,7 +585,7 @@ document.addEventListener("DOMContentLoaded", () => {
           '<label for="nombre-archivo" style="font:600 12px/1 Roboto,system-ui;color:#333;">Nombre del documento:</label>' +
           `<input id="nombre-archivo" type="text" value="${nombreSugeridoFinal}" style="flex:1;min-width:0;padding:6px 8px;border:1px solid #ccc;border-radius:6px; margin: 2px 0;" />` +
           "</div>" +
-          '<div style="padding:8px 12px;text-align:right;border-top:1px solid #eee;display:flex;gap:10px;justify-content:flex-end;">' +
+          '<div style="padding:8px 12px;text-align:right;border-top:1px solid #eee;display:flex;gap:10px;justify-content: center;">' +
           '<button id="btn-descargar-pdf" style="background:#120949;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Descargar</button>' +
           '<button id="btn-compartir" style="background:#FF5800;color:#120949;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Compartir</button>' +
           "</div>" +
