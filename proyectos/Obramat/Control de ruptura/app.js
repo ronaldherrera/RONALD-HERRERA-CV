@@ -555,7 +555,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const nombreLimpio = nombreUsuarioRaw
         ? slugify(nombreUsuarioRaw)
         : "informe";
-      const nombreSugeridoFinal = `${nombreLimpio}_Rupturas_${yyyy}-${mm}-${dd}`;
+      const nombreSugeridoFinal = `${nombreLimpio}_Rupturas_${yyyy}.${mm}.${dd}`;
 
       // --- GUARDAR REFERENCIAS GLOBALES PARA DESCARGA/COMPARTIR ---
       try {
