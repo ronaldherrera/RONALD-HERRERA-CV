@@ -1,6 +1,6 @@
 {
     "name": "Control de Ruptura",
-    "short_name": "Ruptura",
+    "short_name": "Rupturas",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ffffff",
