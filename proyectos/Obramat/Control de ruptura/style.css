@@ -687,3 +687,17 @@ input[type="number"] {
 
 
 
+html, body {
+  touch-action: pan-y;           /* permite scroll vertical, NO pinch-zoom */
+  -ms-touch-action: pan-y;
+}
+
+input, select, textarea, button {
+  font-size: 16px;               /* iOS no hace zoom al enfocar si ≥16px */
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* UX más limpia en iOS */
+  -webkit-user-select: none;
+  user-select: none;             /* si necesitas selección en textos, quita esto en esos bloques */
+}

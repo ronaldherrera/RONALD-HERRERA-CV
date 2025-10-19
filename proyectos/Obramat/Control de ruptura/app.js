@@ -7,6 +7,54 @@ lottie.loadAnimation({
   path: "./recursos/lottie-buscar.json",
 });
 
+// === Anti-zoom global (móvil + desktop) ===
+(function () {
+  // Bloquea gestos de pinch/zoom (iOS Safari)
+  const stopGesture = (e) => e.preventDefault();
+  window.addEventListener("gesturestart", stopGesture, { passive: false });
+  window.addEventListener("gesturechange", stopGesture, { passive: false });
+  window.addEventListener("gestureend", stopGesture, { passive: false });
+
+  // Bloquea Ctrl + rueda (zoom del navegador) en toda la app
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    { passive: false }
+  );
+
+  // Bloquea atajos Ctrl + [+] / [-] / [0] (y numpad)
+  document.addEventListener(
+    "keydown",
+    (e) => {
+      if (!e.ctrlKey) return;
+      const keys = ["+", "=", "-", "0"];
+      if (
+        keys.includes(e.key) ||
+        [
+          "Equal",
+          "NumpadAdd",
+          "Minus",
+          "NumpadSubtract",
+          "Digit0",
+          "Numpad0",
+        ].includes(e.code)
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    true
+  );
+
+  // Asegura política de gestos por CSS en runtime
+  document.documentElement.style.touchAction = "pan-y";
+})();
+
 let cabeceras = [];
 let productos = [];
 let indiceTarjetaAbierta = null; // recordar qué tarjeta quedó abierta
