@@ -628,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const visorDiv = document.createElement("div");
       visorDiv.id = "pdf-viewer";
       visorDiv.style.cssText =
-        "flex:1;overflow:auto;background:#e9e9e9;padding:12px;display:flex;flex-direction:column;align-items:center;";
+        "flex:1;overflow:auto;background:#e9e9e9;padding:4px;display:flex;flex-direction:column;align-items:center;";
       const botonesAccion = contenidoModal.querySelector("div:last-child");
       contenidoModal.insertBefore(visorDiv, botonesAccion);
 
@@ -665,7 +665,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await blob.arrayBuffer();
         const pdf = await pdfjs.getDocument({ data }).promise;
 
-        let scale = 1.4;
+        let scale = 1.1;
 
         // Ajustar escala para que la página quepa al ancho del visor
         async function fitToWidth() {
@@ -702,7 +702,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const pageWrap = document.createElement("div");
             pageWrap.className = "pdf-sheet";
             pageWrap.style.cssText =
-              "background:#fff;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
+              "background:#fff;margin: 10px auto 4px;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
             canvas.style.display = "block";
 
             // Ajuste visual responsivo: que la hoja ocupe todo el ancho disponible
@@ -717,75 +717,71 @@ document.addEventListener("DOMContentLoaded", () => {
         await fitToWidth();
         await renderAllPages();
 
-        // ---------- ZOOM NATURAL (sin toolbar) ----------
-        const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
-        let rerenderTimer = null;
-        const requestRerender = () => {
-          clearTimeout(rerenderTimer);
-          rerenderTimer = setTimeout(async () => {
-            await renderAllPages();
-          }, 80);
+        // ---------- BLOQUEA CUALQUIER ZOOM ----------
+
+        // 1) Evita pinch-zoom y doble-tap en el visor
+        visorDiv.style.touchAction = "pan-y"; // permite scroll vertical, desactiva pinch
+        visorDiv.style.webkitTouchCallout = "none";
+        visorDiv.style.userSelect = "none";
+
+        // Aplica también al contenido (cada hoja/canvas) después de renderizar
+        const aplicarNoZoom = () => {
+          visorDiv.querySelectorAll("canvas, .pdf-sheet").forEach((el) => {
+            el.style.touchAction = "pan-y";
+            el.style.webkitUserSelect = "none";
+            el.style.userSelect = "none";
+          });
         };
 
-        // Ctrl + rueda (PC)
-        visorDiv.addEventListener(
-          "wheel",
-          (ev) => {
-            if (!ev.ctrlKey) return; // solo con Ctrl
-            ev.preventDefault(); // evita zoom del navegador
-            const factor = ev.deltaY > 0 ? 0.9 : 1.1;
-            scale = clamp(scale * factor, 0.5, 3);
-            requestRerender();
-          },
-          { passive: false }
-        );
+        // Llama tras cada render
+        await fitToWidth();
+        await renderAllPages();
+        aplicarNoZoom();
 
-        // Pinch (móvil/tablet)
-        let pinchStartDist = null;
-        let pinchBaseScale = null;
-        const touchDistance = (t0, t1) => {
-          const dx = t0.clientX - t1.clientX;
-          const dy = t0.clientY - t1.clientY;
-          return Math.hypot(dx, dy);
+        // 2) Bloquea gestos de zoom en iOS Safari
+        const stopGesture = (e) => {
+          e.preventDefault();
         };
+        window.addEventListener("gesturestart", stopGesture, {
+          passive: false,
+        });
+        window.addEventListener("gesturechange", stopGesture, {
+          passive: false,
+        });
+        window.addEventListener("gestureend", stopGesture, { passive: false });
 
-        visorDiv.addEventListener(
-          "touchstart",
-          (ev) => {
-            if (ev.touches.length === 2) {
-              pinchStartDist = touchDistance(ev.touches[0], ev.touches[1]);
-              pinchBaseScale = scale;
-            }
-          },
-          { passive: true }
-        );
+        // 3) Bloquea Ctrl + rueda (intento de zoom en escritorio dentro del visor)
+        const stopCtrlWheel = (e) => {
+          if (e.ctrlKey) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        };
+        visorDiv.addEventListener("wheel", stopCtrlWheel, { passive: false });
 
-        visorDiv.addEventListener(
-          "touchmove",
-          (ev) => {
-            if (ev.touches.length === 2 && pinchStartDist) {
-              ev.preventDefault(); // evita zoom del navegador
-              const dist = touchDistance(ev.touches[0], ev.touches[1]);
-              const factor = dist / pinchStartDist;
-              scale = clamp(pinchBaseScale * factor, 0.5, 3);
-              requestRerender();
-            }
-          },
-          { passive: false }
-        );
+        // 4) Bloquea atajos de teclado de zoom mientras el modal está abierto
+        const stopKeyZoom = (e) => {
+          if (!e.ctrlKey) return;
+          // Ctrl + '+', '-', '0' (varían por layout)
+          const keys = ["+", "=", "-", "0"];
+          if (
+            keys.includes(e.key) ||
+            [
+              "Equal",
+              "NumpadAdd",
+              "Minus",
+              "NumpadSubtract",
+              "Digit0",
+              "Numpad0",
+            ].includes(e.code)
+          ) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        };
+        document.addEventListener("keydown", stopKeyZoom, true);
 
-        visorDiv.addEventListener(
-          "touchend",
-          () => {
-            if (event.touches?.length < 2) {
-              pinchStartDist = null;
-              pinchBaseScale = null;
-            }
-          },
-          { passive: true }
-        );
-
-        // Reajuste automático al cambiar tamaño/orientación
+        // 5) Re-render al cambiar orientación/tamaño, manteniendo "fit to width"
         let __rzTimer;
         window.addEventListener(
           "resize",
@@ -794,11 +790,20 @@ document.addEventListener("DOMContentLoaded", () => {
             __rzTimer = setTimeout(async () => {
               await fitToWidth();
               await renderAllPages();
+              aplicarNoZoom();
               visorDiv.scrollTop = 0;
             }, 150);
           },
           { passive: true }
         );
+
+        /* (Opcional) si al cerrar el modal limpias eventos, recuerda quitar:
+window.removeEventListener("gesturestart",  stopGesture);
+window.removeEventListener("gesturechange", stopGesture);
+window.removeEventListener("gestureend",    stopGesture);
+visorDiv.removeEventListener("wheel", stopCtrlWheel);
+document.removeEventListener("keydown", stopKeyZoom, true);
+*/
       })();
 
       // Abrir modal
