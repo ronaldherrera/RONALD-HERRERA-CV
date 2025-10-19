@@ -743,7 +743,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const pageWrap = document.createElement("div");
             pageWrap.className = "pdf-sheet";
             pageWrap.style.cssText =
-              "background:#fff;margin:10px auto 0;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
+              "background:#fff;margin:5px auto 0;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
             canvas.style.display = "block";
             canvas.style.width = "100%";
             canvas.style.height = "auto";
