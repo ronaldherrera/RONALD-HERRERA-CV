@@ -629,8 +629,6 @@ document.addEventListener("DOMContentLoaded", () => {
         modal
           .querySelector("#btn-compartir")
           .addEventListener("click", async () => {
-            if (!window.__ultimoBlobUrl__) return;
-
             const nombre = (
               document.getElementById("nombre-archivo").value || "informe"
             )
@@ -640,37 +638,53 @@ document.addEventListener("DOMContentLoaded", () => {
               ? nombre
               : nombre + ".pdf";
 
-            const blob = window.__ultimoBlobFile__ || null;
-            const file = blob
-              ? new File([blob], nombreFinal, { type: "application/pdf" })
-              : null;
+            const blob = window.__ultimoBlobFile__;
+            if (!blob) return; // no hay PDF generado
 
-            // 1) Web Share API con archivo
-            try {
-              if (
-                file &&
-                navigator.canShare &&
-                navigator.canShare({ files: [file] })
-              ) {
+            const file = new File([blob], nombreFinal, {
+              type: "application/pdf",
+            });
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              try {
                 await navigator.share({
                   files: [file],
                   title: "Informe de ruptura",
                   text: "Informe de ruptura generado.",
                 });
-                return;
+              } catch (e) {
+                // usuario canceló o fallo; no hacemos nada
               }
-            } catch (err) {
-              console.warn("Error al compartir archivo:", err);
+            } else {
+              // Opcional: simplemente no hacemos nada. Si prefieres avisar:
+              // alert("Compartir archivos no está disponible en este dispositivo/navegador.");
             }
-
-            // 2) Si no se puede compartir archivo, solo descarga el PDF
-            const a = document.createElement("a");
-            a.href = window.__ultimoBlobUrl__;
-            a.download = nombreFinal;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
           });
+        const btnCompartir = modal.querySelector("#btn-compartir");
+        try {
+          const pruebaFile = window.__ultimoBlobFile__
+            ? new File([window.__ultimoBlobFile__], "informe.pdf", {
+                type: "application/pdf",
+              })
+            : null;
+          const soportaShareArchivos =
+            !!pruebaFile &&
+            navigator.canShare &&
+            navigator.canShare({ files: [pruebaFile] });
+
+          if (!soportaShareArchivos) {
+            btnCompartir.disabled = true;
+            btnCompartir.title =
+              "Compartir no disponible en este dispositivo/navegador";
+          } else {
+            btnCompartir.disabled = false;
+            btnCompartir.title = "";
+          }
+        } catch {
+          btnCompartir.disabled = true;
+          btnCompartir.title =
+            "Compartir no disponible en este dispositivo/navegador";
+        }
       } else {
         // Si el modal ya existe, solo actualiza el nombre sugerido
         const inputNombre = document.getElementById("nombre-archivo");
@@ -1285,53 +1299,4 @@ document.getElementById("btn-descargar-pdf").addEventListener("click", () => {
   document.body.appendChild(a);
   a.click();
   a.remove();
-});
-
-// Acción: Enviar por correo
-document.getElementById("btn-compartir").addEventListener("click", async () => {
-  if (!ultimoBlobUrl) return;
-
-  const nombre = (
-    document.getElementById("nombre-archivo").value || "informe.pdf"
-  )
-    .replace(/\s+/g, "_")
-    .replace(/[^A-Za-z0-9._-]/g, "");
-  const nombreFinal = nombre.endsWith(".pdf") ? nombre : `${nombre}.pdf`;
-
-  // 1) Intento con Web Share API (adjunta el archivo directamente en móviles/desktop compatibles)
-  try {
-    if (
-      ultimoArchivo &&
-      navigator.canShare &&
-      navigator.canShare({ files: [ultimoArchivo] })
-    ) {
-      await navigator.share({
-        files: [
-          new File([ultimoArchivo], nombreFinal, { type: "application/pdf" }),
-        ],
-        title: "Informe de ruptura",
-        text: "Te envío el informe de ruptura adjunto.",
-      });
-      return;
-    }
-  } catch (_) {
-    // caemos al plan B
-  }
-  // 2) Fallback: forzar descarga y abrir cliente de correo
-  // (Los navegadores no permiten adjuntar archivos a un mailto automáticamente)
-  const subject = encodeURIComponent("Informe de ruptura");
-  const body = encodeURIComponent(
-    "Adjunto el informe de ruptura.\n\nSi no aparece adjunto automáticamente, te lo acabo de descargar con el nombre:\n" +
-      `${nombreFinal}\n\nPor favor, añádelo a este correo y envíalo.`
-  );
-  const mailto = `mailto:?subject=${subject}&body=${body}`;
-  // Disparamos descarga para que el usuario lo tenga a mano
-  const a = document.createElement("a");
-  a.href = ultimoBlobUrl;
-  a.download = nombreFinal;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  // Abrimos el cliente de correo
-  window.location.href = mailto;
 });
