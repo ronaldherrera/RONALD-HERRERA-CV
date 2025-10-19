@@ -587,7 +587,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "</div>" +
           '<div style="padding:8px 12px;text-align:right;border-top:1px solid #eee;display:flex;gap:10px;justify-content:flex-end;">' +
           '<button id="btn-descargar-pdf" style="background:#120949;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Descargar</button>' +
-          '<button id="btn-compartir" style="background:#FF5800;color:#120949;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Enviar por correo</button>' +
+          '<button id="btn-compartir" style="background:#FF5800;color:#120949;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Compartir</button>' +
           "</div>" +
           "</div>";
         document.body.appendChild(modal);
