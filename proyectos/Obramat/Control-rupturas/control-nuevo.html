@@ -2,49 +2,6 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-    />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="https://drive.google.com/uc?export=view&id=1zcDldT92ToAJl0s8wgE_V1Z8LrcsnoTY"
-    />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Control de Ruptura" />
-
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://drive.google.com/file/d/1vUYtWAjEVPZLvY8QZg8O9N8VJ0pL5nrh/view?usp=drive_link"
-      sizes="32x32"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="192x192"
-      href="https://drive.google.com/file/d/1VLbGOrIb3Y6XQka94SMOs7M1Bi3DffJb/view?usp=drive_link"
-    />
-    <script id="manifest-data" type="application/json">
-      {
-        "name": "Control de Ruptura",
-        "short_name": "Rupturas",
-        "start_url": "./index.html",
-        "display": "standalone",
-        "background_color": "#ffffff",
-        "theme_color": "#FF5800",
-        "orientation": "portrait",
-        "icons": [
-          {
-            "src": "./recursos/icono-web.png",
-            "sizes": "192x192",
-            "type": "image/png"
-          }
-        ]
-      }
-    </script>
-    <meta name="theme-color" content="#FF5800" />
 
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script id="lottie-data" type="application/json">
@@ -1728,16 +1685,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
-    <!----------------------------------------------------------------------------->
+    <script id="manifest-data" type="application/json">
+      {
+        "name": "Control de Ruptura",
+        "short_name": "Rupturas",
+        "start_url": "./index.html",
+        "display": "standalone",
+        "background_color": "#ffffff",
+        "theme_color": "#FF5800",
+        "orientation": "portrait",
+        "icons": [
+          {
+            "src": "https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/icono-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+          }
+        ]
+      }
+    </script>
+
+    <!-----------------------------------------------------------------------padding-bottom: calc(
+          var(--footer-h) + env(safe-area-inset-bottom, 0px)
+        );------>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
       @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..700;1,100..700&display=swap");
 
+      :root {
+        --footer-h: 42px;
+      }
+
+      html,
       body {
+        height: 100%;
         margin: 0;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
         font-family: "Roboto Condensed";
         background: #ffffff;
         height: 100vh;
+      }
+
+      .app-main {
+        flex: 1; /* CLAVE */
+        width: 100%;
       }
 
       header {
@@ -1781,6 +1775,169 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+      }
+
+      .footer {
+        height: 42px;
+        background: rgba(18, 9, 73, 0.96);
+        backdrop-filter: blur(6px);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .footer-link {
+        background: #120949;
+        border: 0;
+        color: #fff;
+        font-family: "Roboto Condensed";
+        font-size: 12px;
+        padding: 8px 6px;
+        cursor: pointer;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        user-select: none;
+      }
+
+      /* Contenido del footer */
+      .footer-inner {
+        width: min(800px, 100%);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        padding: 0 10px;
+      }
+
+      .footer-link {
+        background: transparent;
+        border: 0;
+        color: #fff;
+        font-family: "Roboto Condensed";
+        font-size: 12px;
+        padding: 8px 6px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+
+      .footer-link:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .footer-link strong {
+        color: #ff5800;
+        font-weight: 800;
+      }
+
+      /* ===== Modales del footer ===== */
+      .modal-mini {
+        position: fixed;
+        inset: 0;
+        display: none;
+        z-index: 10000; /* por encima del resto */
+      }
+
+      .modal-mini[aria-hidden="false"] {
+        display: block;
+      }
+
+      .modal-mini .modal-capa {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(2px);
+      }
+
+      .modal-mini .modal-caja {
+        position: relative;
+        width: min(940px, 94vw);
+        margin: 7vh auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-mini .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #120949;
+        color: #fff;
+        padding: 10px 14px;
+      }
+
+      .modal-mini .modal-header h3 {
+        margin: 0;
+        font-family: "Roboto";
+        font-weight: 800;
+        font-size: 14px;
+      }
+
+      .modal-mini .modal-cerrar {
+        background: transparent;
+        border: 0;
+        color: #ff5800;
+        font-size: 22px;
+        cursor: pointer;
+        line-height: 1;
+      }
+
+      .modal-mini .modal-body {
+        padding: 12px 14px;
+        max-height: min(68vh, 620px);
+        overflow: auto;
+      }
+
+      /* Ayuda: de momento “marco” para scroll horizontal (luego lo curramos) */
+      .ayuda-scroll-x {
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        border: 1px dashed #ff5800;
+        border-radius: 10px;
+        padding: 10px;
+        background: #fff7dd;
+      }
+
+      /* QR */
+      .qr-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .qr-box {
+        width: 220px;
+        height: 220px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        border: 2px solid #ff5800;
+        background: #fff;
+      }
+
+      .qr-link {
+        font-size: 12px;
+        color: #120949;
+        word-break: break-all;
+        text-align: center;
+      }
+
+      .btn-mini {
+        background: #ff5800;
+        color: #120949;
+        font-weight: 800;
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 12px;
+        cursor: pointer;
       }
 
       #animacion-lupa {
@@ -2544,7 +2701,7 @@
       </div>
     </header>
 
-    <main>
+    <main class="app-main">
       <div id="seccion-inicial">
         <div class="inicio">
           <h2>Control de rupturas</h2>
@@ -4187,6 +4344,249 @@
           a.remove();
         });
     </script>
+
     <!----------------------------------------------------------------------------->
+    <script>
+      (function () {
+        function openModal(id) {
+          const m = document.getElementById(id);
+          if (!m) return;
+          m.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeModal(id) {
+          const m = document.getElementById(id);
+          if (!m) return;
+          m.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+
+        // Delegación: detecta clicks en cualquier parte
+        document.addEventListener(
+          "click",
+          function (e) {
+            const openBtn = e.target.closest("[data-open]");
+            if (openBtn) {
+              const id = openBtn.getAttribute("data-open");
+              openModal(id);
+              return;
+            }
+
+            const closeBtn = e.target.closest("[data-close]");
+            if (closeBtn) {
+              const id = closeBtn.getAttribute("data-close");
+              closeModal(id);
+            }
+          },
+          true
+        ); // <- CAPTURING: incluso si algo para la propagación
+      })();
+    </script>
+
+    <!-- ===== Footer fijo ===== -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <button class="footer-link" type="button" data-open="modal-ayuda">
+          <strong>?</strong> Ayuda
+        </button>
+
+        <button class="footer-link" type="button" data-open="modal-creditos">
+          <strong>©</strong> Créditos
+        </button>
+
+        <button class="footer-link" type="button" data-open="modal-qr">
+          <strong>⤴</strong> Compartir
+        </button>
+      </div>
+    </footer>
+
+    <!-- ===== Modal Ayuda ===== -->
+    <div class="modal-mini" id="modal-ayuda" aria-hidden="true">
+      <div class="modal-capa" data-close="modal-ayuda"></div>
+      <div
+        class="modal-caja"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Ayuda"
+      >
+        <div class="modal-header">
+          <h3>Ayuda</h3>
+          <button class="modal-cerrar" type="button" data-close="modal-ayuda">
+            ×
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="ayuda-scroll-x">
+            <span style="display: inline-block; min-width: 900px">
+              Aquí irá la ayuda con scroll horizontal (lo trabajamos más
+              adelante).
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Modal Créditos ===== -->
+    <div class="modal-mini" id="modal-creditos" aria-hidden="true">
+      <div class="modal-capa" data-close="modal-creditos"></div>
+      <div
+        class="modal-caja"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Créditos"
+      >
+        <div class="modal-header">
+          <h3>Créditos</h3>
+          <button
+            class="modal-cerrar"
+            type="button"
+            data-close="modal-creditos"
+          >
+            ×
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="creditos-grid">
+            <!-- Columna izquierda -->
+            <div class="creditos-card">
+              <div class="creditos-top">
+                <img
+                  class="creditos-foto"
+                  src="ruta/a/tu-foto.jpg"
+                  alt="Foto de Ronald Herrera"
+                />
+
+                <div class="creditos-identidad">
+                  <div class="creditos-nombre">Ronald Herrera</div>
+                  <div class="creditos-rol">
+                    Obramat —
+                    <span class="creditos-depto">[Tu puesto / área]</span>
+                  </div>
+                  <div class="creditos-zona">Santander (Cantabria)</div>
+                </div>
+              </div>
+
+              <div class="creditos-badges">
+                <span class="badge">Control de Rupturas</span>
+                <span class="badge">App interna</span>
+                <span class="badge">Mejora continua</span>
+              </div>
+
+              <hr class="creditos-sep" />
+
+              <div class="creditos-contacto">
+                <div class="contacto-item">
+                  <span class="contacto-label">Email</span>
+                  <a class="contacto-value" href="mailto:TU_CORREO@dominio.com"
+                    >TU_CORREO@dominio.com</a
+                  >
+                </div>
+
+                <div class="contacto-item">
+                  <span class="contacto-label">Teléfono</span>
+                  <a class="contacto-value" href="tel:+34XXXXXXXXX"
+                    >+34 XXX XXX XXX</a
+                  >
+                </div>
+
+                <div class="contacto-item">
+                  <span class="contacto-label">Web</span>
+                  <a
+                    class="contacto-value"
+                    href="https://ronaldherrera.studio"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    ronaldherrera.studio
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="creditos-card creditos-texto">
+              <h4 class="creditos-h">Por qué hice esta app</h4>
+              <p class="creditos-p">
+                La creé para que el control de rupturas sea más rápido, más
+                claro y más útil en el día a día: menos fricción, menos “ida y
+                vuelta” y más foco en tomar decisiones.
+              </p>
+
+              <h4 class="creditos-h">Objetivo</h4>
+              <p class="creditos-p">
+                Convertir esta herramienta en un panel práctico y fiable: que se
+                pueda usar en móvil sin pelearse con nada, que ayude a priorizar
+                y que deje registro de acciones y motivos para mejorar el
+                proceso con datos reales.
+              </p>
+
+              <h4 class="creditos-h">Notas</h4>
+              <p class="creditos-p creditos-muted">
+                Si ves algo que se pueda mejorar (detalle, filtro, botón,
+                flujo), dímelo. La idea es iterar poco a poco y dejarlo cada vez
+                más fino.
+              </p>
+
+              <div class="creditos-cta">
+                <button
+                  class="btn-mini"
+                  type="button"
+                  data-close="modal-creditos"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Modal Compartir (QR) ===== -->
+    <div class="modal-mini" id="modal-qr" aria-hidden="true">
+      <div class="modal-capa" data-close="modal-qr"></div>
+      <div
+        class="modal-caja"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Compartir"
+      >
+        <div class="modal-header">
+          <h3>Compartir enlace</h3>
+          <button class="modal-cerrar" type="button" data-close="modal-qr">
+            ×
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="qr-wrap">
+            <img
+              src="ruta/a/tu-qr.png"
+              alt="Código QR para compartir la app"
+              style="
+                width: 220px;
+                height: 220px;
+                object-fit: contain;
+                border-radius: 12px;
+                border: 2px solid #ff5800;
+                background: #fff;
+                padding: 8px;
+              "
+            />
+
+            <p
+              style="
+                font-size: 12px;
+                color: #555;
+                margin: 0;
+                text-align: center;
+              "
+            >
+              Escanea el código para abrir la aplicación
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
