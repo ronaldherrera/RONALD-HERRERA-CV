@@ -1855,7 +1855,7 @@
       .modal-mini .modal-caja {
         position: relative;
         width: min(940px, 94vw);
-        margin: 7vh auto;
+        margin: 2vh auto;
         background: #fff;
         border-radius: 12px;
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
@@ -1891,7 +1891,7 @@
 
       .modal-mini .modal-body {
         padding: 12px 0px;
-        max-height: min(68vh, 620px);
+        max-height: min(90vh, 620px);
         overflow: auto;
       }
 
@@ -2693,16 +2693,17 @@
       }
 
       .ayuda-media {
+        display: flex;
+        justify-content: center;
         margin-top: 12px;
-        border: 1px solid #ddd;
+        width: 100%;
         border-radius: 8px;
         overflow: hidden;
-        background: #f7f7f7;
       }
 
       .ayuda-media img {
         display: block;
-        width: 100%;
+        width: 50%;
         height: auto;
       }
 
@@ -5069,6 +5070,12 @@
             <div class="ayuda-track" data-track>
               <section class="ayuda-step" data-step>
                 <h4>1. Identifícate y sube el archivo</h4>
+                <div class="ayuda-media">
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/Tutorial/tuto-1.gif"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
                 <p>
                   Escribe tu <strong>nombre</strong> y sube el
                   <strong>archivo de ruptura</strong> que Solex te envía por
@@ -5077,27 +5084,32 @@
                 <p class="ayuda-nota">
                   Sin este archivo no se puede continuar.
                 </p>
-                <div class="ayuda-media">
-                  <img
-                    src="RUTA_DEL_GIF_O_IMAGEN"
-                    alt="Formulario inicial: nombre y subida del archivo"
-                  />
-                </div>
               </section>
 
               <section class="ayuda-step" data-step>
                 <h4>2. Tarjetas de productos</h4>
+                <div class="ayuda-media">
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/Tutorial/tuto-2.gif"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
                 <p>
                   Al cargar el archivo, aparecerán las
                   <strong>tarjetas de los productos en ruptura</strong>. Sin
                   tocar nada puedes ver información relevante para una primera
                   revisión.
                 </p>
-                <!-- GIF / captura: listado de tarjetas -->
               </section>
 
               <section class="ayuda-step" data-step>
                 <h4>3. Ver información detallada</h4>
+                <div class="ayuda-media">
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/Tutorial/tuto-3.gif"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
                 <p>
                   Si pulsas sobre una tarjeta, se despliega información más
                   completa:
@@ -5108,11 +5120,16 @@
                   <li>Últimas y próximas recepciones</li>
                   <li>Otros datos relevantes</li>
                 </ul>
-                <!-- GIF / captura: tarjeta desplegada -->
               </section>
 
               <section class="ayuda-step" data-step>
                 <h4>4. Incluir o excluir del informe</h4>
+                <div class="ayuda-media">
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/Tutorial/tuto-4.gif"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
                 <p>
                   Cada tarjeta tiene un botón para
                   <strong>incluir o excluir</strong> el producto del informe
@@ -5122,14 +5139,23 @@
                   Solo los productos incluidos aparecerán en el informe. Puedes
                   cambiar esta decisión cuando quieras.
                 </p>
-                <!-- GIF / captura: botón incluir / excluir -->
               </section>
 
               <section class="ayuda-step" data-step>
                 <h4>5. Completar el pie de la tarjeta</h4>
+                <div class="ayuda-media">
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/Tutorial/tuto-5.gif"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
                 <p>En el pie editable de cada tarjeta debes indicar:</p>
                 <ul>
-                  <li><strong>Stock real en sala de venta</strong></li>
+                  <li>
+                    <strong>Stock real en sala de venta</strong><br /><small
+                      >Viene relleno por defecto para agilizar.</small
+                    >
+                  </li>
                   <li>
                     <strong>Rectificado en Solex: Sí / No</strong> <br /><small
                       >Viene relleno por defecto para agilizar.</small
@@ -5137,20 +5163,30 @@
                   </li>
                   <li><strong>Pedir / No pedir</strong> (obligatorio)</li>
                 </ul>
-                <!-- GIF / captura: pie de tarjeta -->
               </section>
 
               <section class="ayuda-step" data-step>
                 <h4>6. Comentario (opcional)</h4>
+                <div class="ayuda-media">
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/Tutorial/tuto-6.gif"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
                 <p>
                   Puedes añadir un <strong>comentario</strong> si necesitas
                   dejar una aclaración o información extra.
                 </p>
-                <!-- GIF / captura: campo comentario -->
               </section>
 
               <section class="ayuda-step" data-step>
                 <h4>7. Generar informe</h4>
+                <div class="ayuda-media">
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/Tutorial/tuto-7.gif"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
                 <p>
                   Cuando todas las tarjetas incluidas tengan los campos
                   obligatorios completos, se activará
@@ -5160,11 +5196,16 @@
                   Se abrirá un modal con la <strong>previsualización</strong> y
                   un <strong>nombre recomendado</strong> (editable).
                 </p>
-                <!-- GIF / captura: botón generar informe -->
               </section>
 
               <section class="ayuda-step" data-step>
                 <h4>8. Descargar o compartir</h4>
+                <div class="ayuda-media">
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/Tutorial/tuto-8.gif"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
                 <p>Desde la previsualización final puedes:</p>
                 <ul>
                   <li><strong>Descargar</strong> el informe</li>
@@ -5173,7 +5214,6 @@
                 <p>
                   Antes de hacerlo, puedes inspeccionar el documento completo.
                 </p>
-                <!-- GIF / captura: modal final -->
               </section>
             </div>
 
