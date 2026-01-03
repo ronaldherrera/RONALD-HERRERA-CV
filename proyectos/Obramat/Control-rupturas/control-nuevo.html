@@ -1895,6 +1895,10 @@
         overflow: auto;
       }
 
+      #modal-qr .modal-body {
+        padding: 10px 10px;
+      }
+
       #modal-creditos .modal-body {
         max-height: min(90vh, 620px);
       }
@@ -2001,21 +2005,126 @@
       }
 
       /* QR */
-      .qr-wrap {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
+      /* ===== QR guía (estilo tipo infografía) ===== */
+      .qr-guia {
+        display: grid;
+        gap: 14px;
       }
 
-      .qr-box {
-        width: 220px;
-        height: 220px;
+      .qr-step {
+        display: grid;
+        grid-template-columns: 42px 1fr 170px;
+        gap: 12px;
+        align-items: start;
+        background: #fff;
+        border: 1px solid #e3e3e3;
+        border-radius: 12px;
+        padding: 12px;
+      }
+
+      .qr-num {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        background: #ff5800;
+        color: #fff;
         display: grid;
         place-items: center;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .qr-texto h4 {
+        margin: 0 0 6px;
+        font-size: 15px;
+      }
+
+      .qr-texto p {
+        margin: 0 0 8px;
+        color: #333;
+        font-size: 13px;
+      }
+
+      .qr-url {
+        margin-top: 6px;
+        font-size: 12px;
+        color: #7a3c00;
+        word-break: break-word;
+      }
+
+      .qr-texto ul {
+        margin: 6px 0 8px 18px;
+        padding: 0;
+        font-size: 13px;
+        color: #333;
+      }
+
+      .qr-texto ul ul {
+        margin-top: 6px;
+      }
+
+      .qr-listo {
+        margin-top: 6px;
+        font-size: 13px;
+      }
+
+      .qr-media {
+        display: grid;
+        place-items: center;
+      }
+
+      .qr-media img {
+        width: 100%;
+        max-width: 170px;
+        height: auto;
         border-radius: 12px;
         border: 2px solid #ff5800;
         background: #fff;
+        padding: 6px;
+        object-fit: contain;
+      }
+      .qr-url {
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .qr-url:hover {
+        text-decoration: underline;
+      }
+
+      .qr-copy-msg {
+        padding: 2px;
+        position: absolute;
+        font-size: 11px;
+        color: #ffffff;
+        background-color: #2e7d32;
+        border-radius: 3px;
+      }
+
+      /* ===== Responsive (móvil) ===== */
+      @media (max-width: 520px) {
+        .qr-step {
+          grid-template-columns: 42px 1fr;
+          grid-template-areas:
+            "num texto"
+            "media media";
+        }
+
+        .qr-num {
+          grid-area: num;
+        }
+        .qr-texto {
+          grid-area: texto;
+        }
+        .qr-media {
+          grid-area: media;
+        }
+
+        .qr-media img {
+          max-width: 240px;
+        }
       }
 
       .qr-link {
@@ -3050,6 +3159,26 @@
 
     <!----------------------------------------------------------------------------->
     <script>
+      document.addEventListener("click", (e) => {
+        const el = e.target.closest("[data-copy]");
+        if (!el) return;
+
+        const text = el.getAttribute("data-copy");
+        if (!text) return;
+
+        navigator.clipboard.writeText(text).then(() => {
+          const msg = el.querySelector(".qr-copy-msg");
+          if (!msg) return;
+
+          msg.hidden = false;
+
+          clearTimeout(el.__copyTimer);
+          el.__copyTimer = setTimeout(() => {
+            msg.hidden = true;
+          }, 1500);
+        });
+      });
+
       function initAyudaSlider() {
         const root = document.querySelector('[data-slider="ayuda"]');
         if (!root || root.__inited) return;
@@ -5461,31 +5590,76 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="qr-wrap">
-            <img
-              src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/qr.png"
-              alt="Código QR para compartir la app"
-              style="
-                width: 220px;
-                height: 220px;
-                object-fit: contain;
-                border-radius: 12px;
-                border: 2px solid #ff5800;
-                background: #fff;
-                padding: 8px;
-              "
-            />
+          <div class="qr-guia">
+            <!-- Paso 1 -->
+            <section class="qr-step">
+              <div class="qr-num">1</div>
 
-            <p
-              style="
-                font-size: 12px;
-                color: #555;
-                margin: 0;
-                text-align: center;
-              "
-            >
-              Escanea el código para abrir la aplicación
-            </p>
+              <div class="qr-texto">
+                <h4>Escanea el código QR</h4>
+                <p>
+                  Abre la cámara del móvil, apunta al QR y toca el enlace que
+                  aparezca.
+                </p>
+                <div class="qr-media">
+                  <!-- Aquí pones tu imagen/GIF del móvil escaneando (o el QR) -->
+                  <img src="TU_IMAGEN_O_GIF_1" alt="Escaneo del código QR" />
+                </div>
+                <!-- Opcional: muestra la URL por si falla el escaneo -->
+                <p
+                  class="qr-url"
+                  data-copy="https://script.google.com/a/macros/obramat.es/s/AKfycbztTiuiTEpDK_J7S1T7q-Gsl6Kvubq2_e0lC-aUSWx1mK64RQqM3JugwX3j1YLlFo-N/exec"
+                >
+                  <span class="qr-copy-msg" hidden
+                    >Enlace copiado en el portapapeles</span
+                  >
+                  <br />
+                  https://script.google.com/a/macros/obramat.es/s/AKfycbztTiuiTEpDK_J7S1T7q-Gsl6Kvubq2_e0lC-aUSWx1mK64RQqM3JugwX3j1YLlFo-N/exec
+                </p>
+              </div>
+            </section>
+
+            <!-- Paso 2 -->
+            <section class="qr-step">
+              <div class="qr-num">2</div>
+
+              <div class="qr-texto">
+                <h4>Añade la app a tu pantalla de inicio</h4>
+                <ul>
+                  <li>
+                    Si aparece el mensaje
+                    <strong>“Añadir a pantalla de inicio”</strong>, pulsa
+                    <strong>Añadir</strong>.
+                  </li>
+                  <li>
+                    Si no aparece:
+                    <ul>
+                      <li>
+                        <strong>iPhone (Safari):</strong> Compartir → Añadir a
+                        pantalla de inicio
+                      </li>
+                      <li>
+                        <strong>Android (Chrome):</strong> ⋮ → Añadir a pantalla
+                        de inicio
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <div class="qr-media">
+                  <!-- Aquí pones tu imagen/GIF de los menús “Añadir a pantalla…” -->
+                  <img
+                    src="TU_IMAGEN_O_GIF_2"
+                    alt="Añadir a pantalla de inicio"
+                  />
+                </div>
+
+                <p class="qr-listo">
+                  ✅ <strong>Listo.</strong> Verás el icono de
+                  <strong>Control de Ruptura</strong> junto a tus apps.
+                </p>
+              </div>
+            </section>
           </div>
         </div>
       </div>
