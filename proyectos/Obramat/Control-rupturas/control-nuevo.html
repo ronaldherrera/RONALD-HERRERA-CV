@@ -1890,9 +1890,13 @@
       }
 
       .modal-mini .modal-body {
-        padding: 12px 0px;
-        max-height: min(90vh, 620px);
+        padding: 10px 0px;
+
         overflow: auto;
+      }
+
+      #modal-creditos .modal-body {
+        max-height: min(90vh, 620px);
       }
 
       /* Ayuda: de momento “marco” para scroll horizontal (luego lo curramos) */
@@ -1961,15 +1965,16 @@
       }
 
       .ayuda-btn {
-        border: 1px solid #ddd;
-        background: #fff;
+        border: none;
+        background: #120949;
         padding: 8px 10px;
-        border-radius: 10px;
+        border-radius: 5px;
         cursor: pointer;
+        color: #fff;
       }
 
       .ayuda-btn:disabled {
-        opacity: 0.5;
+        background: rgba(255, 88, 0, 0.35);
         cursor: default;
       }
 
@@ -1984,7 +1989,7 @@
         width: 9px;
         height: 9px;
         border-radius: 999px;
-        border: 1px solid #bbb;
+        border: 1px solid rgba(255, 88, 0, 0.35);
         background: transparent;
         cursor: pointer;
         padding: 0;
@@ -2787,6 +2792,7 @@
         border-radius: 12px;
         padding: 12px;
         background: #fff;
+        margin: 10px;
       }
 
       .creditos-top {
@@ -3046,7 +3052,7 @@
     <script>
       function initAyudaSlider() {
         const root = document.querySelector('[data-slider="ayuda"]');
-        if (!root || root.__inited) return; // evita duplicados
+        if (!root || root.__inited) return;
         root.__inited = true;
 
         const track = root.querySelector("[data-track]");
@@ -3060,7 +3066,10 @@
 
         let index = 0;
 
-        // dots
+        // ✅ Importante para móvil: permite scroll vertical normal, pero gestionamos el horizontal nosotros
+        root.style.touchAction = "pan-y";
+
+        // ---- dots
         const dots = steps.map((_, i) => {
           const b = document.createElement("button");
           b.type = "button";
@@ -3071,8 +3080,14 @@
           return b;
         });
 
+        function setTranslate(percent) {
+          track.style.transform = `translateX(${percent}%)`;
+        }
+
         function update() {
-          track.style.transform = `translateX(${-index * 100}%)`;
+          // vuelve al modo animado normal
+          track.style.transition = "transform .28s ease";
+          setTranslate(-index * 100);
           dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
           btnPrev.disabled = index === 0;
           btnNext.disabled = index === steps.length - 1;
@@ -3087,6 +3102,95 @@
         btnNext.addEventListener("click", () => goTo(index + 1));
 
         update();
+
+        // =========================
+        // ✅ Swipe / drag (móvil)
+        // =========================
+        let dragging = false;
+        let startX = 0;
+        let startY = 0;
+        let dx = 0;
+        let lock = null; // "x" o "y"
+        let pointerId = null;
+
+        const THRESHOLD_RATIO = 0.18; // 18% del ancho para cambiar de paso
+
+        function onPointerDown(e) {
+          // Solo gesto táctil (evita liarla con el ratón en PC)
+          if (e.pointerType === "mouse") return;
+
+          dragging = true;
+          pointerId = e.pointerId;
+          root.setPointerCapture(pointerId);
+
+          startX = e.clientX;
+          startY = e.clientY;
+          dx = 0;
+          lock = null;
+
+          // sin transición mientras arrastras
+          track.style.transition = "none";
+        }
+
+        function onPointerMove(e) {
+          if (!dragging || e.pointerId !== pointerId) return;
+
+          dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+
+          // Decide si es gesto horizontal o vertical
+          if (lock === null) {
+            if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+              lock = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+            } else {
+              return;
+            }
+          }
+
+          // Si es vertical, dejamos que el modal haga scroll normal
+          if (lock === "y") return;
+
+          // Horizontal: evitamos el scroll del navegador y movemos el track “a mano”
+          e.preventDefault();
+
+          const w = Math.max(1, root.clientWidth);
+          const deltaPercent = (dx / w) * 100;
+
+          // base: -index*100, + delta del gesto
+          setTranslate(-index * 100 + deltaPercent);
+        }
+
+        function endDrag(e) {
+          if (!dragging || e.pointerId !== pointerId) return;
+
+          dragging = false;
+
+          if (lock !== "x") {
+            // si fue vertical o no se decidió, restauramos
+            update();
+            return;
+          }
+
+          const w = Math.max(1, root.clientWidth);
+          const ratio = Math.abs(dx) / w;
+
+          if (ratio >= THRESHOLD_RATIO) {
+            // swipe: dx<0 => siguiente, dx>0 => anterior
+            goTo(dx < 0 ? index + 1 : index - 1);
+          } else {
+            // vuelve al paso actual
+            update();
+          }
+
+          dx = 0;
+          lock = null;
+          pointerId = null;
+        }
+
+        root.addEventListener("pointerdown", onPointerDown, { passive: true });
+        root.addEventListener("pointermove", onPointerMove, { passive: false });
+        root.addEventListener("pointerup", endDrag, { passive: true });
+        root.addEventListener("pointercancel", endDrag, { passive: true });
       }
 
       /* ✅ Inicializa cuando el modal se abre */
@@ -5359,7 +5463,7 @@
         <div class="modal-body">
           <div class="qr-wrap">
             <img
-              src="ruta/a/tu-qr.png"
+              src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/qr.svg"
               alt="Código QR para compartir la app"
               style="
                 width: 220px;
