@@ -1731,7 +1731,7 @@
 
       .app-main {
         flex: 1; /* CLAVE */
-        width: 100%;
+        max-width: 800px;
       }
 
       header {
@@ -1779,7 +1779,7 @@
 
       .footer {
         height: 42px;
-        background: rgba(18, 9, 73, 0.96);
+        background: rgba(223, 223, 223, 0.96);
         backdrop-filter: blur(6px);
         border-top: 1px solid rgba(255, 255, 255, 0.15);
         display: flex;
@@ -1815,8 +1815,9 @@
       .footer-link {
         background: transparent;
         border: 0;
-        color: #fff;
-        font-family: "Roboto Condensed";
+        color: #120949;
+        font-family: "Roboto";
+        font-weight: 600;
         font-size: 12px;
         padding: 8px 6px;
         cursor: pointer;
@@ -1824,7 +1825,7 @@
       }
 
       .footer-link:hover {
-        background: rgba(255, 255, 255, 0.08);
+        color: #11094979;
       }
 
       .footer-link strong {
@@ -1889,20 +1890,109 @@
       }
 
       .modal-mini .modal-body {
-        padding: 12px 14px;
+        padding: 12px 0px;
         max-height: min(68vh, 620px);
         overflow: auto;
       }
 
       /* Ayuda: de momento “marco” para scroll horizontal (luego lo curramos) */
-      .ayuda-scroll-x {
-        overflow-x: auto;
-        overflow-y: hidden;
-        white-space: nowrap;
-        border: 1px dashed #ff5800;
+
+      .modal-body {
+        overflow-x: hidden;
+      }
+
+      .ayuda-slider {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .ayuda-track {
+        display: flex;
+        width: 100%;
+        transform: translateX(0);
+        transition: transform 260ms ease;
+        will-change: transform;
+      }
+
+      .ayuda-step {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 16px;
+      }
+
+      .ayuda-slider {
+        width: 100%;
+      }
+
+      .ayuda-track {
+        display: flex;
+        transition: transform 260ms ease;
+        will-change: transform;
+      }
+
+      .ayuda-step {
+        flex: 0 0 100%;
+        padding: 12px;
+      }
+
+      .ayuda-step h4 {
+        margin: 0 0 8px;
+        color: #ff5800;
+      }
+
+      .ayuda-step ul {
+        margin: 8px 0 0 18px;
+      }
+
+      .ayuda-nota {
+        margin-top: 8px;
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .ayuda-nav {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px 0;
+      }
+
+      .ayuda-btn {
+        border: 1px solid #ddd;
+        background: #fff;
+        padding: 8px 10px;
         border-radius: 10px;
-        padding: 10px;
-        background: #fff7dd;
+        cursor: pointer;
+      }
+
+      .ayuda-btn:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+
+      .ayuda-dots {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ayuda-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        border: 1px solid #bbb;
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .ayuda-dot.is-active {
+        background: #ff5800;
+        border-color: #ff5800;
       }
 
       /* QR */
@@ -1951,7 +2041,7 @@
         max-width: 400px;
         margin: 1rem 0;
         background: #fff7dd;
-        border: none;
+        border: 1px solid rgba(255, 88, 0, 0.35);
         border-radius: 5px;
         text-align: start;
       }
@@ -2085,7 +2175,7 @@
 
       .tarjeta-cabecera {
         background-color: #dedddd;
-        padding: 8px 8px 8px;
+        padding: 8px 8px 12px;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
@@ -2187,7 +2277,7 @@
       }
 
       .switch-informe input:not(:checked) + .slider-text {
-        background-color: #792f2f; /* rojo (Excluido) */
+        background-color: rgba(255, 88, 0, 0.35); /* rojo (Excluido) */
       }
       .switch-informe input:not(:checked) + .slider-text::after {
         content: "excluido";
@@ -2256,7 +2346,7 @@
       }
 
       .tarjeta[data-abierta="true"] .tarjeta-detalle {
-        padding: 8px 8px;
+        padding: 8px 8px 12px;
         max-height: 1000px; /* lo suficientemente grande para cualquier tarjeta */
         opacity: 1;
       }
@@ -2364,8 +2454,9 @@
       }
 
       .tarjeta-pie {
-        border-top: 1px solid #cfc5a4;
+        border-top: 1px solid rgba(255, 88, 0, 0.35);
         padding: 8px;
+        padding-top: 12px;
         background: #fff7dd;
         display: flex;
         flex-direction: column;
@@ -2385,7 +2476,7 @@
         min-height: 28px;
         max-height: 120px;
         resize: none; /* controlamos altura con JS */
-        border: 1px solid #ccc;
+        border: 1px solid rgba(255, 88, 0, 0.35);
         border-radius: 5px;
         padding: 6px 8px;
         font-size: 16px;
@@ -2393,6 +2484,7 @@
         background: #ffffff;
         color: #000;
         box-sizing: border-box;
+        font-family: "Roboto";
       }
 
       .comentario-input:focus {
@@ -2409,18 +2501,27 @@
         gap: 5px;
       }
 
-      .tarjeta-pie label,
-      .tarjeta-pie .grupo-radio {
+      .grupo-stock label {
+        display: flex;
+        justify-content: center;
+      }
+
+      .tarjeta-pie label {
         font-size: 12px;
+      }
+
+      .grupo-radio,
+      .grupo-stock {
+        font-size: 10px;
       }
 
       input.stock-real {
         background: #ffffff;
-        border: 1px solid #ccc;
-        padding: 4px 2px 2px;
+        border: 1px solid rgba(255, 88, 0, 0.35);
+
         border-radius: 3px;
-        width: 40px;
-        height: 15px;
+        width: 88%;
+        height: 88%;
         color: black;
         font-size: 16px;
       }
@@ -2437,24 +2538,64 @@
         margin: 0;
       }
 
-      .grupo-radio {
+      .grupo-radio,
+      .grupo-stock {
         display: inline-flex;
+        flex-direction: column;
         align-items: center;
-        gap: 5px;
+        height: 30px;
+        width: 80px;
+        border: 1px solid rgba(255, 88, 0, 0.35);
+        border-radius: 5px;
+      }
+
+      .grupo-stock span {
+        background-color: #000;
+        margin-top: -5px;
+        margin-left: -18px;
+        padding: 0px 5px;
+        background: #fff7dd;
+      }
+
+      .grupo-radio span {
+        background-color: #000;
+        margin-top: -5px;
+        margin-left: -30px;
+        padding: 0px 5px;
+        background: #fff7dd;
+      }
+
+      .grupo-radio div,
+      .grupo-stock div {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
       }
 
       .grupo-radio label {
-        display: inline-flex;
-        align-items: center;
+        display: flex;
+
         gap: 0px;
       }
 
       .grupo-radio input {
-        margin: 0px;
+        margin: 1px;
       }
 
       .grupo-radio input[type="radio"] {
         accent-color: #ff5800;
+        appearance: none;
+        -webkit-appearance: none;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 88, 0, 0.35); /* 👈 BORDE CONTROLADO */
+        background: #fff;
+        cursor: pointer;
+      }
+
+      input[type="radio"]:checked {
+        background: radial-gradient(#ff5800 60%, transparent 10%);
       }
 
       .btn-decision {
@@ -2469,7 +2610,7 @@
       }
 
       .estado-neutro {
-        background-color: #232323;
+        background-color: rgba(255, 88, 0, 0.35);
       }
 
       .estado-pedir {
@@ -2551,6 +2692,20 @@
         overflow: hidden;
       }
 
+      .ayuda-media {
+        margin-top: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #f7f7f7;
+      }
+
+      .ayuda-media img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
       .modal-header {
         display: flex;
         justify-content: space-between;
@@ -2612,6 +2767,129 @@
         justify-content: flex-end;
         padding: 12px 16px;
       }
+
+      /* ===== Créditos (modal) ===== */
+      .creditos-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 1.35fr;
+        gap: 12px;
+      }
+
+      @media (max-width: 820px) {
+        .creditos-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .creditos-card {
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 12px;
+        background: #fff;
+      }
+
+      .creditos-top {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .creditos-foto {
+        width: 72px;
+        height: 72px;
+        border-radius: 14px;
+        object-fit: cover;
+        border: 2px solid #ff5800;
+        background: #f5f5f5;
+      }
+
+      .creditos-identidad {
+        display: grid;
+        gap: 3px;
+      }
+
+      .creditos-nombre {
+        font-weight: 900;
+        font-size: 16px;
+        color: #120949;
+      }
+
+      .creditos-rol {
+        font-size: 13px;
+        color: #333;
+      }
+
+      .creditos-depto {
+        color: #ff5800;
+        font-weight: 800;
+      }
+
+      .creditos-zona {
+        font-size: 12px;
+        color: #777;
+      }
+
+      .creditos-sep {
+        border: none;
+        border-top: 1px solid #eee;
+        margin: 12px 0;
+      }
+
+      .creditos-contacto {
+        display: grid;
+        gap: 10px;
+      }
+
+      .contacto-item {
+        display: grid;
+        gap: 2px;
+      }
+
+      .contacto-label {
+        font-size: 11px;
+        color: #777;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+
+      .contacto-value {
+        font-size: 13px;
+        color: #120949;
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      .contacto-value:hover {
+        text-decoration: underline;
+        color: #ff5800;
+      }
+
+      .creditos-texto .creditos-h {
+        margin: 0 0 6px;
+        font-size: 13px;
+        font-weight: 900;
+        color: #120949;
+      }
+
+      .creditos-texto .creditos-p {
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.35;
+        color: #333;
+      }
+
+      .creditos-muted {
+        color: #666;
+      }
+
+      .creditos-cta {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 6px;
+      }
+
       .btn {
         border: 0;
         border-radius: 6px;
@@ -2765,6 +3043,63 @@
 
     <!----------------------------------------------------------------------------->
     <script>
+      function initAyudaSlider() {
+        const root = document.querySelector('[data-slider="ayuda"]');
+        if (!root || root.__inited) return; // evita duplicados
+        root.__inited = true;
+
+        const track = root.querySelector("[data-track]");
+        const steps = Array.from(root.querySelectorAll("[data-step]"));
+        const dotsWrap = root.querySelector("[data-dots]");
+        const btnPrev = root.querySelector("[data-prev]");
+        const btnNext = root.querySelector("[data-next]");
+
+        if (!track || !steps.length || !dotsWrap || !btnPrev || !btnNext)
+          return;
+
+        let index = 0;
+
+        // dots
+        const dots = steps.map((_, i) => {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "ayuda-dot";
+          b.setAttribute("aria-label", `Ir al paso ${i + 1}`);
+          b.addEventListener("click", () => goTo(i));
+          dotsWrap.appendChild(b);
+          return b;
+        });
+
+        function update() {
+          track.style.transform = `translateX(${-index * 100}%)`;
+          dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
+          btnPrev.disabled = index === 0;
+          btnNext.disabled = index === steps.length - 1;
+        }
+
+        function goTo(i) {
+          index = Math.max(0, Math.min(steps.length - 1, i));
+          update();
+        }
+
+        btnPrev.addEventListener("click", () => goTo(index - 1));
+        btnNext.addEventListener("click", () => goTo(index + 1));
+
+        update();
+      }
+
+      /* ✅ Inicializa cuando el modal se abre */
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest('[data-open="modal-ayuda"]');
+        if (!btn) return;
+
+        // esperamos al siguiente tick por si el modal se muestra con JS
+        setTimeout(initAyudaSlider, 0);
+      });
+
+      /* ✅ Backup: también al cargar DOM */
+      document.addEventListener("DOMContentLoaded", initAyudaSlider);
+
       // --- Animación Lottie ---
       const lottieJson = JSON.parse(
         document.getElementById("lottie-data").textContent
@@ -3540,7 +3875,7 @@
                 "</div>" +
                 '<div style="display:flex;flex-direction:column;padding:10px;border-bottom:1px solid #eee;">' +
                 '<label for="nombre-archivo" style="font:600 12px/1 Roboto,system-ui;color:#333;">Nombre del documento:</label>' +
-                `<input id="nombre-archivo" type="text" value="${nombreSugeridoFinal}" style="flex:1;min-width:0;padding:6px 8px;border:1px solid #ccc;border-radius:6px; margin: 2px 0;" />` +
+                `<input id="nombre-archivo" type="text" value="${nombreSugeridoFinal}" style="flex:1;min-width:0;padding:6px 8px;background: #fff7dd;border:1px solid rgba(255, 88, 0, 0.35);border-radius:6px; margin: 2px 0;" />` +
                 "</div>" +
                 '<div style="padding:8px 12px;text-align:right;border-top:1px solid #eee;display:flex;gap:10px;justify-content: center;">' +
                 '<button id="btn-descargar-pdf" style="background:#120949;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;">Descargar</button>' +
@@ -3668,7 +4003,7 @@
             const visorDiv = document.createElement("div");
             visorDiv.id = "pdf-viewer";
             visorDiv.style.cssText =
-              "flex:1;overflow:auto;background:#e9e9e9;padding:4px;display:flex;flex-direction:column;align-items:center;";
+              "flex:1;overflow:auto;background:#e9e9e9;padding:4px;display:flex;flex-direction:column;";
             const botonesAccion =
               contenidoModal.querySelector("div:last-child");
             contenidoModal.insertBefore(visorDiv, botonesAccion);
@@ -3704,28 +4039,133 @@
               const pdfjs = await esperarPdfjs();
               const data = await blob.arrayBuffer();
               const pdf = await pdfjs.getDocument({ data }).promise;
-              let scale = 1.1;
 
-              async function fitToWidth() {
+              let scale = 1.1;
+              const MIN_SCALE = 0.35; // baja a 0.25 si en móviles pequeños no cabe
+              const MAX_SCALE = 3;
+
+              // === PAN ratón ===
+              let isMousePanning = false;
+              let mStartX = 0,
+                mStartY = 0;
+              let mScrollLeft = 0,
+                mScrollTop = 0;
+
+              // === PAN táctil (1 dedo) ===
+              let touchPanning = false;
+              let tStartX = 0,
+                tStartY = 0;
+              let tScrollLeft = 0,
+                tScrollTop = 0;
+
+              // === PINCH ===
+              let pinchStartDist = null;
+              let pinchStartScale = null;
+              let pinchVisual = 1;
+              let pinchRaf = null;
+              let pendingRender = false;
+
+              // Centro del pinch para mantener “bajo los dedos”
+              let pinchCenterX = 0,
+                pinchCenterY = 0;
+              let pinchStartScrollLeft = 0,
+                pinchStartScrollTop = 0;
+
+              // Doble tap
+              let baseFitScale = scale;
+              let lastTapTime = 0;
+              let lastTapX = 0;
+              let lastTapY = 0;
+
+              function clamp(v, min, max) {
+                return Math.min(max, Math.max(min, v));
+              }
+
+              function getDistance(t1, t2) {
+                return Math.hypot(
+                  t2.clientX - t1.clientX,
+                  t2.clientY - t1.clientY
+                );
+              }
+
+              // === Estilos básicos del visor ===
+              visorDiv.style.touchAction = "none";
+              visorDiv.style.overflow = "auto";
+              visorDiv.style.cursor = "default";
+
+              // === STAGE (define el tamaño real scrollable) + INNER (se escala visualmente) ===
+              const stage = document.createElement("div");
+              stage.className = "pdf-stage";
+              stage.style.position = "relative";
+              stage.style.width = "1px";
+              stage.style.height = "1px";
+
+              const inner = document.createElement("div");
+              inner.className = "pdf-inner";
+              inner.style.position = "absolute";
+              inner.style.left = "0";
+              inner.style.top = "0";
+              inner.style.transformOrigin = "0 0";
+              inner.style.willChange = "transform";
+
+              // Importante: alineación a la izquierda (evita “centrado” raro)
+              inner.style.display = "flex";
+              inner.style.flexDirection = "column";
+
+              inner.style.gap = "12px";
+              inner.style.padding = "6px";
+
+              stage.appendChild(inner);
+              visorDiv.appendChild(stage);
+
+              function updateStageSize(visualFactor = 1) {
+                // stage define el área scrollable REAL
+                const w = Math.ceil(inner.scrollWidth * visualFactor);
+                const h = Math.ceil(inner.scrollHeight * visualFactor);
+                stage.style.width = `${Math.max(1, w)}px`;
+                stage.style.height = `${Math.max(1, h)}px`;
+              }
+
+              async function fitToPage() {
                 const page1 = await pdf.getPage(1);
-                const unscaled = page1.getViewport({ scale: 1 });
-                const containerW = visorDiv.clientWidth - 24;
-                const newScale = containerW / unscaled.width;
-                scale = Math.min(3, Math.max(0.5, newScale));
+                const viewport = page1.getViewport({ scale: 1 });
+
+                const paddingX = 28; // espacio para sombras/márgenes
+                const paddingY = 28;
+
+                const containerW = Math.max(
+                  80,
+                  visorDiv.clientWidth - paddingX
+                );
+                const containerH = Math.max(
+                  80,
+                  visorDiv.clientHeight - paddingY
+                );
+
+                const scaleW = containerW / viewport.width;
+                const scaleH = containerH / viewport.height;
+
+                scale = clamp(Math.min(scaleW, scaleH), MIN_SCALE, MAX_SCALE);
+                baseFitScale = scale;
               }
 
               async function renderAllPages() {
-                visorDiv.innerHTML = "";
+                // NO borres visorDiv. Solo inner.
+                inner.innerHTML = "";
+
                 for (let num = 1; num <= pdf.numPages; num++) {
                   const page = await pdf.getPage(num);
                   const viewport = page.getViewport({ scale });
+
                   const canvas = document.createElement("canvas");
                   const ctx = canvas.getContext("2d");
+
                   const dpr = window.devicePixelRatio || 1;
                   canvas.width = Math.floor(viewport.width * dpr);
                   canvas.height = Math.floor(viewport.height * dpr);
                   canvas.style.width = Math.floor(viewport.width) + "px";
                   canvas.style.height = Math.floor(viewport.height) + "px";
+
                   await page.render({
                     canvasContext: ctx,
                     viewport,
@@ -3735,84 +4175,286 @@
                   const pageWrap = document.createElement("div");
                   pageWrap.className = "pdf-sheet";
                   pageWrap.style.cssText =
-                    "background:#fff;margin:5px auto 0;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
-                  canvas.style.display = "block";
-                  canvas.style.width = "100%";
-                  canvas.style.height = "auto";
+                    "background:#fff;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(0,0,0,.18);";
+
                   pageWrap.appendChild(canvas);
-                  visorDiv.appendChild(pageWrap);
+                  inner.appendChild(pageWrap);
                 }
+
+                // Reset visual scaling (si veníamos de pinch)
+                inner.style.transform = "scale(1)";
+                inner.style.willChange = "auto";
+                updateStageSize(1);
+
+                visorDiv.style.cursor =
+                  scale > baseFitScale ? "grab" : "default";
               }
 
-              await fitToWidth();
+              // Zoom hacia un punto (para PC wheel / doble tap)
+              function zoomToPoint(newScale, clientX, clientY) {
+                const rect = visorDiv.getBoundingClientRect();
+                const x = clientX - rect.left + visorDiv.scrollLeft;
+                const y = clientY - rect.top + visorDiv.scrollTop;
+
+                const ratio = newScale / scale;
+
+                visorDiv.scrollLeft = x * ratio - (x - visorDiv.scrollLeft);
+                visorDiv.scrollTop = y * ratio - (y - visorDiv.scrollTop);
+
+                scale = newScale;
+              }
+
+              // === INIT ===
+              await fitToPage();
               await renderAllPages();
 
-              // Bloquear zoom y gestos
-              visorDiv.style.touchAction = "pan-y";
-              visorDiv.style.userSelect = "none";
-              visorDiv.style.webkitTouchCallout = "none";
-
-              const aplicarNoZoom = () => {
-                visorDiv
-                  .querySelectorAll("canvas, .pdf-sheet")
-                  .forEach((el) => {
-                    el.style.touchAction = "pan-y";
-                    el.style.userSelect = "none";
-                  });
-              };
-
-              aplicarNoZoom();
-
-              const stopGesture = (e) => e.preventDefault();
-              window.addEventListener("gesturestart", stopGesture, {
-                passive: false,
-              });
-              window.addEventListener("gesturechange", stopGesture, {
-                passive: false,
-              });
-              window.addEventListener("gestureend", stopGesture, {
-                passive: false,
-              });
-
-              const stopCtrlWheel = (e) => {
-                if (e.ctrlKey) {
+              /* ===== ZOOM CTRL+RUEDA (PC) ===== */
+              visorDiv.addEventListener(
+                "wheel",
+                async (e) => {
+                  if (!e.ctrlKey) return;
                   e.preventDefault();
-                  e.stopPropagation();
-                }
-              };
-              visorDiv.addEventListener("wheel", stopCtrlWheel, {
-                passive: false,
+
+                  const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                  const newScale = clamp(scale + delta, MIN_SCALE, MAX_SCALE);
+
+                  zoomToPoint(newScale, e.clientX, e.clientY);
+                  await renderAllPages();
+                },
+                { passive: false }
+              );
+
+              /* ===== PAN RATÓN (PC) ===== */
+              visorDiv.addEventListener("mousedown", (e) => {
+                if (scale <= baseFitScale) return;
+
+                isMousePanning = true;
+                visorDiv.style.cursor = "grabbing";
+
+                mStartX = e.pageX;
+                mStartY = e.pageY;
+                mScrollLeft = visorDiv.scrollLeft;
+                mScrollTop = visorDiv.scrollTop;
               });
 
-              const stopKeyZoom = (e) => {
-                if (!e.ctrlKey) return;
-                const keys = ["+", "=", "-", "0"];
-                if (
-                  keys.includes(e.key) ||
-                  [
-                    "Equal",
-                    "NumpadAdd",
-                    "Minus",
-                    "NumpadSubtract",
-                    "Digit0",
-                    "Numpad0",
-                  ].includes(e.code)
-                ) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }
-              };
-              document.addEventListener("keydown", stopKeyZoom, true);
+              visorDiv.addEventListener("mousemove", (e) => {
+                if (!isMousePanning) return;
+                e.preventDefault();
 
-              let __rzTimer;
+                const dx = e.pageX - mStartX;
+                const dy = e.pageY - mStartY;
+
+                visorDiv.scrollLeft = mScrollLeft - dx;
+                visorDiv.scrollTop = mScrollTop - dy;
+              });
+
+              ["mouseup", "mouseleave"].forEach((evt) => {
+                visorDiv.addEventListener(evt, () => {
+                  isMousePanning = false;
+                  visorDiv.style.cursor =
+                    scale > baseFitScale ? "grab" : "default";
+                });
+              });
+
+              /* ===== PAN TÁCTIL (1 dedo) ===== */
+              visorDiv.addEventListener(
+                "touchstart",
+                (e) => {
+                  if (
+                    e.touches.length === 1 &&
+                    scale > baseFitScale &&
+                    pinchStartDist === null
+                  ) {
+                    touchPanning = true;
+                    tStartX = e.touches[0].clientX;
+                    tStartY = e.touches[0].clientY;
+                    tScrollLeft = visorDiv.scrollLeft;
+                    tScrollTop = visorDiv.scrollTop;
+                    e.preventDefault();
+                  }
+                },
+                { passive: false }
+              );
+
+              visorDiv.addEventListener(
+                "touchmove",
+                (e) => {
+                  if (!touchPanning) return;
+                  if (e.touches.length !== 1) return;
+
+                  e.preventDefault();
+
+                  const x = e.touches[0].clientX;
+                  const y = e.touches[0].clientY;
+                  const dx = x - tStartX;
+                  const dy = y - tStartY;
+
+                  visorDiv.scrollLeft = tScrollLeft - dx;
+                  visorDiv.scrollTop = tScrollTop - dy;
+                },
+                { passive: false }
+              );
+
+              ["touchend", "touchcancel"].forEach((evt) => {
+                visorDiv.addEventListener(
+                  evt,
+                  () => {
+                    touchPanning = false;
+                  },
+                  { passive: true }
+                );
+              });
+
+              /* ===== PINCH (MÓVIL) — natural + con scroll real ===== */
+              visorDiv.addEventListener(
+                "touchstart",
+                (e) => {
+                  if (e.touches.length === 2) {
+                    e.preventDefault();
+                    touchPanning = false;
+
+                    pinchStartDist = getDistance(e.touches[0], e.touches[1]);
+                    pinchStartScale = scale;
+                    pinchVisual = 1;
+
+                    const rect = visorDiv.getBoundingClientRect();
+                    pinchCenterX =
+                      (e.touches[0].clientX + e.touches[1].clientX) / 2 -
+                      rect.left +
+                      visorDiv.scrollLeft;
+                    pinchCenterY =
+                      (e.touches[0].clientY + e.touches[1].clientY) / 2 -
+                      rect.top +
+                      visorDiv.scrollTop;
+
+                    pinchStartScrollLeft = visorDiv.scrollLeft;
+                    pinchStartScrollTop = visorDiv.scrollTop;
+
+                    inner.style.willChange = "transform";
+                  }
+                },
+                { passive: false }
+              );
+
+              visorDiv.addEventListener(
+                "touchmove",
+                (e) => {
+                  if (e.touches.length !== 2 || pinchStartDist === null) return;
+                  e.preventDefault();
+
+                  const dist = getDistance(e.touches[0], e.touches[1]);
+                  const ratio = dist / pinchStartDist;
+                  pinchVisual = clamp(ratio, 0.5, 2.2);
+
+                  if (!pinchRaf) {
+                    pinchRaf = requestAnimationFrame(() => {
+                      // zoom visual suave
+                      inner.style.transform = `scale(${pinchVisual})`;
+
+                      // MUY IMPORTANTE: ahora el scroll también tiene rango real
+                      updateStageSize(pinchVisual);
+
+                      // mantener el centro del pinch fijo ajustando scroll
+                      const targetLeft =
+                        pinchCenterX * pinchVisual -
+                        (pinchCenterX - pinchStartScrollLeft);
+                      const targetTop =
+                        pinchCenterY * pinchVisual -
+                        (pinchCenterY - pinchStartScrollTop);
+
+                      visorDiv.scrollLeft = targetLeft;
+                      visorDiv.scrollTop = targetTop;
+
+                      pinchRaf = null;
+                    });
+                  }
+                },
+                { passive: false }
+              );
+
+              async function commitPinch() {
+                if (pinchStartDist === null) return;
+
+                const newScale = clamp(
+                  pinchStartScale * pinchVisual,
+                  MIN_SCALE,
+                  MAX_SCALE
+                );
+
+                pinchStartDist = null;
+                pinchStartScale = null;
+
+                // Mantén el transform mientras renderiza para que no “parpadee”
+                if (pendingRender) return;
+                pendingRender = true;
+
+                // “Scale real” final
+                scale = newScale;
+
+                await renderAllPages();
+
+                pendingRender = false;
+              }
+
+              visorDiv.addEventListener("touchend", commitPinch);
+              visorDiv.addEventListener("touchcancel", commitPinch);
+
+              /* ===== DOBLE TAP (MÓVIL): zoom / volver a fit ===== */
+              visorDiv.addEventListener(
+                "touchend",
+                async (e) => {
+                  // no interferir con pinch
+                  if (pinchStartDist !== null) return;
+                  if (e.changedTouches.length !== 1) return;
+
+                  const now = Date.now();
+                  const touch = e.changedTouches[0];
+                  const x = touch.clientX;
+                  const y = touch.clientY;
+
+                  const dt = now - lastTapTime;
+                  const dx = Math.abs(x - lastTapX);
+                  const dy = Math.abs(y - lastTapY);
+
+                  if (dt < 280 && dx < 28 && dy < 28) {
+                    lastTapTime = 0;
+
+                    const isZoomed = scale > baseFitScale + 0.01;
+
+                    if (!isZoomed) {
+                      const target = clamp(
+                        baseFitScale * 1.6,
+                        MIN_SCALE,
+                        MAX_SCALE
+                      );
+                      zoomToPoint(target, x, y);
+                    } else {
+                      scale = baseFitScale;
+                      visorDiv.scrollLeft = 0;
+                      visorDiv.scrollTop = 0;
+                    }
+
+                    await renderAllPages();
+                    return;
+                  }
+
+                  lastTapTime = now;
+                  lastTapX = x;
+                  lastTapY = y;
+                },
+                { passive: false }
+              );
+
+              /* ===== RESIZE / ROTACIÓN ===== */
+              let resizeTimer;
               window.addEventListener(
                 "resize",
                 () => {
-                  clearTimeout(__rzTimer);
-                  __rzTimer = setTimeout(async () => {
-                    await fitToWidth();
+                  clearTimeout(resizeTimer);
+                  resizeTimer = setTimeout(async () => {
+                    await fitToPage();
                     await renderAllPages();
-                    aplicarNoZoom();
+                    visorDiv.scrollLeft = 0;
                     visorDiv.scrollTop = 0;
                   }, 150);
                 },
@@ -4011,7 +4653,7 @@
           </div>
           <div class="detalle-pedidos">
             <span>PEDIDOS EN<br>CURSO</span><br>
-            <strong style="font-size: 25px;">${
+            <strong style="font-size: 20px;">${
               p["Total Pedido en Curso"] || ""
             }</strong>
           </div>
@@ -4025,7 +4667,7 @@
                 p["Fecha prevista entrega"] || ""
               }</strong>
             </div>
-            <strong style="font-size: 25px;">${
+            <strong style="font-size: 20px;">${
               p["Qts. Próximo pedido"] || "NO SE ESPERA"
             }</strong>
           </div>
@@ -4044,11 +4686,17 @@
         </div>
         <div class="tarjeta-pie">
           <div class="tarjeta-pie1">
-            <label>Stock real: <input class="stock-real" type="number" data-indice="${i}" /></label>
+            <div class="grupo-stock">
+              <span>  Stock real en sv:</span>
+              <label> <input class="stock-real" type="number" data-indice="${i}" /></label>
+              </div>
+            
             <div class="grupo-radio">
-              ¿Rectificado?
+              <span>Rectificado:</span>
+              <div>
               <label>Sí<input type="radio" name="r${i}" value="Sí" /></label>
               <label>No<input type="radio" name="r${i}" value="No" /></label>
+              </div>
             </div>
             <button class="btn-decision">Pedir/No pedir</button>
           </div>
@@ -4387,16 +5035,16 @@
     <!-- ===== Footer fijo ===== -->
     <footer class="footer">
       <div class="footer-inner">
-        <button class="footer-link" type="button" data-open="modal-ayuda">
-          <strong>?</strong> Ayuda
+        <button class="footer-link" type="button" data-open="modal-creditos">
+          <strong></strong> Créditos
         </button>
 
-        <button class="footer-link" type="button" data-open="modal-creditos">
-          <strong>©</strong> Créditos
+        <button class="footer-link" type="button" data-open="modal-ayuda">
+          <strong></strong> Ayuda
         </button>
 
         <button class="footer-link" type="button" data-open="modal-qr">
-          <strong>⤴</strong> Compartir
+          <strong></strong> Compartir
         </button>
       </div>
     </footer>
@@ -4411,17 +5059,139 @@
         aria-label="Ayuda"
       >
         <div class="modal-header">
-          <h3>Ayuda</h3>
+          <h3>Tutorial</h3>
           <button class="modal-cerrar" type="button" data-close="modal-ayuda">
             ×
           </button>
         </div>
         <div class="modal-body">
-          <div class="ayuda-scroll-x">
-            <span style="display: inline-block; min-width: 900px">
-              Aquí irá la ayuda con scroll horizontal (lo trabajamos más
-              adelante).
-            </span>
+          <div class="ayuda-slider" data-slider="ayuda">
+            <div class="ayuda-track" data-track>
+              <section class="ayuda-step" data-step>
+                <h4>1. Identifícate y sube el archivo</h4>
+                <p>
+                  Escribe tu <strong>nombre</strong> y sube el
+                  <strong>archivo de ruptura</strong> que Solex te envía por
+                  correo. Descárgalo y súbelo a la app.
+                </p>
+                <p class="ayuda-nota">
+                  Sin este archivo no se puede continuar.
+                </p>
+                <div class="ayuda-media">
+                  <img
+                    src="RUTA_DEL_GIF_O_IMAGEN"
+                    alt="Formulario inicial: nombre y subida del archivo"
+                  />
+                </div>
+              </section>
+
+              <section class="ayuda-step" data-step>
+                <h4>2. Tarjetas de productos</h4>
+                <p>
+                  Al cargar el archivo, aparecerán las
+                  <strong>tarjetas de los productos en ruptura</strong>. Sin
+                  tocar nada puedes ver información relevante para una primera
+                  revisión.
+                </p>
+                <!-- GIF / captura: listado de tarjetas -->
+              </section>
+
+              <section class="ayuda-step" data-step>
+                <h4>3. Ver información detallada</h4>
+                <p>
+                  Si pulsas sobre una tarjeta, se despliega información más
+                  completa:
+                </p>
+                <ul>
+                  <li>Proveedor</li>
+                  <li>Ventas de los últimos meses</li>
+                  <li>Últimas y próximas recepciones</li>
+                  <li>Otros datos relevantes</li>
+                </ul>
+                <!-- GIF / captura: tarjeta desplegada -->
+              </section>
+
+              <section class="ayuda-step" data-step>
+                <h4>4. Incluir o excluir del informe</h4>
+                <p>
+                  Cada tarjeta tiene un botón para
+                  <strong>incluir o excluir</strong> el producto del informe
+                  final.
+                </p>
+                <p>
+                  Solo los productos incluidos aparecerán en el informe. Puedes
+                  cambiar esta decisión cuando quieras.
+                </p>
+                <!-- GIF / captura: botón incluir / excluir -->
+              </section>
+
+              <section class="ayuda-step" data-step>
+                <h4>5. Completar el pie de la tarjeta</h4>
+                <p>En el pie editable de cada tarjeta debes indicar:</p>
+                <ul>
+                  <li><strong>Stock real en sala de venta</strong></li>
+                  <li>
+                    <strong>Rectificado en Solex: Sí / No</strong> <br /><small
+                      >Viene relleno por defecto para agilizar.</small
+                    >
+                  </li>
+                  <li><strong>Pedir / No pedir</strong> (obligatorio)</li>
+                </ul>
+                <!-- GIF / captura: pie de tarjeta -->
+              </section>
+
+              <section class="ayuda-step" data-step>
+                <h4>6. Comentario (opcional)</h4>
+                <p>
+                  Puedes añadir un <strong>comentario</strong> si necesitas
+                  dejar una aclaración o información extra.
+                </p>
+                <!-- GIF / captura: campo comentario -->
+              </section>
+
+              <section class="ayuda-step" data-step>
+                <h4>7. Generar informe</h4>
+                <p>
+                  Cuando todas las tarjetas incluidas tengan los campos
+                  obligatorios completos, se activará
+                  <strong>Generar informe</strong>.
+                </p>
+                <p>
+                  Se abrirá un modal con la <strong>previsualización</strong> y
+                  un <strong>nombre recomendado</strong> (editable).
+                </p>
+                <!-- GIF / captura: botón generar informe -->
+              </section>
+
+              <section class="ayuda-step" data-step>
+                <h4>8. Descargar o compartir</h4>
+                <p>Desde la previsualización final puedes:</p>
+                <ul>
+                  <li><strong>Descargar</strong> el informe</li>
+                  <li><strong>Compartir</strong> el informe</li>
+                </ul>
+                <p>
+                  Antes de hacerlo, puedes inspeccionar el documento completo.
+                </p>
+                <!-- GIF / captura: modal final -->
+              </section>
+            </div>
+
+            <div class="ayuda-nav">
+              <button type="button" class="ayuda-btn" data-prev>
+                Anterior
+              </button>
+
+              <div
+                class="ayuda-dots"
+                data-dots
+                aria-label="Pasos del tutorial"
+              ></div>
+
+              <button type="button" class="ayuda-btn" data-next>
+                Siguiente
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -4461,16 +5231,12 @@
                   <div class="creditos-nombre">Ronald Herrera</div>
                   <div class="creditos-rol">
                     Obramat —
-                    <span class="creditos-depto">[Tu puesto / área]</span>
+                    <span class="creditos-depto"
+                      >[Vendedor / Electricidad]</span
+                    >
                   </div>
                   <div class="creditos-zona">Santander (Cantabria)</div>
                 </div>
-              </div>
-
-              <div class="creditos-badges">
-                <span class="badge">Control de Rupturas</span>
-                <span class="badge">App interna</span>
-                <span class="badge">Mejora continua</span>
               </div>
 
               <hr class="creditos-sep" />
@@ -4478,28 +5244,22 @@
               <div class="creditos-contacto">
                 <div class="contacto-item">
                   <span class="contacto-label">Email</span>
-                  <a class="contacto-value" href="mailto:TU_CORREO@dominio.com"
-                    >TU_CORREO@dominio.com</a
-                  >
-                </div>
-
-                <div class="contacto-item">
-                  <span class="contacto-label">Teléfono</span>
-                  <a class="contacto-value" href="tel:+34XXXXXXXXX"
-                    >+34 XXX XXX XXX</a
-                  >
-                </div>
-
-                <div class="contacto-item">
-                  <span class="contacto-label">Web</span>
                   <a
                     class="contacto-value"
-                    href="https://ronaldherrera.studio"
-                    target="_blank"
-                    rel="noopener"
+                    href="mailto:ronald-simon.calzadillah@obramat.es"
+                    >ronald-simon.calzadillah@obramat.es</a
                   >
-                    ronaldherrera.studio
-                  </a>
+                </div>
+
+                <div class="contacto-item">
+                  <span class="contacto-label">Teléfono / Extensión</span>
+                  <div>
+                    <a class="contacto-value" href="tel:+34638436482"
+                      >+34 638 436 482</a
+                    >
+                    /
+                    <a class="contacto-value" href="tel:61534">61534</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -4508,35 +5268,33 @@
             <div class="creditos-card creditos-texto">
               <h4 class="creditos-h">Por qué hice esta app</h4>
               <p class="creditos-p">
-                La creé para que el control de rupturas sea más rápido, más
-                claro y más útil en el día a día: menos fricción, menos “ida y
-                vuelta” y más foco en tomar decisiones.
+                La desarrollé para hacer mi trabajo más ágil y ordenado en el
+                día a día. El control de rupturas suele implicar muchos pasos,
+                revisiones y decisiones rápidas, y la idea era reducir fricción:
+                menos tiempo buscando información y más claridad para decidir
+                qué hacer en cada caso.
               </p>
 
               <h4 class="creditos-h">Objetivo</h4>
               <p class="creditos-p">
-                Convertir esta herramienta en un panel práctico y fiable: que se
-                pueda usar en móvil sin pelearse con nada, que ayude a priorizar
-                y que deje registro de acciones y motivos para mejorar el
-                proceso con datos reales.
+                A medio plazo, mi objetivo es poder dedicarme dentro de la
+                empresa al desarrollo de este tipo de herramientas internas:
+                aplicaciones prácticas, pensadas desde el uso real, que ayuden a
+                mejorar la experiencia de trabajo y optimicen procesos del día a
+                día. <br /><br />Esta app es un primer paso en esa dirección:
+                aprender, probar, iterar y demostrar que pequeñas mejoras bien
+                enfocadas pueden tener un impacto real.
               </p>
 
-              <h4 class="creditos-h">Notas</h4>
+              <h4 class="creditos-h">Filosofía</h4>
               <p class="creditos-p creditos-muted">
+                Herramientas sencillas, claras y útiles. Si algo no se entiende
+                a la primera, no está bien diseñado. La idea es seguir
+                mejorándola poco a poco en base al uso real y al feedback.
+                <br /><br />
                 Si ves algo que se pueda mejorar (detalle, filtro, botón,
-                flujo), dímelo. La idea es iterar poco a poco y dejarlo cada vez
-                más fino.
+                flujo), dímelo.
               </p>
-
-              <div class="creditos-cta">
-                <button
-                  class="btn-mini"
-                  type="button"
-                  data-close="modal-creditos"
-                >
-                  Cerrar
-                </button>
-              </div>
             </div>
           </div>
         </div>
