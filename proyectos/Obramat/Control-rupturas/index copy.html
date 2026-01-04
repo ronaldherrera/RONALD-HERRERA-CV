@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+
+    <title>Control de Ruptura Obramat</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/svg+xml" href="./recursos/favicon.svg" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Control de Ruptura" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="./recursos/favicon.png"
+      sizes="32x32"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="192x192"
+      href="./recursos/icono-web.png"
+    />
+    <link rel="manifest" href="./manifiesto.json" />
+    <meta name="theme-color" content="#FF5800" />
+
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  </head>
+  <body>
+    <header id="header-principal">
+      <img src="./recursos/logo m.svg" alt="" />
+    </header>
+
+    <header id="header-secundario" style="display: none">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #120949;
+
+          color: white;
+        "
+      >
+        <div>
+          <strong>Control de ruptura</strong>
+          <span
+            id="fecha-header"
+            style="color: #ff5800; font-weight: 400; margin-left: 8px"
+          ></span>
+        </div>
+        <img src="./recursos/logo m.svg" alt="logo" style="height: 30px" />
+      </div>
+    </header>
+
+    <main>
+      <div id="seccion-inicial">
+        <div class="inicio">
+          <h2>Control de ruptura</h2>
+          <div id="animacion-lupa" style="width: 100px; height: 100px"></div>
+          <p id="info-usuario">
+            <strong>1º </strong>Introduce tu nombre<br /><strong>2º </strong
+            >Sube un archivo .xls
+          </p>
+        </div>
+
+        <div class="inicio">
+          <input type="text" id="nombre-usuario" placeholder="¿Quién eres?" />
+          <br />
+          <label for="archivo-excel" class="boton-subir">Sube tu archivo</label>
+          <input type="file" id="archivo-excel" accept=".xls,.xlsx" />
+        </div>
+      </div>
+
+      <div id="info-final" style="display: none">
+        <div class="info-linea">
+          <div id="boton-volver" class="boton-volver">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="#FF5800"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+
+          <span>Colaborador/a:</span>
+          <div id="campo-nombre" class="info-output"></div>
+        </div>
+
+        <div class="info-linea fila-secundaria">
+          <div class="info-seccion">
+            <span>Sección:</span>
+            <div id="campo-seccion" class="info-output"></div>
+          </div>
+          <button id="boton-reiniciar" class="boton-reiniciar">
+            Volver a subir archivo
+          </button>
+        </div>
+        <span class="productos-titulo">Productos</span>
+      </div>
+
+      <div id="contenedor-productos"></div>
+
+      <button id="boton-descargar" style="display: none">
+        Descargar Excel Modificado
+      </button>
+    </main>
+
+    <script src="app.js?v=1.7"></script>
+  </body>
+</html>

@@ -1,127 +1,401 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Control de Rupturas - Compartir</title>
 
-    <title>Control de Ruptura Obramat</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/svg+xml" href="./recursos/favicon.svg" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Control de Ruptura" />
+    <style>
+      :root {
+        --naranja: #ff5800;
+        --azul: #120a4a;
+        --borde: #e3e3e3;
+        --gris: #f6f6f6;
+        --txt: #222;
+      }
 
-    <link
-      rel="icon"
-      type="image/png"
-      href="./recursos/favicon.png"
-      sizes="32x32"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="192x192"
-      href="./recursos/icono-web.png"
-    />
-    <link rel="manifest" href="./manifiesto.json" />
-    <meta name="theme-color" content="#FF5800" />
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: var(--txt);
+        background: #f2f2f2;
+      }
 
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-    <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+      /* ----- contenedor general de demo ----- */
+      .wrap {
+        max-width: 980px;
+        margin: 16px auto;
+        padding: 0 12px;
+      }
+
+      /* ===== Pantalla Compartir (NO modal) ===== */
+      .share-screen {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 14px;
+        padding: 14px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+      }
+
+      .share-head {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+
+      .share-head h2 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--azul);
+        letter-spacing: 0.2px;
+      }
+
+      .share-head p {
+        margin: 0;
+        color: #444;
+        font-size: 13px;
+        line-height: 1.3;
+      }
+
+      .share-grid {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 14px;
+        align-items: start;
+      }
+
+      .share-qr {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .share-qr-card {
+        background: var(--gris);
+        border: 1px solid #ddd;
+        border-radius: 14px;
+        padding: 12px;
+        display: grid;
+        place-items: center;
+      }
+
+      .share-qr-card img {
+        width: 220px;
+        height: 220px;
+        object-fit: contain;
+        border-radius: 12px;
+        border: 2px solid var(--naranja);
+        background: #fff;
+        padding: 8px;
+      }
+
+      .share-url {
+        margin: 0;
+        font-size: 12px;
+        color: #7a3c00;
+        word-break: break-word;
+        cursor: pointer;
+        user-select: none;
+        line-height: 1.25;
+      }
+      .share-url:hover {
+        text-decoration: underline;
+      }
+
+      .share-copied {
+        margin-left: 6px;
+        color: #2e7d32;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .share-hint {
+        margin: 0;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .share-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .share-step {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        gap: 10px;
+        padding: 12px;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .share-num {
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        background: var(--naranja);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .share-step-body h4 {
+        margin: 0 0 6px;
+        font-size: 14px;
+        color: var(--azul);
+      }
+
+      .share-step-body p,
+      .share-step-body li {
+        font-size: 13px;
+        color: #333;
+        margin: 0;
+        line-height: 1.35;
+      }
+
+      .share-step-body p + p {
+        margin-top: 6px;
+      }
+
+      .share-step-body ul {
+        margin: 6px 0 0 18px;
+        padding: 0;
+      }
+
+      .share-step-body ul ul {
+        margin-top: 6px;
+      }
+
+      .share-done {
+        margin-top: 8px !important;
+        font-weight: 600;
+      }
+
+      .share-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding-top: 4px;
+      }
+
+      .btn-primario {
+        border: 0;
+        background: var(--naranja);
+        color: #111;
+        font-weight: 800;
+        padding: 10px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 8px 18px rgba(255, 88, 0, 0.25);
+      }
+
+      .btn-sec {
+        border: 1px solid #ddd;
+        background: #fff;
+        color: #222;
+        font-weight: 700;
+        padding: 10px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+
+      /* ----- ejemplo: app real debajo ----- */
+      #app-main {
+        margin-top: 14px;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 14px;
+      }
+
+      /* ===== Responsive ===== */
+      @media (max-width: 760px) {
+        .share-grid {
+          grid-template-columns: 1fr;
+        }
+        .share-qr-card img {
+          width: 240px;
+          height: 240px;
+        }
+        .share-actions {
+          justify-content: stretch;
+        }
+        .btn-primario,
+        .btn-sec {
+          width: 100%;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <header id="header-principal">
-      <img src="./recursos/logo m.svg" alt="" />
-    </header>
-
-    <header id="header-secundario" style="display: none">
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          background-color: #120949;
-
-          color: white;
-        "
-      >
-        <div>
-          <strong>Control de ruptura</strong>
-          <span
-            id="fecha-header"
-            style="color: #ff5800; font-weight: 400; margin-left: 8px"
-          ></span>
-        </div>
-        <img src="./recursos/logo m.svg" alt="logo" style="height: 30px" />
-      </div>
-    </header>
-
-    <main>
-      <div id="seccion-inicial">
-        <div class="inicio">
-          <h2>Control de ruptura</h2>
-          <div id="animacion-lupa" style="width: 100px; height: 100px"></div>
-          <p id="info-usuario">
-            <strong>1º </strong>Introduce tu nombre<br /><strong>2º </strong
-            >Sube un archivo .xls
+    <div class="wrap">
+      <!-- ===== Pantalla fija Compartir (NO modal) ===== -->
+      <section class="share-screen" id="share-screen">
+        <header class="share-head">
+          <h2>Usar la app en el móvil corporativo</h2>
+          <p>
+            Escanea el QR con el móvil de empresa para abrir la aplicación
+            dentro del entorno corporativo.
           </p>
-        </div>
+        </header>
 
-        <div class="inicio">
-          <input type="text" id="nombre-usuario" placeholder="¿Quién eres?" />
-          <br />
-          <label for="archivo-excel" class="boton-subir">Sube tu archivo</label>
-          <input type="file" id="archivo-excel" accept=".xls,.xlsx" />
-        </div>
-      </div>
-
-      <div id="info-final" style="display: none">
-        <div class="info-linea">
-          <div id="boton-volver" class="boton-volver">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="#FF5800"
-                stroke-width="3"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+        <div class="share-grid">
+          <!-- Columna QR -->
+          <div class="share-qr">
+            <div class="share-qr-card">
+              <img
+                src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/qr.png"
+                alt="Escaneo del código QR"
               />
-            </svg>
+            </div>
+            <p class="share-hint">Toca el enlace para copiarlo.</p>
+            <p
+              class="share-url"
+              data-copy="https://script.google.com/a/macros/obramat.es/s/AKfycbztTiuiTEpDK_J7S1T7q-Gsl6Kvubq2_e0lC-aUSWx1mK64RQqM3JugwX3j1YLlFo-N/exec"
+            >
+              <span class="qr-copy-msg" hidden
+                >Enlace copiado en el portapapeles</span
+              >
+
+              <small
+                >https://script.google.com/a/macros/obramat.es/s/AKfycbztTiuiTEpDK_J7S1T7q-Gsl6Kvubq2_e0lC-aUSWx1mK64RQqM3JugwX3j1YLlFo-N/exec</small
+              >
+            </p>
           </div>
 
-          <span>Colaborador/a:</span>
-          <div id="campo-nombre" class="info-output"></div>
-        </div>
+          <!-- Columna pasos -->
+          <div class="share-steps">
+            <div class="share-step">
+              <div class="share-num">1</div>
+              <div class="share-step-body">
+                <h4>Escanea el código QR</h4>
+                <p>
+                  Abre la cámara del móvil de empresa, apunta al QR y toca el
+                  enlace que aparezca.
+                </p>
+              </div>
+            </div>
 
-        <div class="info-linea fila-secundaria">
-          <div class="info-seccion">
-            <span>Sección:</span>
-            <div id="campo-seccion" class="info-output"></div>
+            <div class="share-step">
+              <div class="share-num">2</div>
+              <div class="share-step-body">
+                <h4>Añade la app a tu pantalla de inicio</h4>
+                <ul>
+                  <li>
+                    Si aparece “Añadir a pantalla de inicio”, pulsa
+                    <strong>Añadir</strong>.
+                  </li>
+                  <li>Si no aparece:</li>
+                  <ul>
+                    <li>
+                      <strong>iPhone (Safari):</strong> Compartir → Añadir a
+                      pantalla de inicio
+                    </li>
+                    <li>
+                      <strong>Android (Chrome):</strong> ⋮ → Añadir a pantalla
+                      de inicio
+                    </li>
+                  </ul>
+                </ul>
+
+                <p class="share-done">
+                  ✅ Listo. Verás el icono de la app junto a tus aplicaciones.
+                </p>
+              </div>
+            </div>
           </div>
-          <button id="boton-reiniciar" class="boton-reiniciar">
-            Volver a subir archivo
-          </button>
         </div>
-        <span class="productos-titulo">Productos</span>
-      </div>
+      </section>
 
-      <div id="contenedor-productos"></div>
+      <!-- ===== Tu app real iría aquí ===== -->
+      <main id="app-main" hidden>
+        <h3 style="margin: 0 0 8px; color: #120a4a">App principal</h3>
+        <p style="margin: 0; color: #444; font-size: 13px">
+          Aquí pega tu interfaz real (subida de archivo, tarjetas, etc.). Este
+          bloque es solo un placeholder.
+        </p>
+      </main>
+    </div>
 
-      <button id="boton-descargar" style="display: none">
-        Descargar Excel Modificado
-      </button>
-    </main>
+    <script>
+      (function initShareScreen() {
+        const screen = document.getElementById("share-screen");
+        const appMain = document.getElementById("app-main");
 
-    <script src="app.js?v=1.7"></script>
+        const qrImg = document.getElementById("qr-img");
+        const urlWrap = document.getElementById("share-url");
+        const urlText = document.getElementById("share-url-text");
+        const btnIr = document.getElementById("btn-ir-app");
+        const btnRefresh = document.getElementById("btn-refrescar-qr");
+
+        function getAppUrl() {
+          // URL real de la webapp abierta (sin hash)
+          return (location.href || "").split("#")[0];
+        }
+
+        function setQrAndUrl() {
+          const APP_URL = getAppUrl();
+
+          urlText.textContent = APP_URL;
+          urlWrap.setAttribute("data-copy", APP_URL);
+
+          // QR usando un servicio externo (si el móvil corporativo lo bloquea, dímelo y lo hacemos local)
+          qrImg.src =
+            "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=" +
+            encodeURIComponent(APP_URL);
+        }
+
+        setQrAndUrl();
+
+        // Copiar al portapapeles al tap/click en el enlace
+        document.addEventListener("click", (e) => {
+          const el = e.target.closest("#share-url[data-copy]");
+          if (!el) return;
+
+          const text = el.getAttribute("data-copy");
+          if (!text) return;
+
+          // Clipboard API (requiere https, que en Apps Script WebApp lo es)
+          navigator.clipboard
+            .writeText(text)
+            .then(() => {
+              const msg = el.querySelector(".share-copied");
+              if (!msg) return;
+              msg.hidden = false;
+              clearTimeout(el.__t);
+              el.__t = setTimeout(() => (msg.hidden = true), 1400);
+            })
+            .catch(() => {
+              // fallback mínimo: seleccionar el texto (sin alert)
+              const r = document.createRange();
+              r.selectNodeContents(urlText);
+              const sel = window.getSelection();
+              sel.removeAllRanges();
+              sel.addRange(r);
+            });
+        });
+
+        btnRefresh?.addEventListener("click", () => {
+          // Regenera QR por si ha cambiado URL o cache
+          setQrAndUrl();
+        });
+
+        btnIr?.addEventListener("click", () => {
+          // Oculta “pantalla compartir” y muestra app
+          screen.hidden = true;
+          if (appMain) appMain.hidden = false;
+
+          // Si quieres, aquí puedes hacer scroll al formulario real
+          // document.getElementById("subida-archivo")?.scrollIntoView({ behavior: "smooth" });
+        });
+      })();
+    </script>
   </body>
 </html>

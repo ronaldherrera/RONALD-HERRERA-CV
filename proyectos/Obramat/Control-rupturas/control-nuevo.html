@@ -1899,7 +1899,8 @@
         padding: 10px 10px;
       }
 
-      #modal-creditos .modal-body {
+      #modal-creditos .modal-body,
+      #modal-qr .modal-body {
         max-height: min(90vh, 620px);
       }
 
@@ -2007,13 +2008,14 @@
       /* QR */
       /* ===== QR guía (estilo tipo infografía) ===== */
       .qr-guia {
-        display: grid;
+        display: flex;
+        flex-direction: column;
         gap: 14px;
       }
 
       .qr-step {
-        display: grid;
-        grid-template-columns: 42px 1fr 170px;
+        display: flex;
+        flex-direction: column;
         gap: 12px;
         align-items: start;
         background: #fff;
@@ -5593,17 +5595,18 @@
           <div class="qr-guia">
             <!-- Paso 1 -->
             <section class="qr-step">
-              <div class="qr-num">1</div>
-
               <div class="qr-texto">
-                <h4>Escanea el código QR</h4>
+                <h4>1. Escanea el código QR</h4>
                 <p>
                   Abre la cámara del móvil, apunta al QR y toca el enlace que
                   aparezca.
                 </p>
                 <div class="qr-media">
                   <!-- Aquí pones tu imagen/GIF del móvil escaneando (o el QR) -->
-                  <img src="TU_IMAGEN_O_GIF_1" alt="Escaneo del código QR" />
+                  <img
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/qr.png"
+                    alt="Escaneo del código QR"
+                  />
                 </div>
                 <!-- Opcional: muestra la URL por si falla el escaneo -->
                 <p
@@ -5614,17 +5617,17 @@
                     >Enlace copiado en el portapapeles</span
                   >
                   <br />
-                  https://script.google.com/a/macros/obramat.es/s/AKfycbztTiuiTEpDK_J7S1T7q-Gsl6Kvubq2_e0lC-aUSWx1mK64RQqM3JugwX3j1YLlFo-N/exec
+                  <small
+                    >https://script.google.com/a/macros/obramat.es/s/AKfycbztTiuiTEpDK_J7S1T7q-Gsl6Kvubq2_e0lC-aUSWx1mK64RQqM3JugwX3j1YLlFo-N/exec</small
+                  >
                 </p>
               </div>
             </section>
 
             <!-- Paso 2 -->
             <section class="qr-step">
-              <div class="qr-num">2</div>
-
               <div class="qr-texto">
-                <h4>Añade la app a tu pantalla de inicio</h4>
+                <h4>2. Añade la app a tu pantalla de inicio</h4>
                 <ul>
                   <li>
                     Si aparece el mensaje
@@ -5649,7 +5652,7 @@
                 <div class="qr-media">
                   <!-- Aquí pones tu imagen/GIF de los menús “Añadir a pantalla…” -->
                   <img
-                    src="TU_IMAGEN_O_GIF_2"
+                    src="https://ronaldherrera.es/proyectos/Obramat/Control-rupturas/recursos/apps.jpg"
                     alt="Añadir a pantalla de inicio"
                   />
                 </div>
